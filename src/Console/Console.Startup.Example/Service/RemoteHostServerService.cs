@@ -1,4 +1,4 @@
-﻿using Console.Startup.Example.Extensions;
+﻿using Console.Startup.Example.Helpers.Extensions;
 using Console.Startup.Example.Model;
 using Console.Startup.Example.Service.Interface;
 using Microsoft.Extensions.Hosting;
@@ -9,9 +9,9 @@ namespace Console.Startup.Example.Service;
 
 public class RemoteHostServerService : BackgroundService
 {
+    private readonly AppSettings _appSettings;
     private readonly ILogger<RemoteHostServerService> _logger;
     private readonly IRemoteHostServerWorker _worker;
-    private readonly AppSettings _appSettings;
 
     public RemoteHostServerService(
         ILogger<RemoteHostServerService> logger,
@@ -41,12 +41,14 @@ public class RemoteHostServerService : BackgroundService
                 _logger.LogInformation("Starting the Workers");
 
                 #region Worker threads can be added here
+
                 tasks.Add(_worker.ProcessRecordsNeedingUpdate(cancellationToken));
                 //tasks.Add(_worker.Process2(cancellationToken));
                 //tasks.Add(_worker.Process3(cancellationToken));
 
                 Task.WaitAll(tasks.ToArray());
                 tasks.Clear();
+
                 #endregion
 
                 if (cancellationToken.IsCancellationRequested)

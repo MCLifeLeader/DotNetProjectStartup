@@ -1,0 +1,9 @@
+﻿namespace Api.Startup.Example.Model.Authorization;
+
+public class UiPermission
+{
+    public string AccountId { get; set; }
+    public Permission Permission { get; set; }
+    public string PermissionType { get; set; }
+    public string TargetId { get; set; }
+}

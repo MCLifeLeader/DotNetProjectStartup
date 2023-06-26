@@ -7,13 +7,14 @@ namespace Console.Startup.Example.Helpers.Validators;
 public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {
     private readonly IValidator<TOptions> _validator;
-    public string Name { get; }
 
     public FluentValidationOptions(string name, IValidator<TOptions> validator)
     {
         Name = name;
         _validator = validator;
     }
+
+    public string Name { get; }
 
     public ValidateOptionsResult Validate(string name, TOptions options)
     {

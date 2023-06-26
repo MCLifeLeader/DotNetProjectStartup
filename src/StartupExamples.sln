@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console.Startup.Example", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Startup.Example", "Web\Web.Startup.Example\Web.Startup.Example.csproj", "{2113EAC2-F536-463A-AFB4-0D9C3C916385}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StartupExample", "StartupExample\StartupExample.sqlproj", "{14A007F4-DA3C-495D-B5CB-5C246645AEEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{2113EAC2-F536-463A-AFB4-0D9C3C916385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2113EAC2-F536-463A-AFB4-0D9C3C916385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2113EAC2-F536-463A-AFB4-0D9C3C916385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

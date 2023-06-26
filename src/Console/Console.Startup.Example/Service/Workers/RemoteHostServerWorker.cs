@@ -10,14 +10,14 @@ namespace Console.Startup.Example.Service.Workers;
 public class RemoteHostServerWorker : IRemoteHostServerWorker
 {
     private readonly AppSettings _appSettings;
-    private readonly IRemoteHostServerRepository _remoteHostServerRepository;
     private readonly ILogger<RemoteHostServerWorker> _logger;
+    private readonly IRemoteHostServerRepository _remoteHostServerRepository;
 
     public RemoteHostServerWorker(
         ILogger<RemoteHostServerWorker> logger,
         IOptions<AppSettings> appSettings,
         IRemoteHostServerRepository remoteHostServerRepository
-        )
+    )
     {
         _logger = logger;
         _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));

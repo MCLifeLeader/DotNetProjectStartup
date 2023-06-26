@@ -13,7 +13,7 @@ public class RemoteHostServerRepository : IRemoteHostServerRepository
     {
         _httpClient = httpClient;
     }
-    
+
 
     public async Task<string> GetMainHostsFileFromServer(CancellationToken cancellationToken)
     {
@@ -31,6 +31,7 @@ public class RemoteHostServerRepository : IRemoteHostServerRepository
         {
             result = Encoding.UTF8.GetString(data);
         }
+
         return result;
     }
 
@@ -50,6 +51,7 @@ public class RemoteHostServerRepository : IRemoteHostServerRepository
         {
             result = Encoding.UTF8.GetString(data);
         }
+
         return result;
     }
 }

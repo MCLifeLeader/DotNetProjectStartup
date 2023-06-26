@@ -7,32 +7,38 @@
         <RootNamespace>Api.Startup.Example</RootNamespace>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>62459bb0-90a3-4a96-b94d-b75bafc868ef</UserSecretsId>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>62459bb0-90a3-4a96-b94d-b75bafc868ef</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.AzureKeyVault" Version="6.0.3" />
         <PackageReference Include="AspNetCore.HealthChecks.AzureServiceBus" Version="6.1.0" />
         <PackageReference Include="AspNetCore.HealthChecks.AzureStorage" Version="6.1.2" />
+        <PackageReference Include="AspNetCore.HealthChecks.AzureKeyVault" Version="6.0.3" />
         <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
         <PackageReference Include="Azure.Identity" Version="1.9.0" />
         <PackageReference Include="FluentValidation" Version="11.5.2" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="7.0.0" />
+        <PackageReference Include="IdentityModel" Version="6.1.0" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
         <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.8" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
         <PackageReference Include="Microsoft.OpenApi" Version="1.6.5" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
@@ -41,6 +47,13 @@
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="appsettings.json">
+            <TransformOnBuild>true</TransformOnBuild>
+        </Content>
     </ItemGroup>
 
 </Project>

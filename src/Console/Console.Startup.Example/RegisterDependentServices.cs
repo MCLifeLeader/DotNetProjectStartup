@@ -72,6 +72,7 @@ public static class RegisterDependentServices
             .ConfigureServices((hostContext, services) =>
             {
                 #region Bind AppSettings for use in IOptions Pattern
+
                 services.Configure<AppSettings>(hostContext.Configuration);
                 appSettings = new AppSettings
                 {
@@ -90,6 +91,7 @@ public static class RegisterDependentServices
                     .ValidateOnStart();
 
                 services.AddSingleton(hostContext.Configuration);
+
                 #endregion
 
                 services.AddLogging();
