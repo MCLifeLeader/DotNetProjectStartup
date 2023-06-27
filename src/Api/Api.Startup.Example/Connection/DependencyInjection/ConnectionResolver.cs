@@ -1,5 +1,5 @@
 ﻿using Api.Startup.Example.Connection.Interfaces;
-using Api.Startup.Example.Model.ApplicationSettings;
+using Api.Startup.Example.Models.ApplicationSettings;
 
 namespace Api.Startup.Example.Connection.DependencyInjection;
 

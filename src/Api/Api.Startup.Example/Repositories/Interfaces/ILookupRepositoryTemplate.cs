@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using Api.Startup.Example.Model;
+using Api.Startup.Example.Models;
 
 namespace Api.Startup.Example.Repositories.Interfaces;
 

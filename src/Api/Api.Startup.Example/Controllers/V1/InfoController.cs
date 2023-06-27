@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Net;
 using System.Text;
-using Api.Startup.Example.Model.ApplicationSettings;
+using Api.Startup.Example.Models.ApplicationSettings;
 using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

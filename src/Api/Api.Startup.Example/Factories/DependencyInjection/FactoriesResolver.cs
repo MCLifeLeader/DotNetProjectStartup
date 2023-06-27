@@ -1,4 +1,4 @@
-﻿using Api.Startup.Example.Model.ApplicationSettings;
+﻿using Api.Startup.Example.Models.ApplicationSettings;
 
 namespace Api.Startup.Example.Factories.DependencyInjection;
 

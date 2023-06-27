@@ -2,12 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
-using Blazor.Startup.Example.Data;
-using Web.WithLogin.Data;
 
-namespace Web.WithLogin.Data.Migrations
+namespace Blazor.Startup.Example.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

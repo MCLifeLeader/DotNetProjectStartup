@@ -1,4 +1,4 @@
-﻿using Api.Startup.Example.Model.Authorization;
+﻿using Api.Startup.Example.Models.Authorization;
 
 namespace Api.Startup.Example.Helpers.Extensions;
 

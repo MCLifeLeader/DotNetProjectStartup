@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Api.Startup.Example.Model;
+using Api.Startup.Example.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;

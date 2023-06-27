@@ -1,11 +1,8 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Api.Startup.Example;
+namespace Blazor.Startup.Example;
 
-/// <summary>
-/// 
-/// </summary>
 public static class SetupMiddlewarePipeline
 {
     /// <summary>
@@ -15,59 +12,38 @@ public static class SetupMiddlewarePipeline
     /// <returns></returns>
     public static WebApplication SetupMiddleware(this WebApplication app)
     {
-        // Configure Pipeline
+        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage();
-            app.UseExceptionHandler("/Error-Development");
+            app.UseMigrationsEndPoint();
         }
         else
         {
-            //app.UseMiddleware<ExceptionMiddleWare>();
             app.UseExceptionHandler("/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
-        // Configure the HTTP request pipeline.
-        if (app.Configuration.GetValue<bool>("SwaggerEnabled"))
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.EnableTryItOutByDefault();
-                c.DocExpansion(DocExpansion.None);
-                c.EnableFilter();
-                c.DisplayRequestDuration();
-                c.EnableDeepLinking();
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "StartupExample Api");
-                c.InjectStylesheet("/css/SwaggerDark.css");
-                c.DocumentTitle = "StartupExample API Swagger UI";
-            });
-        }
-
         app.MapHealthChecks("/_health",
-            new HealthCheckOptions
+            new HealthCheckOptions()
             {
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            }); //.RequireAuthorization();
+            });//.RequireAuthorization();
+
+        app.UseHttpLogging();
 
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
+
         app.UseRouting();
 
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseRequestDecompression();
-        app.UseResponseCompression();
-
         app.MapControllers();
-
-        app.UseCors(x => x
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+        app.MapBlazorHub();
+        app.MapFallbackToPage("/_Host");
 
         return app;
     }

@@ -9,6 +9,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <Configurations>Debug;Release;Development</Configurations>
     </PropertyGroup>
 
     <ItemGroup>

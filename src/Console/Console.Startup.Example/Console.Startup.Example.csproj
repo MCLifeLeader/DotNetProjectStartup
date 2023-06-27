@@ -14,6 +14,8 @@
         <PublishSingleFile>true</PublishSingleFile>
         
         <UserSecretsId>98752f25-bd55-4a37-a840-ca720045b62b</UserSecretsId>
+        
+        <Configurations>Debug;Release;Development</Configurations>
     </PropertyGroup>
 
     <ItemGroup>

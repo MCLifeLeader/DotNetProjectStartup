@@ -1,9 +1,52 @@
 ﻿@page "/"
+@using Blazor.Startup.Example.Services.Interfaces
+@inject ICanaryService CanaryService
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home page</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="text-center">
+    <h1 class="display-4">Agency Application Services - .NET Blazor</h1>
+    <h3>Exploring using .NET Blazor for the Agency management experience</h3>
+    <img class="img-fluid rounded" src="./content/images/DefaultLogo.png" />
 
-Welcome to your new app.
+    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+</div>
+<div class="row">
+    <div class="col-12">
+        <p>
+            Agency Services
+        </p>
+    </div>
+    <div class="col-12">
+        <ul>
+            <li>
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+            </li>
+            <li>
+
+            </li>
+        </ul>
+    </div>
+    <div class="col-12">
+        <p>
+            @canaryPageDetails
+        </p>
+    </div>
+</div>
+
+@code
+{
+    private string canaryPageDetails = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            canaryPageDetails = await CanaryService.ReadApiCanaryPageAsync();
+        }
+        catch (Exception e)
+        {
+            canaryPageDetails = e.Message;
+        }
+    }
+}

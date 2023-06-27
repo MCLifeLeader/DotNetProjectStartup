@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using Api.Startup.Example.Model;
+using Api.Startup.Example.Models;
 using Api.Startup.Example.Repositories.Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using StartupExample.Data.Model.Db;

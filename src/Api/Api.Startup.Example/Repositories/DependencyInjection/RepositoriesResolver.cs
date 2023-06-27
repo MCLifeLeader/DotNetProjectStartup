@@ -1,4 +1,4 @@
-﻿using Api.Startup.Example.Model.ApplicationSettings;
+﻿using Api.Startup.Example.Models.ApplicationSettings;
 using Api.Startup.Example.Repositories.Db;
 using Api.Startup.Example.Repositories.Db.Interfaces;
 using Api.Startup.Example.Repositories.Db.Persistence;

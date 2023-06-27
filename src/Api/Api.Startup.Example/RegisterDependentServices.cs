@@ -9,7 +9,7 @@ using Api.Startup.Example.Helpers.DependencyInjection;
 using Api.Startup.Example.Helpers.Extensions;
 using Api.Startup.Example.Helpers.Filter;
 using Api.Startup.Example.Helpers.Health;
-using Api.Startup.Example.Model.ApplicationSettings;
+using Api.Startup.Example.Models.ApplicationSettings;
 using Api.Startup.Example.Repositories.DependencyInjection;
 using Api.Startup.Example.Services.DependencyInjection;
 using Azure.Identity;
@@ -30,11 +30,6 @@ namespace Api.Startup.Example;
 public static class RegisterDependentServices
 {
     private static readonly string _swaggerName = "StartupExample API";
-
-    //private static bool IsOriginAllowed(string host)
-    //{
-    //    return host?.Trim() == "http://localhost:7100/";
-    //}
 
     /// <summary>
     /// Extension method that registers services used in the application.
@@ -172,7 +167,6 @@ public static class RegisterDependentServices
                     }
                 });
 
-
                 // Add informative documentation on API Route Endpoints for auto documentation on Swagger page.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -213,11 +207,6 @@ public static class RegisterDependentServices
         return builder;
     }
 
-    private static bool IsOriginAllowed(string arg)
-    {
-        return true;
-    }
-
     private static void SetDependencyInjection(this WebApplicationBuilder builder, AppSettings appSettings)
     {
         // connection
@@ -241,7 +230,7 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.StartupExample_App, c =>
+        builder.Services.AddHttpClient(HttpClientNames.StartupExample_Home, c =>
         {
             c.BaseAddress = new Uri(appSettings.PageUrl);
 

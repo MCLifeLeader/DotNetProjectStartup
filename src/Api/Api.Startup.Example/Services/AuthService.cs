@@ -2,9 +2,9 @@
 using System.Security;
 using System.Security.Claims;
 using System.Text;
-using Api.Startup.Example.Model.ApplicationSettings;
-using Api.Startup.Example.Model.Authorization;
-using Api.Startup.Example.Model.Enums;
+using Api.Startup.Example.Models.ApplicationSettings;
+using Api.Startup.Example.Models.Authorization;
+using Api.Startup.Example.Models.Enums;
 using Api.Startup.Example.Repositories.Db.Interfaces;
 using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -41,7 +41,7 @@ public class AuthService : IAuthService
     }
 
     //ToDo: Update the method to return AuthToken instead of a string
-    public string AuthenticateUser(UserLoginModel user)
+    public string AuthenticateUser(UserLoginModel? user)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(AuthenticateUser));
 
@@ -53,7 +53,7 @@ public class AuthService : IAuthService
         return GenerateJsonWebToken(ValidateUserCredentials(user));
     }
 
-    private IList<Claim> ValidateUserCredentials(UserLoginModel user)
+    private IList<Claim> ValidateUserCredentials(UserLoginModel? user)
     {
         if (user == null)
         {

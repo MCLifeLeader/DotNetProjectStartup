@@ -54,6 +54,8 @@ public static class SetupMiddlewarePipeline
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             }); //.RequireAuthorization();
 
+        app.UseHttpLogging();
+
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();

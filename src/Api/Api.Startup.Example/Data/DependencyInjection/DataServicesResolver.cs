@@ -1,4 +1,4 @@
-﻿using Api.Startup.Example.Model.ApplicationSettings;
+﻿using Api.Startup.Example.Models.ApplicationSettings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
