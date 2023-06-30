@@ -40,6 +40,10 @@ public class RemoteHostServerService : BackgroundService
 
                 _logger.LogInformation("Starting the Workers");
 
+                //NCrontab.CrontabSchedule schedule = NCrontab.CrontabSchedule.Parse("*/5 * * * *");
+                //var nextRun = schedule.GetNextOccurrence(DateTime.UtcNow);
+                //_logger.LogDebug($"{DateTime.UtcNow} < {nextRun}");
+                
                 #region Worker threads can be added here
 
                 tasks.Add(_worker.ProcessRecordsNeedingUpdate(cancellationToken));

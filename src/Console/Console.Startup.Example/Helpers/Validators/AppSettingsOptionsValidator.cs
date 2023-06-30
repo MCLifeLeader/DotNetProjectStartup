@@ -19,7 +19,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         //RuleFor(x => x.KeyVaultUri)
         //    .NotEmpty();
 
-        RuleFor(x => x.ApplicationInsights.ConnectionString)
-            .NotEmpty();
+        //RuleFor(x => x.ApplicationInsights.ConnectionString)
+        //    .NotEmpty();
     }
 }
