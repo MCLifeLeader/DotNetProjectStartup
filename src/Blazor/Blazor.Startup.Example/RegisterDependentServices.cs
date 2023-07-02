@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Azure.Identity;
 using Blazor.Startup.Example.Connection.DependencyInjection;
 using Blazor.Startup.Example.Constants;
@@ -42,7 +43,7 @@ public static class RegisterDependentServices
         if (!string.IsNullOrEmpty(builder.Configuration.GetValue<string>("KeyVaultUri")))
         {
             builder.Configuration.AddAzureKeyVault(
-                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")),
+                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
                 new DefaultAzureCredential());
         }
 

@@ -25,6 +25,8 @@ public class WeatherForecastController : BaseController
     [HttpGet("GetWeatherForecast1")]
     public IEnumerable<WeatherForecast> Get1()
     {
+        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get1));
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -38,6 +40,8 @@ public class WeatherForecastController : BaseController
     [HttpGet("GetWeatherForecast2")]
     public IEnumerable<WeatherForecast> Get2()
     {
+        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get2));
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -51,6 +55,8 @@ public class WeatherForecastController : BaseController
     [HttpGet("GetWeatherForecast4")]
     public IEnumerable<WeatherForecast> Get3()
     {
+        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get3));
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -64,6 +70,8 @@ public class WeatherForecastController : BaseController
     [HttpGet("GetWeatherForecast3")]
     public IEnumerable<WeatherForecast> Get4()
     {
+        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get4));
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

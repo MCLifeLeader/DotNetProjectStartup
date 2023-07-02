@@ -2,7 +2,7 @@
 
 public class Dataconnection
 {
-    public string BaseUri { get; set; }
+    public string Uri { get; set; }
     public int ApiSleepTimerSeconds { get; set; }
     public int TimeOutInSeconds { get; set; }
 }

@@ -22,7 +22,7 @@ public class RemoteHostServerService : BackgroundService
         _worker = worker ?? throw new ArgumentNullException(nameof(worker));
         _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
 
-        _logger.LogInformation("Connected To Service Url {url}", _appSettings.DataConnection.BaseUri);
+        _logger.LogInformation("Connected To Service Url {url}", _appSettings.DataConnection.Uri);
     }
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)

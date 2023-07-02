@@ -54,8 +54,8 @@ public static class RegisterDependentServices
 
                 if (!string.IsNullOrEmpty(configuration.GetValue<string>("KeyVaultUri")))
                 {
-                    string? vaultUri = configuration.GetValue<string>("KeyVaultUri");
-                    configApp.AddAzureKeyVault(new Uri(vaultUri!), new DefaultAzureCredential());
+                    configApp.AddAzureKeyVault(new Uri(configuration.GetValue<string>("KeyVaultUri")!), 
+                        new DefaultAzureCredential());
                 }
 
                 // Import Environment Variables from the Host Server / Service
@@ -159,7 +159,7 @@ public static class RegisterDependentServices
     {
         services.AddHttpClient(HttpClientNames.RemoteHostServerClient, c =>
         {
-            c.BaseAddress = new Uri(appSettings.DataConnection.BaseUri);
+            c.BaseAddress = new Uri(appSettings.DataConnection.Uri);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

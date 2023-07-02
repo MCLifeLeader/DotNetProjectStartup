@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -45,7 +46,7 @@ public static class RegisterDependentServices
         if (!string.IsNullOrEmpty(builder.Configuration.GetValue<string>("KeyVaultUri")))
         {
             builder.Configuration.AddAzureKeyVault(
-                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")),
+                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
                 new DefaultAzureCredential());
         }
 

@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Api.Startup.Example.Connection.DependencyInjection;
 using Api.Startup.Example.Constants;
@@ -57,7 +58,7 @@ public static class RegisterDependentServices
         if (!string.IsNullOrEmpty(builder.Configuration.GetValue<string>("KeyVaultUri")))
         {
             builder.Configuration.AddAzureKeyVault(
-                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")),
+                new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
                 new DefaultAzureCredential());
         }
 

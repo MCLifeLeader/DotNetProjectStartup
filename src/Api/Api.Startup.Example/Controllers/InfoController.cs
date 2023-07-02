@@ -8,12 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Api.Startup.Example.Controllers.V1;
+namespace Api.Startup.Example.Controllers;
 
 [Authorize]
 [ApiController]
-[ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/[controller]")]
 public class InfoController : ControllerBase
 {
     private readonly AppSettings _appSettings;
@@ -39,7 +38,7 @@ public class InfoController : ControllerBase
     [AllowAnonymous]
     [HttpGet("StatusXml")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-    [SwaggerResponse((int) HttpStatusCode.OK, "Returns the page status", typeof(ContentResult))]
+    [SwaggerResponse((int)HttpStatusCode.OK, "Returns the page status", typeof(ContentResult))]
     public async Task<ContentResult> GetStatusInformationXml()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetStatusInformationXml));
@@ -55,7 +54,7 @@ public class InfoController : ControllerBase
     [AllowAnonymous]
     [HttpGet("StatusJson")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-    [SwaggerResponse((int) HttpStatusCode.OK, "Returns the page status", typeof(ContentResult))]
+    [SwaggerResponse((int)HttpStatusCode.OK, "Returns the page status", typeof(ContentResult))]
     public async Task<ContentResult> GetStatusInformationJson()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetStatusInformationJson));
@@ -67,7 +66,7 @@ public class InfoController : ControllerBase
     [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Settings")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-    [SwaggerResponse((int) HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
+    [SwaggerResponse((int)HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
     public async Task<ActionResult<AppSettings>> GetAppSettings()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetAppSettings));
@@ -85,7 +84,7 @@ public class InfoController : ControllerBase
     [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Environment")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
-    [SwaggerResponse((int) HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
+    [SwaggerResponse((int)HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
     public async Task<ActionResult<IDictionary>> GetEnvironment()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetEnvironment));
