@@ -80,9 +80,20 @@ public static class RegisterDependentServices
 
         #endregion
 
-        builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
-            .AddConsole()
-            .AddDebug();
+        // Configure logging 
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug()
+                .AddEventLog();
+        }
+        else
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug();
+        }
 
         builder.Services.AddMemoryCache();
         builder.SetHttpClients(appSettings);

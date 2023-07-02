@@ -95,9 +95,20 @@ public static class RegisterDependentServices
         #endregion
 
         // Configure logging 
-        builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
-            .AddConsole()
-            .AddDebug();
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug()
+                .AddEventLog();
+        }
+        else
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug();
+        }
+
 
         if (appSettings.CorsEnabled)
         {
