@@ -27,27 +27,27 @@ public static class SetupMiddlewarePipeline
         }
 
         // Configure the HTTP request pipeline.
-        //if (app.Configuration.GetValue<bool>("SwaggerEnabled"))
-        //{
-        //    app.UseSwagger();
-        //    app.UseSwaggerUI(c =>
-        //    {
-        //        c.EnableTryItOutByDefault();
-        //        c.DocExpansion(DocExpansion.None);
-        //        c.EnableFilter();
-        //        c.DisplayRequestDuration();
-        //        c.EnableDeepLinking();
-        //        c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{_swaggerName} v1");
-        //        c.InjectStylesheet("/css/SwaggerDark.css");
-        //        c.DocumentTitle = $"{_swaggerName} Swagger UI";
-        //    });
-        //}
+        if (app.Configuration.GetValue<bool>("SwaggerEnabled"))
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.EnableTryItOutByDefault();
+                c.DocExpansion(DocExpansion.None);
+                c.EnableFilter();
+                c.DisplayRequestDuration();
+                c.EnableDeepLinking();
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{_swaggerName} v1");
+                c.InjectStylesheet("/css/SwaggerDark.css");
+                c.DocumentTitle = $"{_swaggerName} Swagger UI";
+            });
+        }
 
-        //app.MapHealthChecks("/_health",
-        //    new HealthCheckOptions
-        //    {
-        //        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-        //    }).AllowAnonymous();
+        app.MapHealthChecks("/_health",
+            new HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            }).AllowAnonymous();
 
         app.UseHttpLogging();
 
@@ -59,8 +59,8 @@ public static class SetupMiddlewarePipeline
         app.UseIdentityServer();
         app.UseAuthorization();
 
-        //app.UseRequestDecompression();
-        //app.UseResponseCompression();
+        app.UseRequestDecompression();
+        app.UseResponseCompression();
 
         app.MapControllerRoute(
             name: "default",

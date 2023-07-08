@@ -92,19 +92,19 @@ public static class RegisterDependentServices
         #endregion
 
         // Configure logging 
-        //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        //{
-        //    builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
-        //        .AddConsole()
-        //        .AddDebug()
-        //        .AddEventLog();
-        //}
-        //else
-        //{
-        //    builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
-        //        .AddConsole()
-        //        .AddDebug();
-        //}
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug()
+                .AddEventLog();
+        }
+        else
+        {
+            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+                .AddConsole()
+                .AddDebug();
+        }
 
         builder.SetDependencyInjection(appSettings);
 
@@ -115,42 +115,41 @@ public static class RegisterDependentServices
         builder.Services.AddAuthentication().AddIdentityServerJwt();
 
         // Add services to the container.
-        builder.Services.AddControllersWithViews(/*options => { options.RespectBrowserAcceptHeader = true; }*/)
-            //.AddNewtonsoftJson(options =>
-            //{
-            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            //    options.SerializerSettings.Formatting = Formatting.Indented;
-            //    options.SerializerSettings.Converters.Add(new StringEnumConverter());
-            //})
-            ;
+        builder.Services.AddControllersWithViews(options => { options.RespectBrowserAcceptHeader = true; })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
 
         builder.Services.AddRazorPages();
 
         builder.SetHttpClients(appSettings);
 
-        //if (appSettings.SwaggerEnabled)
-        //{
-        //    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        //    builder.Services.AddEndpointsApiExplorer();
-        //    builder.Services.AddSwaggerGen(c =>
-        //    {
-        //        c.SwaggerDoc("v1", new ApiInfo().GetApiVersion("v1"));
-        //        c.OperationFilter<SwaggerResponseOperationFilter>();
-        //        c.DocumentFilter<AdditionalPropertiesDocumentFilter>();
+        if (appSettings.SwaggerEnabled)
+        {
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new ApiInfo().GetApiVersion("v1"));
+                c.OperationFilter<SwaggerResponseOperationFilter>();
+                c.DocumentFilter<AdditionalPropertiesDocumentFilter>();
 
-        //        // Add informative documentation on API Route Endpoints for auto documentation on Swagger page.
-        //        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        //        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-        //        c.IncludeXmlComments(xmlPath);
-        //    });
-        //}
+                // Add informative documentation on API Route Endpoints for auto documentation on Swagger page.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+        }
 
-        //builder.Services.AddRequestDecompression();
-        //builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
+        builder.Services.AddRequestDecompression();
+        builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
-        //builder.Services.AddHealthChecks()
-        //    .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.StartupExample_App.ToLower())
-        //    .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection);
+        builder.Services.AddHealthChecks()
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.StartupExample_App.ToLower())
+            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection);
 
         return builder;
     }
