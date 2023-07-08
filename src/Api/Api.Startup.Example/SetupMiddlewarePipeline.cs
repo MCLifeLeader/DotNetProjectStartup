@@ -52,7 +52,7 @@ public static class SetupMiddlewarePipeline
             new HealthCheckOptions
             {
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            }); //.RequireAuthorization();
+            }).AllowAnonymous();
 
         app.UseHttpLogging();
 

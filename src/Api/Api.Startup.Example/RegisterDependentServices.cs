@@ -138,7 +138,6 @@ public static class RegisterDependentServices
 
         if (appSettings.SwaggerEnabled)
         {
-            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddApiVersioning(c =>
             {
                 c.DefaultApiVersion = new ApiVersion(1, 0);

@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Startup.Example", "Web\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DatabaseExample", "StartupExample\DatabaseExample.sqlproj", "{14A007F4-DA3C-495D-B5CB-5C246645AEEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "React.Startup.Example", "React\React.Startup.Example.csproj", "{0FBB82C5-75FB-4E5A-BA34-3EB9AFA8E240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "React.Startup.Example", "React\React.Startup.Example.csproj", "{0FBB82C5-75FB-4E5A-BA34-3EB9AFA8E240}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D64886AA-81B7-42D8-B504-65AE075AB9F2}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
