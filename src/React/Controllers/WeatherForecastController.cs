@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using React.Startup.Example.Models;
 
 namespace React.Startup.Example.Controllers
 {

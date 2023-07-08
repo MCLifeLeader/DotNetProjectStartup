@@ -1,4 +1,4 @@
-namespace React.Startup.Example
+namespace React.Startup.Example.Models
 {
     public class WeatherForecast
     {
