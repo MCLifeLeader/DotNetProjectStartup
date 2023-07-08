@@ -5,7 +5,3 @@ WebApplication.CreateBuilder(args)
     .Build()
     .SetupMiddleware()
     .Run();
-
-namespace Api.Startup.Example
-{
-}

@@ -1,7 +1,7 @@
-﻿using Blazor.Startup.Example.Areas.Identity;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Web.Startup.Example.Areas.Identity;
 using Web.Startup.Example.Models.ApplicationSettings;
 using Web.Startup.Example.Repository.Http.Endpoints;
 using Web.Startup.Example.Repository.Http.Endpoints.Interfaces;
