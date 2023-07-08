@@ -54,7 +54,7 @@ public static class RegisterDependentServices
 
                 if (!string.IsNullOrEmpty(configuration.GetValue<string>("KeyVaultUri")))
                 {
-                    configApp.AddAzureKeyVault(new Uri(configuration.GetValue<string>("KeyVaultUri")!), 
+                    configApp.AddAzureKeyVault(new Uri(configuration.GetValue<string>("KeyVaultUri")!),
                         new DefaultAzureCredential());
                 }
 

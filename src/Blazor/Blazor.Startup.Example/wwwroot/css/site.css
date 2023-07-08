@@ -50,7 +50,6 @@ a, .btn-link { color: #0071c1; }
 .blazor-error-boundary::after { content: "An error has occurred." }
 
 /* Main Site Styling */
-.img-agency-home-logo {
-    max-height: 50px;
-}
+
+.img-agency-home-logo { max-height: 50px; }
 /* Main Site Styling */

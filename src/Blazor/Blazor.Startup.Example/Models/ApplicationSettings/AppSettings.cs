@@ -1,6 +1,5 @@
 ﻿namespace Blazor.Startup.Example.Models.ApplicationSettings;
 
-
 public class AppSettings
 {
     public IConfiguration ConfigurationBase { get; set; }

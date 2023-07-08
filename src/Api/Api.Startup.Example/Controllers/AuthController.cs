@@ -38,7 +38,7 @@ public class AuthController : BaseController
     /// <param name="user">Contains details about the user logging in.</param>
     /// <returns>Token if the login is successful</returns>
     [HttpPost("Login")]
-    [SwaggerResponse((int)HttpStatusCode.OK, "Returns the JWT if Successful", typeof(AuthToken))]
+    [SwaggerResponse((int) HttpStatusCode.OK, "Returns the JWT if Successful", typeof(AuthToken))]
     public async Task<ActionResult<AuthToken>> Login([FromBody] UserLoginModel? user)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Login));
@@ -70,27 +70,27 @@ public class AuthController : BaseController
             if (!string.IsNullOrEmpty(tokenString))
             {
                 _authControllerCache.SetAuth($"{user.Username}", tokenString);
-                return Ok(new AuthToken { Token = tokenString });
+                return Ok(new AuthToken {Token = tokenString});
             }
 
-            ErrorResult errorMessage = new ErrorResult { LogId = logId.ToString(), Message = "Invalid Login Credentials" };
+            ErrorResult errorMessage = new ErrorResult {LogId = logId.ToString(), Message = "Invalid Login Credentials"};
             _logger.LogWarning("LogId:{logId} - Message:{message}", errorMessage.LogId, errorMessage.Message);
 
             return Unauthorized(errorMessage);
         }
         catch (SecurityException ex)
         {
-            ErrorResult errorMessage = new ErrorResult { LogId = logId.ToString(), Message = ex.Message };
+            ErrorResult errorMessage = new ErrorResult {LogId = logId.ToString(), Message = ex.Message};
             _logger.LogCritical(ex, "{logId} - Failed to Login - {message}", errorMessage.LogId, errorMessage.Message);
 
             return Unauthorized(errorMessage);
         }
         catch (Exception ex)
         {
-            ErrorResult errorMessage = new ErrorResult { LogId = logId.ToString(), Message = ex.Message };
+            ErrorResult errorMessage = new ErrorResult {LogId = logId.ToString(), Message = ex.Message};
             _logger.LogCritical(ex, "{logId} - Failed to Login - {message}", errorMessage.LogId, errorMessage.Message);
 
-            return Problem(ex.Message, null, (int)HttpStatusCode.InternalServerError, $"LogId:{logId}");
+            return Problem(ex.Message, null, (int) HttpStatusCode.InternalServerError, $"LogId:{logId}");
         }
     }
 }

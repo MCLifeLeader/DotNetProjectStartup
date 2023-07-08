@@ -62,7 +62,7 @@ public class RandomizeController : BaseController
         for (int ii = 0; ii < namesList.Count; ii++)
         {
             // Add the names to the list of paired participants.
-            randomizeGiftList.Add(new GiftExchange()
+            randomizeGiftList.Add(new GiftExchange
             {
                 Person = namesList[ii],
                 HasName = randomList[ii]

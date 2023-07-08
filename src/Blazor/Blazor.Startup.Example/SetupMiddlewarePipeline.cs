@@ -25,10 +25,10 @@ public static class SetupMiddlewarePipeline
         }
 
         app.MapHealthChecks("/_health",
-            new HealthCheckOptions()
+            new HealthCheckOptions
             {
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });//.RequireAuthorization();
+            }); //.RequireAuthorization();
 
         app.UseHttpLogging();
 

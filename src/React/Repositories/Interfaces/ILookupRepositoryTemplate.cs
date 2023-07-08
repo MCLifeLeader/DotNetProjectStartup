@@ -1,5 +1,5 @@
-﻿using React.Startup.Example.Models;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using React.Startup.Example.Models;
 
 namespace React.Startup.Example.Repositories.Interfaces;
 

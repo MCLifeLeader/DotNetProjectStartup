@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using React.Startup.Example.Models;
 using React.Startup.Example.Models.ApplicationSettings;
 
 namespace React.Startup.Example.Data.DependencyInjection;

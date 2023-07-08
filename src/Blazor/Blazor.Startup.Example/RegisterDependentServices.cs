@@ -78,7 +78,6 @@ public static class RegisterDependentServices
 
         builder.Services.AddSingleton(builder.Configuration);
 
-
         #endregion
 
         // Configure logging 
