@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="StartupExample.publish.xml" />
+    <None Include="StartupExample.Docker.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
