@@ -21,40 +21,42 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
-        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
+        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="7.0.0" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
         <PackageReference Include="Azure.Identity" Version="1.9.0" />
-        <PackageReference Include="FluentValidation" Version="11.6.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
+        <PackageReference Include="FluentValidation" Version="11.7.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="IdentityModel" Version="6.1.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
-        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.7" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.10" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.10" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-        <PackageReference Include="Microsoft.OpenApi" Version="1.6.5" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
+        <PackageReference Include="Microsoft.FeatureManagement" Version="2.6.1" />
+        <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.6.1" />
+        <PackageReference Include="Microsoft.OpenApi" Version="1.6.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -69,6 +71,17 @@
         <Content Remove="$(SpaRoot)**" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ClientApp\public\DefaultLogo.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="ClientApp\public\content\images\DefaultLogo.png">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -250,6 +250,7 @@ WHERE [CompanyName] = 'Agency'
 
 /* Add a block of users with roles for default test accounts */
 
+-- The Password hash = "P@ssword123"
 -- Add user account
 IF(SELECT COUNT(Id) AS Id FROM [dbo].[AspNetUsers] WHERE [UserName] = 'Michael@AGameEmpowerment.com') <= 0
 BEGIN

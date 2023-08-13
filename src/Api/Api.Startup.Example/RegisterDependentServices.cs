@@ -11,7 +11,6 @@ using Api.Startup.Example.Helpers.Extensions;
 using Api.Startup.Example.Helpers.Filter;
 using Api.Startup.Example.Helpers.Health;
 using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Repositories.DependencyInjection;
 using Api.Startup.Example.Services.DependencyInjection;
 using Azure.Identity;
 using FluentValidation;
@@ -22,6 +21,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Startup.Data.Repositories.DependencyInjection;
 
 namespace Api.Startup.Example;
 
@@ -233,7 +233,7 @@ public static class RegisterDependentServices
         DataServicesResolver.RegisterDependencies(builder.Services, appSettings);
 
         // repositories
-        RepositoriesResolver.RegisterDependencies(builder.Services, appSettings);
+        RepositoriesResolver.RegisterDependencies(builder.Services, appSettings.ConnectionStrings.DefaultConnection);
 
         //factories
         FactoriesResolver.RegisterDependencies(builder.Services, appSettings);

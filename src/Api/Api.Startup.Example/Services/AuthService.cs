@@ -5,12 +5,12 @@ using System.Text;
 using Api.Startup.Example.Models.ApplicationSettings;
 using Api.Startup.Example.Models.Authorization;
 using Api.Startup.Example.Models.Enums;
-using Api.Startup.Example.Repositories.Db.Interfaces;
 using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using StartupExample.Data.Model.Db;
+using Startup.Data.Models.Db;
+using Startup.Data.Repositories.Db.Interfaces;
 
 namespace Api.Startup.Example.Services;
 

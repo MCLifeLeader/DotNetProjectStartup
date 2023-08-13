@@ -87,6 +87,7 @@ public static class RegisterDependentServices
             .ValidateOnStart();
 
         builder.Services.AddSingleton(builder.Configuration);
+        builder.Services.AddSingleton(appSettings);
 
         #endregion
 

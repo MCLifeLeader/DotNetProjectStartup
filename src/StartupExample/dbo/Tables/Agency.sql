@@ -3,7 +3,7 @@
     [Id]                    UNIQUEIDENTIFIER    NOT NULL    DEFAULT (NewSequentialId()),
 
     [CompanyName]           NVARCHAR (250)      NOT NULL,
-    [CompanyLogoURL]        VARCHAR (250)       NOT NULL    DEFAULT ('http://www.StartupExample.com/Images/DefaultLogo.png'),
+    [CompanyLogoURL]        VARCHAR (250)       NOT NULL    DEFAULT ('http://www.StartupExample.com/content/images/DefaultLogo.png'),
 
     [Address1]              NVARCHAR (100)      NULL,
     [Address2]              NVARCHAR (100)      NULL,
