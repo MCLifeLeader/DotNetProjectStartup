@@ -38,14 +38,21 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .InclusiveBetween(5, 120);
 
         RuleFor(x => x.Jwt.Key)
-            .NotEmpty();
+            .NotNull()
+            .NotEmpty()
+            .Length(64, 1024);
         RuleFor(x => x.Jwt.Issuer)
-            .NotEmpty();
+            .NotNull()
+            .NotEmpty()
+            .Must(e=>e.Contains("https://"));
         RuleFor(x => x.Jwt.Audience)
-            .NotEmpty();
+            .NotNull()
+            .NotEmpty()
+            .Must(e => e.Contains("https://"));
         RuleFor(x => x.Jwt.ExpireInMinutes)
             .InclusiveBetween(1, 600);
         RuleFor(x => x.Jwt.Subject)
+            .NotNull()
             .NotEmpty();
     }
 }

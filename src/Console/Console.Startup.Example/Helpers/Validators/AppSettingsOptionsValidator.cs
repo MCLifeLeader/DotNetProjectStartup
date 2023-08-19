@@ -1,4 +1,4 @@
-﻿using Console.Startup.Example.Model;
+﻿using Console.Startup.Example.Model.ApplicationSettings;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 

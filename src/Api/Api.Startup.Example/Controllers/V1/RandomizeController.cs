@@ -19,13 +19,18 @@ public class RandomizeController : BaseController
     /// <summary>
     /// Generate a secret gift exchange list, pairing each person with another randomly.
     /// </summary>
-    /// <param name="namesList">The list of participants to be randomly paired with another.</param>
+    /// <param name="namesList">The list of participants to be randomly paired with another. Count >= 3</param>
     /// <returns>A list of pairs of people, each of whom is assigned to someone else.</returns>
     [AllowAnonymous]
     [HttpPost("GenerateSecretGiftExchangeList")]
     public async Task<IList<GiftExchange>> GenerateSecretGiftExchangeList([FromBody] IList<string> namesList)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateSecretGiftExchangeList));
+
+        if (namesList == null || namesList.Count <= 2)
+        {
+            throw new ArgumentException(nameof(namesList));
+        }
 
         // Randomize the items in the names list.
         var randomList = await Task.Run(() =>

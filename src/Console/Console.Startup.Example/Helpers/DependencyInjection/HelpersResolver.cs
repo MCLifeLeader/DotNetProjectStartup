@@ -1,4 +1,4 @@
-﻿using Console.Startup.Example.Model;
+﻿using Console.Startup.Example.Model.ApplicationSettings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Console.Startup.Example.Helpers.DependencyInjection;

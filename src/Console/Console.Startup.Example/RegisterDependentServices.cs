@@ -7,7 +7,7 @@ using Console.Startup.Example.Constants;
 using Console.Startup.Example.Factories.DependencyInjection;
 using Console.Startup.Example.Helpers.DependencyInjection;
 using Console.Startup.Example.Helpers.Extensions;
-using Console.Startup.Example.Model;
+using Console.Startup.Example.Model.ApplicationSettings;
 using Console.Startup.Example.Repositories.DependencyInjection;
 using Console.Startup.Example.Service.DependencyInjection;
 using FluentValidation;

@@ -17,7 +17,10 @@ public class HttpClientWrapper : IHttpClientWrapper
     {
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.GetAsync(resourcePath).Result;
-        if (response.IsSuccessStatusCode) return response.Content.ReadAsByteArrayAsync().Result;
+        if (response.IsSuccessStatusCode)
+        {
+            return response.Content.ReadAsByteArrayAsync().Result;
+        }
 
         string msg = $"GET:{resourcePath} erred out with a result:{response.StatusCode}";
         throw new Exception(msg);
@@ -40,11 +43,14 @@ public class HttpClientWrapper : IHttpClientWrapper
     {
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.GetAsync(resourcePath).Result;
-        if (response.IsSuccessStatusCode) return response.Content.ReadAsAsync<T>().Result;
+        if (response.IsSuccessStatusCode)
+        {
+            return response.Content.ReadAsAsync<T>().Result;
+        }
 
         if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.NotFound)
         {
-            return default;
+            return default!;
         }
 
         string msg = $"GET:{resourcePath} erred out with a result:{response.StatusCode}";
@@ -62,7 +68,7 @@ public class HttpClientWrapper : IHttpClientWrapper
 
         if (response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.NotFound)
         {
-            return default;
+            return default!;
         }
 
         string msg = $"GET:{resourcePath} erred out with a result:{response.StatusCode}";
