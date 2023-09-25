@@ -1,4 +1,4 @@
-﻿namespace AdverTran.Background.Client.BackgroundServices.Interface;
+﻿namespace Console.Startup.Example.BackgroundService.Interface;
 
 public interface IHealthCheckWorker
 {

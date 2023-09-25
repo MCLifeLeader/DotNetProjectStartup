@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Azure.Identity;
+using Console.Startup.Example.BackgroundService.DependencyInjection;
 using Console.Startup.Example.Connection.DependencyInjection;
 using Console.Startup.Example.Constants;
 using Console.Startup.Example.Factories.DependencyInjection;
@@ -9,7 +10,6 @@ using Console.Startup.Example.Helpers.DependencyInjection;
 using Console.Startup.Example.Helpers.Extensions;
 using Console.Startup.Example.Model.ApplicationSettings;
 using Console.Startup.Example.Repositories.DependencyInjection;
-using Console.Startup.Example.Service.DependencyInjection;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -159,12 +159,12 @@ public static class RegisterDependentServices
     {
         services.AddHttpClient(HttpClientNames.RemoteHostServerClient, c =>
         {
-            c.BaseAddress = new Uri(appSettings.DataConnection.Uri);
+            c.BaseAddress = new Uri(appSettings.WorkerProcesses.HealthCheckService.Uri);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-            c.Timeout = TimeSpan.FromSeconds(appSettings.DataConnection.TimeOutInSeconds);
+            c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.HealthCheckService.TimeOutInSeconds);
         }).ConfigurePrimaryHttpMessageHandler(c =>
         {
             HttpClientHandler h = new HttpClientHandler

@@ -1,4 +1,4 @@
-﻿using AdverTran.Background.Client.BackgroundServices.Interface;
+﻿using Console.Startup.Example.BackgroundService.Interface;
 using Console.Startup.Example.Constants;
 using Console.Startup.Example.Helpers.Extensions;
 using Console.Startup.Example.Model.ApplicationSettings;
@@ -72,7 +72,7 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
                     return;
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.HealthCheckService.SleepDelaySeconds), cancellationToken);
+                await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.SleepDelaySeconds), cancellationToken);
             }
         }
         catch (TaskCanceledException ex)

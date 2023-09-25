@@ -1,4 +1,4 @@
-﻿using AdverTran.Background.Client.BackgroundServices.Interface;
+﻿using Console.Startup.Example.BackgroundService.Interface;
 using Console.Startup.Example.Connection;
 using Console.Startup.Example.Model.ApplicationSettings;
 using Microsoft.Extensions.Logging;
@@ -34,9 +34,9 @@ public class HealthCheckWorker : IHealthCheckWorker
             {
                 try
                 {
-                    _adverTranHttpClient.RefreshToken();
-                    var apiHealth = await _adverTranHttpClient.CheckApiHealthAsync();
-                    _logger.LogInformation($"{apiHealth}");
+                    //_adverTranHttpClient.RefreshToken();
+                    //var apiHealth = await _adverTranHttpClient.CheckApiHealthAsync();
+                    //_logger.LogInformation($"{apiHealth}");
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +63,7 @@ public class HealthCheckWorker : IHealthCheckWorker
             while (DateTime.UtcNow < nextRun)
             {
                 // Play friendly with the API endpoint when there is no work to be done
-                await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.HealthCheckService.SleepDelaySeconds), cancellationToken);
+                await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.SleepDelaySeconds), cancellationToken);
             }
             _logger.LogInformation("Thread Resumed for: '{Class}.{Method}'", GetType().Name, nameof(CheckAdverTranApi));
         }
