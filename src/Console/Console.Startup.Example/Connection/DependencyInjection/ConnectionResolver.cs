@@ -1,12 +1,23 @@
-﻿using Console.Startup.Example.Connection.Interfaces;
+﻿using Console.Startup.Example.Model.ApplicationSettings;
 using Microsoft.Extensions.DependencyInjection;
+using Startup.Client.Api;
+using Startup.Common.Connection;
+using Startup.Common.Connection.Interfaces;
 
 namespace Console.Startup.Example.Connection.DependencyInjection;
 
 public static class ConnectionResolver
 {
-    public static void RegisterDependencies(IServiceCollection service)
+    public static void RegisterDependencies(IServiceCollection services, AppSettings appSettings)
     {
-        service.AddTransient<IHttpClientWrapper, HttpClientWrapper>();
+        services.AddTransient<IHttpClientWrapper, HttpClientWrapper>();
+        services.AddTransient<StartupHttp>();
+
+        services.AddSingleton(new UserLoginModel()
+        {
+            Username = appSettings.WorkerProcesses.StartupApi.Username,
+            Password = appSettings.WorkerProcesses.StartupApi.Password,
+            DisplayName = appSettings.WorkerProcesses.StartupApi.Username,
+        });
     }
 }

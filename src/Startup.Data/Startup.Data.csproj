@@ -4,9 +4,10 @@
         <LangVersion>latest</LangVersion>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
+        <Nullable>enable</Nullable>
         <AssemblyName>Startup.Data</AssemblyName>
         <RootNamespace>Startup.Data</RootNamespace>
+        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +33,11 @@
         <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="2.6.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Startup.Common\Startup.Common.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Startup.Data.Models.Db;
+using Startup.Data.Models.Db.dboSchema;
 
 namespace Startup.Data.Repositories.Db;
 
@@ -15,6 +16,8 @@ public partial class StartupExampleContainer
     }
 
     public virtual DbSet<Agency> Agencies { get; set; }
+
+    public virtual DbSet<AgencyToMediaContent> AgencyToMediaContents { get; set; }
 
     public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
 
@@ -33,6 +36,8 @@ public partial class StartupExampleContainer
     public virtual DbSet<AuthenticationLog> AuthenticationLogs { get; set; }
 
     public virtual DbSet<AuthenticationStatus> AuthenticationStatuses { get; set; }
+
+    public virtual DbSet<MediaContent> MediaContents { get; set; }
 
     public virtual DbSet<UserToAgency> UserToAgencies { get; set; }
 
@@ -66,6 +71,23 @@ public partial class StartupExampleContainer
             entity.Property(e => e.PostalCode).HasMaxLength(20);
             entity.Property(e => e.StateOrProvince).HasMaxLength(50);
             entity.Property(e => e.WebAppEulaacceptDate).HasColumnName("WebAppEULAAcceptDate");
+        });
+
+        modelBuilder.Entity<AgencyToMediaContent>(entity =>
+        {
+            entity.HasKey(e => new { e.AgencyId, e.MediaContentId });
+
+            entity.ToTable("AgencyToMediaContent");
+
+            entity.HasOne(d => d.Agency).WithMany(p => p.AgencyToMediaContents)
+                .HasForeignKey(d => d.AgencyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgencyToMediaContent_Agency");
+
+            entity.HasOne(d => d.MediaContent).WithMany(p => p.AgencyToMediaContents)
+                .HasForeignKey(d => d.MediaContentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgencyToMediaContent_MediaContent");
         });
 
         modelBuilder.Entity<AspNetRole>(entity =>
@@ -177,6 +199,38 @@ public partial class StartupExampleContainer
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(20)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<MediaContent>(entity =>
+        {
+            entity.ToTable("MediaContent");
+
+            entity.HasIndex(e => e.DateCreated, "IX_MediaContent_DateCreated");
+
+            entity.HasIndex(e => e.FileName, "IX_MediaContent_FileName");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+            entity.Property(e => e.BlobFileNamePath)
+                .HasMaxLength(1024)
+                .IsUnicode(false);
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.DownloadFileUrl)
+                .HasMaxLength(1024)
+                .IsUnicode(false);
+            entity.Property(e => e.FileName)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.FileNameExt)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.FileSignature)
+                .IsRequired()
+                .HasMaxLength(512)
+                .IsUnicode(false);
+            entity.Property(e => e.LastUpdated).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.TempFilePath)
+                .HasMaxLength(512)
                 .IsUnicode(false);
         });
 

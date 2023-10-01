@@ -1,0 +1,10 @@
+﻿{
+  "input-file": "https://localhost:7100/swagger/v1/swagger.json",
+  "namespace": "Startup.Client",
+  "override-client-name": "StartupClient",
+  "clear-output-folder": true,
+  "add-credentials": true,
+  "csharp": {
+    "output-folder": "V1"
+  }
+}

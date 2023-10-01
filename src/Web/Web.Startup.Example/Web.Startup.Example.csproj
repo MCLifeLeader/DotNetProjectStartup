@@ -7,10 +7,46 @@
         <RootNamespace>Web.Startup.Example</RootNamespace>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <Configurations>Debug;Release;Development</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+        <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Content Remove="appsettings.Debug.json" />
+      <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Production.json" />
+      <Content Remove="appsettings.Release.json" />
+      <Content Remove="appsettings.Staging.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="appsettings.Debug.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Development.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Production.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Release.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Staging.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
@@ -22,6 +58,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.11" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
           <PrivateAssets>all</PrivateAssets>
@@ -45,6 +82,16 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Startup.Data\Startup.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.json">
+        <TransformOnBuild>true</TransformOnBuild>
+      </Content>
     </ItemGroup>
 
 </Project>

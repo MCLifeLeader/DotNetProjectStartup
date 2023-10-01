@@ -1,4 +1,4 @@
-﻿using Startup.Data.Repositories.Interfaces;
+﻿using Startup.Common.Repositories.Interfaces;
 
 namespace Startup.Data.Repositories.Db.Interfaces;
 

@@ -105,7 +105,7 @@ public static class RegisterDependentServices
         builder.SetDependencyInjection(appSettings);
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.StartupExample_App.ToLower());
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_APP.ToLower());
 
         return builder;
     }
@@ -132,7 +132,7 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.StartupExample_Api, c =>
+        builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_API, c =>
         {
             c.BaseAddress = new Uri(appSettings.PageUrl);
 
@@ -148,7 +148,7 @@ public static class RegisterDependentServices
             return h;
         });
 
-        builder.Services.AddHttpClient(HttpClientNames.StartupExample_App, c =>
+        builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_APP, c =>
         {
             c.BaseAddress = new Uri(appSettings.PageUrl);
 

@@ -12,10 +12,8 @@
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
         <PlatformTarget>x64</PlatformTarget>
         <PublishSingleFile>true</PublishSingleFile>
-        
+        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
         <UserSecretsId>98752f25-bd55-4a37-a840-ca720045b62b</UserSecretsId>
-        
-        <Configurations>Debug;Release;Development</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,6 +23,7 @@
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.11" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
           <PrivateAssets>all</PrivateAssets>
@@ -43,6 +42,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="7.0.0" />
         <PackageReference Include="Microsoft.FeatureManagement" Version="2.6.1" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
@@ -55,7 +55,16 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Startup.Client\Startup.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Update="appsettings.Debug.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Development.json">
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings.json</DependentUpon>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -64,7 +73,17 @@
         <TransformOnBuild>true</TransformOnBuild>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="appsettings.Production.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="appsettings.Release.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.Staging.json">
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings.json</DependentUpon>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -72,6 +91,10 @@
       <None Update="Install_Service.ps1">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\Interface\" />
     </ItemGroup>
 
 </Project>

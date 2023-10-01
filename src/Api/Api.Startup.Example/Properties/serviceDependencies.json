@@ -4,6 +4,11 @@
       "type": "mssql",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null
+    },
+    "storage1": {
+      "type": "storage",
+      "connectionId": "ConnectionStrings:AzuriteBlobStorage",
+      "dynamicId": null
     }
   }
 }

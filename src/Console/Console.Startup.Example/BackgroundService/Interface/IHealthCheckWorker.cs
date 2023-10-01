@@ -2,5 +2,5 @@
 
 public interface IHealthCheckWorker
 {
-    Task CheckAdverTranApi(CancellationToken cancellationToken);
+    Task CheckStartupApi(CancellationToken cancellationToken);
 }

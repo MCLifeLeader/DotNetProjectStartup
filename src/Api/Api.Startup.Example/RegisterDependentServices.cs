@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using Api.Startup.Example.Connection.DependencyInjection;
-using Api.Startup.Example.Constants;
 using Api.Startup.Example.Data.DependencyInjection;
 using Api.Startup.Example.Factories.DependencyInjection;
 using Api.Startup.Example.Helpers.DependencyInjection;
@@ -16,12 +15,15 @@ using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Startup.Data.Repositories.DependencyInjection;
+using Startup.Business.DependencyInjection;
+using Startup.Business.Models.ApplicationSettings;
+using Startup.Common.Constants;
 
 namespace Api.Startup.Example;
 
@@ -79,6 +81,8 @@ public static class RegisterDependentServices
 
         // Bind the app settings to the model
         builder.Configuration.Bind(appSettings);
+        StorageAccount storageAccount = new();
+        builder.Configuration.GetSection("StorageAccount").Bind(storageAccount);
 
         // Adds the Fluent Validation to DI.
         builder.Services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -92,6 +96,8 @@ public static class RegisterDependentServices
             .ValidateOnStart();
 
         builder.Services.AddSingleton(builder.Configuration);
+        builder.Services.AddSingleton(appSettings);
+        builder.Services.AddSingleton(storageAccount);
 
         #endregion
 
@@ -185,6 +191,8 @@ public static class RegisterDependentServices
             });
         }
 
+        builder.Services.AddFeatureManagement();
+        
         builder.SetDependencyInjection(appSettings);
 
         builder.Services.AddAuthentication(o =>
@@ -212,8 +220,9 @@ public static class RegisterDependentServices
         builder.Services.AddAuthorization();
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.StartupExample_App.ToLower())
-            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection);
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUP_EXTERNAL.ToLower())
+            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection)
+            .AddAzureBlobStorage(appSettings.StorageAccount.BlobStorageConnection);
 
         return builder;
     }
@@ -225,15 +234,13 @@ public static class RegisterDependentServices
 
         // services
         ServicesResolver.RegisterDependencies(builder.Services, appSettings);
+        BusinessServicesResolver.RegisterDependencies(builder.Services, appSettings.StorageAccount);
 
         // helpers
         HelpersResolver.RegisterDependencies(builder.Services, appSettings);
 
-        // identity
-        DataServicesResolver.RegisterDependencies(builder.Services, appSettings);
-
         // repositories
-        RepositoriesResolver.RegisterDependencies(builder.Services, appSettings.ConnectionStrings.DefaultConnection);
+        DataServicesResolver.RegisterDependencies(builder.Services, appSettings);
 
         //factories
         FactoriesResolver.RegisterDependencies(builder.Services, appSettings);
@@ -241,9 +248,9 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.StartupExample_Home, c =>
+        builder.Services.AddHttpClient(HttpClientNames.STARTUP_EXTERNAL, c =>
         {
-            c.BaseAddress = new Uri(appSettings.PageUrl);
+            c.BaseAddress = new Uri(appSettings.StartupExample.ExternalUrl);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));

@@ -4,13 +4,13 @@ public static class HttpClientNames
 {
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public const string StartupExample_Api = "StartupExample_Api";
+    public const string STARTUPEXAMPLE_API = "StartupExample_Api";
 
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public const string StartupExample_App = "StartupExample_App";
+    public const string STARTUPEXAMPLE_APP = "StartupExample_App";
 
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public const string StartupExample_Home = "StartupExample_Home";
+    public const string STARTUPEXAMPLE_HOME = "StartupExample_Home";
 }

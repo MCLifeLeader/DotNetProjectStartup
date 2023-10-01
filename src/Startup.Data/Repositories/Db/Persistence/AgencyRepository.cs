@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Startup.Data.Helpers;
 using Startup.Data.Models;
-using Startup.Data.Models.Db;
+using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 using System.Linq.Expressions;
 
@@ -124,5 +124,25 @@ public class AgencyRepository : StartupExampleRepositoryBase, IAgencyRepository
     public IQueryable<Agency> GetAsQueryable()
     {
         return _context.Agencies.AsQueryable();
+    }
+
+    public Common.Models.ChunkedObjectData<Agency> GetByChunking(Guid key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Common.Models.ChunkedObjectData<Agency>> GetByChunkingAsync(Guid key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Common.Models.ChunkedObjectData<Agency> GetByPaging(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Common.Models.ChunkedObjectData<Agency>> GetByPagingAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
     }
 }

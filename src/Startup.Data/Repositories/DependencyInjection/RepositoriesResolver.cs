@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.FeatureManagement;
+using Startup.Common.Constants;
+using Startup.Common.Helpers.Extensions;
 using Startup.Data.Repositories.Db;
 using Startup.Data.Repositories.Db.Interfaces;
 using Startup.Data.Repositories.Db.Persistence;
@@ -12,7 +15,17 @@ public static class RepositoriesResolver
     {
         #region Database Repositories
 
-        service.AddDbContext<StartupExampleContext>(options => options.UseSqlServer(connectionString));
+        service.AddDbContext<StartupExampleContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+
+            if (service.BuildServiceProvider().GetService<IFeatureManager>().IsEnabledAsync(FeatureFlags.SQL_DEBUGGER).Result)
+            {
+                options.EnableSensitiveDataLogging();
+                options.EnableDetailedErrors();
+                options.UseLoggerFactory(LoggerSupport.GetLoggerFactory());
+            }
+        });
 
         service.AddScoped<IStartupExampleContext, StartupExampleContext>();
 

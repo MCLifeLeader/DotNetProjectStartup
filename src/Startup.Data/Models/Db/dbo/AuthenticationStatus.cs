@@ -2,8 +2,10 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Startup.Data.Models.Db.dboSchema;
 
-namespace Startup.Data.Models.Db;
+
+namespace Startup.Data.Models.Db.dboSchema;
 
 public partial class AuthenticationStatus
 {

@@ -5,6 +5,7 @@ using Console.Startup.Example.Model.ApplicationSettings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
+using Startup.Common.Helpers.Extensions;
 
 namespace Console.Startup.Example.BackgroundService;
 
@@ -16,17 +17,20 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
     private readonly AppSettings _appSettings;
     private readonly ILogger<HostedBackgroundServices> _logger;
     private readonly IHealthCheckWorker _healthCheckWorker;
+    private readonly IFileDownloadWorker _fileWorker;
     private readonly IFeatureManager _featureManager;
 
     public HostedBackgroundServices(
         IFeatureManager featureManager,
         ILogger<HostedBackgroundServices> logger,
         IOptions<AppSettings> appSettings,
+        IFileDownloadWorker fileWorker,
         IHealthCheckWorker healthCheckWorker)
     {
         _featureManager = featureManager ?? throw new ArgumentNullException(nameof(featureManager));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _healthCheckWorker = healthCheckWorker ?? throw new ArgumentNullException(nameof(healthCheckWorker));
+        _fileWorker = fileWorker ?? throw new ArgumentNullException(nameof(fileWorker));
         _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
     }
 
@@ -37,6 +41,7 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
         _logger.LogInformation(await _appSettings.ToJsonAsync());
 
         bool healthCheckWorkerEnabled = await _featureManager.IsEnabledAsync(FeatureFlags.HEALTH_CHECK_WORKER);
+        bool fileWorkerEnabled = await _featureManager.IsEnabledAsync(FeatureFlags.FILE_WORKER);
 
         List<Task> tasks = new List<Task>();
 
@@ -52,15 +57,21 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
 
                 if (healthCheckWorkerEnabled)
                 {
-                    tasks.Add(_healthCheckWorker.CheckAdverTranApi(cancellationToken));
+                    tasks.Add(_healthCheckWorker.CheckStartupApi(cancellationToken));
                 }
                 else
                 {
-                    _logger.LogInformation($"");
+                    _logger.LogInformation($"{nameof(IHealthCheckWorker)} Disabled");
                 }
 
-                //tasks.Add(_worker.Process2(cancellationToken));
-                //tasks.Add(_worker.Process3(cancellationToken));
+                if (fileWorkerEnabled)
+                {
+                    tasks.Add(_fileWorker.ProcessDownloadFile(cancellationToken));
+                }
+                else
+                {
+                    _logger.LogInformation($"{nameof(IFileDownloadWorker)} Disabled");
+                }
 
                 Task.WaitAll(tasks.ToArray());
                 tasks.Clear();

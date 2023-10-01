@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Startup.Data.Models.Db;
+using Startup.Common.Models;
+using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 using System.Linq.Expressions;
 
@@ -66,6 +67,26 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         return await _context.UserToAgencies.SingleOrDefaultAsync(e => e.UserId.Equals(key2) && e.AgencyId == key2);
     }
 
+    public IList<UserToAgency> GetEntitiesByFirstKeyId(string key1)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IList<UserToAgency>> GetEntitiesByFirstKeyIdAsync(string key1)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IList<UserToAgency> GetEntitiesBySecondKeyId(Guid key2)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IList<UserToAgency>> GetEntitiesBySecondKeyIdAsync(Guid key2)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<IList<UserToAgency>> GetEntityByFirstKeyIdAsync(string key1)
     {
         return await _context.UserToAgencies.Where(e => e.UserId.Equals(key1)).ToListAsync();
@@ -76,6 +97,16 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         return await _context.UserToAgencies.Where(e => e.AgencyId == key2).ToListAsync();
     }
 
+    public UserToAgency GetEntityById(string key1)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<UserToAgency> GetEntityByIdAsync(string key1)
+    {
+        throw new NotImplementedException();
+    }
+
     public IList<UserToAgency> GetAll()
     {
         return _context.UserToAgencies.ToList();
@@ -84,6 +115,26 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
     public async Task<IList<UserToAgency>> GetAllAsync()
     {
         return await _context.UserToAgencies.ToListAsync();
+    }
+
+    public ChunkedObjectData<UserToAgency> GetByChunking(string key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ChunkedObjectData<UserToAgency>> GetByChunkingAsync(string key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ChunkedObjectData<UserToAgency> GetByPaging(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ChunkedObjectData<UserToAgency>> GetByPagingAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
     }
 
     public IQueryable<UserToAgency> Query(Expression<Func<UserToAgency, bool>> filter)

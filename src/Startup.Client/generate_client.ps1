@@ -1,0 +1,1 @@
+﻿autorest config.json --verbose

@@ -8,18 +8,29 @@ using Console.Startup.Example.Constants;
 using Console.Startup.Example.Factories.DependencyInjection;
 using Console.Startup.Example.Helpers.DependencyInjection;
 using Console.Startup.Example.Helpers.Extensions;
+using Console.Startup.Example.Model;
 using Console.Startup.Example.Model.ApplicationSettings;
 using Console.Startup.Example.Repositories.DependencyInjection;
+using Console.Startup.Example.Services.DependencyInjection;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
+using Startup.Common.Constants;
+using Startup.Common.Helpers.Extensions;
+using Startup.Common.Models;
+using Startup.Common.Models.Authorization;
+using System.Net.Http.Formatting;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Console.Startup.Example;
 
 public static class RegisterDependentServices
 {
+    private static LoginToken? _token;
+
     public static IHostBuilder RegisterServices(this IHostBuilder builder)
     {
         AppSettings? appSettings = null;
@@ -87,6 +98,7 @@ public static class RegisterDependentServices
                 services
                     .AddOptions<AppSettings>()
                     .Bind(hostContext.Configuration)
+                    .ValidateDataAnnotations()
                     .ValidateFluently()
                     .ValidateOnStart();
 
@@ -106,6 +118,7 @@ public static class RegisterDependentServices
 
                 services.SetHttpClients(appSettings);
                 services.SetDependencyInjection(appSettings);
+                services.AddFeatureManagement();
             })
             .ConfigureLogging((hostContext, logging) =>
             {
@@ -140,9 +153,10 @@ public static class RegisterDependentServices
     private static void SetDependencyInjection(this IServiceCollection services, AppSettings appSettings)
     {
         //// http client wrapper etc
-        ConnectionResolver.RegisterDependencies(services);
+        ConnectionResolver.RegisterDependencies(services, appSettings);
 
         //// services
+        BackgroundServicesResolver.RegisterDependencies(services);
         ServicesResolver.RegisterDependencies(services);
 
         //// helpers
@@ -157,14 +171,58 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this IServiceCollection services, AppSettings appSettings)
     {
-        services.AddHttpClient(HttpClientNames.RemoteHostServerClient, c =>
+        services.AddHttpClient(HttpClientNames.STARTUP_API, c =>
         {
-            c.BaseAddress = new Uri(appSettings.WorkerProcesses.HealthCheckService.Uri);
+            c.BaseAddress = new Uri(appSettings.WorkerProcesses.StartupApi.Uri);
+
+            c.DefaultRequestHeaders.Accept.Clear();
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+            c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.StartupApi.TimeOutInSeconds);
+
+            UserLoginModel userLogin = new UserLoginModel()
+            {
+                Username = appSettings.WorkerProcesses.StartupApi.Username,
+                Password = appSettings.WorkerProcesses.StartupApi.Password,
+                DisplayName = appSettings.WorkerProcesses.StartupApi.Username,
+            };
+
+            if (!string.IsNullOrEmpty(_token?.Token))
+            {
+                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+                JwtSecurityToken token = handler.ReadJwtToken(_token?.Token);
+
+                if (token.ValidTo < DateTime.UtcNow)
+                {
+                    _token = GetAuthToken(services, c, userLogin);
+                }
+            }
+            else
+            {
+                _token = GetAuthToken(services, c, userLogin);
+            }
+
+            c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token?.Token);
+
+        }).ConfigurePrimaryHttpMessageHandler(c =>
+        {
+            HttpClientHandler h = new HttpClientHandler
+            {
+                UseProxy = false
+            };
+            return h;
+        });
+
+        services.AddHttpClient(HttpClientNames.STARTUP_WEB, c =>
+        {
+            c.BaseAddress = new Uri(appSettings.WorkerProcesses.RemoteServerConnection.Uri);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-            c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.HealthCheckService.TimeOutInSeconds);
+            c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.StartupApi.TimeOutInSeconds);
         }).ConfigurePrimaryHttpMessageHandler(c =>
         {
             HttpClientHandler h = new HttpClientHandler
@@ -174,4 +232,32 @@ public static class RegisterDependentServices
             return h;
         });
     }
+
+    private static LoginToken? GetAuthToken(IServiceCollection services, HttpClient httpClient, UserLoginModel userLoginModel)
+    {
+        LoginToken? token = null;
+
+        ILogger<Program> logger = services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
+
+        try
+        {
+            HttpResponseMessage response = httpClient.PostAsync(
+                "v1.0/Auth/Login",
+                userLoginModel,
+                new JsonMediaTypeFormatter()).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string rawToken = response.Content.ReadAsStringAsync().Result;
+                token = rawToken.FromJson<LoginToken>();
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting auth token");
+        }
+
+        return token;
+    }
+
 }

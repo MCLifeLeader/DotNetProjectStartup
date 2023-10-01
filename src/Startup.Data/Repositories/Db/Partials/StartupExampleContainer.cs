@@ -1,6 +1,6 @@
 ﻿#nullable disable
 using Microsoft.EntityFrameworkCore;
-using Startup.Data.Repositories;
+using Startup.Common.Repositories;
 using Startup.Data.Repositories.Db.Interfaces;
 
 // ReSharper disable All

@@ -20,6 +20,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AgencyToMediaContent]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[AspNetRoleClaims]",
          "ObjectType": 0
       },
@@ -56,11 +60,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[MediaContent]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[UserToAgency]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "4d4bc7a16e4b.StartupExample.dbo",
+   "UiHint": "95e68b7b2f1c.StartupExample.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
@@ -77,7 +85,7 @@
    "UseNodaTime": false,
    "UseNullableReferences": false,
    "UseSchemaFolders": true,
-   "UseSchemaNamespaces": false,
+   "UseSchemaNamespaces": true,
    "UseSpatial": false,
    "UseT4": false
 }

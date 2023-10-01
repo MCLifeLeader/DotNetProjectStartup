@@ -9,7 +9,7 @@ using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Startup.Data.Models.Db;
+using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 
 namespace Api.Startup.Example.Services;

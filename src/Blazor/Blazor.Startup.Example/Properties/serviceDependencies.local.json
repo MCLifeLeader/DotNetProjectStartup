@@ -9,6 +9,15 @@
       "type": "mssql.container",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null
+    },
+    "storage1": {
+      "containerPorts": "10000:10000,10001:10001,10002:10002",
+      "secretStore": "LocalSecretsFile",
+      "containerName": "azurite",
+      "containerImage": "mcr.microsoft.com/azure-storage/azurite",
+      "type": "storage.container",
+      "connectionId": "ConnectionStrings:AzuriteBlobStorage",
+      "dynamicId": null
     }
   }
 }

@@ -12,7 +12,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .IsEnumName(typeof(LogLevel));
         RuleFor(x => x.Logging.LogLevel.Microsoft)
             .IsEnumName(typeof(LogLevel));
-        RuleFor(x => x.Logging.LogLevel.MicrosoftAspNetCore)
+        RuleFor(x => x.Logging.LogLevel.System)
             .IsEnumName(typeof(LogLevel));
 
         // ToDo: Once key vault is live, comment back in

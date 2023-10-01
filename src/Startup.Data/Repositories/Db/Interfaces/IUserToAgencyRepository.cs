@@ -1,5 +1,5 @@
-﻿using Startup.Data.Models.Db;
-using Startup.Data.Repositories.Interfaces;
+﻿using Startup.Common.Repositories.Interfaces;
+using Startup.Data.Models.Db.dboSchema;
 
 namespace Startup.Data.Repositories.Db.Interfaces;
 

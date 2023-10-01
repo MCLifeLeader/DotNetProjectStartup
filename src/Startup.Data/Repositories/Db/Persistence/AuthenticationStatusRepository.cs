@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Startup.Data.Models;
-using Startup.Data.Models.Db;
+using Startup.Common.Models;
+using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 using System.Linq.Expressions;
 
@@ -32,12 +32,32 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         return await _context.AuthenticationStatuses.ToListAsync();
     }
 
-    public PagedObjectData<AuthenticationStatus> GetByPaging(short key, int pageSize)
+    public ChunkedObjectData<AuthenticationStatus> GetByChunking(short key1, int pageSize)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
+    public async Task<ChunkedObjectData<AuthenticationStatus>> GetByChunkingAsync(short key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ChunkedObjectData<AuthenticationStatus> GetByPaging(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ChunkedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Models.PagedObjectData<AuthenticationStatus> GetByPaging(short key, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Models.PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
     {
         throw new NotImplementedException();
     }

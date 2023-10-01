@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Startup.Common.Models;
 using Startup.Data.Helpers;
-using Startup.Data.Models;
-using Startup.Data.Models.Db;
+using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 using System.Linq.Expressions;
 
@@ -68,7 +68,27 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
         throw new NotImplementedException();
     }
 
-    public PagedObjectData<AuthenticationLog> GetByPaging(Guid key, int pageSize)
+    public ChunkedObjectData<AuthenticationLog> GetByChunking(Guid key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ChunkedObjectData<AuthenticationLog>> GetByChunkingAsync(Guid key1, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ChunkedObjectData<AuthenticationLog> GetByPaging(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<ChunkedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Models.PagedObjectData<AuthenticationLog> GetByPaging(Guid key, int pageSize)
     {
         long totalRecords = _context.AuthenticationLogs.Count();
 
@@ -78,7 +98,7 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
             .Take(pageSize)
             .ToList();
 
-        PagedObjectData<AuthenticationLog> pagedObjectData = new()
+        Models.PagedObjectData<AuthenticationLog> pagedObjectData = new()
         {
             EntityList = entityList,
             TotalRecordsInTable = totalRecords,
@@ -88,7 +108,7 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
         return pagedObjectData;
     }
 
-    public async Task<PagedObjectData<AuthenticationLog>> GetByPagingAsync(Guid key, int pageSize)
+    public async Task<Models.PagedObjectData<AuthenticationLog>> GetByPagingAsync(Guid key, int pageSize)
     {
         long totalRecords = await _context.AuthenticationLogs.CountAsync();
 
@@ -98,7 +118,7 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
             .Take(pageSize)
             .ToListAsync();
 
-        PagedObjectData<AuthenticationLog> pagedObjectData = new()
+        Models.PagedObjectData<AuthenticationLog> pagedObjectData = new()
         {
             EntityList = entityList,
             TotalRecordsInTable = totalRecords,

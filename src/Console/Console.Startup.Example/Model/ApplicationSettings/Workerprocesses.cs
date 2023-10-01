@@ -2,7 +2,8 @@
 {
     public class Workerprocesses
     {
-        public Healthcheckservice HealthCheckService { get; set; }
         public int SleepDelaySeconds { get; set; }
+        public Startupapi StartupApi { get; set; }
+        public Remoteserverconnection RemoteServerConnection { get; set; }
     }
 }

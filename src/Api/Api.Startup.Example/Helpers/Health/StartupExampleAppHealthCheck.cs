@@ -1,6 +1,6 @@
 ﻿using Api.Startup.Example.Connection.Interfaces;
-using Api.Startup.Example.Constants;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Startup.Common.Constants;
 
 namespace Api.Startup.Example.Helpers.Health;
 
@@ -17,7 +17,7 @@ public class StartupExampleAppHealthCheck : IHealthCheck
     {
         try
         {
-            var data = await _httpClient.GetBytesAsync("", HttpClientNames.StartupExample_Home);
+            var data = await _httpClient.GetBytesAsync("DotNetProjectStartup", HttpClientNames.STARTUP_EXTERNAL);
 
             if (data is {Length: > 0})
             {

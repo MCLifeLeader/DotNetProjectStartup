@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Startup.Client</AssemblyName>
+        <RootNamespace>Startup.Client</RootNamespace>
+        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" ClassName="StartupHttp" Namespace="Startup.Client.Api">
+            <SourceUri>https://localhost:7157/swagger/v1/swagger.json</SourceUri>
+        </OpenApiReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Azure.Identity" Version="1.10.1" />
+        <PackageReference Include="IdentityModel" Version="6.2.0" />
+        <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.11">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="2.6.1" />
+        <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Startup.Common\Startup.Common.csproj" />
+    </ItemGroup>
+
+</Project>

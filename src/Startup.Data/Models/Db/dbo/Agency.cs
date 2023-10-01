@@ -2,8 +2,10 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Startup.Data.Models.Db.dboSchema;
 
-namespace Startup.Data.Models.Db;
+
+namespace Startup.Data.Models.Db.dboSchema;
 
 public partial class Agency
 {
@@ -34,6 +36,8 @@ public partial class Agency
     public DateTime DateCreated { get; set; }
 
     public DateTime LastUpdated { get; set; }
+
+    public virtual ICollection<AgencyToMediaContent> AgencyToMediaContents { get; set; } = new List<AgencyToMediaContent>();
 
     public virtual ICollection<UserToAgency> UserToAgencies { get; set; } = new List<UserToAgency>();
 }

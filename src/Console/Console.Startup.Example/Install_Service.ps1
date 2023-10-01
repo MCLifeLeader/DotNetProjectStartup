@@ -4,7 +4,7 @@
 [string] $sourcePath = $PSScriptRoot
 [string] $binPath = $directoryPath + '\' + $args[0] + '.exe'
 
-# Install_Service.ps1 Console.Startup.Example C:\Services\Example Producation
+# Install_Service.ps1 Console.Startup.Example C:\Services\Example Production
 
 # If lane is not null, append it to the service name
 if ($null -ne $lane) {

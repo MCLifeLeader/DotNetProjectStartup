@@ -7,9 +7,9 @@
         <RootNamespace>Blazor.Startup.Example</RootNamespace>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>3d04371a-8027-4f3e-806b-40231954f535</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <Configurations>Debug;Release;Development</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+        <UserSecretsId>3d04371a-8027-4f3e-806b-40231954f535</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,12 +20,21 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Remove="appsettings.Debug.json" />
+      <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Production.json" />
+      <Content Remove="appsettings.Release.json" />
+      <Content Remove="appsettings.Staging.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
         <PackageReference Include="Azure.Identity" Version="1.10.1" />
         <PackageReference Include="FluentValidation" Version="11.7.1" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.11" />
@@ -59,6 +68,31 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Include="appsettings.Debug.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Development.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Production.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Release.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Staging.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Include="Pages\Counter.razor" />
       <None Include="Pages\Error.cshtml" />
       <None Include="Pages\FetchData.razor" />
@@ -67,6 +101,16 @@
       <None Include="Shared\MainLayout.razor" />
       <None Include="Shared\NavMenu.razor" />
       <None Include="Shared\SurveyPrompt.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Startup.Data\Startup.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.json">
+        <TransformOnBuild>true</TransformOnBuild>
+      </Content>
     </ItemGroup>
 
 </Project>
