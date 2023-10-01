@@ -27,10 +27,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{D64A
 		..\Start_Docker_Containers.ps1 = ..\Start_Docker_Containers.ps1
 		..\Start_StartupExample_Api.ps1 = ..\Start_StartupExample_Api.ps1
 		..\Start_StartupExample_Blazor.ps1 = ..\Start_StartupExample_Blazor.ps1
+		..\Start_StartupExample_Console.ps1 = ..\Start_StartupExample_Console.ps1
 		..\Start_StartupExample_Web.ps1 = ..\Start_StartupExample_Web.ps1
 		..\Stop_Docker_Containers.ps1 = ..\Stop_Docker_Containers.ps1
 		..\Stop_StartupExample_Api.ps1 = ..\Stop_StartupExample_Api.ps1
 		..\Stop_StartupExample_Blazor.ps1 = ..\Stop_StartupExample_Blazor.ps1
+		..\Stop_StartupExample_Console.ps1 = ..\Stop_StartupExample_Console.ps1
 		..\Stop_StartupExample_Web.ps1 = ..\Stop_StartupExample_Web.ps1
 	EndProjectSection
 EndProject
@@ -44,7 +46,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Common", "Startup.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Client", "Startup.Client\Startup.Client.csproj", "{D99A8175-7EE2-4680-A527-CC31A977F68E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startup.Business", "Startup.Business\Startup.Business.csproj", "{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Business", "Startup.Business\Startup.Business.csproj", "{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
