@@ -32,17 +32,9 @@ public class HealthCheckWorker : IHealthCheckWorker
         {
             try
             {
-                try
-                {
-                    _startupHttp.RefreshToken();
-                    var apiHealth = await _startupHttp.CheckApiHealthAsync();
-                    _logger.LogInformation($"{apiHealth}");
-                }
-                catch (Exception ex)
-                {
-                    // Log the error but let the application loop continue.
-                    _logger.LogWarning(ex, ex.Message);
-                }
+                _startupHttp.RefreshToken();
+                var apiHealth = await _startupHttp.CheckApiHealthAsync();
+                _logger.LogInformation($"{apiHealth}");
             }
             catch (TaskCanceledException)
             {

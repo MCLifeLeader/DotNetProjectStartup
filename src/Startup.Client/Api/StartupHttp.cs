@@ -76,7 +76,7 @@ public partial class StartupHttp
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(StartupHttp));
 
         var result = await _apiHealthRepository.GetHealthAsync();
-        _logger.LogInformation("{healthStatus}", result);
+        _logger.LogDebug("{healthStatus}", result);
 
         return result;
     }

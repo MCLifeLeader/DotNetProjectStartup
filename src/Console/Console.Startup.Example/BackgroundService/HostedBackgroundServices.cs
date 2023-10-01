@@ -1,6 +1,5 @@
 ﻿using Console.Startup.Example.BackgroundService.Interface;
 using Console.Startup.Example.Constants;
-using Console.Startup.Example.Helpers.Extensions;
 using Console.Startup.Example.Model.ApplicationSettings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
