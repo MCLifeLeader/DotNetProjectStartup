@@ -105,7 +105,7 @@ public static class RegisterDependentServices
         builder.SetDependencyInjection(appSettings);
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_APP.ToLower());
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower());
 
         return builder;
     }
@@ -134,7 +134,7 @@ public static class RegisterDependentServices
     {
         builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_API, c =>
         {
-            c.BaseAddress = new Uri(appSettings.PageUrl);
+            c.BaseAddress = new Uri(appSettings.StartupExample.ApiUrl);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
@@ -150,7 +150,7 @@ public static class RegisterDependentServices
 
         builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_APP, c =>
         {
-            c.BaseAddress = new Uri(appSettings.PageUrl);
+            c.BaseAddress = new Uri(appSettings.StartupExample.AppUrl);
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));

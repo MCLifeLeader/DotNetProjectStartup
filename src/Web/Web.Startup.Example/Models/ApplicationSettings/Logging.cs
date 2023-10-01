@@ -1,6 +1,7 @@
-﻿namespace Web.Startup.Example.Models.ApplicationSettings;
-
-public class Logging
+﻿namespace Web.Startup.Example.Models.ApplicationSettings
 {
-    public Loglevel LogLevel { get; set; }
+    public class Logging
+    {
+        public Loglevel LogLevel { get; set; }
+    }
 }

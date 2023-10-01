@@ -1,6 +1,7 @@
-﻿namespace Blazor.Startup.Example.Models.ApplicationSettings;
-
-public class Connectionstrings
+﻿namespace Blazor.Startup.Example.Models.ApplicationSettings
 {
-    public string DefaultConnection { get; set; }
+    public class Connectionstrings
+    {
+        public string DefaultConnection { get; set; }
+    }
 }

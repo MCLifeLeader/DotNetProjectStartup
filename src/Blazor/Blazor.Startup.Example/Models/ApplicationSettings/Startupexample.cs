@@ -1,4 +1,4 @@
-﻿namespace Console.Startup.Example.Model.ApplicationSettings
+﻿namespace Blazor.Startup.Example.Models.ApplicationSettings
 {
     public class Startupexample
     {

@@ -1,6 +1,7 @@
-﻿namespace Blazor.Startup.Example.Models.ApplicationSettings;
-
-public class Logging
+﻿namespace Blazor.Startup.Example.Models.ApplicationSettings
 {
-    public Loglevel LogLevel { get; set; }
+    public class Logging
+    {
+        public Loglevel LogLevel { get; set; }
+    }
 }
