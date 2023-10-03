@@ -20,7 +20,7 @@ public class CanaryService : ICanaryService
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ReadApiCanaryPage));
 
         string canary = _canaryPageRepository.GetCanaryPage();
-        string weather = _canaryPageRepository.GetWeatherPage();
+        string weather = string.Empty;//_canaryPageRepository.GetWeatherPage();
 
         return canary + weather;
     }
@@ -30,7 +30,7 @@ public class CanaryService : ICanaryService
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ReadApiCanaryPage));
 
         string canary = await _canaryPageRepository.GetCanaryPageAsync();
-        string weather = await _canaryPageRepository.GetWeatherPageAsync();
+        string weather = string.Empty;//await _canaryPageRepository.GetWeatherPageAsync();
 
         return canary + weather;
     }

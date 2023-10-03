@@ -25,7 +25,7 @@ public class CanaryPageRepository : ICanaryPageRepository
 
         if (string.IsNullOrEmpty(cached))
         {
-            string data = Encoding.UTF8.GetString(_httpClient.GetBytes("v1.0/Canary/StatusJson", HttpClientNames.STARTUPEXAMPLE_APP));
+            string data = Encoding.UTF8.GetString(_httpClient.GetBytes("api/Info/StatusJson", HttpClientNames.STARTUPEXAMPLE_APP));
 
             _cache.SetCanaryPage(canary, data);
             return data;
@@ -36,7 +36,7 @@ public class CanaryPageRepository : ICanaryPageRepository
 
     public string GetWeatherPage()
     {
-        return Encoding.UTF8.GetString(_httpClient.GetBytes("v1.0/WeatherForecast/GetWeatherForecast2", HttpClientNames.STARTUPEXAMPLE_API));
+        return Encoding.UTF8.GetString(_httpClient.GetBytes("api/v1.0/WeatherForecast/GetWeatherForecast2", HttpClientNames.STARTUPEXAMPLE_API));
     }
 
     public async Task<string> GetCanaryPageAsync()
@@ -46,7 +46,7 @@ public class CanaryPageRepository : ICanaryPageRepository
 
         if (string.IsNullOrEmpty(cached))
         {
-            string data = Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("v1.0/Canary/StatusJson", HttpClientNames.STARTUPEXAMPLE_API));
+            string data = Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("api/Info/StatusJson", HttpClientNames.STARTUPEXAMPLE_API));
 
             _cache.SetCanaryPage(canary, data);
             return data;
@@ -57,6 +57,6 @@ public class CanaryPageRepository : ICanaryPageRepository
 
     public async Task<string> GetWeatherPageAsync()
     {
-        return Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("v1.0/WeatherForecast/GetWeatherForecast2", HttpClientNames.STARTUPEXAMPLE_API));
+        return Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("api/v1.0/WeatherForecast/GetWeatherForecast2", HttpClientNames.STARTUPEXAMPLE_API));
     }
 }

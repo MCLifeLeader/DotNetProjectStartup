@@ -66,7 +66,7 @@ public class AuthService : IAuthService
 
         IdentityUser iUser = _userManager.FindByNameAsync(user.Username).Result;
 
-        _userManager.ChangePasswordAsync(iUser, "P@ssword123", "P@ssword123").GetAwaiter().GetResult();
+        //_userManager.ChangePasswordAsync(iUser, "P@ssword123", "P@ssword123").GetAwaiter().GetResult();
 
         // Create a log entry for the authentication attempt.
         authLog = new AuthenticationLog
