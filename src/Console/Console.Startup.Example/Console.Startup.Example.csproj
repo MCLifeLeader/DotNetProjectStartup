@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -18,7 +18,7 @@
 
     <ItemGroup>
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
-        <PackageReference Include="Azure.Identity" Version="1.10.1" />
+        <PackageReference Include="Azure.Identity" Version="1.10.2" />
         <PackageReference Include="FluentValidation" Version="11.7.1" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
