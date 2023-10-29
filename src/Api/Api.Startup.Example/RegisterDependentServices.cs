@@ -11,6 +11,7 @@ using Api.Startup.Example.Helpers.Filter;
 using Api.Startup.Example.Helpers.Health;
 using Api.Startup.Example.Models.ApplicationSettings;
 using Api.Startup.Example.Services.DependencyInjection;
+using Asp.Versioning;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

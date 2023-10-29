@@ -1,4 +1,5 @@
 using Api.Startup.Example.Models;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
