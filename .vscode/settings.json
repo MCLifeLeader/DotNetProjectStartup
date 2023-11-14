@@ -1,3 +1,4 @@
 {
-   "dotnet.defaultSolution": "src\\StartupExamples.sln"
+   "dotnet.defaultSolution": "src\\StartupExamples.sln",
+   "sarif-viewer.connectToGithubCodeScanning": "off"
 }
