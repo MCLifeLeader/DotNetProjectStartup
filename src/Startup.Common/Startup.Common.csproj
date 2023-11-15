@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Startup.Common</AssemblyName>
@@ -11,29 +11,29 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Azure.Identity" Version="1.10.3" />
-        <PackageReference Include="Azure.Storage.Blobs" Version="12.18.0" />
-        <PackageReference Include="Azure.Storage.Queues" Version="12.16.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+        <PackageReference Include="Azure.Identity" Version="1.10.4" />
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+        <PackageReference Include="Azure.Storage.Queues" Version="12.17.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.1" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="Microsoft.FeatureManagement" Version="3.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+        <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
     </ItemGroup>
 
 </Project>
