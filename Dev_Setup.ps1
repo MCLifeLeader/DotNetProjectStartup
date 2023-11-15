@@ -15,7 +15,9 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
     ## Pull the Docker images
     docker pull mcr.microsoft.com/azure-storage/azurite
     docker pull mcr.microsoft.com/dotnet/sdk
+    docker pull mcr.microsoft.com/dotnet/sdk:7.0
     docker pull mcr.microsoft.com/dotnet/aspnet
+    docker pull mcr.microsoft.com/dotnet/aspnet:7.0
     docker pull mcr.microsoft.com/mssql/server
 
     ## Stop the StartupExampleSql-Dev container if it is running
@@ -34,7 +36,7 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
         Write-Host "The StartupExampleSql-Dev container has been removed."
     } else {
         Write-Host "The StartupExampleSql-Dev container does not exist."
-    }    
+    }
 
     ## Start the StartupExampleSql-Dev container on port 4433 with local dev password
     docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@ssword123!' -p 4433:1433 --name 'StartupExampleSql-Dev' -d mcr.microsoft.com/mssql/server
