@@ -26,6 +26,6 @@ public class ApiHealthRepository : IApiHealthRepository
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetHealthAsync));
 
-        return Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("_health", HttpClientNames.STARTUP_API));
+        return Encoding.UTF8.GetString(await _httpClient.GetBytesAsync("_health", HttpClientNames.STARTUPEXAMPLE_API));
     }
 }

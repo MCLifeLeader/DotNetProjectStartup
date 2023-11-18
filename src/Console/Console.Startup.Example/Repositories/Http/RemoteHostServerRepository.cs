@@ -22,7 +22,7 @@ public class RemoteHostServerRepository : IRemoteHostServerRepository
             return null;
         }
 
-        byte[] data = await _httpClient.GetBytesAsync(urlPath, HttpClientNames.STARTUP_WEB);
+        byte[] data = await _httpClient.GetBytesAsync(urlPath, HttpClientNames.STARTUPEXAMPLE_HOME);
         return Encoding.UTF8.GetString(data);
     }
 }

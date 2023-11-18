@@ -221,7 +221,7 @@ public static class RegisterDependentServices
         builder.Services.AddAuthorization();
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUP_EXTERNAL.ToLower())
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_EXTERNAL.ToLower())
             .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection)
             .AddAzureBlobStorage(appSettings.StorageAccount.BlobStorageConnection);
 
@@ -249,7 +249,7 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.STARTUP_EXTERNAL, c =>
+        builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_EXTERNAL, c =>
         {
             c.BaseAddress = new Uri(appSettings.StartupExample.ExternalUrl);
 

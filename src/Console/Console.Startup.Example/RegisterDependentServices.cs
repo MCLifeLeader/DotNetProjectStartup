@@ -169,7 +169,7 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this IServiceCollection services, AppSettings appSettings)
     {
-        services.AddHttpClient(HttpClientNames.STARTUP_API, c =>
+        services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_API, c =>
         {
             c.BaseAddress = new Uri(appSettings.WorkerProcesses.StartupApi.Uri);
 
@@ -213,7 +213,7 @@ public static class RegisterDependentServices
             return h;
         });
 
-        services.AddHttpClient(HttpClientNames.STARTUP_WEB, c =>
+        services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_HOME, c =>
         {
             c.BaseAddress = new Uri(appSettings.WorkerProcesses.RemoteServerConnection.Uri);
 

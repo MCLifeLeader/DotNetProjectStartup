@@ -1,6 +1,6 @@
 ﻿using Blazor.Startup.Example.Connection.Interfaces;
-using Blazor.Startup.Example.Constants;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Startup.Common.Constants;
 
 namespace Blazor.Startup.Example.Helpers.Health;
 

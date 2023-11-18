@@ -1,6 +1,5 @@
 using Blazor.Startup.Example.Components.Account;
 using Blazor.Startup.Example.Connection.DependencyInjection;
-using Blazor.Startup.Example.Constants;
 using Blazor.Startup.Example.Data;
 using Blazor.Startup.Example.Data.DependencyInjection;
 using Blazor.Startup.Example.Factories.DependencyInjection;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Startup.Common.Constants;
 using System.Net.Http.Headers;
 
 namespace Blazor.Startup.Example;

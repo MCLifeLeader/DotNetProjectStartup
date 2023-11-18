@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Blazor.Startup.Example.Connection.Interfaces;
-using Blazor.Startup.Example.Constants;
 using Blazor.Startup.Example.Repository.Http.Endpoints.Interfaces;
+using Startup.Common.Constants;
 
 namespace Blazor.Startup.Example.Repository.Http.Endpoints;
 

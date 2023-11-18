@@ -27,7 +27,7 @@ public partial class StartupHttp
     {
         _logger = logger;
 
-        _httpClient = httpClientWrapper.HttpClient(HttpClientNames.STARTUP_API);
+        _httpClient = httpClientWrapper.HttpClient(HttpClientNames.STARTUPEXAMPLE_API);
         _baseUrl = _httpClient.BaseAddress?.OriginalString;
         _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         _apiHealthRepository = apiHealthRepository;

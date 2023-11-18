@@ -17,7 +17,7 @@ public class StartupExampleAppHealthCheck : IHealthCheck
     {
         try
         {
-            var data = await _httpClient.GetBytesAsync("DotNetProjectStartup", HttpClientNames.STARTUP_EXTERNAL);
+            var data = await _httpClient.GetBytesAsync("DotNetProjectStartup", HttpClientNames.STARTUPEXAMPLE_EXTERNAL);
 
             if (data is {Length: > 0})
             {
