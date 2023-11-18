@@ -1,4 +1,4 @@
-using Blazor.Startup.Example.Data;
+using Blazor.Startup.Example.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace Blazor.Startup.Example.Components.Account

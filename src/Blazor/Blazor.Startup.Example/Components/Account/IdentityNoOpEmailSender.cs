@@ -1,4 +1,4 @@
-using Blazor.Startup.Example.Data;
+using Blazor.Startup.Example.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

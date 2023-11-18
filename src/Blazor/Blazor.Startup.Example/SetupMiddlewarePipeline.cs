@@ -1,9 +1,16 @@
 using Blazor.Startup.Example.Components;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Blazor.Startup.Example;
 
 public static class SetupMiddlewarePipeline
 {
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
     public static WebApplication SetupMiddleware(this WebApplication app)
     {
         // Configure the HTTP request pipeline.
@@ -18,6 +25,12 @@ public static class SetupMiddlewarePipeline
             app.UseHsts();
         }
 
+        app.MapHealthChecks("/_health",
+            new HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            }); //.RequireAuthorization();
+            
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
