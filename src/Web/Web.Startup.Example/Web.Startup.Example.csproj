@@ -10,6 +10,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <Configurations>Debug;Release;Development;Production;Staging</Configurations>
         <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
+        <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
 
     <ItemGroup>
@@ -52,8 +53,8 @@
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.0" />
         <PackageReference Include="Azure.Identity" Version="1.10.4" />
-        <PackageReference Include="FluentValidation" Version="11.8.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+        <PackageReference Include="FluentValidation" Version="11.8.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.1" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />

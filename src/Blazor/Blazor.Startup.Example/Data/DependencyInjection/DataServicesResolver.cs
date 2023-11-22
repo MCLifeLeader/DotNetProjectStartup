@@ -18,8 +18,8 @@ public static class DataServicesResolver
 
         #region Http Repositories
 
-        service.AddTransient<ICanaryPageCache, CanaryPageCache>();
-        service.AddScoped<ICanaryPageRepository, CanaryPageRepository>();
+        //service.AddTransient<ICanaryPageCache, CanaryPageCache>();
+        //service.AddScoped<ICanaryPageRepository, CanaryPageRepository>();
 
         #endregion
     }
