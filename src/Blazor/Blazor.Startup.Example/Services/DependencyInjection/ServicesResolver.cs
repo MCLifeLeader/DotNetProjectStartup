@@ -7,6 +7,6 @@ public static class ServicesResolver
 {
     public static void RegisterDependencies(IServiceCollection service, AppSettings appSettings)
     {
-        //service.AddTransient<ICanaryService, CanaryService>();
+        service.AddTransient<ICanaryService, CanaryService>();
     }
 }

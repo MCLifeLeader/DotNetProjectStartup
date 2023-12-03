@@ -7,6 +7,6 @@ public static class HelpersResolver
 {
     public static void RegisterDependencies(IServiceCollection service, AppSettings appSettings)
     {
-        //service.AddSingleton<MemoryCache>();
+        service.AddSingleton<MemoryCache>();
     }
 }
