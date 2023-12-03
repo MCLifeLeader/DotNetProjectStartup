@@ -10,6 +10,7 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <Configurations>Debug;Release;Development;Production;Staging</Configurations>
         <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
+        <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
 
     <ItemGroup>

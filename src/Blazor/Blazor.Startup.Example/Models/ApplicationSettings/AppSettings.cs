@@ -11,4 +11,5 @@ public class AppSettings
     public Connectionstrings ConnectionStrings { get; set; }
     public Startupexample StartupExample { get; set; }
     public string AllowedHosts { get; set; }
+    public object StorageAccount { get; internal set; }
 }

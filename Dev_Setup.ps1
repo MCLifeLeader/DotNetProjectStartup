@@ -15,9 +15,7 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
     ## Pull the Docker images
     docker pull mcr.microsoft.com/azure-storage/azurite
     docker pull mcr.microsoft.com/dotnet/sdk
-    docker pull mcr.microsoft.com/dotnet/sdk:7.0
     docker pull mcr.microsoft.com/dotnet/aspnet
-    docker pull mcr.microsoft.com/dotnet/aspnet:7.0
     docker pull mcr.microsoft.com/mssql/server
 
     ## Stop the StartupExampleSql-Dev container if it is running

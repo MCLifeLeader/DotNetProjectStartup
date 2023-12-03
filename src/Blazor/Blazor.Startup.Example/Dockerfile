@@ -9,20 +9,20 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Api/Api.Startup.Example/Api.Startup.Example.csproj", "Api/Api.Startup.Example/"]
+COPY ["Blazor/Blazor.Startup.Example/Blazor.Startup.Example.csproj", "Blazor/Blazor.Startup.Example/"]
 COPY ["Startup.Business/Startup.Business.csproj", "Startup.Business/"]
 COPY ["Startup.Common/Startup.Common.csproj", "Startup.Common/"]
 COPY ["Startup.Data/Startup.Data.csproj", "Startup.Data/"]
-RUN dotnet restore "./Api/Api.Startup.Example/./Api.Startup.Example.csproj"
+RUN dotnet restore "./Blazor/Blazor.Startup.Example/./Blazor.Startup.Example.csproj"
 COPY . .
-WORKDIR "/src/Api/Api.Startup.Example"
-RUN dotnet build "./Api.Startup.Example.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Blazor/Blazor.Startup.Example"
+RUN dotnet build "./Blazor.Startup.Example.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Api.Startup.Example.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Blazor.Startup.Example.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Api.Startup.Example.dll"]
+ENTRYPOINT ["dotnet", "Blazor.Startup.Example.dll"]
