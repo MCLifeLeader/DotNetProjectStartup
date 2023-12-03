@@ -98,6 +98,11 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
+
         builder.Services.AddMemoryCache();
         builder.SetHttpClients(appSettings);
 

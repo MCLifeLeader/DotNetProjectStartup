@@ -117,6 +117,10 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
 
         if (appSettings.CorsEnabled)
         {
