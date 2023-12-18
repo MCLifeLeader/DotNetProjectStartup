@@ -87,16 +87,26 @@ public static class RegisterDependentServices
         #endregion
 
         // Configure logging 
+        builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+
+        if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+        {
+            builder.Logging.AddApplicationInsights(
+                configureTelemetryConfiguration: (config) =>
+                    config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
+                configureApplicationInsightsLoggerOptions: (options) => { });
+        }
+
+        // EventLog is only available in a Windows environment
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
-                .AddConsole()
-                .AddDebug()
-                .AddEventLog();
+            //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
+            builder.Logging.AddEventLog();
         }
-        else
+
+        if (builder.Environment.IsDevelopment())
         {
-            builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"))
+            builder.Logging
                 .AddConsole()
                 .AddDebug();
         }

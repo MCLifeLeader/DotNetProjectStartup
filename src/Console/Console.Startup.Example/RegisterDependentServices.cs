@@ -122,21 +122,28 @@ public static class RegisterDependentServices
             {
                 logging.ClearProviders();
 
+                logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
+
+                if (appSettings != null && !appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                {
+                    logging.AddApplicationInsights(
+                        configureTelemetryConfiguration: (config) =>
+                            config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
+                        configureApplicationInsightsLoggerOptions: (options) => { });
+                }
+
                 // EventLog is only available in a Windows environment
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    // Log to the Windows Event Log if on a Windows OS
-                    logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"))
-                        .AddConsole()
-                        .AddDebug()
-                        .AddEventLog();
+                    //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
+                    logging.AddEventLog();
                 }
-                else
-                {
-                    logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"))
-                        .AddConsole()
-                        .AddDebug();
-                }
+
+#if DEBUG || DEVELOPMENT
+                logging
+                    .AddConsole()
+                    .AddDebug();
+#endif
             })
             .UseWindowsService(o => { o.ServiceName = appSettings!.ServiceName; });
 
