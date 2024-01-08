@@ -1,24 +1,25 @@
 using Azure.Identity;
-using Blazor.Startup.Example.Components.Account;
 using Blazor.Startup.Example.Connection.DependencyInjection;
-using Blazor.Startup.Example.Data;
 using Blazor.Startup.Example.Data.DependencyInjection;
 using Blazor.Startup.Example.Factories.DependencyInjection;
+using Blazor.Startup.Example.Helpers.Data;
 using Blazor.Startup.Example.Helpers.DependencyInjection;
 using Blazor.Startup.Example.Helpers.Extensions;
+using Blazor.Startup.Example.Helpers.Filter;
 using Blazor.Startup.Example.Helpers.Health;
 using Blazor.Startup.Example.Models.ApplicationSettings;
-using Blazor.Startup.Example.Models.Identity;
 using Blazor.Startup.Example.Services.DependencyInjection;
 using FluentValidation;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Startup.Common.Constants;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace Blazor.Startup.Example;
@@ -102,16 +103,37 @@ public static class RegisterDependentServices
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
+            builder.Logging
+                .AddEventLog()
+                .EnableRedaction();
         }
 
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
                 .AddConsole()
-                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
+                {
+                    Indented = true,
+                    Encoder = JavaScriptEncoder.Default
+                })
                 .AddDebug();
         }
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        });
 
         builder.Services.AddHttpLogging(o =>
         {

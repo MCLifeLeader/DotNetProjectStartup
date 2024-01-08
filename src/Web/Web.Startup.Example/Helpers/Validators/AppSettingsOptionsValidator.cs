@@ -15,6 +15,10 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         RuleFor(x => x.Logging.LogLevel.MicrosoftAspNetCore)
             .IsEnumName(typeof(LogLevel));
 
+        RuleFor(x => x.RedactionKey)
+            .NotNull()
+            .NotEmpty();
+
         RuleFor(x => x.ConnectionStrings.ApplicationInsights)
             .NotNull()
             .NotEmpty()

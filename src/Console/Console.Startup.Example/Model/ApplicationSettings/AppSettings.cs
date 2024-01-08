@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Console.Startup.Example.Helpers.Data;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Console.Startup.Example.Model.ApplicationSettings;
 
 public class AppSettings
 {
+    [JsonIgnore]
+    [XmlIgnore]
     public IConfiguration ConfigurationBase { get; set; }
 
     public Featuremanagement FeatureManagement { get; set; }
@@ -13,4 +18,6 @@ public class AppSettings
     public Connectionstrings ConnectionStrings { get; set; }
     public Workerprocesses WorkerProcesses { get; set; }
     public Startupexample StartupExample { get; set; }
+    [SensitiveData]
+    public string RedactionKey { get; set; }
 }

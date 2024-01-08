@@ -20,6 +20,10 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .NotEmpty()
             .Must(s => s.ToLower().Contains("instrumentationkey") || s.ToLower().Contains("na"));
 
+        RuleFor(x => x.RedactionKey)
+            .NotNull()
+            .NotEmpty();
+
         // if the connection string is invalid 'SqlConnectionStringBuilder' will throw an exception.
         // The Contains check validates that we are pointed at the EDU database.
         RuleFor(x => x.ConnectionStrings.DefaultConnection)

@@ -2,12 +2,9 @@
 using System.Security;
 using Api.Startup.Example.Helpers.Caching.Controllers.Interfaces;
 using Api.Startup.Example.Models;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Models.Authorization;
 using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Startup.Common.Models.Authorization;
 using Swashbuckle.AspNetCore.Annotations;
 

@@ -1,7 +1,13 @@
-﻿namespace Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Blazor.Startup.Example.Helpers.Data;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
+
+namespace Blazor.Startup.Example.Models.ApplicationSettings;
 
 public class AppSettings
 {
+    [JsonIgnore]
+    [XmlIgnore]
     public IConfiguration ConfigurationBase { get; set; }
 
     public Featuremanagement FeatureManagement { get; set; }
@@ -12,4 +18,6 @@ public class AppSettings
     public Startupexample StartupExample { get; set; }
     public string AllowedHosts { get; set; }
     public object StorageAccount { get; internal set; }
+    [SensitiveData]
+    public string RedactionKey { get; set; }
 }

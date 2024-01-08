@@ -5,8 +5,10 @@ using Azure.Identity;
 using Console.Startup.Example.BackgroundService.DependencyInjection;
 using Console.Startup.Example.Connection.DependencyInjection;
 using Console.Startup.Example.Factories.DependencyInjection;
+using Console.Startup.Example.Helpers.Data;
 using Console.Startup.Example.Helpers.DependencyInjection;
 using Console.Startup.Example.Helpers.Extensions;
+using Console.Startup.Example.Helpers.Filter;
 using Console.Startup.Example.Model.ApplicationSettings;
 using Console.Startup.Example.Repositories.DependencyInjection;
 using Console.Startup.Example.Services.DependencyInjection;
@@ -23,6 +25,10 @@ using Startup.Common.Models.Authorization;
 using System.Net.Http.Formatting;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace Console.Startup.Example;
 
@@ -118,6 +124,21 @@ public static class RegisterDependentServices
                 services.SetHttpClients(appSettings);
                 services.SetDependencyInjection(appSettings);
                 services.AddFeatureManagement();
+
+                services.AddRedaction(x =>
+                {
+                    x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+
+                    x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+                    x.SetHmacRedactor(o =>
+                    {
+                        o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                        o.KeyId = 1776;
+                    }, new DataClassificationSet(DataTaxonomy.Pii));
+#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+                });
             })
             .ConfigureLogging((hostContext, logging) =>
             {
@@ -137,13 +158,19 @@ public static class RegisterDependentServices
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-                    logging.AddEventLog();
+                    logging
+                        .AddEventLog()
+                        .EnableRedaction();
                 }
 
 #if DEBUG || DEVELOPMENT
                 logging
                     .AddConsole()
-                    .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
+                    .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
+                    {
+                        Indented = true,
+                        Encoder = JavaScriptEncoder.Default
+                    })
                     .AddDebug();
 #endif
             })

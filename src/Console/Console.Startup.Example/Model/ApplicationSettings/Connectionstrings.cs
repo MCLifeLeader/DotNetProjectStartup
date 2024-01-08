@@ -1,8 +1,11 @@
-﻿namespace Console.Startup.Example.Model.ApplicationSettings
+﻿using Console.Startup.Example.Helpers.Data;
+
+namespace Console.Startup.Example.Model.ApplicationSettings;
+
+public class Connectionstrings
 {
-    public class Connectionstrings
-    {
-        public string DefaultConnection { get; set; }
-        public string ApplicationInsights { get; set; }
-    }
+    [SensitiveData]
+    public string DefaultConnection { get; set; }
+    [SensitiveData]
+    public string ApplicationInsights { get; set; }
 }

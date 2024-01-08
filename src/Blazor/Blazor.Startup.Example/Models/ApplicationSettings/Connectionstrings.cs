@@ -1,8 +1,11 @@
-﻿namespace Blazor.Startup.Example.Models.ApplicationSettings
+﻿using Blazor.Startup.Example.Helpers.Data;
+
+namespace Blazor.Startup.Example.Models.ApplicationSettings;
+
+public class Connectionstrings
 {
-    public class Connectionstrings
-    {
-        public string DefaultConnection { get; set; }
-        public string ApplicationInsights { get; set; }
-    }
+    [SensitiveData]
+    public string DefaultConnection { get; set; }
+    [SensitiveData]
+    public string ApplicationInsights { get; set; }
 }

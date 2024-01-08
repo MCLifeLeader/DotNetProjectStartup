@@ -1,10 +1,9 @@
-﻿namespace Api.Startup.Example.Models.ApplicationSettings
+﻿namespace Api.Startup.Example.Models.ApplicationSettings;
+
+public class Loglevel
 {
-    public class Loglevel
-    {
-        public string Default { get; set; }
-        public string Microsoft { get; set; }
-        public string MicrosoftAspNetCore { get; set; }
-        public string System { get; set; }
-    }
+    public string Default { get; set; }
+    public string Microsoft { get; set; }
+    public string MicrosoftAspNetCore { get; set; }
+    public string System { get; set; }
 }

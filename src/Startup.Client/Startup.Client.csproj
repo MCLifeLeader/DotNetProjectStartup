@@ -26,13 +26,13 @@
         <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-        <PackageReference Include="Microsoft.FeatureManagement" Version="3.1.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="3.1.1" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="NSwag.ApiDescription.Client" Version="13.20.0">
+        <PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

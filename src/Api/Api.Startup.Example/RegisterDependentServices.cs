@@ -6,6 +6,7 @@ using System.Text.Json;
 using Api.Startup.Example.Connection.DependencyInjection;
 using Api.Startup.Example.Data.DependencyInjection;
 using Api.Startup.Example.Factories.DependencyInjection;
+using Api.Startup.Example.Helpers.Data;
 using Api.Startup.Example.Helpers.DependencyInjection;
 using Api.Startup.Example.Helpers.Extensions;
 using Api.Startup.Example.Helpers.Filter;
@@ -16,7 +17,8 @@ using Asp.Versioning;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.FeatureManagement;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -26,6 +28,7 @@ using Newtonsoft.Json.Serialization;
 using Startup.Business.DependencyInjection;
 using Startup.Business.Models.ApplicationSettings;
 using Startup.Common.Constants;
+using System.Text.Encodings.Web;
 
 namespace Api.Startup.Example;
 
@@ -118,16 +121,37 @@ public static class RegisterDependentServices
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
+            builder.Logging
+                .AddEventLog()
+                .EnableRedaction();
         }
 
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
                 .AddConsole()
-                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
+                {
+                    Indented = true,
+                    Encoder = JavaScriptEncoder.Default
+                })
                 .AddDebug();
         }
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        });
 
         builder.Services.AddHttpLogging(o =>
         {
@@ -209,7 +233,7 @@ public static class RegisterDependentServices
         }
 
         builder.Services.AddFeatureManagement();
-        
+
         builder.SetDependencyInjection(appSettings);
 
         builder.Services.AddAuthentication(o =>

@@ -1,12 +1,12 @@
 using Blazor.Startup.Example.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 
-namespace Blazor.Startup.Example.Components.Account
+namespace Blazor.Startup.Example.Components.Account;
+
+internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
 {
-    internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
+    public async Task<ApplicationUser> GetRequiredUserAsync(HttpContext context)
     {
-        public async Task<ApplicationUser> GetRequiredUserAsync(HttpContext context)
-        {
             var user = await userManager.GetUserAsync(context.User);
 
             if (user is null)
@@ -16,5 +16,4 @@ namespace Blazor.Startup.Example.Components.Account
 
             return user;
         }
-    }
 }

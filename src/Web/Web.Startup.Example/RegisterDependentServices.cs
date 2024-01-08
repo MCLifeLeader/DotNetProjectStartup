@@ -3,17 +3,23 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Azure.Identity;
 using FluentValidation;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Text;
 using System.Text.Json;
 using Web.Startup.Example.Connection.DependencyInjection;
 using Web.Startup.Example.Constants;
 using Web.Startup.Example.Data.DependencyInjection;
 using Web.Startup.Example.Factories.DependencyInjection;
+using Web.Startup.Example.Helpers.Data;
 using Web.Startup.Example.Helpers.DependencyInjection;
 using Web.Startup.Example.Helpers.Extensions;
 using Web.Startup.Example.Helpers.Health;
 using Web.Startup.Example.Models.ApplicationSettings;
 using Web.Startup.Example.Services.DependencyInjection;
+using System.Text.Encodings.Web;
+using Web.Startup.Example.Helpers.Filter;
 
 namespace Web.Startup.Example;
 
@@ -99,16 +105,37 @@ public static class RegisterDependentServices
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
+            builder.Logging
+                .AddEventLog()
+                .EnableRedaction();
         }
 
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
                 .AddConsole()
-                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
+                {
+                    Indented = true,
+                    Encoder = JavaScriptEncoder.Default
+                })
                 .AddDebug();
         }
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        });
 
         builder.Services.AddHttpLogging(o =>
         {

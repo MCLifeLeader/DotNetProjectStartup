@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Api.Startup.Example.Helpers.Extensions;
+using System.Collections;
 using System.Net;
 using System.Text;
 using Api.Startup.Example.Models.ApplicationSettings;
@@ -63,13 +64,17 @@ public class InfoController : ControllerBase
         return Content(_canaryService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
     }
 
-    [Authorize(Roles = "AgencyAdmin")]
+    [AllowAnonymous]
+    //[Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Settings")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
     [SwaggerResponse((int) HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
     public async Task<ActionResult<AppSettings>> GetAppSettings()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetAppSettings));
+
+        // Using custom logging and redaction support.
+        _logger.LogAppSettings(_appSettings);
 
         await Task.Yield();
 

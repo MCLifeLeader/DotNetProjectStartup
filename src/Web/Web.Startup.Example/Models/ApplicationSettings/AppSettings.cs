@@ -1,7 +1,13 @@
-﻿namespace Web.Startup.Example.Models.ApplicationSettings;
+﻿using Newtonsoft.Json;
+using System.Xml.Serialization;
+using Web.Startup.Example.Helpers.Data;
+
+namespace Web.Startup.Example.Models.ApplicationSettings;
 
 public class AppSettings
 {
+    [JsonIgnore]
+    [XmlIgnore]
     public IConfiguration ConfigurationBase { get; set; }
 
     public Featuremanagement FeatureManagement { get; set; }
@@ -11,4 +17,6 @@ public class AppSettings
     public Connectionstrings ConnectionStrings { get; set; }
     public Startupexample StartupExample { get; set; }
     public string AllowedHosts { get; set; }
+    [SensitiveData]
+    public string RedactionKey { get; set; }
 }
