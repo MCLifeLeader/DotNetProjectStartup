@@ -64,8 +64,7 @@ public class InfoController : ControllerBase
         return Content(_canaryService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
     }
 
-    [AllowAnonymous]
-    //[Authorize(Roles = "AgencyAdmin")]
+    [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Settings")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
     [SwaggerResponse((int) HttpStatusCode.OK, "Returns App Settings", typeof(ContentResult))]
