@@ -19,6 +19,7 @@ using Startup.Common.Constants;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 
 namespace Blazor.Startup.Example;
 
@@ -108,6 +109,7 @@ public static class RegisterDependentServices
         {
             builder.Logging
                 .AddConsole()
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
                 .AddDebug();
         }
 

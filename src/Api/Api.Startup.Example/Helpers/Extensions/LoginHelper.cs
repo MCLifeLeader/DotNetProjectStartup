@@ -1,4 +1,5 @@
-﻿using Api.Startup.Example.Models.Authorization;
+﻿using Startup.Common.Models.Authorization;
+using DeviceLoginModel = Api.Startup.Example.Models.Authorization.DeviceLoginModel;
 
 namespace Api.Startup.Example.Helpers.Extensions;
 

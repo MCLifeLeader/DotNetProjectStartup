@@ -1,4 +1,4 @@
-﻿using Api.Startup.Example.Models.Authorization;
+﻿using Startup.Common.Models.Authorization;
 
 namespace Api.Startup.Example.Services.Interfaces;
 

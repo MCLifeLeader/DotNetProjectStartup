@@ -8,6 +8,7 @@ using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Startup.Common.Models.Authorization;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Api.Startup.Example.Controllers;
@@ -23,7 +24,6 @@ public class AuthController : BaseController
 
     public AuthController(
         ILogger<AuthController> logger,
-        IOptions<AppSettings> appSettings,
         IAuthService authService,
         IAuthControllerCache authControllerCache)
     {

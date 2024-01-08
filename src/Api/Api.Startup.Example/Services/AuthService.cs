@@ -3,12 +3,12 @@ using System.Security;
 using System.Security.Claims;
 using System.Text;
 using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Models.Authorization;
 using Api.Startup.Example.Models.Enums;
 using Api.Startup.Example.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Startup.Common.Models.Authorization;
 using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
 
@@ -19,7 +19,6 @@ public class AuthService : IAuthService
     private readonly AppSettings _appSettings;
     private readonly IAuthenticationLogRepository _authenticationLogRepository;
     private readonly ILogger<AuthService> _logger;
-    private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IStartupExampleContext _startupExampleContext;
     private readonly UserManager<IdentityUser> _userManager;
 
@@ -34,7 +33,6 @@ public class AuthService : IAuthService
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-        _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         _startupExampleContext = startupExampleContext ?? throw new ArgumentNullException(nameof(startupExampleContext));
         _authenticationLogRepository = authenticationLogRepository ?? throw new ArgumentNullException(nameof(authenticationLogRepository));
         ;
@@ -60,22 +58,19 @@ public class AuthService : IAuthService
             throw new ArgumentNullException(nameof(user));
         }
 
-        AuthenticationLog authLog = null;
-
         List<Claim> claims = new List<Claim>();
 
-        IdentityUser iUser = _userManager.FindByNameAsync(user.Username).Result;
+        IdentityUser iUser = _userManager.FindByNameAsync(user.Username).Result!;
 
         //_userManager.ChangePasswordAsync(iUser, "P@ssword123", "P@ssword123").GetAwaiter().GetResult();
-
         // Create a log entry for the authentication attempt.
-        authLog = new AuthenticationLog
+        var authLog = new AuthenticationLog
         {
             Username = user.Username,
             AuthStatusId = (short) AuthenticationStatusEnum.Failure,
         };
 
-        if (iUser != null && _userManager.CheckPasswordAsync(iUser, user.Password).Result)
+        if (_userManager.CheckPasswordAsync(iUser, user.Password).Result)
         {
             // Update the log entry with the user Id.
             authLog.AspNetUsersId = iUser.Id;

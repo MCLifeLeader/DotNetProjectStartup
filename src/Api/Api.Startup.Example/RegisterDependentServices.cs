@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
 using Api.Startup.Example.Connection.DependencyInjection;
 using Api.Startup.Example.Data.DependencyInjection;
 using Api.Startup.Example.Factories.DependencyInjection;
@@ -124,6 +125,7 @@ public static class RegisterDependentServices
         {
             builder.Logging
                 .AddConsole()
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
                 .AddDebug();
         }
 

@@ -22,6 +22,7 @@ using Startup.Common.Models;
 using Startup.Common.Models.Authorization;
 using System.Net.Http.Formatting;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json;
 
 namespace Console.Startup.Example;
 
@@ -142,6 +143,7 @@ public static class RegisterDependentServices
 #if DEBUG || DEVELOPMENT
                 logging
                     .AddConsole()
+                    .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
                     .AddDebug();
 #endif
             })

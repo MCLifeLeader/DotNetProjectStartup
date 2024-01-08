@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Text.Json;
 using Web.Startup.Example.Connection.DependencyInjection;
 using Web.Startup.Example.Constants;
 using Web.Startup.Example.Data.DependencyInjection;
@@ -105,6 +106,7 @@ public static class RegisterDependentServices
         {
             builder.Logging
                 .AddConsole()
+                .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions { Indented = true })
                 .AddDebug();
         }
 
