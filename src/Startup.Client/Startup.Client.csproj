@@ -19,7 +19,7 @@
     <ItemGroup>
         <PackageReference Include="Azure.Identity" Version="1.10.4" />
         <PackageReference Include="IdentityModel" Version="6.2.0" />
-        <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.0">
+        <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="8.0.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -32,7 +32,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.0">
+        <PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
