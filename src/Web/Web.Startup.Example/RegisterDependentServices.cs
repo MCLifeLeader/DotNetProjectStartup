@@ -143,6 +143,13 @@ public static class RegisterDependentServices
         });
 
         builder.Services.AddMemoryCache();
+
+        builder.Services.ConfigureHttpClientDefaults(http =>
+        {
+            // Turn on resilience by default
+            http.AddStandardResilienceHandler();
+        });
+        
         builder.SetHttpClients(appSettings);
 
         builder.Services.AddRazorPages();

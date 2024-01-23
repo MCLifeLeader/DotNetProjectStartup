@@ -140,6 +140,12 @@ public static class RegisterDependentServices
             o.CombineLogs = true;
         });
 
+        builder.Services.ConfigureHttpClientDefaults(http =>
+        {
+            // Turn on resilience by default
+            http.AddStandardResilienceHandler();
+        });
+
         builder.SetHttpClients(appSettings);
         builder.Services.AddMemoryCache();
 

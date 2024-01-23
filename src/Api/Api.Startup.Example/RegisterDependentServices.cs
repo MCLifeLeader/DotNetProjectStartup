@@ -181,15 +181,11 @@ public static class RegisterDependentServices
         builder.Services.AddRequestDecompression();
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 
-        // ToDo: Figure out why the library reference is not coming in.
-        //builder.Services.ConfigureHttpClientDefaults(http =>
-        //{
-        //    // Turn on resilience by default
-        //    http.AddStandardResilienceHandler();
-
-        //    // Turn on service discovery by default
-        //    http.UseServiceDiscovery();
-        //});
+        builder.Services.ConfigureHttpClientDefaults(http =>
+        {
+            // Turn on resilience by default
+            http.AddStandardResilienceHandler();
+        });
 
         builder.SetHttpClients(appSettings);
 

@@ -121,6 +121,12 @@ public static class RegisterDependentServices
                     options.ShutdownTimeout = TimeSpan.FromSeconds(30);
                 });
 
+                services.ConfigureHttpClientDefaults(http =>
+                {
+                    // Turn on resilience by default
+                    http.AddStandardResilienceHandler();
+                });
+
                 services.SetHttpClients(appSettings);
                 services.SetDependencyInjection(appSettings);
                 services.AddFeatureManagement();
