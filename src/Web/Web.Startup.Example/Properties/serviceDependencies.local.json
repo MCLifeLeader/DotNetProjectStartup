@@ -15,9 +15,9 @@
       "secretStore": "LocalSecretsFile",
       "containerName": "azurite",
       "containerImage": "mcr.microsoft.com/azure-storage/azurite",
+      "resourceId": null,
       "type": "storage.container",
-      "connectionId": "ConnectionStrings:AzuriteBlobStorage",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:AzuriteBlobStorage"
     }
   }
 }

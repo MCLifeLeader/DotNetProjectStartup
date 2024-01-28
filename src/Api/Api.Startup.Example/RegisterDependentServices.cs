@@ -29,6 +29,7 @@ using Startup.Business.DependencyInjection;
 using Startup.Business.Models.ApplicationSettings;
 using Startup.Common.Constants;
 using System.Text.Encodings.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Startup.Example;
 
@@ -269,7 +270,7 @@ public static class RegisterDependentServices
         builder.Services.AddHealthChecks()
             .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_EXTERNAL.ToLower())
             .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection)
-            .AddAzureBlobStorage(appSettings.StorageAccount.BlobStorageConnection);
+            .AddAzureBlobStorage(appSettings.ConnectionStrings.AzuriteBlobStorage);
 
         return builder;
     }
@@ -281,7 +282,7 @@ public static class RegisterDependentServices
 
         // services
         ServicesResolver.RegisterDependencies(builder.Services, appSettings);
-        BusinessServicesResolver.RegisterDependencies(builder.Services, appSettings.StorageAccount);
+        BusinessServicesResolver.RegisterDependencies(builder.Services, appSettings.ConnectionStrings.AzuriteBlobStorage);
 
         // helpers
         HelpersResolver.RegisterDependencies(builder.Services, appSettings);

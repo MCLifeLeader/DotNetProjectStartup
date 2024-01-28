@@ -11,11 +11,11 @@ namespace Startup.Business.DependencyInjection;
 
 public static class BusinessServicesResolver
 {
-    public static void RegisterDependencies(IServiceCollection services, StorageAccount appSettings)
+    public static void RegisterDependencies(IServiceCollection services, string storageConnectionString)
     {
         services.AddAzureClients(builder =>
         {
-            builder.AddBlobServiceClient(appSettings.BlobStorageConnection).WithName(BlobStorageClientNames.STARTUP_BLOB);
+            builder.AddBlobServiceClient(storageConnectionString).WithName(BlobStorageClientNames.STARTUP_BLOB);
         });
 
         #region Repositories

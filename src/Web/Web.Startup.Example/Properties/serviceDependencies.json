@@ -7,8 +7,7 @@
     },
     "storage1": {
       "type": "storage",
-      "connectionId": "ConnectionStrings:AzuriteBlobStorage",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:AzuriteBlobStorage"
     }
   }
 }
