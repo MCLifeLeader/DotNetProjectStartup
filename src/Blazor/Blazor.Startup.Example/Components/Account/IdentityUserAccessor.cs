@@ -1,7 +1,7 @@
-using Blazor.Startup.Example.Models.Identity;
+using Startup.Blazor.Server.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 
-namespace Blazor.Startup.Example.Components.Account;
+namespace Startup.Blazor.Server.Components.Account;
 
 internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
 {

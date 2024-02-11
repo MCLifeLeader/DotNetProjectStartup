@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Console.Startup.Example.Services.DependencyInjection;
+namespace Startup.Console.Services.DependencyInjection;
 
 public static class ServicesResolver
 {

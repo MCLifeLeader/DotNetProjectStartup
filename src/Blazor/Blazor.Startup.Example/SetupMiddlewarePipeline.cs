@@ -1,9 +1,9 @@
-using Blazor.Startup.Example.Components;
-using Blazor.Startup.Example.Components.Account;
+using Startup.Blazor.Server.Components;
+using Startup.Blazor.Server.Components.Account;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Blazor.Startup.Example;
+namespace Startup.Blazor.Server;
 
 public static class SetupMiddlewarePipeline
 {

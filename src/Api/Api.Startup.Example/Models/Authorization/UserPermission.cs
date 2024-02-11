@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Api.Startup.Example.Models.Authorization;
+namespace Startup.Api.Models.Authorization;
 
 public class UserPermission
 {

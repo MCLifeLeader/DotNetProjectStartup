@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Models.Enums;
+﻿namespace Startup.Api.Models.Enums;
 
 public enum AuthenticationStatusEnum : short
 {

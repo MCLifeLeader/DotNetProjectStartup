@@ -5,17 +5,17 @@ will be broken apart into various layers that can be consumed by one of the exam
 # Project Structure
 The project is broken apart into the following examples:
 - Api.Startup.Example - This sample application is provided as a demonstration for creating a RESTful API using ASP.NET Core.
-- Blazor.Startup.Example - This sample application is provided as a demonstration for creating a Blazor application using ASP.NET Core.
+- Startup.Blazor.Server - This sample application is provided as a demonstration for creating a Blazor application using ASP.NET Core.
 - Console.Startup.Example - This sample application is provided as a demonstration for creating a Windows service application using ASP.NET Core.
 - Database.Example - This sample application is provided as a demonstration for creating a database using Database First.
 - React.Startup.Example - ToDo
-- Web.Startup.Example - This sample application is provided as a demonstration for creating a web application using ASP.NET Core.
+- Startup.Web - This sample application is provided as a demonstration for creating a web application using ASP.NET Core.
 
 # Project Dependencies
 ## Required
-- .NET 7.0
+- .NET 8.0
 - Visual Studio 2022
-- SQL Server Express 2019 or Docker Desktop with SQL Server 2019 container
+- SQL Server Express 2019 or later
 
 ## Recommended
 - SQL Server Management Studio or other SQL Server management tool

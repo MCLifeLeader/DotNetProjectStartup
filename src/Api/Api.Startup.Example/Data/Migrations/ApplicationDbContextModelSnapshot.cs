@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Startup.Api.Data;
 using System;
-using Api.Startup.Example.Data;
 
 namespace StartupExample.Web.Data.Migrations
 {

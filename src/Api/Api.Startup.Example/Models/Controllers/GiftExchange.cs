@@ -1,4 +1,4 @@
-namespace Api.Startup.Example.Models.Controllers;
+namespace Startup.Api.Models.Controllers;
 
 /// <summary>
 /// Represents a pairing of two people in a gift exchange.

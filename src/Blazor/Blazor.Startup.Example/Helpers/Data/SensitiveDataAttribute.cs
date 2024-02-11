@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Blazor.Startup.Example.Helpers.Data;
+namespace Startup.Blazor.Server.Helpers.Data;
 
 public class SensitiveDataAttribute : DataClassificationAttribute
 {

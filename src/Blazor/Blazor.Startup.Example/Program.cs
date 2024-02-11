@@ -1,4 +1,4 @@
-using Blazor.Startup.Example;
+using Startup.Blazor.Server;
 
 WebApplication.CreateBuilder(args)
     .RegisterServices()

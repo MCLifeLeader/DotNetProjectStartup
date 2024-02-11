@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Web.Startup.Example.Connection.Interfaces;
-using Web.Startup.Example.Constants;
+using Startup.Common.Connection.Interfaces;
+using Startup.Web.Constants;
 
-namespace Web.Startup.Example.Helpers.Health;
+namespace Startup.Web.Helpers.Health;
 
 public class StartupExampleAppHealthCheck : IHealthCheck
 {

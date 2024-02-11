@@ -1,6 +1,6 @@
-﻿using Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
 
-namespace Blazor.Startup.Example.Helpers.Extensions;
+namespace Startup.Blazor.Server.Helpers.Extensions;
 
 public static partial class Logging
 {

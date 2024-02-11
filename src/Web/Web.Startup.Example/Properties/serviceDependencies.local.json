@@ -2,22 +2,10 @@
   "dependencies": {
     "mssql1": {
       "serviceConnectorResourceId": "",
-      "containerPorts": "1433:1433",
       "secretStore": "LocalSecretsFile",
-      "containerName": "mssql",
-      "containerImage": "mcr.microsoft.com/mssql/server:2019-latest",
-      "type": "mssql.container",
+      "type": "mssql.onprem",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null
-    },
-    "storage1": {
-      "containerPorts": "10000:10000,10001:10001,10002:10002",
-      "secretStore": "LocalSecretsFile",
-      "containerName": "azurite",
-      "containerImage": "mcr.microsoft.com/azure-storage/azurite",
-      "resourceId": null,
-      "type": "storage.container",
-      "connectionId": "ConnectionStrings:AzuriteBlobStorage"
     }
   }
 }

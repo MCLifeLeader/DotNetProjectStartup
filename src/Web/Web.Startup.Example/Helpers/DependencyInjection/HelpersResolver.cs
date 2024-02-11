@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using Web.Startup.Example.Models.ApplicationSettings;
+using Startup.Web.Models.ApplicationSettings;
 
-namespace Web.Startup.Example.Helpers.DependencyInjection;
+namespace Startup.Web.Helpers.DependencyInjection;
 
 public static class HelpersResolver
 {

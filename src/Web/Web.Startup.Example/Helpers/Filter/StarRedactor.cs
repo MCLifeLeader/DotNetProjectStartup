@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Redaction;
 
-namespace Web.Startup.Example.Helpers.Filter;
+namespace Startup.Web.Helpers.Filter;
 
 /// <summary>
 /// Example Custom Redaction Capability

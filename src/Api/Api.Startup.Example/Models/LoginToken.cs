@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Models;
+﻿namespace Startup.Api.Models;
 
 public class LoginToken
 {

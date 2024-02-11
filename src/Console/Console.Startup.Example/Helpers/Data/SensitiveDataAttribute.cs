@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Console.Startup.Example.Helpers.Data;
+namespace Startup.Console.Helpers.Data;
 
 public class SensitiveDataAttribute : DataClassificationAttribute
 {

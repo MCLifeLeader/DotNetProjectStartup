@@ -1,6 +1,6 @@
-﻿using Api.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Api.Models.ApplicationSettings;
 
-namespace Api.Startup.Example.Helpers.Extensions;
+namespace Startup.Api.Helpers.Extensions;
 
 public static partial class Logging
 {

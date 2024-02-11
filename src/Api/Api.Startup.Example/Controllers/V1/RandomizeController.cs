@@ -1,9 +1,9 @@
-using Api.Startup.Example.Models.Controllers;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Startup.Api.Models.Controllers;
 
-namespace Api.Startup.Example.Controllers.V1;
+namespace Startup.Api.Controllers.V1;
 
 [ApiController]
 [ApiVersion("1.0")]

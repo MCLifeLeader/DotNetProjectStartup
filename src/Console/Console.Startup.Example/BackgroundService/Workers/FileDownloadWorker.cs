@@ -1,10 +1,10 @@
-﻿using Console.Startup.Example.BackgroundService.Interface;
-using Console.Startup.Example.Model.ApplicationSettings;
-using Console.Startup.Example.Repositories.Http.Interface;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Startup.Console.BackgroundService.Interface;
+using Startup.Console.Model.ApplicationSettings;
+using Startup.Console.Repositories.Http.Interface;
 
-namespace Console.Startup.Example.BackgroundService.Workers;
+namespace Startup.Console.BackgroundService.Workers;
 
 public class FileDownloadWorker : IFileDownloadWorker
 {

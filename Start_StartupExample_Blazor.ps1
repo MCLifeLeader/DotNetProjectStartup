@@ -1,4 +1,4 @@
-Set-Location .\src\Blazor\Blazor.Startup.Example
-dotnet build --configuration Development --source .\Blazor.Startup.Example.csproj
-dotnet run .\Blazor.Startup.Example.csproj --configuration Development --launch-profile https &
+Set-Location .\src\Blazor\Startup.Blazor.Server
+dotnet build --configuration Development --source .\Startup.Blazor.Server.csproj
+dotnet run .\Startup.Blazor.Server.csproj --configuration Development --launch-profile https &
 Set-Location ..\..\..\

@@ -1,4 +1,4 @@
-﻿namespace Console.Startup.Example.Repositories.Http.Interface;
+﻿namespace Startup.Console.Repositories.Http.Interface;
 
 public interface IRemoteHostServerRepository
 {

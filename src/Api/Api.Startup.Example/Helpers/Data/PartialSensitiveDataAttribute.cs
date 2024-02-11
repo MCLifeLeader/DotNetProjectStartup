@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Api.Startup.Example.Helpers.Data
+namespace Startup.Api.Helpers.Data
 {
     public class PartialSensitiveDataAttribute : DataClassificationAttribute
     {

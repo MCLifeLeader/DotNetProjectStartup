@@ -1,4 +1,4 @@
-﻿namespace Console.Startup.Example.Model.ApplicationSettings;
+﻿namespace Startup.Console.Model.ApplicationSettings;
 
 public class Workerprocesses
 {

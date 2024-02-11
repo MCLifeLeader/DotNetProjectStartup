@@ -2,7 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Api.Startup.Example;
+namespace Startup.Api;
 
 /// <summary>
 /// 
@@ -32,7 +32,7 @@ public static class SetupMiddlewarePipeline
         }
 
         // Configure the HTTP request pipeline.
-        if (app.Configuration.GetValue<bool>("SwaggerEnabled"))
+        if (app.Configuration.GetSection("FeatureManagement").GetValue<bool>("SwaggerEnabled"))
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>

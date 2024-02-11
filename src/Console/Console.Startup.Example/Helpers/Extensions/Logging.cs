@@ -1,7 +1,7 @@
-﻿using Console.Startup.Example.Model.ApplicationSettings;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.Helpers.Extensions;
+namespace Startup.Console.Helpers.Extensions;
 
 public static partial class Logging
 {

@@ -1,6 +1,6 @@
-using Blazor.Startup.Example.Components.Account.Pages;
-using Blazor.Startup.Example.Components.Account.Pages.Manage;
-using Blazor.Startup.Example.Models.Identity;
+using Startup.Blazor.Server.Components.Account.Pages;
+using Startup.Blazor.Server.Components.Account.Pages.Manage;
+using Startup.Blazor.Server.Models.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace Blazor.Startup.Example.Components.Account;
+namespace Startup.Blazor.Server.Components.Account;
 
 internal static class IdentityComponentsEndpointRouteBuilderExtensions
 {

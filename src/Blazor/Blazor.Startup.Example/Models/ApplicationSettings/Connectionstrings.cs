@@ -1,6 +1,6 @@
-﻿using Blazor.Startup.Example.Helpers.Data;
+﻿using Startup.Blazor.Server.Helpers.Data;
 
-namespace Blazor.Startup.Example.Models.ApplicationSettings;
+namespace Startup.Blazor.Server.Models.ApplicationSettings;
 
 public class Connectionstrings
 {

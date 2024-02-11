@@ -1,12 +1,12 @@
-﻿using Api.Startup.Example.Models.ApplicationSettings;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FeatureManagement;
+using Startup.Api.Models.ApplicationSettings;
 using Startup.Common.Constants;
 using Startup.Common.Helpers.Extensions;
 using Startup.Data.Repositories.DependencyInjection;
 
-namespace Api.Startup.Example.Data.DependencyInjection;
+namespace Startup.Api.Data.DependencyInjection;
 
 public static class DataServicesResolver
 {

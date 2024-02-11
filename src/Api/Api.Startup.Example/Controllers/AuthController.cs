@@ -1,14 +1,14 @@
-﻿using System.Net;
-using System.Security;
-using Api.Startup.Example.Helpers.Caching.Controllers.Interfaces;
-using Api.Startup.Example.Models;
-using Api.Startup.Example.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Startup.Api.Helpers.Caching.Controllers.Interfaces;
+using Startup.Api.Models;
+using Startup.Api.Services.Interfaces;
 using Startup.Common.Models.Authorization;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
+using System.Security;
 
-namespace Api.Startup.Example.Controllers;
+namespace Startup.Api.Controllers;
 
 [ApiController]
 [AllowAnonymous]

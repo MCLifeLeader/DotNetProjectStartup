@@ -1,4 +1,4 @@
-﻿namespace Blazor.Startup.Example.Models;
+﻿namespace Startup.Blazor.Server.Models;
 
 public class LoginToken
 {

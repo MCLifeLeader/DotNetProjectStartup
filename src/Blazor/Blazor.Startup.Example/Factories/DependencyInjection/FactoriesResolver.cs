@@ -1,6 +1,6 @@
-﻿using Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
 
-namespace Blazor.Startup.Example.Factories.DependencyInjection;
+namespace Startup.Blazor.Server.Factories.DependencyInjection;
 
 public static class FactoriesResolver
 {

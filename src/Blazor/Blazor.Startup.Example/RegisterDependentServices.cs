@@ -1,14 +1,14 @@
 using Azure.Identity;
-using Blazor.Startup.Example.Connection.DependencyInjection;
-using Blazor.Startup.Example.Data.DependencyInjection;
-using Blazor.Startup.Example.Factories.DependencyInjection;
-using Blazor.Startup.Example.Helpers.Data;
-using Blazor.Startup.Example.Helpers.DependencyInjection;
-using Blazor.Startup.Example.Helpers.Extensions;
-using Blazor.Startup.Example.Helpers.Filter;
-using Blazor.Startup.Example.Helpers.Health;
-using Blazor.Startup.Example.Models.ApplicationSettings;
-using Blazor.Startup.Example.Services.DependencyInjection;
+using Startup.Blazor.Server.Connection.DependencyInjection;
+using Startup.Blazor.Server.Data.DependencyInjection;
+using Startup.Blazor.Server.Factories.DependencyInjection;
+using Startup.Blazor.Server.Helpers.Data;
+using Startup.Blazor.Server.Helpers.DependencyInjection;
+using Startup.Blazor.Server.Helpers.Extensions;
+using Startup.Blazor.Server.Helpers.Filter;
+using Startup.Blazor.Server.Helpers.Health;
+using Startup.Blazor.Server.Models.ApplicationSettings;
+using Startup.Blazor.Server.Services.DependencyInjection;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Compliance.Classification;
@@ -22,7 +22,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
-namespace Blazor.Startup.Example;
+namespace Startup.Blazor.Server;
 
 public static class RegisterDependentServices
 {

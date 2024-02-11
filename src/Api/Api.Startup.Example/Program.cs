@@ -1,5 +1,4 @@
-using Api.Startup.Example;
-using Microsoft.Extensions.Azure;
+using Startup.Api;
 
 WebApplication.CreateBuilder(args)
     .RegisterServices()

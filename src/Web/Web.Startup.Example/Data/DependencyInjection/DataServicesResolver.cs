@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Web.Startup.Example.Areas.Identity;
-using Web.Startup.Example.Models.ApplicationSettings;
-using Web.Startup.Example.Repository.Http.Endpoints;
-using Web.Startup.Example.Repository.Http.Endpoints.Interfaces;
+using Startup.Web.Areas.Identity;
+using Startup.Web.Models.ApplicationSettings;
+using Startup.Web.Repository.Http.Endpoints;
+using Startup.Web.Repository.Http.Endpoints.Interfaces;
 
-namespace Web.Startup.Example.Data.DependencyInjection;
+namespace Startup.Web.Data.DependencyInjection;
 
 public static class DataServicesResolver
 {
@@ -19,8 +19,8 @@ public static class DataServicesResolver
 
         #region Http Repositories
 
-        service.AddTransient<ICanaryPageCache, CanaryPageCache>();
-        service.AddScoped<ICanaryPageRepository, CanaryPageRepository>();
+        service.AddTransient<IInfoPageCache, InfoPageCache>();
+        service.AddScoped<IInfoPageRepository, InfoPageRepository>();
 
         #endregion
     }

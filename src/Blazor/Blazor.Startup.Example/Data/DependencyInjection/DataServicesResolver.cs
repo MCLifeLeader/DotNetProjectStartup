@@ -1,13 +1,13 @@
-﻿using Blazor.Startup.Example.Components.Account;
-using Blazor.Startup.Example.Models.ApplicationSettings;
-using Blazor.Startup.Example.Models.Identity;
-using Blazor.Startup.Example.Repository.Http.Endpoints;
-using Blazor.Startup.Example.Repository.Http.Endpoints.Interfaces;
+﻿using Startup.Blazor.Server.Components.Account;
+using Startup.Blazor.Server.Models.ApplicationSettings;
+using Startup.Blazor.Server.Models.Identity;
+using Startup.Blazor.Server.Repository.Http.Endpoints;
+using Startup.Blazor.Server.Repository.Http.Endpoints.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blazor.Startup.Example.Data.DependencyInjection;
+namespace Startup.Blazor.Server.Data.DependencyInjection;
 
 public static class DataServicesResolver
 {
@@ -25,8 +25,8 @@ public static class DataServicesResolver
 
         #region Http Repositories
 
-        service.AddTransient<ICanaryPageCache, CanaryPageCache>();
-        service.AddScoped<ICanaryPageRepository, CanaryPageRepository>();
+        service.AddTransient<IInfoPageCache, InfoPageCache>();
+        service.AddScoped<IInfoPageRepository, InfoPageRepository>();
 
         #endregion
     }

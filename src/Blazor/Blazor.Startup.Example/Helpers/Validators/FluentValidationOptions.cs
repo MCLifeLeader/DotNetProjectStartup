@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.Extensions.Options;
 
-namespace Blazor.Startup.Example.Helpers.Validators;
+namespace Startup.Blazor.Server.Helpers.Validators;
 
 public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {

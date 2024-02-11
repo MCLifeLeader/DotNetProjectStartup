@@ -1,18 +1,3 @@
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
-using Api.Startup.Example.Connection.DependencyInjection;
-using Api.Startup.Example.Data.DependencyInjection;
-using Api.Startup.Example.Factories.DependencyInjection;
-using Api.Startup.Example.Helpers.Data;
-using Api.Startup.Example.Helpers.DependencyInjection;
-using Api.Startup.Example.Helpers.Extensions;
-using Api.Startup.Example.Helpers.Filter;
-using Api.Startup.Example.Helpers.Health;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Services.DependencyInjection;
 using Asp.Versioning;
 using Azure.Identity;
 using FluentValidation;
@@ -25,13 +10,26 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Startup.Api.Connection.DependencyInjection;
+using Startup.Api.Constants;
+using Startup.Api.Data.DependencyInjection;
+using Startup.Api.Factories.DependencyInjection;
+using Startup.Api.Helpers.Data;
+using Startup.Api.Helpers.DependencyInjection;
+using Startup.Api.Helpers.Extensions;
+using Startup.Api.Helpers.Filter;
+using Startup.Api.Helpers.Health;
+using Startup.Api.Models.ApplicationSettings;
+using Startup.Api.Services.DependencyInjection;
 using Startup.Business.DependencyInjection;
-using Startup.Business.Models.ApplicationSettings;
-using Startup.Common.Constants;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Encodings.Web;
-using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
 
-namespace Api.Startup.Example;
+namespace Startup.Api;
 
 /// <summary>
 /// This class contains static methods responsible for registering dependent services such as connection, repositories, and services in the web application's builder. class
@@ -63,7 +61,8 @@ public static class RegisterDependentServices
         }
 
         // Import Azure Key Vault Secrets and override any pre-loaded secrets
-        if (!string.IsNullOrEmpty(builder.Configuration.GetValue<string>("KeyVaultUri")))
+        string keyVaultUri = builder.Configuration.GetValue<string>("KeyVaultUri")!;
+        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
         {
             builder.Configuration.AddAzureKeyVault(
                 new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
@@ -87,8 +86,6 @@ public static class RegisterDependentServices
 
         // Bind the app settings to the model
         builder.Configuration.Bind(appSettings);
-        StorageAccount storageAccount = new();
-        builder.Configuration.GetSection("StorageAccount").Bind(storageAccount);
 
         // Adds the Fluent Validation to DI.
         builder.Services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -103,7 +100,6 @@ public static class RegisterDependentServices
 
         builder.Services.AddSingleton(builder.Configuration);
         builder.Services.AddSingleton(appSettings);
-        builder.Services.AddSingleton(storageAccount);
 
         #endregion
 
@@ -122,14 +118,13 @@ public static class RegisterDependentServices
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging
-                .AddEventLog()
-                .EnableRedaction();
+            builder.Logging.AddEventLog();
         }
 
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
+                .EnableRedaction()
                 .AddConsole()
                 .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
                 {
@@ -138,6 +133,11 @@ public static class RegisterDependentServices
                 })
                 .AddDebug();
         }
+
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
 
         builder.Services.AddRedaction(x =>
         {
@@ -154,12 +154,7 @@ public static class RegisterDependentServices
 #pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         });
 
-        builder.Services.AddHttpLogging(o =>
-        {
-            o.CombineLogs = true;
-        });
-
-        if (appSettings.CorsEnabled)
+        if (appSettings.FeatureManagement.CorsEnabled)
         {
             builder.Services.AddCors(options => options.AddPolicy("StartupExampleApi",
                 corsPolicyBuilder =>
@@ -190,7 +185,7 @@ public static class RegisterDependentServices
 
         builder.SetHttpClients(appSettings);
 
-        if (appSettings.SwaggerEnabled)
+        if (appSettings.FeatureManagement.SwaggerEnabled)
         {
             builder.Services.AddApiVersioning(c =>
             {
@@ -268,9 +263,8 @@ public static class RegisterDependentServices
         builder.Services.AddAuthorization();
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_EXTERNAL.ToLower())
-            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection)
-            .AddAzureBlobStorage(appSettings.ConnectionStrings.AzuriteBlobStorage);
+            .AddCheck<OpenAiHealthCheck>(HttpClientNames.OPEN_AI_API_HEALTH.ToLower())
+            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection);
 
         return builder;
     }
@@ -282,7 +276,7 @@ public static class RegisterDependentServices
 
         // services
         ServicesResolver.RegisterDependencies(builder.Services, appSettings);
-        BusinessServicesResolver.RegisterDependencies(builder.Services, appSettings.ConnectionStrings.AzuriteBlobStorage);
+        BusinessServicesResolver.RegisterDependencies(builder.Services);
 
         // helpers
         HelpersResolver.RegisterDependencies(builder.Services, appSettings);
@@ -296,13 +290,13 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_EXTERNAL, c =>
+        builder.Services.AddHttpClient(HttpClientNames.AZURE_OPEN_AI_API_HEALTH, c =>
         {
-            c.BaseAddress = new Uri(appSettings.StartupExample.ExternalUrl);
+            c.BaseAddress = new Uri(appSettings.HealthCheckEndpoints.OpenAi);
 
             c.DefaultRequestHeaders.Accept.Clear();
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
-            c.Timeout = TimeSpan.FromSeconds(120);
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            c.Timeout = TimeSpan.FromSeconds(appSettings.HealthCheckEndpoints.TimeoutInSeconds);
         }).ConfigurePrimaryHttpMessageHandler(c =>
         {
             HttpClientHandler h = new HttpClientHandler

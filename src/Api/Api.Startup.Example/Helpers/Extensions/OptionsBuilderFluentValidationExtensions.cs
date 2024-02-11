@@ -1,8 +1,8 @@
-﻿using Api.Startup.Example.Helpers.Validators;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.Options;
+using Startup.Api.Helpers.Validators;
 
-namespace Api.Startup.Example.Helpers.Extensions;
+namespace Startup.Api.Helpers.Extensions;
 
 public static class OptionsBuilderFluentValidationExtensions
 {

@@ -1,7 +1,7 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace Web.Startup.Example;
+namespace Startup.Web;
 
 /// <summary>
 /// 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Redaction;
 
-namespace Api.Startup.Example.Helpers.Filter;
+namespace Startup.Api.Helpers.Filter;
 
 /// <summary>
 /// Example Custom Redaction Capability

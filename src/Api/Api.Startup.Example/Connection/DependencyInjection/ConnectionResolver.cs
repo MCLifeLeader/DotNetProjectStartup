@@ -1,7 +1,8 @@
-﻿using Api.Startup.Example.Connection.Interfaces;
-using Api.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Api.Models.ApplicationSettings;
+using Startup.Common.Connection;
+using Startup.Common.Connection.Interfaces;
 
-namespace Api.Startup.Example.Connection.DependencyInjection;
+namespace Startup.Api.Connection.DependencyInjection;
 
 public static class ConnectionResolver
 {

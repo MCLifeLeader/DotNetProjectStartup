@@ -1,17 +1,17 @@
 ﻿#nullable enable
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Startup.Api.Models.ApplicationSettings;
+using Startup.Api.Models.Ui.CanaryPage;
+using Startup.Api.Services.Interfaces;
+using Startup.Common.Helpers.Extensions;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml.Serialization;
-using Api.Startup.Example.Helpers.Extensions;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Models.Ui.CanaryPage;
-using Api.Startup.Example.Services.Interfaces;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
-namespace Api.Startup.Example.Services;
+namespace Startup.Api.Services;
 
 public class InfoService : IInfoService
 {
@@ -52,7 +52,7 @@ public class InfoService : IInfoService
         XmlSerializer serializer = new XmlSerializer(_canaryPageDetails.GetType());
         using StringWriter textWriter = new StringWriter();
 
-        serializer.Serialize(textWriter, _canaryPageDetails, serializerNamespaces);
+        serializer.Serialize((TextWriter)textWriter, (object?)_canaryPageDetails, serializerNamespaces);
         string response = textWriter.ToString();
 
         return response;
@@ -119,7 +119,7 @@ public class InfoService : IInfoService
 
             using (CanaryDbContext context = new CanaryDbContext(optionsBuilder.Options))
             {
-                result = context.TestEntities.FromSqlRaw("SELECT 1 as TestInt").Count();
+                result = RelationalQueryableExtensions.FromSqlRaw(context.TestEntities, "SELECT 1 as TestInt").Count();
             }
 
             if (result == 1)

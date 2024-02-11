@@ -1,12 +1,12 @@
-﻿using Blazor.Startup.Example.Models.ApplicationSettings;
-using Blazor.Startup.Example.Services.Interfaces;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
+using Startup.Blazor.Server.Services.Interfaces;
 
-namespace Blazor.Startup.Example.Services.DependencyInjection;
+namespace Startup.Blazor.Server.Services.DependencyInjection;
 
 public static class ServicesResolver
 {
     public static void RegisterDependencies(IServiceCollection service, AppSettings appSettings)
     {
-        service.AddTransient<ICanaryService, CanaryService>();
+        service.AddTransient<IInfoService, InfoService>();
     }
 }

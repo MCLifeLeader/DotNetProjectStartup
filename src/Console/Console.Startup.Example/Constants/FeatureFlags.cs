@@ -1,4 +1,4 @@
-﻿namespace Console.Startup.Example.Constants;
+﻿namespace Startup.Console.Constants;
 
 internal class FeatureFlags
 {

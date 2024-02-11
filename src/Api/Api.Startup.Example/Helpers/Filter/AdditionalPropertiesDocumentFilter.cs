@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Api.Startup.Example.Helpers.Filter;
+namespace Startup.Api.Helpers.Filter;
 
 /// <summary>
 /// Newtonsoft Document Filter to assist the function of the Autorest generator

@@ -1,4 +1,4 @@
-﻿namespace Web.Startup.Example.Constants;
+﻿namespace Startup.Web.Constants;
 
 public static class HttpClientNames
 {

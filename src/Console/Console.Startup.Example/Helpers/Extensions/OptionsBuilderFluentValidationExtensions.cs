@@ -1,9 +1,9 @@
-﻿using Console.Startup.Example.Helpers.Validators;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Startup.Console.Helpers.Validators;
 
-namespace Console.Startup.Example.Helpers.Extensions;
+namespace Startup.Console.Helpers.Extensions;
 
 public static class OptionsBuilderFluentValidationExtensions
 {

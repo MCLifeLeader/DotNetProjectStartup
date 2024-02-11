@@ -1,9 +1,9 @@
-﻿using Console.Startup.Example.Helpers.Data;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Startup.Console.Helpers.Data;
 using System.Xml.Serialization;
 
-namespace Console.Startup.Example.Model.ApplicationSettings;
+namespace Startup.Console.Model.ApplicationSettings;
 
 public class AppSettings
 {

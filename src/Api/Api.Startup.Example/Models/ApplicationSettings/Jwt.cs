@@ -1,6 +1,6 @@
-﻿using Api.Startup.Example.Helpers.Data;
+﻿using Startup.Api.Helpers.Data;
 
-namespace Api.Startup.Example.Models.ApplicationSettings;
+namespace Startup.Api.Models.ApplicationSettings;
 
 public class Jwt
 {

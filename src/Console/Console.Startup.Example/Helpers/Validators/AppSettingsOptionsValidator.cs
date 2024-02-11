@@ -1,8 +1,9 @@
-﻿using Console.Startup.Example.Model.ApplicationSettings;
-using FluentValidation;
+﻿using FluentValidation;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.Helpers.Validators;
+namespace Startup.Console.Helpers.Validators;
 
 public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
 {
@@ -24,8 +25,11 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .NotEmpty()
             .Must(s => s.ToLower().Contains("instrumentationkey") || s.ToLower().Contains("na"));
 
-        // ToDo: Once key vault is live, comment back in
-        //RuleFor(x => x.KeyVaultUri)
-        //    .NotEmpty();
+        // if the connection string is invalid 'SqlConnectionStringBuilder' will throw an exception.
+        // The Contains check validates that we are pointed at the EDU database.
+        RuleFor(x => x.ConnectionStrings.DefaultConnection)
+            .NotEmpty()
+            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Database=StartupExample", StringComparison.CurrentCultureIgnoreCase))
+            .WithMessage("The connection string cannot be empty, must be formatted correctly, and be pointed at the StartupExample database.");
     }
 }

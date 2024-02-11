@@ -1,6 +1,6 @@
-﻿using Web.Startup.Example.Helpers.Data;
+﻿using Startup.Web.Helpers.Data;
 
-namespace Web.Startup.Example.Models.ApplicationSettings;
+namespace Startup.Web.Models.ApplicationSettings;
 
 public class Connectionstrings
 {

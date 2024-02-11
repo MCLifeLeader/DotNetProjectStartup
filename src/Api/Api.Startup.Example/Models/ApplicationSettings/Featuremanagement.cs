@@ -1,7 +1,10 @@
-﻿namespace Api.Startup.Example.Models.ApplicationSettings;
+﻿namespace Startup.Api.Models.ApplicationSettings;
 
-public class Featuremanagement
+public class FeatureManagement
 {
     public bool InformationEndpoints { get; set; }
     public bool SqlDebugger { get; set; }
+    public bool DisplayConfiguration { get; set; }
+    public bool CorsEnabled { get; set; }
+    public bool SwaggerEnabled { get; set; }
 }

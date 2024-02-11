@@ -1,4 +1,4 @@
-namespace Web.Startup.Example.Data;
+namespace Startup.Web.Data;
 
 public class WeatherForecastService
 {

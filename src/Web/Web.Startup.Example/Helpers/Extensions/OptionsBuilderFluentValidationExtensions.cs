@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Options;
-using Web.Startup.Example.Helpers.Validators;
+using Startup.Web.Helpers.Validators;
 
-namespace Web.Startup.Example.Helpers.Extensions;
+namespace Startup.Web.Helpers.Extensions;
 
 public static class OptionsBuilderFluentValidationExtensions
 {

@@ -1,10 +1,10 @@
-﻿using System.Net;
-using Api.Startup.Example.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Startup.Api.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Net;
 
-namespace Api.Startup.Example.Helpers.Filter;
+namespace Startup.Api.Helpers.Filter;
 
 public class SwaggerResponseOperationFilter : IOperationFilter
 {

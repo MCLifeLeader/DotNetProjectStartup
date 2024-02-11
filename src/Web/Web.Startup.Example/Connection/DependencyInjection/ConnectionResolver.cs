@@ -1,7 +1,8 @@
-﻿using Web.Startup.Example.Connection.Interfaces;
-using Web.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Common.Connection;
+using Startup.Common.Connection.Interfaces;
+using Startup.Web.Models.ApplicationSettings;
 
-namespace Web.Startup.Example.Connection.DependencyInjection;
+namespace Startup.Web.Connection.DependencyInjection;
 
 public static class ConnectionResolver
 {

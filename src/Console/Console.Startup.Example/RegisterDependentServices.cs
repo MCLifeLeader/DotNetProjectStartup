@@ -1,18 +1,7 @@
-﻿using System.Net.Http.Headers;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using Azure.Identity;
-using Console.Startup.Example.BackgroundService.DependencyInjection;
-using Console.Startup.Example.Connection.DependencyInjection;
-using Console.Startup.Example.Factories.DependencyInjection;
-using Console.Startup.Example.Helpers.Data;
-using Console.Startup.Example.Helpers.DependencyInjection;
-using Console.Startup.Example.Helpers.Extensions;
-using Console.Startup.Example.Helpers.Filter;
-using Console.Startup.Example.Model.ApplicationSettings;
-using Console.Startup.Example.Repositories.DependencyInjection;
-using Console.Startup.Example.Services.DependencyInjection;
+﻿using Azure.Identity;
 using FluentValidation;
+using Microsoft.Extensions.Compliance.Classification;
+using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,15 +11,26 @@ using Startup.Common.Constants;
 using Startup.Common.Helpers.Extensions;
 using Startup.Common.Models;
 using Startup.Common.Models.Authorization;
-using System.Net.Http.Formatting;
+using Startup.Console.BackgroundService.DependencyInjection;
+using Startup.Console.Connection.DependencyInjection;
+using Startup.Console.Factories.DependencyInjection;
+using Startup.Console.Helpers.Data;
+using Startup.Console.Helpers.DependencyInjection;
+using Startup.Console.Helpers.Extensions;
+using Startup.Console.Helpers.Filter;
+using Startup.Console.Model.ApplicationSettings;
+using Startup.Console.Repositories.DependencyInjection;
+using Startup.Console.Services.DependencyInjection;
 using System.IdentityModel.Tokens.Jwt;
-using System.Text.Json;
-using Microsoft.Extensions.Compliance.Classification;
-using Microsoft.Extensions.Compliance.Redaction;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 
-namespace Console.Startup.Example;
+namespace Startup.Console;
 
 public static class RegisterDependentServices
 {

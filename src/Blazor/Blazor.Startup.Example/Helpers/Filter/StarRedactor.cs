@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Redaction;
 
-namespace Blazor.Startup.Example.Helpers.Filter;
+namespace Startup.Blazor.Server.Helpers.Filter;
 
 /// <summary>
 /// Example Custom Redaction Capability

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Startup.Example.Controllers;
+namespace Startup.Api.Controllers;
 
 public class HomeController : BaseController
 {

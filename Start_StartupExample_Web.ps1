@@ -1,4 +1,4 @@
-Set-Location .\src\Web\Web.Startup.Example
-dotnet build --configuration Development --source .\Web.Startup.Example.csproj
-dotnet run .\Web.Startup.Example.csproj --configuration Development --launch-profile https &
+Set-Location .\src\Web\Startup.Web
+dotnet build --configuration Development --source .\Startup.Web.csproj
+dotnet run .\Startup.Web.csproj --configuration Development --launch-profile https &
 Set-Location ..\..\..\

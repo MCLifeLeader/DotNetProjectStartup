@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Web.Startup.Example.Helpers.Data;
+namespace Startup.Web.Helpers.Data;
 
 /// <summary>
 /// You may run into trouble with the Logger autogen if you put this in a core class

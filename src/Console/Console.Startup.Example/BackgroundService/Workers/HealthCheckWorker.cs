@@ -1,10 +1,10 @@
-﻿using Console.Startup.Example.BackgroundService.Interface;
-using Console.Startup.Example.Model.ApplicationSettings;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Startup.Client.Api;
+using Startup.Console.BackgroundService.Interface;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.BackgroundService.Workers;
+namespace Startup.Console.BackgroundService.Workers;
 
 public class HealthCheckWorker : IHealthCheckWorker
 {

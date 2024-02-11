@@ -1,8 +1,8 @@
-﻿using Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
 using FluentValidation;
 using Microsoft.Data.SqlClient;
 
-namespace Blazor.Startup.Example.Helpers.Validators;
+namespace Startup.Blazor.Server.Helpers.Validators;
 
 public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
 {
@@ -28,7 +28,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         // The Contains check validates that we are pointed at the EDU database.
         RuleFor(x => x.ConnectionStrings.DefaultConnection)
             .NotEmpty()
-            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Initial Catalog=StartupExample", StringComparison.CurrentCultureIgnoreCase))
+            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Database=StartupExample", StringComparison.CurrentCultureIgnoreCase))
             .WithMessage("The connection string cannot be empty, must be formatted correctly, and be pointed at the StartupExample database.");
 
         RuleFor(x => x.AllowedHosts)

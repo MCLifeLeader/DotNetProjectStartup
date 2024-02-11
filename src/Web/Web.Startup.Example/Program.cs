@@ -1,4 +1,5 @@
-using Web.Startup.Example;
+using Startup.Web;
+using Startup.Web;
 
 WebApplication.CreateBuilder(args)
     .RegisterServices()

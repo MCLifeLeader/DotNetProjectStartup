@@ -1,27 +1,27 @@
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.Json;
-using Web.Startup.Example.Connection.DependencyInjection;
-using Web.Startup.Example.Constants;
-using Web.Startup.Example.Data.DependencyInjection;
-using Web.Startup.Example.Factories.DependencyInjection;
-using Web.Startup.Example.Helpers.Data;
-using Web.Startup.Example.Helpers.DependencyInjection;
-using Web.Startup.Example.Helpers.Extensions;
-using Web.Startup.Example.Helpers.Health;
-using Web.Startup.Example.Models.ApplicationSettings;
-using Web.Startup.Example.Services.DependencyInjection;
 using System.Text.Encodings.Web;
-using Web.Startup.Example.Helpers.Filter;
+using System.Text.Json;
+using Startup.Web.Connection.DependencyInjection;
+using Startup.Web.Constants;
+using Startup.Web.Data.DependencyInjection;
+using Startup.Web.Factories.DependencyInjection;
+using Startup.Web.Helpers.Data;
+using Startup.Web.Helpers.DependencyInjection;
+using Startup.Web.Helpers.Extensions;
+using Startup.Web.Helpers.Filter;
+using Startup.Web.Helpers.Health;
+using Startup.Web.Models.ApplicationSettings;
+using Startup.Web.Services.DependencyInjection;
 
-namespace Web.Startup.Example;
+namespace Startup.Web;
 
 /// <summary>
 /// 

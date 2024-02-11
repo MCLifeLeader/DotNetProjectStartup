@@ -1,18 +1,18 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security;
-using System.Security.Claims;
-using System.Text;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Models.Enums;
-using Api.Startup.Example.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Startup.Api.Models.ApplicationSettings;
+using Startup.Api.Models.Enums;
+using Startup.Api.Services.Interfaces;
 using Startup.Common.Models.Authorization;
 using Startup.Data.Models.Db.dboSchema;
 using Startup.Data.Repositories.Db.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security;
+using System.Security.Claims;
+using System.Text;
 
-namespace Api.Startup.Example.Services;
+namespace Startup.Api.Services;
 
 public class AuthService : IAuthService
 {

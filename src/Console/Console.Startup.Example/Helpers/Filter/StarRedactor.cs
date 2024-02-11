@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Redaction;
 
-namespace Console.Startup.Example.Helpers.Filter;
+namespace Startup.Console.Helpers.Filter;
 
 /// <summary>
 /// Example Custom Redaction Capability

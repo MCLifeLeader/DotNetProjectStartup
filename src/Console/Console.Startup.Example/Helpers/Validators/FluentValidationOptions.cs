@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.Extensions.Options;
 
-namespace Console.Startup.Example.Helpers.Validators;
+namespace Startup.Console.Helpers.Validators;
 
 public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {

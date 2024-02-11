@@ -1,4 +1,4 @@
-﻿namespace Web.Startup.Example.Models.ApplicationSettings;
+﻿namespace Startup.Web.Models.ApplicationSettings;
 
 public class Loglevel
 {

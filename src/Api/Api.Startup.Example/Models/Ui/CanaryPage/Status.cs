@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Models.Ui.CanaryPage;
+﻿namespace Startup.Api.Models.Ui.CanaryPage;
 
 public enum Status
 {

@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Services.Interfaces;
+﻿namespace Startup.Api.Services.Interfaces;
 
 public interface IInfoService
 {

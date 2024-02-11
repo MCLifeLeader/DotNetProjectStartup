@@ -1,9 +1,9 @@
-﻿using System.Text;
-using Console.Startup.Example.Repositories.Http.Interface;
-using Startup.Common.Connection.Interfaces;
+﻿using Startup.Common.Connection.Interfaces;
 using Startup.Common.Constants;
+using Startup.Console.Repositories.Http.Interface;
+using System.Text;
 
-namespace Console.Startup.Example.Repositories.Http;
+namespace Startup.Console.Repositories.Http;
 
 public class RemoteHostServerRepository : IRemoteHostServerRepository
 {

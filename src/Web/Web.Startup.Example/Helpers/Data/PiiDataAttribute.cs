@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Web.Startup.Example.Helpers.Data;
+namespace Startup.Web.Helpers.Data;
 
 public class PiiDataAttribute : DataClassificationAttribute
 {

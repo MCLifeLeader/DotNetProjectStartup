@@ -1,7 +1,7 @@
-﻿using Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Blazor.Startup.Example.Helpers.DependencyInjection;
+namespace Startup.Blazor.Server.Helpers.DependencyInjection;
 
 public static class HelpersResolver
 {

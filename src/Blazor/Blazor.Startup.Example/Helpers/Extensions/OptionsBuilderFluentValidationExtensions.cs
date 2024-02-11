@@ -1,8 +1,8 @@
-﻿using Blazor.Startup.Example.Helpers.Validators;
+﻿using Startup.Blazor.Server.Helpers.Validators;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 
-namespace Blazor.Startup.Example.Helpers.Extensions;
+namespace Startup.Blazor.Server.Helpers.Extensions;
 
 public static class OptionsBuilderFluentValidationExtensions
 {

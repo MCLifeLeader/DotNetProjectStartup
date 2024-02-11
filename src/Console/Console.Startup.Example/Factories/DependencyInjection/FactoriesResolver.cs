@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Console.Startup.Example.Factories.DependencyInjection;
+namespace Startup.Console.Factories.DependencyInjection;
 
 public static class FactoriesResolver
 {

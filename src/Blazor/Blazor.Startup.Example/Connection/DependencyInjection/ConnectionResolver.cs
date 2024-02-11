@@ -1,7 +1,8 @@
-﻿using Blazor.Startup.Example.Connection.Interfaces;
-using Blazor.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Blazor.Server.Models.ApplicationSettings;
+using Startup.Common.Connection;
+using Startup.Common.Connection.Interfaces;
 
-namespace Blazor.Startup.Example.Connection.DependencyInjection;
+namespace Startup.Blazor.Server.Connection.DependencyInjection;
 
 public static class ConnectionResolver
 {

@@ -1,4 +1,4 @@
-﻿namespace Web.Startup.Example.Models;
+﻿namespace Startup.Web.Models;
 
 public class LoginToken
 {

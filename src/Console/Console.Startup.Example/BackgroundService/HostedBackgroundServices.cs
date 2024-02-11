@@ -1,12 +1,12 @@
-﻿using Console.Startup.Example.BackgroundService.Interface;
-using Console.Startup.Example.Constants;
-using Console.Startup.Example.Model.ApplicationSettings;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
 using Startup.Common.Helpers.Extensions;
+using Startup.Console.BackgroundService.Interface;
+using Startup.Console.Constants;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.BackgroundService;
+namespace Startup.Console.BackgroundService;
 
 /// <summary>
 /// This is the main service that will run all of the background workers.

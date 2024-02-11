@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Api.Startup.Example.Models.Authorization;
+namespace Startup.Api.Models.Authorization;
 
 public class DeviceLoginModel
 {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Xml.Serialization;
 
-namespace Api.Startup.Example.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.CanaryPage;
 
 public class ServiceDetails
 {

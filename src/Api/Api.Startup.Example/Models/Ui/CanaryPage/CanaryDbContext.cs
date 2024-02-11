@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Api.Startup.Example.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.CanaryPage;
 
 /// <summary>
 /// Class CanaryDbContext.

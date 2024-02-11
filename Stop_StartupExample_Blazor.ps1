@@ -5,7 +5,7 @@ Get-Job
 $jobs = Get-Job
 
 # Search the list of jobs for the one you want to stop.
-$job = $jobs | Where-Object { $_.Command -like '*Blazor.Startup.Example*' }
+$job = $jobs | Where-Object { $_.Command -like '*Startup.Blazor.Server*' }
 
 # Use either Stop-Job or Remove-Job to kill the job.
 Stop-Job $job.Id

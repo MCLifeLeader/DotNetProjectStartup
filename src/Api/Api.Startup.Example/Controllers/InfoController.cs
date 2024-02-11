@@ -1,33 +1,39 @@
-﻿using Api.Startup.Example.Helpers.Extensions;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.FeatureManagement;
+using Microsoft.FeatureManagement.Mvc;
+using Startup.Api.Models.ApplicationSettings;
+using Startup.Api.Services.Interfaces;
+using Startup.Common.Constants;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Collections;
 using System.Net;
 using System.Text;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Annotations;
 
-namespace Api.Startup.Example.Controllers;
+namespace Startup.Api.Controllers;
 
 [Authorize]
 [ApiController]
+[FeatureGate("InformationEndpoints")]
 [Route("api/[controller]")]
 public class InfoController : ControllerBase
 {
     private readonly AppSettings _appSettings;
-    private readonly IInfoService _canaryService;
+    private readonly IInfoService _infoService;
     private readonly ILogger<InfoController> _logger;
+    private readonly IFeatureManager _featureManager;
 
     public InfoController(
         ILogger<InfoController> logger,
         IOptions<AppSettings> appSettings,
-        IInfoService canaryService)
+        IFeatureManager featureManager,
+        IInfoService infoService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
-        _canaryService = canaryService ?? throw new ArgumentNullException(nameof(canaryService));
+        _featureManager = featureManager ?? throw new ArgumentNullException(nameof(featureManager));
+        _infoService = infoService ?? throw new ArgumentNullException(nameof(infoService));
 
         _logger.LogDebug("{ControllerName} init.", nameof(InfoController));
     }
@@ -45,7 +51,7 @@ public class InfoController : ControllerBase
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetStatusInformationXml));
         await Task.Yield();
 
-        return Content(_canaryService.SerializeToResponseXml(), "application/xml", Encoding.UTF8);
+        return Content(_infoService.SerializeToResponseXml(), "application/xml", Encoding.UTF8);
     }
 
     /// <summary>
@@ -61,7 +67,7 @@ public class InfoController : ControllerBase
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetStatusInformationJson));
         await Task.Yield();
 
-        return Content(_canaryService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
+        return Content(_infoService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
     }
 
     [Authorize(Roles = "AgencyAdmin")]
@@ -71,13 +77,9 @@ public class InfoController : ControllerBase
     public async Task<ActionResult<AppSettings>> GetAppSettings()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetAppSettings));
-
-        // Using custom logging and redaction support.
-        _logger.LogAppSettings(_appSettings);
-
         await Task.Yield();
 
-        if (_appSettings.DisplayConfiguration)
+        if (await _featureManager.IsEnabledAsync(FeatureFlags.DISPLAY_CONFIGURATION))
         {
             return Ok(_appSettings);
         }
@@ -95,7 +97,7 @@ public class InfoController : ControllerBase
 
         await Task.Yield();
 
-        if (_appSettings.DisplayConfiguration)
+        if (_appSettings.FeatureManagement.DisplayConfiguration)
         {
             return Ok(Environment.GetEnvironmentVariables());
         }

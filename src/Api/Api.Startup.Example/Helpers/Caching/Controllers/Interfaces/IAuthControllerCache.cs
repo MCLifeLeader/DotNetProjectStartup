@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Helpers.Caching.Controllers.Interfaces;
+﻿namespace Startup.Api.Helpers.Caching.Controllers.Interfaces;
 
 public interface IAuthControllerCache
 {

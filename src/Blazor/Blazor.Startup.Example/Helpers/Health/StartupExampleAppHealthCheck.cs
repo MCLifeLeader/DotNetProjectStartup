@@ -1,8 +1,8 @@
-﻿using Blazor.Startup.Example.Connection.Interfaces;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Startup.Common.Connection.Interfaces;
 using Startup.Common.Constants;
 
-namespace Blazor.Startup.Example.Helpers.Health;
+namespace Startup.Blazor.Server.Helpers.Health;
 
 public class StartupExampleAppHealthCheck : IHealthCheck
 {

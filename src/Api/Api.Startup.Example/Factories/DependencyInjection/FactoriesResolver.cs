@@ -1,6 +1,6 @@
-﻿using Api.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Api.Models.ApplicationSettings;
 
-namespace Api.Startup.Example.Factories.DependencyInjection;
+namespace Startup.Api.Factories.DependencyInjection;
 
 public static class FactoriesResolver
 {

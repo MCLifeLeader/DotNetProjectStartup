@@ -1,7 +1,7 @@
-﻿using Api.Startup.Example.Models.ApplicationSettings;
-using Api.Startup.Example.Services.Interfaces;
+﻿using Startup.Api.Models.ApplicationSettings;
+using Startup.Api.Services.Interfaces;
 
-namespace Api.Startup.Example.Services.DependencyInjection;
+namespace Startup.Api.Services.DependencyInjection;
 
 public static class ServicesResolver
 {

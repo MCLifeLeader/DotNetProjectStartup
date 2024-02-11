@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.Data.SqlClient;
-using Web.Startup.Example.Models.ApplicationSettings;
+using Startup.Web.Models.ApplicationSettings;
 
-namespace Web.Startup.Example.Helpers.Validators;
+namespace Startup.Web.Helpers.Validators;
 
 public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
 {
@@ -28,7 +28,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         // The Contains check validates that we are pointed at the EDU database.
         RuleFor(x => x.ConnectionStrings.DefaultConnection)
             .NotEmpty()
-            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Initial Catalog=StartupExample", StringComparison.CurrentCultureIgnoreCase))
+            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Database=StartupExample", StringComparison.CurrentCultureIgnoreCase))
             .WithMessage("The connection string cannot be empty, must be formatted correctly, and be pointed at the StartupExample database.");
 
         RuleFor(x => x.AllowedHosts)

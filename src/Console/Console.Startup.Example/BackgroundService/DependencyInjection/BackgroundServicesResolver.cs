@@ -1,8 +1,8 @@
-﻿using Console.Startup.Example.BackgroundService.Interface;
-using Console.Startup.Example.BackgroundService.Workers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Startup.Console.BackgroundService.Interface;
+using Startup.Console.BackgroundService.Workers;
 
-namespace Console.Startup.Example.BackgroundService.DependencyInjection;
+namespace Startup.Console.BackgroundService.DependencyInjection;
 
 public static class BackgroundServicesResolver
 {

@@ -1,4 +1,4 @@
-﻿namespace Api.Startup.Example.Models.ApplicationSettings;
+﻿namespace Startup.Api.Models.ApplicationSettings;
 
 public class Logging
 {

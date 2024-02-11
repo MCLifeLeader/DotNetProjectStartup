@@ -1,6 +1,6 @@
-﻿using Web.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Web.Models.ApplicationSettings;
 
-namespace Web.Startup.Example.Factories.DependencyInjection;
+namespace Startup.Web.Factories.DependencyInjection;
 
 public static class FactoriesResolver
 {

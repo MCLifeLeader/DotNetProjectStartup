@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace Console.Startup.Example;
+namespace Startup.Console;
 
 public static class SetupMiddlewarePipeline
 {

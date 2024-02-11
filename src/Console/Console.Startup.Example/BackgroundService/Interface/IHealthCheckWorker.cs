@@ -1,4 +1,4 @@
-﻿namespace Console.Startup.Example.BackgroundService.Interface;
+﻿namespace Startup.Console.BackgroundService.Interface;
 
 public interface IHealthCheckWorker
 {

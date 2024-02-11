@@ -1,10 +1,10 @@
-﻿using Console.Startup.Example.Model.ApplicationSettings;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Startup.Client.Api;
 using Startup.Common.Connection;
 using Startup.Common.Connection.Interfaces;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.Connection.DependencyInjection;
+namespace Startup.Console.Connection.DependencyInjection;
 
 public static class ConnectionResolver
 {

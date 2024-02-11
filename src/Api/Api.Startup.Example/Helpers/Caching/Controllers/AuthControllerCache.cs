@@ -1,9 +1,9 @@
-﻿using Api.Startup.Example.Helpers.Caching.Controllers.Interfaces;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using Startup.Api.Helpers.Caching.Controllers.Interfaces;
+using Startup.Api.Models.ApplicationSettings;
 
-namespace Api.Startup.Example.Helpers.Caching.Controllers;
+namespace Startup.Api.Helpers.Caching.Controllers;
 
 /// <summary>
 /// Protect the Canary page from aggressive hits.

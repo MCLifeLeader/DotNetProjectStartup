@@ -1,7 +1,7 @@
 ﻿using Startup.Common.Models.Authorization;
-using DeviceLoginModel = Api.Startup.Example.Models.Authorization.DeviceLoginModel;
+using DeviceLoginModel = Startup.Api.Models.Authorization.DeviceLoginModel;
 
-namespace Api.Startup.Example.Helpers.Extensions;
+namespace Startup.Api.Helpers.Extensions;
 
 public static class LoginHelper
 {

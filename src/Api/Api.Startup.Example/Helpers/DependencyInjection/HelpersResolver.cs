@@ -1,9 +1,9 @@
-﻿using Api.Startup.Example.Helpers.Caching.Controllers;
-using Api.Startup.Example.Helpers.Caching.Controllers.Interfaces;
-using Api.Startup.Example.Models.ApplicationSettings;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Startup.Api.Helpers.Caching.Controllers;
+using Startup.Api.Helpers.Caching.Controllers.Interfaces;
+using Startup.Api.Models.ApplicationSettings;
 
-namespace Api.Startup.Example.Helpers.DependencyInjection;
+namespace Startup.Api.Helpers.DependencyInjection;
 
 public static class HelpersResolver
 {

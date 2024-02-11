@@ -1,6 +1,6 @@
-﻿using Console.Startup.Example.Helpers.Data;
+﻿using Startup.Console.Helpers.Data;
 
-namespace Console.Startup.Example.Model.ApplicationSettings;
+namespace Startup.Console.Model.ApplicationSettings;
 
 public class Connectionstrings
 {

@@ -1,7 +1,7 @@
-﻿using Console.Startup.Example.Model.ApplicationSettings;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Startup.Console.Model.ApplicationSettings;
 
-namespace Console.Startup.Example.Helpers.DependencyInjection;
+namespace Startup.Console.Helpers.DependencyInjection;
 
 public static class HelpersResolver
 {

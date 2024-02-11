@@ -1,6 +1,6 @@
-﻿using Web.Startup.Example.Models.ApplicationSettings;
+﻿using Startup.Web.Models.ApplicationSettings;
 
-namespace Web.Startup.Example.Helpers.Extensions;
+namespace Startup.Web.Helpers.Extensions;
 
 public static partial class Logging
 {

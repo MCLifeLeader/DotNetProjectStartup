@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Api.Startup.Example.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.CanaryPage;
 
 /// <summary>
 /// Class TestEntity.
