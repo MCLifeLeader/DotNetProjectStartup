@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Startup.Common.Connection.Interfaces;
-using Startup.Web.Constants;
+using Startup.Common.Constants;
 
 namespace Startup.Web.Helpers.Health;
 

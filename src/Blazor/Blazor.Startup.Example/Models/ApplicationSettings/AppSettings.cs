@@ -10,14 +10,18 @@ public class AppSettings
     [XmlIgnore]
     public IConfiguration ConfigurationBase { get; set; }
 
-    public Featuremanagement FeatureManagement { get; set; }
     public Logging Logging { get; set; }
+    public Featuremanagement FeatureManagement { get; set; }
+
     public string KeyVaultUri { get; set; }
-    public bool DisplayConfiguration { get; set; }
-    public Connectionstrings ConnectionStrings { get; set; }
-    public Startupexample StartupExample { get; set; }
-    public string AllowedHosts { get; set; }
-    public object StorageAccount { get; internal set; }
+
     [SensitiveData]
     public string RedactionKey { get; set; }
+
+    public Connectionstrings ConnectionStrings { get; set; }
+    public HttpClients HttpClients { get; set; }
+    public HealthCheckEndpoint HealthCheckEndpoints { get; set; }
+    public Startupexample StartupExample { get; set; }
+
+    public string AllowedHosts { get; set; }
 }

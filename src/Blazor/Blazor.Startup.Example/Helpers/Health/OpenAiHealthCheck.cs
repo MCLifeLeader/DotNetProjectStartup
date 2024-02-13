@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
-using Startup.Api.Constants;
 using Startup.Common.Connection.Interfaces;
 using Startup.Common.Constants;
 
-namespace Startup.Api.Helpers.Health;
+namespace Startup.Blazor.Server.Helpers.Health;
 
 public class OpenAiHealthCheck : IHealthCheck
 {

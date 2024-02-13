@@ -1,6 +1,6 @@
 ﻿using Startup.Common.Connection.Interfaces;
+using Startup.Common.Constants;
 using System.Text;
-using Startup.Web.Constants;
 using Startup.Web.Repository.Http.Endpoints.Interfaces;
 
 namespace Startup.Web.Repository.Http.Endpoints;

@@ -22,6 +22,7 @@ using Startup.Api.Helpers.Health;
 using Startup.Api.Models.ApplicationSettings;
 using Startup.Api.Services.DependencyInjection;
 using Startup.Business.DependencyInjection;
+using Startup.Common.Constants;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -290,7 +291,7 @@ public static class RegisterDependentServices
 
     private static void SetHttpClients(this WebApplicationBuilder builder, AppSettings appSettings)
     {
-        builder.Services.AddHttpClient(HttpClientNames.AZURE_OPEN_AI_API_HEALTH, c =>
+        builder.Services.AddHttpClient(HttpClientNames.OPEN_AI_API_HEALTH, c =>
         {
             c.BaseAddress = new Uri(appSettings.HealthCheckEndpoints.OpenAi);
 

@@ -10,7 +10,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Startup.Web.Connection.DependencyInjection;
-using Startup.Web.Constants;
 using Startup.Web.Data.DependencyInjection;
 using Startup.Web.Factories.DependencyInjection;
 using Startup.Web.Helpers.Data;
@@ -20,6 +19,9 @@ using Startup.Web.Helpers.Filter;
 using Startup.Web.Helpers.Health;
 using Startup.Web.Models.ApplicationSettings;
 using Startup.Web.Services.DependencyInjection;
+using Microsoft.FeatureManagement;
+using Microsoft.Extensions.DependencyInjection;
+using Startup.Common.Constants;
 
 namespace Startup.Web;
 
@@ -50,7 +52,8 @@ public static class RegisterDependentServices
         }
 
         // Import Azure Key Vault Secrets and override any pre-loaded secrets
-        if (!string.IsNullOrEmpty(builder.Configuration.GetValue<string>("KeyVaultUri")))
+        string keyVaultUri = builder.Configuration.GetValue<string>("KeyVaultUri")!;
+        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
         {
             builder.Configuration.AddAzureKeyVault(
                 new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
@@ -87,6 +90,7 @@ public static class RegisterDependentServices
             .ValidateOnStart();
 
         builder.Services.AddSingleton(builder.Configuration);
+        builder.Services.AddSingleton(appSettings);
 
         #endregion
 
@@ -105,14 +109,13 @@ public static class RegisterDependentServices
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging
-                .AddEventLog()
-                .EnableRedaction();
+            builder.Logging.AddEventLog();
         }
 
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
+                .EnableRedaction()
                 .AddConsole()
                 .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
                 {
@@ -122,10 +125,14 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
+
         builder.Services.AddRedaction(x =>
         {
             x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-
             x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
 #pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
@@ -137,11 +144,6 @@ public static class RegisterDependentServices
 #pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         });
 
-        builder.Services.AddHttpLogging(o =>
-        {
-            o.CombineLogs = true;
-        });
-
         builder.Services.AddMemoryCache();
 
         builder.Services.ConfigureHttpClientDefaults(http =>
@@ -149,14 +151,16 @@ public static class RegisterDependentServices
             // Turn on resilience by default
             http.AddStandardResilienceHandler();
         });
-        
         builder.SetHttpClients(appSettings);
+
+        builder.Services.AddFeatureManagement();
 
         builder.Services.AddRazorPages();
         builder.SetDependencyInjection(appSettings);
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower());
+            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower())
+            .AddCheck<OpenAiHealthCheck>(HttpClientNames.OPEN_AI_API_HEALTH);
 
         return builder;
     }
@@ -188,7 +192,7 @@ public static class RegisterDependentServices
             c.BaseAddress = new Uri(appSettings.StartupExample.ApiUrl);
 
             c.DefaultRequestHeaders.Accept.Clear();
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             c.Timeout = TimeSpan.FromSeconds(120);
         }).ConfigurePrimaryHttpMessageHandler(c =>
         {
@@ -205,6 +209,22 @@ public static class RegisterDependentServices
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
+            c.Timeout = TimeSpan.FromSeconds(120);
+        }).ConfigurePrimaryHttpMessageHandler(c =>
+        {
+            HttpClientHandler h = new HttpClientHandler
+            {
+                UseProxy = false
+            };
+            return h;
+        });
+
+        builder.Services.AddHttpClient(HttpClientNames.OPEN_AI_API_HEALTH, c =>
+        {
+            c.BaseAddress = new Uri(appSettings.HealthCheckEndpoints.OpenAi);
+
+            c.DefaultRequestHeaders.Accept.Clear();
+            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             c.Timeout = TimeSpan.FromSeconds(120);
         }).ConfigurePrimaryHttpMessageHandler(c =>
         {

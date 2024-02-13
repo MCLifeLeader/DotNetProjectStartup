@@ -101,6 +101,7 @@
 
     <ItemGroup>
       <Folder Include="Connection\Interfaces\" />
+      <Folder Include="Constants\" />
     </ItemGroup>
 
 </Project>
