@@ -22,8 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\ApplicationSettings\" />
-      <Folder Include="Repository\Interfaces\" />
       <Folder Include="Services\Interfaces\" />
     </ItemGroup>
 

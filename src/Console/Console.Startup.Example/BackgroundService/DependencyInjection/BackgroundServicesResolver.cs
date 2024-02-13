@@ -9,7 +9,6 @@ public static class BackgroundServicesResolver
     public static void RegisterDependencies(IServiceCollection services)
     {
         services.AddSingleton<IHealthCheckWorker, HealthCheckWorker>();
-        services.AddSingleton<IFileDownloadWorker, FileDownloadWorker>();
         services.AddHostedService<HostedBackgroundServices>();
     }
 }

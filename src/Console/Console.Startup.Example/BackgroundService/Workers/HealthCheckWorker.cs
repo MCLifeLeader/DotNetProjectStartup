@@ -32,12 +32,43 @@ public class HealthCheckWorker : IHealthCheckWorker
         {
             try
             {
+                // Sleep until cron rule has been satisfied.
+                NCrontab.CrontabSchedule schedule = NCrontab.CrontabSchedule.Parse(_appSettings.WorkerProcesses.StartupApi.Cron);
+                DateTime nextRun = schedule.GetNextOccurrence(DateTime.UtcNow);
+
+                _logger.LogInformation("Thread Sleep for: '{Class}.{Method}' until: {nextRun}",
+                    GetType().Name, nameof(CheckStartupApi), nextRun);
+
+                while (DateTime.UtcNow < nextRun)
+                {
+                    // Play friendly with the API endpoint when there is no work to be done
+                    await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.SleepDelaySeconds), cancellationToken);
+
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        _logger.LogWarning("'{Class}.{Method}' CancellationToken Received", GetType().Name, nameof(CheckStartupApi));
+                        return;
+                    }
+                }
+
+                _logger.LogInformation("Thread Resumed for: '{Class}.{Method}'", GetType().Name, nameof(CheckStartupApi));
+            }
+            catch (Exception ex)
+            {
+                // Log the error but let the application loop continue.
+                _logger.LogCritical(ex, $"Cron failed for {nameof(CheckStartupApi)}");
+            }
+
+            try
+            {
+                // Run the desired action.
                 _startupHttp.RefreshToken();
                 var apiHealth = await _startupHttp.CheckApiHealthAsync();
                 _logger.LogInformation($"{apiHealth}");
             }
             catch (TaskCanceledException)
             {
+                // Some stop action happened, throw the error up stream.
                 throw;
             }
             catch (Exception ex)
@@ -45,19 +76,6 @@ public class HealthCheckWorker : IHealthCheckWorker
                 // Log the error but let the application loop continue.
                 _logger.LogError(ex, ex.Message);
             }
-
-            NCrontab.CrontabSchedule schedule = NCrontab.CrontabSchedule.Parse(_appSettings.WorkerProcesses.StartupApi.Cron);
-            DateTime nextRun = schedule.GetNextOccurrence(DateTime.UtcNow);
-
-            _logger.LogInformation("Thread Sleep for: '{Class}.{Method}' until: {nextRun}",
-                GetType().Name, nameof(CheckStartupApi), nextRun);
-
-            while (DateTime.UtcNow < nextRun)
-            {
-                // Play friendly with the API endpoint when there is no work to be done
-                await Task.Delay(TimeSpan.FromSeconds(_appSettings.WorkerProcesses.SleepDelaySeconds), cancellationToken);
-            }
-            _logger.LogInformation("Thread Resumed for: '{Class}.{Method}'", GetType().Name, nameof(CheckStartupApi));
         }
     }
 }

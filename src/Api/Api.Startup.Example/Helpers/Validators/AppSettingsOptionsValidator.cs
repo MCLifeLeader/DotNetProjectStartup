@@ -20,7 +20,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         RuleFor(x => x.ConnectionStrings.DefaultConnection)
             .NotNull()
             .NotEmpty()
-            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Initial Catalog=AiCoaches", StringComparison.CurrentCultureIgnoreCase))
+            .Must(s => new SqlConnectionStringBuilder(s).ConnectionString.Contains("Initial Catalog=StartupExample", StringComparison.CurrentCultureIgnoreCase))
             .WithMessage("The connection string cannot be empty, must be formatted correctly, and be pointed at the correct database.");
         RuleFor(x => x.ConnectionStrings.ApplicationInsights)
             .NotNull()
@@ -38,7 +38,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .Must(_ => true);
 
         RuleFor(x => x.CacheDurationInSeconds)
-    .InclusiveBetween(5, 120);
+            .InclusiveBetween(5, 120);
 
         RuleFor(x => x.RedactionKey)
             .NotNull()

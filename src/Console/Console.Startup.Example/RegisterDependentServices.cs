@@ -87,6 +87,8 @@ public static class RegisterDependentServices
             })
             .ConfigureServices((hostContext, services) =>
             {
+                services.AddLogging();
+
                 #region Bind AppSettings for use in IOptions Pattern
 
                 services.Configure<AppSettings>(hostContext.Configuration);
@@ -110,8 +112,6 @@ public static class RegisterDependentServices
                 services.AddSingleton(hostContext.Configuration);
 
                 #endregion
-
-                services.AddLogging();
 
                 services.Configure<HostOptions>(options =>
                 {
@@ -148,8 +148,6 @@ public static class RegisterDependentServices
             })
             .ConfigureLogging((hostContext, logging) =>
             {
-                logging.ClearProviders();
-
                 logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
 
                 if (appSettings != null && !appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
@@ -165,8 +163,7 @@ public static class RegisterDependentServices
                 {
                     //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
                     logging
-                        .AddEventLog()
-                        .EnableRedaction();
+                        .AddEventLog();
                 }
 
 #if DEBUG || DEVELOPMENT
@@ -179,6 +176,8 @@ public static class RegisterDependentServices
                     })
                     .AddDebug();
 #endif
+
+                logging.EnableRedaction();
             })
             .UseWindowsService(o => { o.ServiceName = appSettings!.ServiceName; });
 
@@ -217,9 +216,6 @@ public static class RegisterDependentServices
 
             c.DefaultRequestHeaders.Accept.Clear();
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
             c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.StartupApi.TimeOutInSeconds);
 
             UserLoginModel userLogin = new UserLoginModel()
@@ -254,23 +250,6 @@ public static class RegisterDependentServices
             };
             return h;
         });
-
-        services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_HOME, c =>
-        {
-            c.BaseAddress = new Uri(appSettings.WorkerProcesses.RemoteServerConnection.Uri);
-
-            c.DefaultRequestHeaders.Accept.Clear();
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-            c.Timeout = TimeSpan.FromSeconds(appSettings.WorkerProcesses.StartupApi.TimeOutInSeconds);
-        }).ConfigurePrimaryHttpMessageHandler(c =>
-        {
-            HttpClientHandler h = new HttpClientHandler
-            {
-                UseProxy = false
-            };
-            return h;
-        });
     }
 
     private static LoginToken? GetAuthToken(IServiceCollection services, HttpClient httpClient, UserLoginModel userLoginModel)
@@ -282,7 +261,7 @@ public static class RegisterDependentServices
         try
         {
             HttpResponseMessage response = httpClient.PostAsync(
-                "v1.0/Auth/Login",
+                "Auth/Login",
                 userLoginModel,
                 new JsonMediaTypeFormatter()).Result;
 
