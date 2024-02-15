@@ -43,10 +43,31 @@ public static class RegisterDependentServices
         // Needed for windows services to find their resources to run correctly.
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
+        #region Environment Variable for DOTNET
+
         // OS Level environment variable and if environment is null fallback to Development
-        string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ??
-                             Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ??
-                             "Development";
+        string? environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ??
+                              Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+        // ToDo: launchSettings.json does not seem to take effect for console applications
+        if (string.IsNullOrEmpty(environment))
+        {
+#if DEBUG || DEVELOPMENT
+            builder.UseEnvironment(Environments.Development);
+            Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", Environments.Development);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", Environments.Development);
+#elif STAGING
+            builder.UseEnvironment(Environments.Staging);
+            Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", Environments.Staging);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", Environments.Staging);
+#elif PRODUCTION || RELEASE
+            builder.UseEnvironment(Environments.Production);
+            Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", Environments.Production);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", Environments.Production);
+#endif
+        }
+
+        #endregion
 
         builder.ConfigureAppConfiguration((hostContext, configApp) =>
             {
@@ -68,7 +89,8 @@ public static class RegisterDependentServices
                 // Build the initial configuration settings to be used for the Key Vault registration
                 IConfiguration configuration = configApp.Build();
 
-                if (!string.IsNullOrEmpty(configuration.GetValue<string>("KeyVaultUri")))
+                string keyVaultUri = configuration.GetValue<string>("KeyVaultUri")!;
+                if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
                 {
                     configApp.AddAzureKeyVault(new Uri(configuration.GetValue<string>("KeyVaultUri")!),
                         new DefaultAzureCredential());
@@ -150,6 +172,8 @@ public static class RegisterDependentServices
             {
                 logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
 
+                logging.EnableRedaction();
+
                 if (appSettings != null && !appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
                 {
                     logging.AddApplicationInsights(
@@ -166,26 +190,26 @@ public static class RegisterDependentServices
                         .AddEventLog();
                 }
 
-#if DEBUG || DEVELOPMENT
-                logging
-                    .AddConsole()
-                    .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
-                    {
-                        Indented = true,
-                        Encoder = JavaScriptEncoder.Default
-                    })
-                    .AddDebug();
-#endif
-
-                logging.EnableRedaction();
+                if (hostContext.HostingEnvironment.EnvironmentName == Environments.Development)
+                {
+                    logging
+                        .AddConsole()
+                        .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
+                        {
+                            Indented = true,
+                            Encoder = JavaScriptEncoder.Default
+                        })
+                        .AddDebug();
+                }
             })
             .UseWindowsService(o => { o.ServiceName = appSettings!.ServiceName; });
 
-#if DEBUG || DEVELOPMENT
-        // If registered as a windows service. This will cause the service to fail to start.
-        // if the console window is closed help kill running processes.
-        builder.UseConsoleLifetime();
-#endif
+        if (environment == Environments.Development)
+        {
+            // If registered as a windows service. This will cause the service to fail to start.
+            // if the console window is closed help kill running processes.
+            builder.UseConsoleLifetime();
+        }
         return builder;
     }
 

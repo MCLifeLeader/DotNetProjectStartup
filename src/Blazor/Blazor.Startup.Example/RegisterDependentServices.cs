@@ -92,6 +92,8 @@ public static class RegisterDependentServices
         // Configure logging 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
+        builder.Logging.EnableRedaction();
+
         if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
@@ -110,7 +112,6 @@ public static class RegisterDependentServices
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
-                .EnableRedaction()
                 .AddConsole()
                 .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
                 {

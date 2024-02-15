@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Startup.Api.Connection.DependencyInjection;
-using Startup.Api.Constants;
 using Startup.Api.Data.DependencyInjection;
 using Startup.Api.Factories.DependencyInjection;
 using Startup.Api.Helpers.Data;
@@ -107,6 +106,8 @@ public static class RegisterDependentServices
         // Configure logging 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
+        builder.Logging.EnableRedaction();
+
         if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
@@ -125,7 +126,6 @@ public static class RegisterDependentServices
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
-                .EnableRedaction()
                 .AddConsole()
                 .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
                 {

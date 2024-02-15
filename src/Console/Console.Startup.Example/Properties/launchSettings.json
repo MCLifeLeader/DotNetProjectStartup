@@ -1,0 +1,28 @@
+{
+  "profiles": {
+    "Startup.Console - Development": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
+    },
+    "Startup.Console - Staging": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging",
+        "DOTNET_ENVIRONMENT": "Staging"
+      },
+      "dotnetRunMessages": true
+    },
+    "Startup.Console - Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "DOTNET_ENVIRONMENT": "Production"
+      },
+      "dotnetRunMessages": true
+    }
+  }
+}

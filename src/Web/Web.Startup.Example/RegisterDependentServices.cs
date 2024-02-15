@@ -20,7 +20,6 @@ using Startup.Web.Helpers.Health;
 using Startup.Web.Models.ApplicationSettings;
 using Startup.Web.Services.DependencyInjection;
 using Microsoft.FeatureManagement;
-using Microsoft.Extensions.DependencyInjection;
 using Startup.Common.Constants;
 
 namespace Startup.Web;
@@ -97,6 +96,8 @@ public static class RegisterDependentServices
         // Configure logging 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
+        builder.Logging.EnableRedaction();
+
         if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
@@ -115,7 +116,6 @@ public static class RegisterDependentServices
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
-                .EnableRedaction()
                 .AddConsole()
                 .AddJsonConsole(o => o.JsonWriterOptions = new JsonWriterOptions
                 {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
-using Startup.Api.Constants;
 using Startup.Common.Connection.Interfaces;
 using Startup.Common.Constants;
 
@@ -9,9 +8,12 @@ namespace Startup.Api.Helpers.Health;
 public class OpenAiHealthCheck : IHealthCheck
 {
     private readonly IHttpClientWrapper _httpClient;
+    private readonly ILogger<OpenAiHealthCheck> _logger;
 
-    public OpenAiHealthCheck(IHttpClientWrapper httpClientWrapper)
+    public OpenAiHealthCheck(ILogger<OpenAiHealthCheck> logger,
+        IHttpClientWrapper httpClientWrapper)
     {
+        _logger = logger;
         _httpClient = httpClientWrapper;
     }
 
@@ -21,17 +23,35 @@ public class OpenAiHealthCheck : IHealthCheck
         {
             OpenAiHealthStatus data = await _httpClient.GetObjectAsync<OpenAiHealthStatus>("api/v2/status.json", HttpClientNames.OPEN_AI_API_HEALTH);
 
-            if (data.Page.Name.Contains("OpenAI") &&
-                data.Status.Indicator.Contains("none") &&
-                data.Status.Description.Contains("All Systems Operational"))
+            if (data.Page.Name.Contains("OpenAI"))
             {
-                return HealthCheckResult.Healthy();
+                if (data.Status.Indicator.ToLower().Contains("none"))
+                {
+                    _logger.LogInformation($"Health Check: {data.Status.Description}");
+                    return HealthCheckResult.Healthy(data.Status.Description);
+                }
+
+                if (data.Status.Indicator.ToLower().Contains("minor"))
+                {
+                    _logger.LogWarning($"Health Check: {data.Status.Description}");
+                    return HealthCheckResult.Degraded(data.Status.Description);
+                }
+
+                // This is an assumption don't know yet
+                if (data.Status.Indicator.ToLower().Contains("major"))
+                {
+                    _logger.LogError($"Health Check: {data.Status.Description}");
+                    return HealthCheckResult.Unhealthy(data.Status.Description);
+                }
             }
 
-            return HealthCheckResult.Degraded();
+            // Fallback health status
+            _logger.LogError($"Health Check Fallback: {data.Status.Description}");
+            return HealthCheckResult.Unhealthy(data.Status.Description);
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, $"Health Check: {ex.Message}");
             return HealthCheckResult.Unhealthy(ex.Message);
         }
     }

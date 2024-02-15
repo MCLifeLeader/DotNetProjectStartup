@@ -97,7 +97,7 @@ public class InfoController : ControllerBase
 
         await Task.Yield();
 
-        if (_appSettings.FeatureManagement.DisplayConfiguration)
+        if (await _featureManager.IsEnabledAsync(FeatureFlags.DISPLAY_CONFIGURATION))
         {
             return Ok(Environment.GetEnvironmentVariables());
         }
