@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Startup.Common.Models;
 using Startup.Data.Helpers;
 using Startup.Data.Models.Db.dboSchema;
@@ -70,12 +72,42 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
 
     public ChunkedObjectData<AuthenticationLog> GetByChunking(Guid key1, int pageSize)
     {
-        throw new NotImplementedException();
+        long totalRecords = _context.AuthenticationLogs.Count();
+
+        List<AuthenticationLog> entityList = _context.AuthenticationLogs
+            .OrderBy(o => o.Id)
+            .Where(e => e.Id.IsGreaterThan(key1))
+            .Take(pageSize)
+            .ToList();
+
+        ChunkedObjectData<AuthenticationLog> pagedObjectData = new()
+        {
+            EntityList = entityList,
+            TotalItemCount = totalRecords,
+            PageSize = pageSize
+        };
+
+        return pagedObjectData;
     }
 
     public async Task<ChunkedObjectData<AuthenticationLog>> GetByChunkingAsync(Guid key1, int pageSize)
     {
-        throw new NotImplementedException();
+        long totalRecords = await _context.AuthenticationLogs.CountAsync();
+
+        List<AuthenticationLog> entityList = await _context.AuthenticationLogs
+        .OrderBy(o => o.Id)
+            .Where(e => e.Id.IsGreaterThan(key1))
+            .Take(pageSize)
+            .ToListAsync();
+
+        ChunkedObjectData<AuthenticationLog> pagedObjectData = new()
+        {
+            EntityList = entityList,
+            TotalItemCount = totalRecords,
+            PageSize = pageSize
+        };
+
+        return pagedObjectData;
     }
 
     public ChunkedObjectData<AuthenticationLog> GetByPaging(int pageNumber, int pageSize)
@@ -86,46 +118,6 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
     public async Task<ChunkedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
-    }
-
-    public Models.PagedObjectData<AuthenticationLog> GetByPaging(Guid key, int pageSize)
-    {
-        long totalRecords = _context.AuthenticationLogs.Count();
-
-        List<AuthenticationLog> entityList = _context.AuthenticationLogs
-            .OrderBy(o => o.Id)
-            .Where(e => e.Id.IsGreaterThan(key))
-            .Take(pageSize)
-            .ToList();
-
-        Models.PagedObjectData<AuthenticationLog> pagedObjectData = new()
-        {
-            EntityList = entityList,
-            TotalRecordsInTable = totalRecords,
-            PageSize = pageSize
-        };
-
-        return pagedObjectData;
-    }
-
-    public async Task<Models.PagedObjectData<AuthenticationLog>> GetByPagingAsync(Guid key, int pageSize)
-    {
-        long totalRecords = await _context.AuthenticationLogs.CountAsync();
-
-        List<AuthenticationLog> entityList = await _context.AuthenticationLogs
-            .OrderBy(o => o.Id)
-            .Where(e => e.Id.IsGreaterThan(key))
-            .Take(pageSize)
-            .ToListAsync();
-
-        Models.PagedObjectData<AuthenticationLog> pagedObjectData = new()
-        {
-            EntityList = entityList,
-            TotalRecordsInTable = totalRecords,
-            PageSize = pageSize
-        };
-
-        return pagedObjectData;
     }
 
     public IQueryable<AuthenticationLog> Query(Expression<Func<AuthenticationLog, bool>> filter)
