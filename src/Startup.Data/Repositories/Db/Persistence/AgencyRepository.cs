@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Startup.Common.Models;
 using Startup.Data.Helpers;
 using Startup.Data.Models;
 using Startup.Data.Models.Db.dboSchema;
@@ -76,46 +79,6 @@ public class AgencyRepository : StartupExampleRepositoryBase, IAgencyRepository
         throw new NotImplementedException();
     }
 
-    public PagedObjectData<Agency> GetByPaging(Guid key, int pageSize)
-    {
-        long totalRecords = _context.Agencies.Count();
-
-        List<Agency> entityList = _context.Agencies
-            .OrderBy(o => o.Id)
-            .Where(e => e.Id.IsGreaterThan(key))
-            .Take(pageSize)
-            .ToList();
-
-        PagedObjectData<Agency> pagedObjectData = new()
-        {
-            EntityList = entityList,
-            TotalRecordsInTable = totalRecords,
-            PageSize = pageSize
-        };
-
-        return pagedObjectData;
-    }
-
-    public async Task<PagedObjectData<Agency>> GetByPagingAsync(Guid key, int pageSize)
-    {
-        long totalRecords = await _context.Agencies.CountAsync();
-
-        List<Agency> entityList = await _context.Agencies
-            .OrderBy(o => o.Id)
-            .Where(e => e.Id.IsGreaterThan(key))
-            .Take(pageSize)
-            .ToListAsync();
-
-        PagedObjectData<Agency> pagedObjectData = new()
-        {
-            EntityList = entityList,
-            TotalRecordsInTable = totalRecords,
-            PageSize = pageSize
-        };
-
-        return pagedObjectData;
-    }
-
     public IQueryable<Agency> Query(Expression<Func<Agency, bool>> filter)
     {
         return _context.Agencies.Where(filter);
@@ -128,12 +91,42 @@ public class AgencyRepository : StartupExampleRepositoryBase, IAgencyRepository
 
     public Common.Models.ChunkedObjectData<Agency> GetByChunking(Guid key1, int pageSize)
     {
-        throw new NotImplementedException();
+        long totalRecords = _context.Agencies.Count();
+
+        List<Agency> entityList = _context.Agencies
+            .OrderBy(o => o.Id)
+            .Where(e => e.Id.IsGreaterThan(key1))
+            .Take(pageSize)
+            .ToList();
+
+        ChunkedObjectData<Agency> pagedObjectData = new()
+        {
+            EntityList = entityList,
+            TotalItemCount = totalRecords,
+            PageSize = pageSize
+        };
+
+        return pagedObjectData;
     }
 
-    public Task<Common.Models.ChunkedObjectData<Agency>> GetByChunkingAsync(Guid key1, int pageSize)
+    public async Task<Common.Models.ChunkedObjectData<Agency>> GetByChunkingAsync(Guid key1, int pageSize)
     {
-        throw new NotImplementedException();
+        long totalRecords = await _context.Agencies.CountAsync();
+
+        List<Agency> entityList = await _context.Agencies
+        .OrderBy(o => o.Id)
+            .Where(e => e.Id.IsGreaterThan(key1))
+            .Take(pageSize)
+            .ToListAsync();
+
+        ChunkedObjectData<Agency> pagedObjectData = new()
+        {
+            EntityList = entityList,
+            TotalItemCount = totalRecords,
+            PageSize = pageSize
+        };
+
+        return pagedObjectData;
     }
 
     public Common.Models.ChunkedObjectData<Agency> GetByPaging(int pageNumber, int pageSize)
