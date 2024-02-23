@@ -22,16 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Data", "Startup.Dat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{D64A0A57-74BC-454A-8BEA-1AF2472FBD39}"
 	ProjectSection(SolutionItems) = preProject
-		..\Start_Docker_Containers.ps1 = ..\Start_Docker_Containers.ps1
 		..\Start_StartupExample_Api.ps1 = ..\Start_StartupExample_Api.ps1
-		..\Start_StartupExample_Blazor.ps1 = ..\Start_StartupExample_Blazor.ps1
-		..\Start_StartupExample_Console.ps1 = ..\Start_StartupExample_Console.ps1
-		..\Start_StartupExample_Web.ps1 = ..\Start_StartupExample_Web.ps1
-		..\Stop_Docker_Containers.ps1 = ..\Stop_Docker_Containers.ps1
 		..\Stop_StartupExample_Api.ps1 = ..\Stop_StartupExample_Api.ps1
-		..\Stop_StartupExample_Blazor.ps1 = ..\Stop_StartupExample_Blazor.ps1
-		..\Stop_StartupExample_Console.ps1 = ..\Stop_StartupExample_Console.ps1
-		..\Stop_StartupExample_Web.ps1 = ..\Stop_StartupExample_Web.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{AA486938-F915-4F6A-8A1E-495A01A57EDA}"

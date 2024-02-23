@@ -23,56 +23,57 @@ public class RandomizeController : BaseController
     /// <param name="namesList">The list of participants to be randomly paired with another. Count >= 3</param>
     /// <returns>A list of pairs of people, each of whom is assigned to someone else.</returns>
     [AllowAnonymous]
-    [HttpPost("GenerateSecretGiftExchangeList")]
-    public async Task<IList<GiftExchange>> GenerateSecretGiftExchangeList([FromBody] IList<string> namesList)
+    [HttpPost("GenerateRandomPairList")]
+    public async Task<IList<GiftExchange>> GenerateRandomPairList([FromBody] IList<string> namesList)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateSecretGiftExchangeList));
+        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateRandomPairList));
 
         if (namesList == null || namesList.Count <= 2)
         {
             throw new ArgumentException(nameof(namesList));
         }
 
-        // Randomize the items in the names list.
-        var randomList = await Task.Run(() =>
-        {
-            List<string> preRandomList;
-            while (true)
-            {
-                // Get a randomized names list.
-                preRandomList = namesList.OrderBy(_ => Random.Shared.Next()).ToList();
-
-                // Check if the random list is valid and no two people have the same name
-                bool isValid = true;
-                for (int ii = 0; ii < namesList.Count; ii++)
-                {
-                    if (preRandomList[ii] == namesList[ii])
-                    {
-                        isValid = false;
-                        break;
-                    }
-                }
-
-                // If the random list is valid, break out of the loop.
-                if (isValid)
-                {
-                    break;
-                }
-            }
-
-            return preRandomList;
-        });
+        // Get a randomized names list.
+        namesList = namesList.OrderBy(_ => Random.Shared.Next()).ToList();
 
         // Create a list of pairs between each name and a randomized name.
         var randomizeGiftList = new List<GiftExchange>();
-        for (int ii = 0; ii < namesList.Count; ii++)
+
+        if (namesList.Count % 2 == 0)
         {
-            // Add the names to the list of paired participants.
-            randomizeGiftList.Add(new GiftExchange
+            for (int ii = 0; ii < namesList.Count; ii += 2)
             {
-                Person = namesList[ii],
-                HasName = randomList[ii]
-            });
+                // Add the names to the list of paired participants.
+                randomizeGiftList.Add(new GiftExchange
+                {
+                    Person = namesList[ii],
+                    HasName = namesList[ii + 1]
+                });
+            }
+        }
+        else
+        {
+            for (int ii = 0; ii < namesList.Count; ii += 2)
+            {
+                if (ii + 1 >= namesList.Count)
+                {
+                    // Pick one person at random to have a double exchange
+                    randomizeGiftList.Add(new GiftExchange
+                    {
+                        Person = namesList[ii],
+                        HasName = namesList[Random.Shared.Next(0, namesList.Count - 1)]
+                    });
+                }
+                else
+                {
+                    // Add the names to the list of paired participants.
+                    randomizeGiftList.Add(new GiftExchange
+                    {
+                        Person = namesList[ii],
+                        HasName = namesList[ii + 1]
+                    });
+                }
+            }
         }
 
         // Return the list of randomly paired names.
