@@ -29,6 +29,8 @@ public class RandomizeController : BaseController
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateRandomPairList));
 
+        await Task.Yield();
+
         if (namesList == null || namesList.Count <= 2)
         {
             throw new ArgumentException(nameof(namesList));
