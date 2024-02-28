@@ -12,6 +12,7 @@ public class RandomizeController : BaseController
 {
     private readonly ILogger<RandomizeController> _logger;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public RandomizeController(ILogger<RandomizeController> logger)
     {
         _logger = logger;
@@ -24,9 +25,11 @@ public class RandomizeController : BaseController
     /// <returns>A list of pairs of people, each of whom is assigned to someone else.</returns>
     [AllowAnonymous]
     [HttpPost("GenerateRandomPairList")]
-    public async Task<IList<GiftExchange>> GenerateRandomPairList([FromBody] IList<string> namesList)
+    public async Task<IList<PairedName>> GenerateRandomPairList([FromBody] IList<string> namesList)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateRandomPairList));
+
+        await Task.Yield();
 
         if (namesList == null || namesList.Count <= 2)
         {
@@ -37,14 +40,14 @@ public class RandomizeController : BaseController
         namesList = namesList.OrderBy(_ => Random.Shared.Next()).ToList();
 
         // Create a list of pairs between each name and a randomized name.
-        var randomizeGiftList = new List<GiftExchange>();
+        var randomizeNamesList = new List<PairedName>();
 
         if (namesList.Count % 2 == 0)
         {
             for (int ii = 0; ii < namesList.Count; ii += 2)
             {
                 // Add the names to the list of paired participants.
-                randomizeGiftList.Add(new GiftExchange
+                randomizeNamesList.Add(new PairedName
                 {
                     Person = namesList[ii],
                     HasName = namesList[ii + 1]
@@ -58,7 +61,7 @@ public class RandomizeController : BaseController
                 if (ii + 1 >= namesList.Count)
                 {
                     // Pick one person at random to have a double exchange
-                    randomizeGiftList.Add(new GiftExchange
+                    randomizeNamesList.Add(new PairedName
                     {
                         Person = namesList[ii],
                         HasName = namesList[Random.Shared.Next(0, namesList.Count - 1)]
@@ -67,7 +70,7 @@ public class RandomizeController : BaseController
                 else
                 {
                     // Add the names to the list of paired participants.
-                    randomizeGiftList.Add(new GiftExchange
+                    randomizeNamesList.Add(new PairedName
                     {
                         Person = namesList[ii],
                         HasName = namesList[ii + 1]
@@ -77,6 +80,6 @@ public class RandomizeController : BaseController
         }
 
         // Return the list of randomly paired names.
-        return randomizeGiftList;
+        return randomizeNamesList;
     }
 }
