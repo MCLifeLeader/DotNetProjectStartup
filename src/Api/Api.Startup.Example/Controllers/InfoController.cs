@@ -70,6 +70,10 @@ public class InfoController : ControllerBase
         return Content(_infoService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
     }
 
+    /// <summary>
+    /// Demo to pull back appsettings based on a role of "AgencyAdmin"
+    /// </summary>
+    /// <returns></returns>
     [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Settings")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
@@ -87,6 +91,10 @@ public class InfoController : ControllerBase
         return Forbid();
     }
 
+    /// <summary>
+    /// Demo to pull back system env settings based on a role of "AgencyAdmin"
+    /// </summary>
+    /// <returns></returns>
     [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("Environment")]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]

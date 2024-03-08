@@ -1,0 +1,22 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+GET https://localhost:7100/api/v1.0/String/GetSomeRandomString/0
+Content-Type: application/json
+
+###
+
+
+GET https://localhost:7100/api/v1.0/String/GetSomeRandomString/-1
+Content-Type: application/json
+
+###
+
+GET https://localhost:7100/api/v1.0/String/GetSomeRandomString/1
+Content-Type: application/json
+
+###
+
+GET https://localhost:7100/api/v1.0/String/GetSomeRandomString/100
+Content-Type: application/json
+
+###

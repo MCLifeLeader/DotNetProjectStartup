@@ -2,6 +2,8 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Startup.Api.Models.Controllers;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace Startup.Api.Controllers.V1;
 
@@ -25,7 +27,8 @@ public class RandomizeController : BaseController
     /// <returns>A list of pairs of people, each of whom is assigned to someone else.</returns>
     [AllowAnonymous]
     [HttpPost("GenerateRandomPairList")]
-    public async Task<IList<PairedName>> GenerateRandomPairList([FromBody] IList<string> namesList)
+    [SwaggerResponse((int)HttpStatusCode.OK, "A string of characters", typeof(IList<PairedName>))]
+    public async Task<ActionResult> GenerateRandomPairList([FromBody] IList<string> namesList)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GenerateRandomPairList));
 
@@ -80,6 +83,6 @@ public class RandomizeController : BaseController
         }
 
         // Return the list of randomly paired names.
-        return randomizeNamesList;
+        return new OkObjectResult(randomizeNamesList);
     }
 }
