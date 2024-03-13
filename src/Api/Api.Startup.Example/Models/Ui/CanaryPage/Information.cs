@@ -5,7 +5,7 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 /// <summary>
 /// 
 /// </summary>
-public class Canary
+public class Information
 {
     [JsonPropertyName("project-information")]
     public ProjectInformation ProjectInformation { get; set; }

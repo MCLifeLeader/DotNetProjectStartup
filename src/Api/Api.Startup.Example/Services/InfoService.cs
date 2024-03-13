@@ -16,7 +16,7 @@ namespace Startup.Api.Services;
 public class InfoService : IInfoService
 {
     private readonly AppSettings _appSettings;
-    private readonly CanaryPageDetails _canaryPageDetails = new();
+    private readonly InfoPageDetails _canaryPageDetails = new();
     private readonly ILogger<InfoService> _logger;
     private readonly Stopwatch _totalTimer = new();
 
@@ -114,10 +114,10 @@ public class InfoService : IInfoService
         {
             int result;
 
-            DbContextOptionsBuilder<CanaryDbContext> optionsBuilder = new DbContextOptionsBuilder<CanaryDbContext>();
+            DbContextOptionsBuilder<InfoDbContext> optionsBuilder = new DbContextOptionsBuilder<InfoDbContext>();
             optionsBuilder.UseSqlServer(_appSettings.ConnectionStrings.DefaultConnection);
 
-            using (CanaryDbContext context = new CanaryDbContext(optionsBuilder.Options))
+            using (InfoDbContext context = new InfoDbContext(optionsBuilder.Options))
             {
                 result = RelationalQueryableExtensions.FromSqlRaw(context.TestEntities, "SELECT 1 as TestInt").Count();
             }

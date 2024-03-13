@@ -4,8 +4,8 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 
 /// <summary>
 /// </summary>
-[XmlRoot("canary")]
-public class CanaryPageDetails
+[XmlRoot("information")]
+public class InfoPageDetails
 {
     /// <summary>
     ///     Gets or sets the project information collection.

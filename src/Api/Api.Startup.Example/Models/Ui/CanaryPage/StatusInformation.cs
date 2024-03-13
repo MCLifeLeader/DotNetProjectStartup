@@ -10,6 +10,6 @@ public class StatusInformation
     [JsonPropertyName("?xml")]
     public Xml Xml { get; set; }
 
-    [JsonPropertyName("canary")]
-    public Canary Canary { get; set; }
+    [JsonPropertyName("information")]
+    public Information Information { get; set; }
 }

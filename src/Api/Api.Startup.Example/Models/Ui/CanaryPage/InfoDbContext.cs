@@ -7,13 +7,13 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 /// Implements the <see cref="Microsoft.EntityFrameworkCore.DbContext" />
 /// </summary>
 /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
-public class CanaryDbContext : DbContext
+public class InfoDbContext : DbContext
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="CanaryDbContext"/> class.
+    /// Initializes a new instance of the <see cref="InfoDbContext"/> class.
     /// </summary>
     /// <param name="options">The options.</param>
-    public CanaryDbContext(DbContextOptions<CanaryDbContext> options) : base(options)
+    public InfoDbContext(DbContextOptions<InfoDbContext> options) : base(options)
     {
     }
 
