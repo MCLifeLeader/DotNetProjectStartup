@@ -31,6 +31,7 @@ public class StringController : BaseController
     /// <returns></returns>
     [AllowAnonymous]
     [HttpGet("GetSomeRandomString/{length}")]
+    [Produces("application/json")]
     [SwaggerResponse((int)HttpStatusCode.OK, "A string of characters", typeof(string))]
     [SwaggerResponse((int)HttpStatusCode.NoContent, "No data returned")]
     public async Task<ActionResult> GenerateSomeRandomString(int length)

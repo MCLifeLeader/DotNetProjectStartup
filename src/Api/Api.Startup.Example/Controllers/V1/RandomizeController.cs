@@ -27,6 +27,7 @@ public class RandomizeController : BaseController
     /// <returns>A list of pairs of people, each of whom is assigned to someone else.</returns>
     [AllowAnonymous]
     [HttpPost("GenerateRandomPairList")]
+    [Produces("application/json")]
     [SwaggerResponse((int)HttpStatusCode.OK, "A string of characters", typeof(IList<PairedName>))]
     public async Task<ActionResult> GenerateRandomPairList([FromBody] IList<string> namesList)
     {

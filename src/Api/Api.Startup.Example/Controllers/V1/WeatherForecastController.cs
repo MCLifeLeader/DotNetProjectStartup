@@ -24,6 +24,7 @@ public class WeatherForecastController : BaseController
 
     [AllowAnonymous]
     [HttpGet("GetWeatherForecast1")]
+    [Produces("application/json")]
     public IEnumerable<WeatherForecast> Get1()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get1));
@@ -39,6 +40,7 @@ public class WeatherForecastController : BaseController
 
     [Authorize]
     [HttpGet("GetWeatherForecast2")]
+    [Produces("application/json")]
     public IEnumerable<WeatherForecast> Get2()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get2));
@@ -54,6 +56,7 @@ public class WeatherForecastController : BaseController
 
     [Authorize(Roles = "AgencyAdmin")]
     [HttpGet("GetWeatherForecast4")]
+    [Produces("application/json")]
     public IEnumerable<WeatherForecast> Get3()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get3));
@@ -69,6 +72,7 @@ public class WeatherForecastController : BaseController
 
     [Authorize(Roles = "OtherRole")]
     [HttpGet("GetWeatherForecast3")]
+    [Produces("application/json")]
     public IEnumerable<WeatherForecast> Get4()
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Get4));

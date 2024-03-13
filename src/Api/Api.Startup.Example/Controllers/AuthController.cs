@@ -35,6 +35,7 @@ public class AuthController : BaseController
     /// <param name="user">Contains details about the user logging in.</param>
     /// <returns>Token if the login is successful</returns>
     [HttpPost("Login")]
+    [Produces("application/json")]
     [SwaggerResponse((int) HttpStatusCode.OK, "Returns the JWT if Successful", typeof(AuthToken))]
     public async Task<ActionResult<AuthToken>> Login([FromBody] UserLoginModel? user)
     {
