@@ -4,7 +4,7 @@
 [string] $ado_repo_name = $args[3]
 [string] $ado_pat = $args[4]
 [string] $git_url = 'https://' + $git_pat + '@github.com/' + $git_repo_name
-[string] $ado_url = 'https://' + $ado_pat + '@dev.azure.com/churchofjesuschrist/' + $ado_project + '/_git/' + $ado_repo_name
+[string] $ado_url = 'https://' + $ado_pat + '@dev.azure.com/agameempowerment/' + $ado_project + '/_git/' + $ado_repo_name
 [string] $directoryPath = $ado_repo_name + '.git'
 
 Write-Host "One way sync from Azure Repos to GitHub"
