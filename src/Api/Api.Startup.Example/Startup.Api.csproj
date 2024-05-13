@@ -91,8 +91,8 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Telemetry" Version="8.4.0" />
-        <PackageReference Include="Microsoft.FeatureManagement" Version="3.2.0" />
-        <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.2.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="3.3.0" />
+        <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Microsoft.OpenApi" Version="1.6.14" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
