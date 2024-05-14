@@ -17,6 +17,7 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
     docker pull mcr.microsoft.com/dotnet/sdk
     docker pull mcr.microsoft.com/dotnet/aspnet
     docker pull mcr.microsoft.com/mssql/server
+    docker pull docker.io/library/redis
 
     ## Stop the StartupExampleSql-Dev container if it is running
     if (docker ps -a | Select-String -Pattern "StartupExampleSql-Dev") {
