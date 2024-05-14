@@ -21,11 +21,12 @@ using Startup.Web.Models.ApplicationSettings;
 using Startup.Web.Services.DependencyInjection;
 using Microsoft.FeatureManagement;
 using Startup.Common.Constants;
+using Microsoft.Extensions.Http.Resilience;
 
 namespace Startup.Web;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public static class RegisterDependentServices
 {
@@ -93,7 +94,7 @@ public static class RegisterDependentServices
 
         #endregion
 
-        // Configure logging 
+        // Configure logging
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
         builder.Logging.EnableRedaction();
@@ -149,8 +150,27 @@ public static class RegisterDependentServices
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
             // Turn on resilience by default
-            http.AddStandardResilienceHandler();
+            http.AddStandardResilienceHandler(o =>
+            {
+                o.TotalRequestTimeout = new HttpTimeoutStrategyOptions()
+                {
+                    Name = "TotalTimeout",
+                    Timeout = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds)
+                };
+                o.AttemptTimeout = new HttpTimeoutStrategyOptions()
+                {
+                    Name = "TotalTimeout",
+                    Timeout = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                };
+                o.CircuitBreaker = new HttpCircuitBreakerStrategyOptions()
+                {
+                    Name = "TotalTimeout",
+                    BreakDuration = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                    SamplingDuration = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds * 2)
+                };
+            });
         });
+
         builder.SetHttpClients(appSettings);
 
         builder.Services.AddFeatureManagement();
