@@ -19,26 +19,26 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
     docker pull mcr.microsoft.com/mssql/server
     docker pull docker.io/library/redis
 
-    ## Stop the StartupExampleSql-Dev container if it is running
-    if (docker ps -a | Select-String -Pattern "StartupExampleSql-Dev") {
-        Write-Host "Stopping the StartupExampleSql-Dev container..."
-        docker stop StartupExampleSql-Dev
-        Write-Host "The StartupExampleSql-Dev container has been stopped."
+    ## Stop the StartupExampleSql container if it is running
+    if (docker ps -a | Select-String -Pattern "StartupExampleSql") {
+        Write-Host "Stopping the StartupExampleSql container..."
+        docker stop StartupExampleSql
+        Write-Host "The StartupExampleSql container has been stopped."
     } else {
-        Write-Host "The StartupExampleSql-Dev container is not running."
+        Write-Host "The StartupExampleSql container is not running."
     }
 
-    ## Remove the StartupExampleSql-Dev container if it exists
-    if (docker ps -a | Select-String -Pattern "StartupExampleSql-Dev") {
-        Write-Host "Removing the StartupExampleSql-Dev container..."
-        docker rm StartupExampleSql-Dev
-        Write-Host "The StartupExampleSql-Dev container has been removed."
+    ## Remove the StartupExampleSql container if it exists
+    if (docker ps -a | Select-String -Pattern "StartupExampleSql") {
+        Write-Host "Removing the StartupExampleSql container..."
+        docker rm StartupExampleSql
+        Write-Host "The StartupExampleSql container has been removed."
     } else {
-        Write-Host "The StartupExampleSql-Dev container does not exist."
+        Write-Host "The StartupExampleSql container does not exist."
     }
 
-    ## Start the StartupExampleSql-Dev container on port 4433 with local dev password
-    docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@ssword123!' -p 4433:1433 --name 'StartupExampleSql-Dev' -d mcr.microsoft.com/mssql/server
+    ## Start the vs multi-container
+    docker-compose.exe -f ".\containers\docker-compose.yml" -p vs up -d
 }
 
 Write-Host "Head back to  README.md  for deployment of the database and other services..."

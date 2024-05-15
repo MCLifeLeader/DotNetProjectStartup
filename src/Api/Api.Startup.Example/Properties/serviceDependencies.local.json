@@ -2,8 +2,11 @@
   "dependencies": {
     "mssql1": {
       "serviceConnectorResourceId": "",
+      "containerPorts": "4433:1433",
       "secretStore": "LocalSecretsFile",
-      "type": "mssql.onprem",
+      "containerName": "mssql",
+      "containerImage": "mcr.microsoft.com/mssql/server:latest",
+      "type": "mssql.container",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null
     }

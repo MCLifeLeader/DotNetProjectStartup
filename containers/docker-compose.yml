@@ -1,0 +1,11 @@
+services:
+    mssql:
+        build: ./mssql
+        environment:
+            SA_PASSWORD: "P@ssword123!"
+            ACCEPT_EULA: "Y"
+            MSSQL_AGENT_ENABLED: "true"
+        ports:
+            - "4443:1433"
+        container_name: StartupExampleSql
+        hostname: mssql
