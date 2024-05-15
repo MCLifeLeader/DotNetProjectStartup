@@ -21,6 +21,9 @@
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.windows": "PowerShell"
+      },
       "extensions": [
         "ms-vscode.vscode-node-azure-pack",
         "GitHub.copilot",
@@ -32,7 +35,11 @@
       ]
     }
   },
-  "forwardPorts": [7100, 7110, 7120],
+  "forwardPorts": [
+    7100,
+    7110,
+    7120
+  ],
   "postCreateCommand": "cd ./src && pwsh -File ./PostCreate.ps1",
   "hostRequirements": {
     "memory": "8gb",

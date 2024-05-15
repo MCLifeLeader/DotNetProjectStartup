@@ -42,3 +42,8 @@ The project is broken apart into the following examples:
 
 ## Running the Applications
 1. Once the project has been built and the database has been created, you can run any of the applications.
+
+# Codespaces
+## GitHub Configuration
+git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
