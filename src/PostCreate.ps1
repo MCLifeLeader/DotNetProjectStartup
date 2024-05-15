@@ -11,4 +11,5 @@ cd ../../Web/Web.Startup.Example
 dotnet restore Startup.Web.csproj
 cd ../../
 
-
+# Setup git Configurations
+git config --global credential.useHttpPath true
