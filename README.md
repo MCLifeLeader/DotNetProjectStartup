@@ -1,6 +1,5 @@
 # DotNetProjectStartup
-This project demonstrates one possible way to setup and organize your Visual Studio project. As this project progresses it
-will be broken apart into various layers that can be consumed by one of the example project applications provided.
+This project demonstrates one possible way to setup and organize your Visual Studio project. As this project progresses it will be broken apart into various layers that can be consumed by one of the example project applications provided.
 
 # Project Structure
 The project is broken apart into the following examples:
@@ -20,24 +19,23 @@ The project is broken apart into the following examples:
 ## Recommended
 - SQL Server Management Studio or other SQL Server management tool
 
-# Getting Started 
+# Getting Started
 ## Setting up the project
 1. Locate the file Dev_Setup.ps1 in the root of the project.
 2. Run this file in PowerShell and this will setup the Docker Containers and Dependencies.
 
 ## Using SQL Server Express
-1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio. 
-2. Once the solution is open, you will need to build the solution. This will download all of the NuGet packages that are required for the project.
+1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio.
+2. Once the solution is open, you will need to build the solution. This will download all of the NuGet packages that are required or the project.
 3. Open the Database.Example project and build the project then publish using the "StartupExample.publish.xml" profile.
-4. There should be no need to update the secrets.json file with the connection string as it should be configured in the appsettings.json file for SQL Express.
+4. There should be no need to update the secrets.json file with the connection string as it should be configured in the ppsettings json file for SQL Express.
 
 ## Using Docker Containers
-1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio. 
+1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio.
 2. Once the solution is open, you will need to build the solution. This will download all of the NuGet packages that are required for the project.
 3. Open the first project and find the "Connected Services" folder. Right click on the "Connected Services" folder and select "Manage Connected Services".
 4. Locate the SQL Server Database option and click the elipses button "..." to open the configuration window and select "Open in Containers Window".
-5. Locate and select the "mssql" option and click the Environment Tab. Locate the "SA_PASSWORD" option and update your database string in your "Secrets.json" file in each project. 
-"ConnectionStrings:DefaultConnection": "Server=localhost,4433;Database=StartupExample;User ID=sa;Password=<DatabasePassword>;Persist Security Info=False;TrustServerCertificate=true;"
+5. Locate and select the "mssql" option and click the Environment Tab. Locate the "SA_PASSWORD" option and update your database string in your "Secrets.json" file in each project. "ConnectionStrings:DefaultConnection": "Server=localhost,4433 Database=StartupExample;User ID=sa;Password=<DatabasePassword>;Persist Security Info=False;TrustServerCertificate=true;"
 6. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Use the password obtained in step 5.
 
 ## Running the Applications
