@@ -344,8 +344,9 @@ public static class RegisterDependentServices
             {
                 Title = $"{_swaggerName} {version}",
                 Version = $"{version}",
-                Description = $"API Swagger Documentation, &copy; 2022 - {DateTime.UtcNow:yyyy} - {_swaggerName} - " +
-                              $"Build Version: {GetType().Assembly.GetName().Version}"
+                Description = $"API Swagger Documentation, &copy; 2022 - {DateTime.UtcNow:yyyy} - {_swaggerName} " +
+                              $"- <a class=\"fw-bold\" href=\"https://github.com/MCLifeLeader/ePortfolio\" target=\"_blank\" rel=\"noopener\">ePortfolio</a> " +
+                              $"- Build Version: {GetType().Assembly.GetName().Version}"
             };
         }
     }
