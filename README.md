@@ -1,6 +1,9 @@
 # DotNetProjectStartup
 This project demonstrates one possible way to setup and organize your Visual Studio project. As this project progresses it will be broken apart into various layers that can be consumed by one of the example project applications provided.
 
+## ePortfolio
+You can find my ePortfolio [here](https://github.com/MCLifeLeader/ePortfolio).
+
 # Project Structure
 The project is broken apart into the following examples:
 - Api.Startup.Example - This sample application is provided as a demonstration for creating a RESTful API using ASP.NET Core.
