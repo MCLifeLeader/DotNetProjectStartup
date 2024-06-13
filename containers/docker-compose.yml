@@ -9,3 +9,12 @@ services:
             - "4443:1433"
         container_name: StartupExampleSql
         hostname: mssql
+    mailhog:
+        # build: ./mailhog
+        image: mailhog/mailhog
+        logging:
+            driver: 'none' # Disable logging
+        ports:
+            - "1025:1025" # smtp server
+            - "8025:8025" # web ui
+        container_name: StartupExampleMailhog
