@@ -11,7 +11,7 @@ services:
         hostname: mssql
     mailhog:
         # build: ./mailhog
-        image: mailhog/mailhog
+        image: mailhog/mailhog:latest
         logging:
             driver: 'none' # Disable logging
         ports:

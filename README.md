@@ -40,6 +40,7 @@ The project is broken apart into the following examples:
 4. Locate the SQL Server Database option and click the elipses button "..." to open the configuration window and select "Open in Containers Window".
 5. Locate and select the "mssql" option and click the Environment Tab. Locate the "SA_PASSWORD" option and update your database string in your "Secrets.json" file in each project. "ConnectionStrings:DefaultConnection": "Server=localhost,4433 Database=StartupExample;User ID=sa;Password=<DatabasePassword>;Persist Security Info=False;TrustServerCertificate=true;"
 6. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Use the password obtained in step 5.
+7. MailHog was added to for an email trap.
 
 ## Running the Applications
 1. Once the project has been built and the database has been created, you can run any of the applications.
