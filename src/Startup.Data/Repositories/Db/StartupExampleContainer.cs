@@ -49,7 +49,7 @@ public partial class StartupExampleContainer
 
             entity.HasIndex(e => e.CompanyName, "IX_Agency_CompanyName");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+            entity.Property(e => e.Id).HasDefaultValueSql("NewSequentialId()");
             entity.Property(e => e.Address1).HasMaxLength(100);
             entity.Property(e => e.Address2).HasMaxLength(100);
             entity.Property(e => e.City).HasMaxLength(100);
@@ -57,17 +57,17 @@ public partial class StartupExampleContainer
                 .IsRequired()
                 .HasMaxLength(250)
                 .IsUnicode(false)
-                .HasDefaultValueSql("('http://www.StartupExample.com/content/images/DefaultLogo.png')")
+                .HasDefaultValueSql("'http://www.StartupExample.com/content/images/DefaultLogo.png'")
                 .HasColumnName("CompanyLogoURL");
             entity.Property(e => e.CompanyName)
                 .IsRequired()
                 .HasMaxLength(250);
             entity.Property(e => e.Country).HasMaxLength(100);
-            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.IsEnabled)
                 .IsRequired()
-                .HasDefaultValueSql("((1))");
-            entity.Property(e => e.LastUpdated).HasDefaultValueSql("(getutcdate())");
+                .HasDefaultValueSql("1");
+            entity.Property(e => e.LastUpdated).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.PostalCode).HasMaxLength(20);
             entity.Property(e => e.StateOrProvince).HasMaxLength(50);
             entity.Property(e => e.WebAppEulaacceptDate).HasColumnName("WebAppEULAAcceptDate");
@@ -170,9 +170,9 @@ public partial class StartupExampleContainer
         {
             entity.ToTable("AuthenticationLog");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+            entity.Property(e => e.Id).HasDefaultValueSql("NewSequentialId()");
             entity.Property(e => e.AspNetUsersId).HasMaxLength(450);
-            entity.Property(e => e.LogDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.LogDate).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.Username)
                 .IsRequired()
                 .HasMaxLength(200);
@@ -210,11 +210,11 @@ public partial class StartupExampleContainer
 
             entity.HasIndex(e => e.FileName, "IX_MediaContent_FileName");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+            entity.Property(e => e.Id).HasDefaultValueSql("NewSequentialId()");
             entity.Property(e => e.BlobFileNamePath)
                 .HasMaxLength(1024)
                 .IsUnicode(false);
-            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.DownloadFileUrl)
                 .HasMaxLength(1024)
                 .IsUnicode(false);
@@ -228,7 +228,7 @@ public partial class StartupExampleContainer
                 .IsRequired()
                 .HasMaxLength(512)
                 .IsUnicode(false);
-            entity.Property(e => e.LastUpdated).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.LastUpdated).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.TempFilePath)
                 .HasMaxLength(512)
                 .IsUnicode(false);
