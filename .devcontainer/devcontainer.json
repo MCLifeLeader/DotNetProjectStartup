@@ -4,10 +4,10 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/github-cli:1": {
-      "version": "2"
+      "version": "latest"
     },
     "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest"
+      "version": "7.4.2"
     },
     "ghcr.io/azure/azure-dev/azd:0": {
       "version": "latest"
