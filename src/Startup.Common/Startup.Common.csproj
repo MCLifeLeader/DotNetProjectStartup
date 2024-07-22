@@ -11,25 +11,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Azure.Identity" Version="1.11.4" />
-        <PackageReference Include="Azure.Storage.Blobs" Version="12.20.0" />
-        <PackageReference Include="Azure.Storage.Queues" Version="12.18.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+        <PackageReference Include="Azure.Identity" Version="1.12.0" />
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.21.0" />
+        <PackageReference Include="Azure.Storage.Queues" Version="12.19.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
         <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.4" />
         <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="8.6.0" />
+        <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="8.7.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.6.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.7.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-        <PackageReference Include="Microsoft.FeatureManagement" Version="3.3.1" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="3.5.0" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
