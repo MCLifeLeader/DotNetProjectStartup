@@ -25,13 +25,25 @@
         "terminal.integrated.defaultProfile.windows": "PowerShell"
       },
       "extensions": [
-        "ms-vscode.vscode-node-azure-pack",
+        "DotJoshJohnson.xml",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "GitHub.vscode-github-actions",
+        "humao.rest-client",
+        "mechatroner.rainbow-csv",
         "ms-dotnettools.vscode-dotnet-runtime",
         "ms-dotnettools.csdevkit",
-        "ms-dotnettools.csharp"
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "ms-mssql.mssql",
+        "ms-vscode.vscode-node-azure-pack",
+        "ms-vsliveshare.vsliveshare",
+        "rangav.vscode-thunder-client",
+        "redhat.vscode-yaml",
+        "ritwickdey.LiveServer",
+        "yzhang.markdown-all-in-one"
       ]
     }
   },
