@@ -45,3 +45,12 @@ services:
             - "1024:1025" # smtp server
             - "8024:8025" # web ui
         container_name: ExampleMailhog
+
+    otel-collector:
+        image: datalust/seq:latest
+        environment:
+            ACCEPT_EULA: "Y"
+            SEQ_API_KEY: "1234567890"
+        ports:
+            - "4341:80" # OpenTelemetry
+        container_name: ExampleOtelCollector
