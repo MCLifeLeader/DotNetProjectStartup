@@ -54,8 +54,8 @@
   ],
   "postCreateCommand": "cd ./src && pwsh -File ./PostCreate.ps1",
   "hostRequirements": {
-    "cpus": 6,
-    "memory": "16gb",
+    "cpus": 4,
+    "memory": "8gb",
     "storage": "5gb"
   },
   "remoteEnv": {
