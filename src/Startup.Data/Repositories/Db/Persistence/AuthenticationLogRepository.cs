@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Startup.Common.Models;
 using Startup.Data.Helpers;
 using Startup.Data.Models.Db.dboSchema;
