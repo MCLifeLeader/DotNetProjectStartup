@@ -12,6 +12,9 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
 using Startup.Api.Connection.DependencyInjection;
 using Startup.Api.Data.DependencyInjection;
 using Startup.Api.Factories.DependencyInjection;
@@ -137,6 +140,31 @@ public static class RegisterDependentServices
                     Encoder = JavaScriptEncoder.Default
                 })
                 .AddDebug();
+        }
+
+        if (appSettings.FeatureManagement.OpenTelemetryEnabled)
+        {
+            //builder.Logging.ClearProviders();
+            builder.Logging.AddOpenTelemetry(x =>
+            {
+                x.SetResourceBuilder(ResourceBuilder.CreateEmpty()
+                    .AddService("Startup.Api")
+                    .AddAttributes(new Dictionary<string, object>()
+                    {
+                        ["deployment.environment"] = builder.Environment.EnvironmentName,
+                        ["deployment.version"] = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "1.0.0.0"
+                    }));
+
+                x.IncludeScopes = true;
+                x.IncludeFormattedMessage = true;
+
+                x.AddOtlpExporter(a =>
+                {
+                    a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                    a.Protocol = OtlpExportProtocol.HttpProtobuf;
+                    a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                });
+            });
         }
 
         builder.Services.AddHttpLogging(o =>
