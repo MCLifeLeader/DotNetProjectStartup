@@ -47,6 +47,7 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
 
     protected sealed override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (_connectionString != null)
         {
             optionsBuilder.UseSqlServer(_connectionString);
@@ -56,7 +57,7 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
         {
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.EnableDetailedErrors();
-            optionsBuilder.UseLoggerFactory(LoggerSupport.GetLoggerFactory());
+            optionsBuilder.UseLoggerFactory(LoggerSupport.GetLoggerFactory(null));
         }
 
         base.OnConfiguring(optionsBuilder);

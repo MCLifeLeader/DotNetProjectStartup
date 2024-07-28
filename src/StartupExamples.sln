@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
@@ -44,6 +43,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Console", "Console\Console.Startup.Example\Startup.Console.csproj", "{DACDB214-2B7A-445B-855D-A54B38467E8C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Web", "Web\Web.Startup.Example\Startup.Web.csproj", "{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{B412558B-07BE-41EB-A7D8-880B11D6B59D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startup.Tests", "Startup.Tests\Startup.Tests.csproj", "{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +152,16 @@ Global
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Production|Any CPU.Build.0 = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +178,7 @@ Global
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB} = {92F595DB-1BEB-4452-8B4B-5B6D323E5BB1}
 		{DACDB214-2B7A-445B-855D-A54B38467E8C} = {92F595DB-1BEB-4452-8B4B-5B6D323E5BB1}
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE} = {92F595DB-1BEB-4452-8B4B-5B6D323E5BB1}
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B} = {B412558B-07BE-41EB-A7D8-880B11D6B59D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54A5C23D-0AD5-4407-AE9A-FE3B79B19215}

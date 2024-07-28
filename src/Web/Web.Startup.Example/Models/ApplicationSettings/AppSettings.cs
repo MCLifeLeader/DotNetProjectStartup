@@ -12,13 +12,15 @@ public class AppSettings
 
     public Logging Logging { get; set; }
 
+    public Opentelemetry OpenTelemetry { get; set; }
+
     public Featuremanagement FeatureManagement { get; set; }
 
     [SensitiveData]
     public string RedactionKey { get; set; }
 
     public string KeyVaultUri { get; set; }
-    
+
     public Connectionstrings ConnectionStrings { get; set; }
     public Startupexample StartupExample { get; set; }
     public HealthCheckEndpoint HealthCheckEndpoints { get; set; }

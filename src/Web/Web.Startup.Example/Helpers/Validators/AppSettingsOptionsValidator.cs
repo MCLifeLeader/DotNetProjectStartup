@@ -17,6 +17,8 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         RuleFor(x => x.Logging.LogLevel.System)
             .IsEnumName(typeof(LogLevel));
 
+        RuleFor(x => x.FeatureManagement.OpenTelemetryEnabled)
+            .Must(_ => true);
         RuleFor(x => x.FeatureManagement.InformationEndpoints)
             .Must(_ => true);
         RuleFor(x => x.FeatureManagement.SqlDebugger)

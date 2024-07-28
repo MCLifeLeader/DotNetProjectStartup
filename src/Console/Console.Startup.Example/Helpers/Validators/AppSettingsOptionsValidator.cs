@@ -38,6 +38,8 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .Must(e => !e.Contains("Replace-Key"))
             .Length(48, 128);
 
+        RuleFor(x => x.FeatureManagement.OpenTelemetryEnabled)
+            .Must(_ => true);
         RuleFor(x => x.FeatureManagement.HealthCheckWorker)
             .Must(_ => true);
 

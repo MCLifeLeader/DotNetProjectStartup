@@ -11,8 +11,9 @@ public class AppSettings
     [XmlIgnore]
     public IConfiguration ConfigurationBase { get; set; }
 
-    public Featuremanagement FeatureManagement { get; set; }
     public Logging Logging { get; set; }
+    public Opentelemetry OpenTelemetry { get; set; }
+    public Featuremanagement FeatureManagement { get; set; }
     public string KeyVaultUri { get; set; }
     public string ServiceName { get; set; }
     public Connectionstrings ConnectionStrings { get; set; }

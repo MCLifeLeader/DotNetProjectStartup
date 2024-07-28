@@ -7,14 +7,50 @@ services:
             MSSQL_AGENT_ENABLED: "true"
         ports:
             - "4443:1433"
-        container_name: StartupExampleSql
+        container_name: ExampleSql
         hostname: mssql
+
+    redis:
+        image: redis:latest
+        ports:
+            - "4379:6379"
+        container_name: ExampleRedisCache
+
+    cosmodb:
+        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+        ports:
+            - "4081:8081" # Cosmos DB emulator
+            - "14250:10250"
+            - "14251:10251" # Cosmos DB emulator gateway
+            - "14252:10252" # Cosmos DB emulator gateway management
+            - "14253:10253" # Cosmos DB emulator data explorer
+            - "14254:10254"
+            - "14255:10255"
+        container_name: ExampleCosmosDB
+
+    azurite:
+        image: mcr.microsoft.com/azure-storage/azurite:latest
+        ports:
+            - "14000:10000" # Blob service
+            - "14001:10001" # Queue service
+            - "14002:10002" # Table service
+        container_name: ExampleAzurite
+
     mailhog:
         # build: ./mailhog
         image: mailhog/mailhog:latest
         logging:
             driver: 'none' # Disable logging
         ports:
-            - "1025:1025" # smtp server
-            - "8025:8025" # web ui
-        container_name: StartupExampleMailhog
+            - "1024:1025" # smtp server
+            - "8024:8025" # web ui
+        container_name: ExampleMailhog
+
+    otel-collector:
+        image: datalust/seq:latest
+        environment:
+            ACCEPT_EULA: "Y"
+            SEQ_API_KEY: "1234567890"
+        ports:
+            - "4341:80" # OpenTelemetry
+        container_name: ExampleOtelCollector

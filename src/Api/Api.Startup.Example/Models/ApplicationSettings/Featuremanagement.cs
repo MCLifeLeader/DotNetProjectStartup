@@ -2,6 +2,7 @@
 
 public class FeatureManagement
 {
+    public bool OpenTelemetryEnabled { get; set; }
     public bool InformationEndpoints { get; set; }
     public bool SqlDebugger { get; set; }
     public bool DisplayConfiguration { get; set; }

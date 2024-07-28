@@ -22,6 +22,9 @@ using Startup.Web.Services.DependencyInjection;
 using Microsoft.FeatureManagement;
 using Startup.Common.Constants;
 using Microsoft.Extensions.Http.Resilience;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
 
 namespace Startup.Web;
 
@@ -124,6 +127,32 @@ public static class RegisterDependentServices
                     Encoder = JavaScriptEncoder.Default
                 })
                 .AddDebug();
+        }
+
+        if (appSettings.FeatureManagement.OpenTelemetryEnabled)
+        {
+            builder.Logging.ClearProviders();
+            builder.Logging.AddOpenTelemetry(x =>
+            {
+                x.SetResourceBuilder(ResourceBuilder.CreateEmpty()
+                    .AddService(Assembly.GetEntryAssembly()?.GetName().Name ?? "Unknown")
+                    .AddAttributes(new Dictionary<string, object>()
+                    {
+                        ["deployment.environment"] = builder.Environment.EnvironmentName,
+                        ["deployment.version"] = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "1.0.0.0"
+                    }));
+
+                x.IncludeScopes = true;
+                x.IncludeFormattedMessage = true;
+
+                x.AddConsoleExporter();
+                x.AddOtlpExporter(a =>
+                {
+                    a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                    a.Protocol = OtlpExportProtocol.HttpProtobuf;
+                    a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                });
+            });
         }
 
         builder.Services.AddHttpLogging(o =>
