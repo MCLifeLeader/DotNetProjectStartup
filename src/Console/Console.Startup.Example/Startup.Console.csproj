@@ -54,6 +54,7 @@
         </PackageReference>
         <PackageReference Include="NCrontab.Signed" Version="3.3.3" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
         <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
         <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />

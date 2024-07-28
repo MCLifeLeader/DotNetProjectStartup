@@ -207,11 +207,11 @@ public static class RegisterDependentServices
 
                 if (appSettings is { FeatureManagement.OpenTelemetryEnabled: true })
                 {
-                    //logging.ClearProviders();
+                    logging.ClearProviders();
                     logging.AddOpenTelemetry(x =>
                     {
                         x.SetResourceBuilder(ResourceBuilder.CreateEmpty()
-                            .AddService("Startup.Console")
+                            .AddService(Assembly.GetEntryAssembly()?.GetName().Name ?? "Unknown")
                             .AddAttributes(new Dictionary<string, object>()
                             {
                                 ["deployment.environment"] = hostContext.HostingEnvironment.EnvironmentName,
@@ -221,6 +221,7 @@ public static class RegisterDependentServices
                         x.IncludeScopes = true;
                         x.IncludeFormattedMessage = true;
 
+                        x.AddConsoleExporter();
                         x.AddOtlpExporter(a =>
                         {
                             a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
