@@ -21,11 +21,12 @@ The project is broken apart into the following examples:
 
 ## Recommended
 - SQL Server Management Studio or other SQL Server management tool
+- Docker Desktop
 
 # Getting Started
 ## Setting up the project
-1. Locate the file Dev_Setup.ps1 in the root of the project.
-2. Run this file in PowerShell and this will setup the Docker Containers and Dependencies.
+1. Clone the repository to your local machine.
+2. Locate the file docker_setup.ps1 in the root of the project and run this in PowerShell which will setup the Docker Containers and Dependencies.
 
 ## Using SQL Server Express
 1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio.
@@ -34,12 +35,11 @@ The project is broken apart into the following examples:
 4. There should be no need to update the secrets.json file with the connection string as it should be configured in the ppsettings json file for SQL Express.
 
 ## Using Docker Containers
-1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio.
-2. Once the solution is open, you will need to build the solution. This will download all of the NuGet packages that are required for the project.
-3. Open the first project and find the "Connected Services" folder. Right click on the "Connected Services" folder and select "Manage Connected Services".
-4. Locate the SQL Server Database option and click the elipses button "..." to open the configuration window and select "Open in Containers Window".
-5. Locate and select the "mssql" option and click the Environment Tab. Locate the "SA_PASSWORD" option and update your database string in your "Secrets.json" file in each project. "ConnectionStrings:DefaultConnection": "Server=localhost,4433 Database=StartupExample;User ID=sa;Password=<DatabasePassword>;Persist Security Info=False;TrustServerCertificate=true;"
-6. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Use the password obtained in step 5.
+1. Start Visual Studio and open the solution.
+2. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Using the default password of "P@ssword123!".
+3. MailHog was added as an email trap.
+4. Open Telemetry was added to the project to help with debugging and development and can be found [here](http://localhost:4341/) after starting the docker containers.
+
 
 ## Running the Applications
 1. Once the project has been built and the database has been created, you can run any of the applications.

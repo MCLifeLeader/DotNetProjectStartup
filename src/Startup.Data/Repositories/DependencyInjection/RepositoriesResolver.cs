@@ -23,7 +23,7 @@ public static class RepositoriesResolver
             {
                 options.EnableSensitiveDataLogging();
                 options.EnableDetailedErrors();
-                options.UseLoggerFactory(LoggerSupport.GetLoggerFactory());
+                options.UseLoggerFactory(LoggerSupport.GetLoggerFactory(service));
             }
         });
 

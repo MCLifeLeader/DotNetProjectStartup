@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
 using Startup.Common.Constants;
 using Startup.Common.Helpers.Extensions;
 using Startup.Common.Models;
@@ -200,6 +203,32 @@ public static class RegisterDependentServices
                             Encoder = JavaScriptEncoder.Default
                         })
                         .AddDebug();
+                }
+
+                if (appSettings is { FeatureManagement.OpenTelemetryEnabled: true })
+                {
+                    logging.ClearProviders();
+                    logging.AddOpenTelemetry(x =>
+                    {
+                        x.SetResourceBuilder(ResourceBuilder.CreateEmpty()
+                            .AddService(Assembly.GetEntryAssembly()?.GetName().Name ?? "Unknown")
+                            .AddAttributes(new Dictionary<string, object>()
+                            {
+                                ["deployment.environment"] = hostContext.HostingEnvironment.EnvironmentName,
+                                ["deployment.version"] = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "1.0.0.0"
+                            }));
+
+                        x.IncludeScopes = true;
+                        x.IncludeFormattedMessage = true;
+
+                        x.AddConsoleExporter();
+                        x.AddOtlpExporter(a =>
+                        {
+                            a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                            a.Protocol = OtlpExportProtocol.HttpProtobuf;
+                            a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                        });
+                    });
                 }
             })
             .UseWindowsService(o => { o.ServiceName = appSettings!.ServiceName; });

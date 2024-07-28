@@ -11,6 +11,7 @@ public class AppSettings
     public IConfiguration ConfigurationBase { get; internal set; }
 
     public Logging Logging { get; set; }
+    public Opentelemetry OpenTelemetry { get; set; }
     public FeatureManagement FeatureManagement { get; set; }
     public string KeyVaultUri { get; set; }
     public int CacheDurationInSeconds { get; set; }

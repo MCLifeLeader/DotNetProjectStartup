@@ -1,4 +1,5 @@
 {
    "dotnet.defaultSolution": "src\\StartupExamples.sln",
-   "sarif-viewer.connectToGithubCodeScanning": "off"
+   "sarif-viewer.connectToGithubCodeScanning": "off",
+   "remote.autoForwardPortsFallback": 0
 }
