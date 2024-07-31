@@ -47,11 +47,11 @@
       ]
     }
   },
-  "forwardPorts": [
-    7100,
-    7110,
-    7120
-  ],
+  // "forwardPorts": [
+  //   7100,
+  //   7110,
+  //   7120
+  // ],
   "postCreateCommand": "cd ./src && pwsh -File ./PostCreate.ps1",
   "hostRequirements": {
     "cpus": 4,
@@ -61,19 +61,19 @@
   "remoteEnv": {
     "DOTNET_MULTILEVEL_LOOKUP": "0",
     "TARGET": "net8.0"
-  },
-  "portsAttributes": {
-    "7100": {
-      "label": "Example API",
-      "onAutoForward": "notify"
-    },
-    "7110": {
-      "label": "Example Blazor Server",
-      "onAutoForward": "notify"
-    },
-    "7120": {
-      "label": "Example Web",
-      "onAutoForward": "notify"
-    }
   }
+  // "portsAttributes": {
+  //   "7100": {
+  //     "label": "Example API",
+  //     "onAutoForward": "notify"
+  //   },
+  //   "7110": {
+  //     "label": "Example Blazor Server",
+  //     "onAutoForward": "notify"
+  //   },
+  //   "7120": {
+  //     "label": "Example Web",
+  //     "onAutoForward": "notify"
+  //   }
+  // }
 }
