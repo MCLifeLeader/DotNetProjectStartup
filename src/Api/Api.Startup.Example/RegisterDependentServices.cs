@@ -2,7 +2,6 @@ using Asp.Versioning;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Http.Resilience;
@@ -27,8 +26,6 @@ using Startup.Api.Models.ApplicationSettings;
 using Startup.Api.Services.DependencyInjection;
 using Startup.Business.DependencyInjection;
 using Startup.Common.Constants;
-using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -122,7 +119,8 @@ public static class RegisterDependentServices
                     config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
                 configureApplicationInsightsLoggerOptions: (options) => { });
         }
-
+        builder.Services.AddApplicationInsightsTelemetry();
+        
         // EventLog is only available in a Windows environment
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -234,7 +232,6 @@ public static class RegisterDependentServices
                 };
             });
         });
-
 
         builder.SetHttpClients(appSettings);
 

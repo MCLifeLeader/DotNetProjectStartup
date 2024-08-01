@@ -170,6 +170,7 @@ public static class RegisterDependentServices
                     }, new DataClassificationSet(DataTaxonomy.Pii));
 #pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
                 });
+                services.AddApplicationInsightsTelemetry();
             })
             .ConfigureLogging((hostContext, logging) =>
             {
