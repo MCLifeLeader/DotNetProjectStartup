@@ -1,0 +1,16 @@
+{
+    "version": "1.0",
+    "components": [
+        "Microsoft.VisualStudio.Component.CoreEditor",
+        "Microsoft.VisualStudio.Workload.CoreEditor",
+        "Microsoft.VisualStudio.Component.NuGet",
+        "Microsoft.VisualStudio.Component.Git"
+    ],
+    "extensions": [
+        "https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerPack",
+        "https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools",
+        "https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsls-vs-2022",
+        "https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.ProductivityPowerPack2022",
+        "https://marketplace.visualstudio.com/items?itemName=vscps.SlowCheetah-XMLTransforms-VS2022"
+    ]
+}
