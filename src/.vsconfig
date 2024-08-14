@@ -1,13 +1,23 @@
 {
     "version": "1.0",
     "components": [
+        "Component.Microsoft.VisualStudio.LiveShare.2022",
+        "Component.OpenJDK",
+        "Microsoft.Component.MSBuild",
+        "Microsoft.NetCore.Component.DevelopmentTools",
+        "Microsoft.NetCore.Component.Runtime.8.0",
+        "Microsoft.NetCore.Component.SDK",
+        "Microsoft.NetCore.Component.Web",
         "Microsoft.VisualStudio.Component.CoreEditor",
-        "Microsoft.VisualStudio.Workload.CoreEditor",
+        "Microsoft.VisualStudio.Component.EntityFramework",
+        "Microsoft.VisualStudio.Component.Git",
+        "Microsoft.VisualStudio.Component.LinqToSql",
         "Microsoft.VisualStudio.Component.NuGet",
-        "Microsoft.VisualStudio.Component.Git"
+        "Microsoft.VisualStudio.Component.Web",
+        "Microsoft.VisualStudio.Workload.Azure",
+        "Microsoft.VisualStudio.Workload.CoreEditor"
     ],
     "extensions": [
-        "https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerPack",
         "https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools",
         "https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsls-vs-2022",
         "https://marketplace.visualstudio.com/items?itemName=VisualStudioPlatformTeam.ProductivityPowerPack2022",
