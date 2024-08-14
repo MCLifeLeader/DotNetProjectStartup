@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
 using Microsoft.FeatureManagement.Mvc;
+using Startup.Api.Helpers.Extensions;
 using Startup.Api.Models.ApplicationSettings;
 using Startup.Api.Services.Interfaces;
 using Startup.Common.Constants;
@@ -85,6 +86,8 @@ public class InfoController : ControllerBase
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetAppSettings));
         await Task.Yield();
+
+        _logger.LogAppSettings(_appSettings);
 
         if (await _featureManager.IsEnabledAsync(FeatureFlags.DISPLAY_CONFIGURATION))
         {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Startup.Common.Helpers.Data;
 using System.Xml.Serialization;
-using Startup.Web.Helpers.Data;
 
 namespace Startup.Web.Models.ApplicationSettings;
 

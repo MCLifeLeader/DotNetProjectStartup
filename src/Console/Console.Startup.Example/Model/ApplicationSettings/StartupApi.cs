@@ -1,4 +1,4 @@
-﻿using Startup.Console.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Console.Model.ApplicationSettings;
 

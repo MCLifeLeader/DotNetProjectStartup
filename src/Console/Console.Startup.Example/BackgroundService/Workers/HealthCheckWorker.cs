@@ -33,8 +33,6 @@ public class HealthCheckWorker : IHealthCheckWorker
         {
             try
             {
-                _logger.LogInformation("{appSettings}", _appSettings);
-
                 // Sleep until cron rule has been satisfied.
                 NCrontab.CrontabSchedule schedule = NCrontab.CrontabSchedule.Parse(_appSettings.WorkerProcesses.StartupApi.Cron);
                 DateTime nextRun = schedule.GetNextOccurrence(DateTime.UtcNow);

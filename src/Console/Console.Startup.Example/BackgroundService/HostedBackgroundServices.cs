@@ -4,6 +4,7 @@ using Microsoft.FeatureManagement;
 using Startup.Console.BackgroundService.Interface;
 using Startup.Console.BackgroundService.Workers;
 using Startup.Console.Constants;
+using Startup.Console.Helpers.Extensions;
 using Startup.Console.Model.ApplicationSettings;
 
 namespace Startup.Console.BackgroundService;
@@ -35,7 +36,7 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ExecuteAsync));
         _logger.LogWarning("{Service} is starting. - {dateTime}", nameof(HostedBackgroundServices), DateTime.UtcNow);
-        _logger.LogInformation("{appSettings}", _appSettings);
+        _logger.LogAppSettings(_appSettings);
 
         // Add collection of feature flags here that enable / disable worker threads
         bool healthCheckWorkerEnabled = await _featureManager.IsEnabledAsync(FeatureFlags.HEALTH_CHECK_WORKER);

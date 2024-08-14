@@ -1,4 +1,4 @@
-﻿using Startup.Blazor.Server.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Blazor.Server.Models.ApplicationSettings
 {

@@ -1,4 +1,4 @@
-﻿using Startup.Web.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Web.Models.ApplicationSettings;
 

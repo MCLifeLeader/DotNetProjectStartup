@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Startup.Api.Helpers.Data;
+using Startup.Common.Helpers.Data;
 using System.Xml.Serialization;
 
 namespace Startup.Api.Models.ApplicationSettings;

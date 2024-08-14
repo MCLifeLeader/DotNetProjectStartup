@@ -1,5 +1,5 @@
-﻿using Startup.Blazor.Server.Helpers.Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Startup.Common.Helpers.Data;
 using System.Xml.Serialization;
 
 namespace Startup.Blazor.Server.Models.ApplicationSettings;

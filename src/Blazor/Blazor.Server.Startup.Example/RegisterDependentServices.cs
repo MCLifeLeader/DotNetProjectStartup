@@ -2,10 +2,8 @@ using Azure.Identity;
 using Startup.Blazor.Server.Connection.DependencyInjection;
 using Startup.Blazor.Server.Data.DependencyInjection;
 using Startup.Blazor.Server.Factories.DependencyInjection;
-using Startup.Blazor.Server.Helpers.Data;
 using Startup.Blazor.Server.Helpers.DependencyInjection;
 using Startup.Blazor.Server.Helpers.Extensions;
-using Startup.Blazor.Server.Helpers.Filter;
 using Startup.Blazor.Server.Helpers.Health;
 using Startup.Blazor.Server.Models.ApplicationSettings;
 using Startup.Blazor.Server.Services.DependencyInjection;
@@ -24,6 +22,8 @@ using System.Text.Json;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
+using Startup.Common.Helpers.Data;
+using Startup.Common.Helpers.Filter;
 
 namespace Startup.Blazor.Server;
 

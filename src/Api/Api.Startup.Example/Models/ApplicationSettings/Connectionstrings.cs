@@ -1,4 +1,4 @@
-﻿using Startup.Api.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Api.Models.ApplicationSettings;
 

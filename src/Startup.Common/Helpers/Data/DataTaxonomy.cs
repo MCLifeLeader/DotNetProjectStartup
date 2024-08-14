@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Compliance.Classification;
 
-namespace Startup.Blazor.Server.Helpers.Data;
+namespace Startup.Common.Helpers.Data;
 
 /// <summary>
 /// You may run into trouble with the Logger autogen if you put this in a core class
