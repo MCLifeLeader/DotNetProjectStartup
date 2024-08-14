@@ -47,7 +47,7 @@ public static class JsonExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static string ToJson(this object value)
+    public static string? ToJson(this object value)
     {
         return JsonConvert.SerializeObject(value);
     }

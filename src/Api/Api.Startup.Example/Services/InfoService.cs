@@ -58,7 +58,7 @@ public class InfoService : IInfoService
         return response;
     }
 
-    public string SerializeToResponseJson()
+    public string? SerializeToResponseJson()
     {
         _logger.LogDebug("{ControllerName}.{MethodName} - Executing", nameof(InfoService), nameof(SerializeToResponseJson));
 
