@@ -4,5 +4,5 @@ namespace Startup.Api.Services.Interfaces;
 
 public interface IAuthService
 {
-    string AuthenticateUser(UserLoginModel? user);
+    string? AuthenticateUser(UserLoginModel? user);
 }

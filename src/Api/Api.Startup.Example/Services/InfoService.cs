@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Startup.Api.Models.ApplicationSettings;
-using Startup.Api.Models.Ui.CanaryPage;
+using Startup.Api.Models.Ui.InfoPage;
 using Startup.Api.Services.Interfaces;
 using Startup.Common.Helpers.Extensions;
 using System.Diagnostics;
@@ -80,10 +80,10 @@ public class InfoService : IInfoService
         _canaryPageDetails.ProjectInfoCollection = new List<ProjectInfoDetails>
         {
             new("Current Time on Server", DateTime.Now.ToString(CultureInfo.CurrentCulture)),
-            new("Product Name", assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product),
+            new("Product Name", assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product!),
             new("Product Version", $"{assemblyVersion?.Major}.{assemblyVersion?.Minor}.{assemblyVersion?.Build}"),
             new("Build Date", new FileInfo(assembly.Location ?? "").LastWriteTime.ToString(CultureInfo.CurrentCulture)),
-            new("Build Version", assemblyVersion?.ToString()),
+            new("Build Version", assemblyVersion?.ToString()!),
             new("Runtime .NET Framework Version", Environment.Version.ToString()),
             new("Product .NET Framework Version", assembly.ImageRuntimeVersion),
             new("Server OS Version", Environment.OSVersion.VersionString),

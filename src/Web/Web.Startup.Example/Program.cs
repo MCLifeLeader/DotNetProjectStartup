@@ -1,7 +1,8 @@
 using Startup.Web;
+using Startup.Web.Models.ApplicationSettings;
 
 WebApplication.CreateBuilder(args)
-    .RegisterServices()
+    .RegisterServices(out AppSettings? appSettings)
     .Build()
-    .SetupMiddleware()
+    .SetupMiddleware(appSettings)
     .Run();

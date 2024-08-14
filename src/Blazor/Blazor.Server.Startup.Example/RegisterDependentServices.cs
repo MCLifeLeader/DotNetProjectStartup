@@ -29,12 +29,16 @@ namespace Startup.Blazor.Server;
 
 public static class RegisterDependentServices
 {
+
+    private static AppSettings? _appSettings;
+
     /// <summary>
     /// This method gets called by the runtime. Use this method to add services to the container.
     /// </summary>
     /// <param name="builder"></param>
+    /// <param name="appSettings"></param>
     /// <returns></returns>
-    public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder, out AppSettings? appSettings)
     {
         #region Configuration Setup
 
@@ -69,13 +73,13 @@ public static class RegisterDependentServices
         }
 
         builder.Services.Configure<AppSettings>(builder.Configuration);
-        AppSettings appSettings = new()
+        _appSettings = new()
         {
             ConfigurationBase = builder.Configuration
         };
 
         // Bind the app settings to the model
-        builder.Configuration.Bind(appSettings);
+        builder.Configuration.Bind(_appSettings);
 
         // Adds the Fluent Validation to DI.
         builder.Services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -92,19 +96,19 @@ public static class RegisterDependentServices
 
         #endregion
 
-        // Configure logging 
+        #region Logging Setup
+
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-        builder.Logging.EnableRedaction();
-
-        if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+        if (!_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
                 configureTelemetryConfiguration: (config) =>
-                    config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
+                    config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
                 configureApplicationInsightsLoggerOptions: (options) => { });
+
+            //builder.Services.AddApplicationInsightsTelemetry();
         }
-        builder.Services.AddApplicationInsightsTelemetry();
 
         // EventLog is only available in a Windows environment
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -125,7 +129,7 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
-        if (appSettings.FeatureManagement.OpenTelemetryEnabled)
+        if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
             builder.Logging.ClearProviders();
             builder.Logging.AddOpenTelemetry(x =>
@@ -144,9 +148,9 @@ public static class RegisterDependentServices
                 x.AddConsoleExporter();
                 x.AddOtlpExporter(a =>
                 {
-                    a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                    a.Endpoint = new Uri(_appSettings.OpenTelemetry.Endpoint);
                     a.Protocol = OtlpExportProtocol.HttpProtobuf;
-                    a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                    a.Headers = $"X-Seq-ApiKey={_appSettings.OpenTelemetry.ApiKey}";
                 });
             });
         }
@@ -156,20 +160,24 @@ public static class RegisterDependentServices
             o.CombineLogs = true;
         });
 
+        builder.Logging.EnableRedaction();
+
         builder.Services.AddRedaction(x =>
         {
             x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
 
             x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
-#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
             x.SetHmacRedactor(o =>
             {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
                 o.KeyId = 1776;
             }, new DataClassificationSet(DataTaxonomy.Pii));
-#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+
+            x.SetFallbackRedactor<NullRedactor>();
         });
+
+        #endregion
 
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
@@ -177,10 +185,10 @@ public static class RegisterDependentServices
             http.AddStandardResilienceHandler();
         });
 
-        builder.SetHttpClients(appSettings);
+        builder.SetHttpClients(_appSettings);
         builder.Services.AddMemoryCache();
 
-        builder.SetDependencyInjection(appSettings);
+        builder.SetDependencyInjection(_appSettings);
 
         // Add services to the container.
         builder.Services.AddRazorComponents().AddInteractiveServerComponents();
@@ -197,6 +205,7 @@ public static class RegisterDependentServices
             .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower())
             .AddCheck<OpenAiHealthCheck>(HttpClientNames.OPEN_AI_API_HEALTH);
 
+        appSettings = _appSettings;
         return builder;
     }
     private static void SetDependencyInjection(this WebApplicationBuilder builder, AppSettings appSettings)

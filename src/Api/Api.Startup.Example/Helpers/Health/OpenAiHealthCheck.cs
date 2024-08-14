@@ -23,22 +23,22 @@ public class OpenAiHealthCheck : IHealthCheck
         {
             OpenAiHealthStatus data = await _httpClient.GetObjectAsync<OpenAiHealthStatus>("api/v2/status.json", HttpClientNames.OPEN_AI_API_HEALTH);
 
-            if (data.Page.Name.Contains("OpenAI"))
+            if (data.Page is { Name: not null } && data.Page.Name.Contains("OpenAI"))
             {
-                if (data.Status.Indicator.ToLower().Contains("none"))
+                if (data.Status is { Indicator: not null } && data.Status.Indicator.ToLower().Contains("none"))
                 {
                     _logger.LogInformation($"Health Check: {data.Status.Description}");
                     return HealthCheckResult.Healthy(data.Status.Description);
                 }
 
-                if (data.Status.Indicator.ToLower().Contains("minor"))
+                if (data.Status is { Indicator: not null } && data.Status.Indicator.ToLower().Contains("minor"))
                 {
                     _logger.LogWarning($"Health Check: {data.Status.Description}");
                     return HealthCheckResult.Degraded(data.Status.Description);
                 }
 
                 // This is an assumption don't know yet
-                if (data.Status.Indicator.ToLower().Contains("major"))
+                if (data.Status is { Indicator: not null } && data.Status.Indicator.ToLower().Contains("major"))
                 {
                     _logger.LogError($"Health Check: {data.Status.Description}");
                     return HealthCheckResult.Unhealthy(data.Status.Description);
@@ -46,8 +46,8 @@ public class OpenAiHealthCheck : IHealthCheck
             }
 
             // Fallback health status
-            _logger.LogError($"Health Check Fallback: {data.Status.Description}");
-            return HealthCheckResult.Unhealthy(data.Status.Description);
+            _logger.LogError($"Health Check Fallback: {data.Status?.Description}");
+            return HealthCheckResult.Unhealthy(data.Status?.Description);
         }
         catch (Exception ex)
         {
@@ -60,25 +60,25 @@ public class OpenAiHealthCheck : IHealthCheck
     public class OpenAiHealthStatus
     {
         [JsonProperty("page")]
-        public Page Page { get; set; }
+        public Page? Page { get; set; }
 
         [JsonProperty("status")]
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
     }
 
     public class Page
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         [JsonProperty("time_zone")]
-        public string TimeZone { get; set; }
+        public string? TimeZone { get; set; }
 
         [JsonProperty("updated_at")]
         public DateTime UpdatedAt { get; set; }
@@ -87,10 +87,10 @@ public class OpenAiHealthCheck : IHealthCheck
     public class Status
     {
         [JsonProperty("indicator")]
-        public string Indicator { get; set; }
+        public string? Indicator { get; set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
     #endregion
 }

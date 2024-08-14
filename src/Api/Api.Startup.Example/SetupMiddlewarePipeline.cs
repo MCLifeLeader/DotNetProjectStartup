@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Startup.Api.Models.ApplicationSettings;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Startup.Api;
@@ -15,8 +16,9 @@ public static class SetupMiddlewarePipeline
     /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     /// </summary>
     /// <param name="app"></param>
+    /// <param name="appSettings"></param>
     /// <returns></returns>
-    public static WebApplication SetupMiddleware(this WebApplication app)
+    public static WebApplication SetupMiddleware(this WebApplication app, AppSettings? appSettings)
     {
         // Configure Pipeline
         if (app.Environment.IsDevelopment())
@@ -32,7 +34,7 @@ public static class SetupMiddlewarePipeline
         }
 
         // Configure the HTTP request pipeline.
-        if (app.Configuration.GetSection("FeatureManagement").GetValue<bool>("SwaggerEnabled"))
+        if (appSettings!.FeatureManagement.SwaggerEnabled)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>

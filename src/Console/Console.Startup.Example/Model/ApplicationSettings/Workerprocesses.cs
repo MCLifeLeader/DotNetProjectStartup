@@ -1,7 +1,9 @@
-﻿namespace Startup.Console.Model.ApplicationSettings;
+﻿using Microsoft.Extensions.Logging;
 
-public class Workerprocesses
+namespace Startup.Console.Model.ApplicationSettings;
+
+public record Workerprocesses
 {
     public int SleepDelaySeconds { get; set; }
-    public Startupapi StartupApi { get; set; }
+    public Startupapi StartupApi { get; set; } = default!;
 }

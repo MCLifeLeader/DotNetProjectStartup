@@ -23,7 +23,7 @@ public class AuthControllerCache : IAuthControllerCache
         _cacheDurationSeconds = appSettings.Value.CacheDurationInSeconds;
     }
 
-    public bool SetAuth(string key, string data)
+    public bool SetAuth(string key, string? data)
     {
         try
         {
@@ -36,9 +36,9 @@ public class AuthControllerCache : IAuthControllerCache
         }
     }
 
-    public string GetAuth(string key)
+    public string? GetAuth(string key)
     {
-        if (_cache.TryGetValue($"{_cacheKey}{key}", out string data))
+        if (_cache.TryGetValue($"{_cacheKey}{key}", out string? data))
         {
             return data;
         }

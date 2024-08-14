@@ -2,15 +2,15 @@
 
 namespace Startup.Api.Models.ApplicationSettings;
 
-public class ConnectionStrings
+public record ConnectionStrings
 {
     [SensitiveData]
-    public string DefaultConnection { get; set; }
+    public string DefaultConnection { get; set; } = default!;
 
     [SensitiveData]
-    public string ServiceBus { get; set; }
-    public string ServiceBusQueue { get; set; }
+    public string ServiceBus { get; set; } = default!;
+    public string ServiceBusQueue { get; set; } = default!;
 
     [SensitiveData]
-    public string ApplicationInsights { get; set; }
+    public string ApplicationInsights { get; set; } = default!;
 }

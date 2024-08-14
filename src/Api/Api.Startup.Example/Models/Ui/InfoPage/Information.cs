@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 /// <summary>
 /// 
@@ -8,11 +8,11 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 public class Information
 {
     [JsonPropertyName("project-information")]
-    public ProjectInformation ProjectInformation { get; set; }
+    public ProjectInformation? ProjectInformation { get; set; }
 
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     [JsonPropertyName("service")]
-    public List<Service> Service { get; set; }
+    public List<Service>? Service { get; set; }
 }

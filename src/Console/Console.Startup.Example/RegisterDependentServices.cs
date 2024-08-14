@@ -35,14 +35,29 @@ using System.Text.Json;
 
 namespace Startup.Console;
 
+/// <summary>
+/// Registers the dependent services for the console application.
+/// </summary>
 public static class RegisterDependentServices
 {
+    /// <summary>
+    /// The login token.
+    /// </summary>
     private static LoginToken? _token;
 
-    public static IHostBuilder RegisterServices(this IHostBuilder builder)
-    {
-        AppSettings? appSettings = null;
+    /// <summary>
+    /// The application settings.
+    /// </summary>
+    private static AppSettings? _appSettings = null;
 
+    /// <summary>
+    /// Registers the services for the console application.
+    /// </summary>
+    /// <param name="builder">The host builder.</param>
+    /// <param name="appSettings">The application settings.</param>
+    /// <returns>The host builder.</returns>
+    public static IHostBuilder RegisterServices(this IHostBuilder builder, out AppSettings? appSettings)
+    {
         // Needed for windows services to find their resources to run correctly.
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
@@ -76,8 +91,8 @@ public static class RegisterDependentServices
             {
                 #region Configuration/Key Vault
 
-                // Note: This is not being set were I was expecting it to be.
-                hostContext.HostingEnvironment.EnvironmentName = environment;
+                // Note: This is not being set where I was expecting it to be.
+                hostContext.HostingEnvironment.EnvironmentName = environment ?? "Production";
 
                 configApp.SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -117,11 +132,11 @@ public static class RegisterDependentServices
                 #region Bind AppSettings for use in IOptions Pattern
 
                 services.Configure<AppSettings>(hostContext.Configuration);
-                appSettings = new AppSettings
+                _appSettings = new AppSettings
                 {
                     ConfigurationBase = hostContext.Configuration
                 };
-                hostContext.Configuration.Bind(appSettings);
+                hostContext.Configuration.Bind(_appSettings);
 
                 // Adds the Fluent Validation to DI.
                 services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -152,9 +167,11 @@ public static class RegisterDependentServices
                     http.AddStandardResilienceHandler();
                 });
 
-                services.SetHttpClients(appSettings);
-                services.SetDependencyInjection(appSettings);
+                services.SetHttpClients(_appSettings);
+                services.SetDependencyInjection(_appSettings);
                 services.AddFeatureManagement();
+
+                #region Logging Setup
 
                 services.AddRedaction(x =>
                 {
@@ -162,27 +179,33 @@ public static class RegisterDependentServices
 
                     x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
-#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
                     x.SetHmacRedactor(o =>
                     {
-                        o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                        o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
                         o.KeyId = 1776;
                     }, new DataClassificationSet(DataTaxonomy.Pii));
-#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+
+                    x.SetFallbackRedactor<NullRedactor>();
                 });
-                services.AddApplicationInsightsTelemetry();
+
+                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                {
+                    //services.AddApplicationInsightsTelemetry();
+                }
+
+                #endregion
             })
             .ConfigureLogging((hostContext, logging) =>
             {
+                #region Logging Setup
+
                 logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
 
-                logging.EnableRedaction();
-
-                if (appSettings != null && !appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
                 {
                     logging.AddApplicationInsights(
                         configureTelemetryConfiguration: (config) =>
-                            config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
+                            config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
                         configureApplicationInsightsLoggerOptions: (options) => { });
                 }
 
@@ -206,7 +229,7 @@ public static class RegisterDependentServices
                         .AddDebug();
                 }
 
-                if (appSettings is { FeatureManagement.OpenTelemetryEnabled: true })
+                if (_appSettings is { FeatureManagement.OpenTelemetryEnabled: true })
                 {
                     logging.ClearProviders();
                     logging.AddOpenTelemetry(x =>
@@ -225,14 +248,18 @@ public static class RegisterDependentServices
                         x.AddConsoleExporter();
                         x.AddOtlpExporter(a =>
                         {
-                            a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                            a.Endpoint = new Uri(_appSettings.OpenTelemetry.Endpoint);
                             a.Protocol = OtlpExportProtocol.HttpProtobuf;
-                            a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                            a.Headers = $"X-Seq-ApiKey={_appSettings.OpenTelemetry.ApiKey}";
                         });
                     });
                 }
+
+                logging.EnableRedaction();
+
+                #endregion
             })
-            .UseWindowsService(o => { o.ServiceName = appSettings!.ServiceName; });
+            .UseWindowsService(o => { o.ServiceName = _appSettings!.ServiceName; });
 
         if (environment == Environments.Development)
         {
@@ -240,9 +267,16 @@ public static class RegisterDependentServices
             // if the console window is closed help kill running processes.
             builder.UseConsoleLifetime();
         }
+
+        appSettings = _appSettings;
         return builder;
     }
 
+    /// <summary>
+    /// Sets the dependency injection for the services.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="appSettings">The application settings.</param>
     private static void SetDependencyInjection(this IServiceCollection services, AppSettings appSettings)
     {
         //// http client wrapper etc
@@ -262,6 +296,11 @@ public static class RegisterDependentServices
         FactoriesResolver.RegisterDependencies(services);
     }
 
+    /// <summary>
+    /// Sets the HTTP clients for the services.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="appSettings">The application settings.</param>
     private static void SetHttpClients(this IServiceCollection services, AppSettings appSettings)
     {
         services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_API, c =>
@@ -306,6 +345,13 @@ public static class RegisterDependentServices
         });
     }
 
+    /// <summary>
+    /// Gets the authentication token.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="httpClient">The HTTP client.</param>
+    /// <param name="userLoginModel">The user login model.</param>
+    /// <returns>The login token.</returns>
     private static LoginToken? GetAuthToken(IServiceCollection services, HttpClient httpClient, UserLoginModel userLoginModel)
     {
         LoginToken? token = null;
@@ -332,5 +378,4 @@ public static class RegisterDependentServices
 
         return token;
     }
-
 }

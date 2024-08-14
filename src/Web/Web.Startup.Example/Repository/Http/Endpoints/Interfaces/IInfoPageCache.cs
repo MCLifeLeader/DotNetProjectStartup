@@ -2,6 +2,6 @@
 
 public interface IInfoPageCache
 {
-    bool SetCanaryPage(string key, string data);
-    string GetCanaryPage(string key);
+    bool SetCanaryPage(string key, string? data);
+    string? GetCanaryPage(string key);
 }

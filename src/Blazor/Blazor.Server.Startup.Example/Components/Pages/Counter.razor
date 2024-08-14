@@ -1,5 +1,13 @@
 ﻿@page "/counter"
+@using Microsoft.Extensions.Options
+@using Startup.Blazor.Server.Helpers.Extensions
+@using Startup.Blazor.Server.Models.ApplicationSettings
+@using Startup.Common.Helpers.Extensions
 @rendermode InteractiveServer
+
+@inject NavigationManager NavigationManager
+@inject IOptions<AppSettings> AppSettings;
+@inject ILogger<Counter> Logger;
 
 <PageTitle>Counter</PageTitle>
 
@@ -8,12 +16,29 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="RefreshPage">Refresh Page</button>
+<button class="btn btn-primary" @onclick="DisplayConfig">Display Configuration</button>
+
+<text>@config_settings</text>
 
 @code {
     private int currentCount = 0;
+    private string config_settings;
 
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    private void RefreshPage()
+    {
+        NavigationManager.Refresh(true);
+    }
+
+    private void DisplayConfig()
+    {
+        config_settings = AppSettings.Value.ToJson();
+
+        Logger.LogAppSettings(AppSettings.Value);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Startup.Blazor.Server.Models.ApplicationSettings
 {
-    public class OpenAiClient
+    public record OpenAiClient
     {
-        public string BaseUrl { get; set; }
+        public string BaseUrl { get; set; } = default!;
 
         [SensitiveData]
-        public string ApiKey { get; set; }
-        public string AiModel { get; set; }
+        public string ApiKey { get; set; } = default!;
+        public string AiModel { get; set; } = default!;
         public int TimeoutInSeconds { get; set; }
         public int CacheDurationInSeconds { get; set; }
     }

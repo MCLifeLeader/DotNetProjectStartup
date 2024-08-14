@@ -1,9 +1,9 @@
 ﻿namespace Startup.Web.Models.ApplicationSettings;
 
-public class Loglevel
+public record Loglevel
 {
-    public string Default { get; set; }
-    public string Microsoft { get; set; }
-    public string MicrosoftAspNetCore { get; set; }
-    public string System { get; set; }
+    public string Default { get; set; } = default!;
+    public string Microsoft { get; set; } = default!;
+    public string MicrosoftAspNetCore { get; set; } = default!;
+    public string System { get; set; } = default!;
 }

@@ -2,6 +2,7 @@ using Startup.Blazor.Server.Components;
 using Startup.Blazor.Server.Components.Account;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Startup.Blazor.Server.Models.ApplicationSettings;
 
 namespace Startup.Blazor.Server;
 
@@ -11,8 +12,9 @@ public static class SetupMiddlewarePipeline
     /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     /// </summary>
     /// <param name="app"></param>
+    /// <param name="appSettings"></param>
     /// <returns></returns>
-    public static WebApplication SetupMiddleware(this WebApplication app)
+    public static WebApplication SetupMiddleware(this WebApplication app, AppSettings? appSettings)
     {
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

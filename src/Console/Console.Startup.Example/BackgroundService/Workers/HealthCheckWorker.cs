@@ -12,6 +12,7 @@ public class HealthCheckWorker : IHealthCheckWorker
     private readonly ILogger<HealthCheckWorker> _logger;
     private readonly StartupHttp _startupHttp;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public HealthCheckWorker(
         ILogger<HealthCheckWorker> logger,
         IOptions<AppSettings> appSettings,
@@ -32,6 +33,8 @@ public class HealthCheckWorker : IHealthCheckWorker
         {
             try
             {
+                _logger.LogInformation("{appSettings}", _appSettings);
+
                 // Sleep until cron rule has been satisfied.
                 NCrontab.CrontabSchedule schedule = NCrontab.CrontabSchedule.Parse(_appSettings.WorkerProcesses.StartupApi.Cron);
                 DateTime nextRun = schedule.GetNextOccurrence(DateTime.UtcNow);

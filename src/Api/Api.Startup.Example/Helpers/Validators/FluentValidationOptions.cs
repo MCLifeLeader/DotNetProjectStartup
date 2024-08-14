@@ -16,7 +16,7 @@ public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> wher
 
     public string Name { get; }
 
-    public ValidateOptionsResult Validate(string name, TOptions options)
+    public ValidateOptionsResult Validate(string? name, TOptions options)
     {
         // Null name is used to configure all named options.
         if (Name != null && name != Name)

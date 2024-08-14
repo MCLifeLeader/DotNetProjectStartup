@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 /// <summary>
 /// 
@@ -8,8 +8,8 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 public class Xml
 {
     [JsonPropertyName("@version")]
-    public string Version { get; set; }
+    public string? Version { get; set; }
 
     [JsonPropertyName("@encoding")]
-    public string Encoding { get; set; }
+    public string? Encoding { get; set; }
 }

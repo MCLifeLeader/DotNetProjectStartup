@@ -1,9 +1,9 @@
 ﻿namespace Startup.Blazor.Server.Models.ApplicationSettings;
 
-public class Startupexample
+public record Startupexample
 {
-    public string ApiUrl { get; set; }
-    public string AppUrl { get; set; }
-    public string WebUrl { get; set; }
-    public string TempMediaPath { get; set; }
+    public string ApiUrl { get; set; } = default!;
+    public string AppUrl { get; set; } = default!;
+    public string WebUrl { get; set; } = default!;
+    public string TempMediaPath { get; set; } = default!;
 }

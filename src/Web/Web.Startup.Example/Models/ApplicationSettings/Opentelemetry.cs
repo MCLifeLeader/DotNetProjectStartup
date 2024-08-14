@@ -2,10 +2,11 @@
 
 namespace Startup.Web.Models.ApplicationSettings
 {
-    public class Opentelemetry
+    public record Opentelemetry
     {
-        public string Endpoint { get; set; }
+        public string Endpoint { get; set; } = default!;
+
         [SensitiveData]
-        public string ApiKey { get; set; }
+        public string ApiKey { get; set; } = default!;
     }
 }

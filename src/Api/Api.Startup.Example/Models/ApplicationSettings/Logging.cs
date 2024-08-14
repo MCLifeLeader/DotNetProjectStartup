@@ -1,6 +1,6 @@
 ﻿namespace Startup.Api.Models.ApplicationSettings;
 
-public class Logging
+public record Logging
 {
-    public Loglevel LogLevel { get; set; }
+    public Loglevel LogLevel { get; set; } = default!;
 }
