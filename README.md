@@ -39,7 +39,7 @@ The project is broken apart into the following examples:
 2. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Using the default password of "P@ssword123!".
 3. MailHog was added as an email trap.
 4. Open Telemetry was added to the project to help with debugging and development and can be found [here](http://localhost:4341/) after starting the docker containers.
-
+   1. Watch the following video: [The Logging Everyone Should Be Using in .NET](https://www.youtube.com/watch?v=MHJ0BHfWhRw)
 
 ## Running the Applications
 1. Once the project has been built and the database has been created, you can run any of the applications.
