@@ -1,6 +1,8 @@
-﻿namespace Startup.Console.Model.ApplicationSettings;
+﻿using Microsoft.Extensions.Logging;
 
-public class Logging
+namespace Startup.Console.Model.ApplicationSettings;
+
+public record Logging
 {
-    public Loglevel LogLevel { get; set; }
+    public Loglevel LogLevel { get; set; } = default!;
 }

@@ -1,13 +1,14 @@
-﻿using Startup.Api.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Api.Models.ApplicationSettings;
 
-public class Jwt
+public record Jwt
 {
-    public string Issuer { get; set; }
-    public string Audience { get; set; }
+    public string Issuer { get; set; } = default!;
+    public string Audience { get; set; } = default!;
     public int ExpireInMinutes { get; set; }
-    public string Subject { get; set; }
+    public string Subject { get; set; } = default!;
+
     [SensitiveData]
-    public string Key { get; set; }
+    public string Key { get; set; } = default!;
 }

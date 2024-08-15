@@ -3,5 +3,5 @@
 public interface IInfoService
 {
     string SerializeToResponseXml();
-    string SerializeToResponseJson();
+    string? SerializeToResponseJson();
 }

@@ -6,6 +6,7 @@ namespace Startup.Console.Helpers.Validators;
 
 public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {
+    public string? Name { get; }
     private readonly IValidator<TOptions> _validator;
 
     public FluentValidationOptions(string name, IValidator<TOptions> validator)
@@ -14,9 +15,7 @@ public class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> wher
         _validator = validator;
     }
 
-    public string Name { get; }
-
-    public ValidateOptionsResult Validate(string name, TOptions options)
+    public ValidateOptionsResult Validate(string? name, TOptions options)
     {
         // Null name is used to configure all named options.
         if (Name != null && name != Name)

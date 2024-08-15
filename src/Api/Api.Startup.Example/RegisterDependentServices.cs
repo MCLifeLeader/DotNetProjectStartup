@@ -17,7 +17,6 @@ using OpenTelemetry.Resources;
 using Startup.Api.Connection.DependencyInjection;
 using Startup.Api.Data.DependencyInjection;
 using Startup.Api.Factories.DependencyInjection;
-using Startup.Api.Helpers.Data;
 using Startup.Api.Helpers.DependencyInjection;
 using Startup.Api.Helpers.Extensions;
 using Startup.Api.Helpers.Filter;
@@ -26,6 +25,8 @@ using Startup.Api.Models.ApplicationSettings;
 using Startup.Api.Services.DependencyInjection;
 using Startup.Business.DependencyInjection;
 using Startup.Common.Constants;
+using Startup.Common.Helpers.Data;
+using Startup.Common.Helpers.Filter;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -42,13 +43,16 @@ public static class RegisterDependentServices
 {
     private static readonly string _swaggerName = "StartupExample API";
 
+    private static AppSettings? _appSettings;
+
     /// <summary>
     /// Extension method that registers services used in the application.
     /// This method gets called by the runtime. Use this method to add services to the container.
     /// </summary>
     /// <param name="builder">The web application builder.</param>
+    /// <param name="appSettings"></param>
     /// <returns>The configured web application builder.</returns>
-    public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder, out AppSettings? appSettings)
     {
         #region Configuration Setup
 
@@ -83,13 +87,13 @@ public static class RegisterDependentServices
         }
 
         builder.Services.Configure<AppSettings>(builder.Configuration);
-        AppSettings appSettings = new()
+        _appSettings = new()
         {
             ConfigurationBase = builder.Configuration
         };
 
         // Bind the app settings to the model
-        builder.Configuration.Bind(appSettings);
+        builder.Configuration.Bind(_appSettings);
 
         // Adds the Fluent Validation to DI.
         builder.Services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Singleton);
@@ -103,24 +107,24 @@ public static class RegisterDependentServices
             .ValidateOnStart();
 
         builder.Services.AddSingleton(builder.Configuration);
-        builder.Services.AddSingleton(appSettings);
+        builder.Services.AddSingleton(_appSettings);
 
         #endregion
 
-        // Configure logging
+        #region Logging Setup
+
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-        builder.Logging.EnableRedaction();
-
-        if (!appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+        if (!_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
                 configureTelemetryConfiguration: (config) =>
-                    config.ConnectionString = appSettings.ConnectionStrings.ApplicationInsights,
+                    config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
                 configureApplicationInsightsLoggerOptions: (options) => { });
+
+            //builder.Services.AddApplicationInsightsTelemetry();
         }
-        builder.Services.AddApplicationInsightsTelemetry();
-        
+
         // EventLog is only available in a Windows environment
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -140,7 +144,7 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
-        if (appSettings.FeatureManagement.OpenTelemetryEnabled)
+        if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
             builder.Logging.ClearProviders();
             builder.Logging.AddOpenTelemetry(x =>
@@ -159,9 +163,9 @@ public static class RegisterDependentServices
                 x.AddConsoleExporter();
                 x.AddOtlpExporter(a =>
                 {
-                    a.Endpoint = new Uri(appSettings.OpenTelemetry.Endpoint);
+                    a.Endpoint = new Uri(_appSettings.OpenTelemetry.Endpoint);
                     a.Protocol = OtlpExportProtocol.HttpProtobuf;
-                    a.Headers = $"X-Seq-ApiKey={appSettings.OpenTelemetry.ApiKey}";
+                    a.Headers = $"X-Seq-ApiKey={_appSettings.OpenTelemetry.ApiKey}";
                 });
             });
         }
@@ -171,27 +175,31 @@ public static class RegisterDependentServices
             o.CombineLogs = true;
         });
 
+        builder.Logging.EnableRedaction();
+
         builder.Services.AddRedaction(x =>
         {
             x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
 
             x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
-#pragma warning disable EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
             x.SetHmacRedactor(o =>
             {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(appSettings.RedactionKey));
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
                 o.KeyId = 1776;
             }, new DataClassificationSet(DataTaxonomy.Pii));
-#pragma warning restore EXTEXP0002 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+
+            x.SetFallbackRedactor<NullRedactor>();
         });
 
-        if (appSettings.FeatureManagement.CorsEnabled)
+        #endregion
+
+        if (_appSettings.FeatureManagement.CorsEnabled)
         {
             builder.Services.AddCors(options => options.AddPolicy("StartupExampleApi",
                 corsPolicyBuilder =>
                 {
-                    corsPolicyBuilder.WithOrigins(appSettings.Jwt.Issuer);
+                    corsPolicyBuilder.WithOrigins(_appSettings.Jwt.Issuer);
                     corsPolicyBuilder.AllowAnyHeader();
                     corsPolicyBuilder.AllowAnyMethod();
                 }));
@@ -217,25 +225,25 @@ public static class RegisterDependentServices
                 o.TotalRequestTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds)
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds)
                 };
                 o.AttemptTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
                 };
                 o.CircuitBreaker = new HttpCircuitBreakerStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    BreakDuration = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
-                    SamplingDuration = TimeSpan.FromSeconds(appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds * 2)
+                    BreakDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                    SamplingDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds * 2)
                 };
             });
         });
 
-        builder.SetHttpClients(appSettings);
+        builder.SetHttpClients(_appSettings);
 
-        if (appSettings.FeatureManagement.SwaggerEnabled)
+        if (_appSettings.FeatureManagement.SwaggerEnabled)
         {
             builder.Services.AddApiVersioning(c =>
             {
@@ -287,7 +295,7 @@ public static class RegisterDependentServices
 
         builder.Services.AddFeatureManagement();
 
-        builder.SetDependencyInjection(appSettings);
+        builder.SetDependencyInjection(_appSettings);
 
         builder.Services.AddAuthentication(o =>
         {
@@ -300,9 +308,9 @@ public static class RegisterDependentServices
             o.SaveToken = true;
             o.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidIssuer = appSettings.Jwt.Issuer,
-                ValidAudience = appSettings.Jwt.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.Jwt.Key)),
+                ValidIssuer = _appSettings.Jwt.Issuer,
+                ValidAudience = _appSettings.Jwt.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.Jwt.Key)),
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,
@@ -315,8 +323,9 @@ public static class RegisterDependentServices
 
         builder.Services.AddHealthChecks()
             .AddCheck<OpenAiHealthCheck>(HttpClientNames.OPEN_AI_API_HEALTH.ToLower())
-            .AddSqlServer(appSettings.ConnectionStrings.DefaultConnection);
+            .AddSqlServer(_appSettings.ConnectionStrings.DefaultConnection);
 
+        appSettings = _appSettings;
         return builder;
     }
 

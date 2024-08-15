@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
-using Startup.Common.Helpers.Extensions;
 using Startup.Console.BackgroundService.Interface;
 using Startup.Console.BackgroundService.Workers;
 using Startup.Console.Constants;
+using Startup.Console.Helpers.Extensions;
 using Startup.Console.Model.ApplicationSettings;
 
 namespace Startup.Console.BackgroundService;
 
 /// <summary>
-/// This is the main service that will run all of the background workers.
+/// This is the main service that will run all the background workers.
 /// </summary>
 public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundService
 {
@@ -19,6 +19,7 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
     private readonly IHealthCheckWorker _healthCheckWorker;
     private readonly IFeatureManager _featureManager;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public HostedBackgroundServices(
         IFeatureManager featureManager,
         ILogger<HostedBackgroundServices> logger,
@@ -35,7 +36,7 @@ public class HostedBackgroundServices : Microsoft.Extensions.Hosting.BackgroundS
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ExecuteAsync));
         _logger.LogWarning("{Service} is starting. - {dateTime}", nameof(HostedBackgroundServices), DateTime.UtcNow);
-        _logger.LogInformation(await _appSettings.ToJsonAsync());
+        _logger.LogAppSettings(_appSettings);
 
         // Add collection of feature flags here that enable / disable worker threads
         bool healthCheckWorkerEnabled = await _featureManager.IsEnabledAsync(FeatureFlags.HEALTH_CHECK_WORKER);

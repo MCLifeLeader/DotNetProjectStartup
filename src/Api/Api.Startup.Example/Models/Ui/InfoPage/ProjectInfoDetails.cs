@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 /// <summary>
 /// </summary>
@@ -32,7 +32,7 @@ public class ProjectInfoDetails
     ///     The name.
     /// </value>
     [XmlAttribute("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     ///     Gets or sets the text.
@@ -41,5 +41,5 @@ public class ProjectInfoDetails
     ///     The text.
     /// </value>
     [XmlText]
-    public string Text { get; set; }
+    public string Text { get; set; } = null!;
 }

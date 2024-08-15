@@ -1,8 +1,8 @@
 ﻿namespace Startup.Api.Models.ApplicationSettings
 {
-    public class HttpClients
+    public record HttpClients
     {
-        public OpenAiClient OpenAi { get; set; }
-        public OpenAiClient AzureOpenAi { get; set; }
+        public OpenAiClient OpenAi { get; set; } = default!;
+        public OpenAiClient AzureOpenAi { get; set; } = default!;
     }
 }

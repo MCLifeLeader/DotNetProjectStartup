@@ -25,7 +25,7 @@ public class InfoPageCache : IInfoPageCache
     /// <param name="key"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public bool SetCanaryPage(string key, string data)
+    public bool SetCanaryPage(string key, string? data)
     {
         try
         {
@@ -43,9 +43,9 @@ public class InfoPageCache : IInfoPageCache
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    public string GetCanaryPage(string key)
+    public string? GetCanaryPage(string key)
     {
-        if (_cache.TryGetValue($"{_cacheKey}{key}", out string data))
+        if (_cache.TryGetValue($"{_cacheKey}{key}", out string? data))
         {
             return data;
         }

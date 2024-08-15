@@ -1,11 +1,12 @@
-﻿using Startup.Blazor.Server.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Blazor.Server.Models.ApplicationSettings
 {
-    public class Opentelemetry
+    public record Opentelemetry
     {
-        public string Endpoint { get; set; }
+        public string Endpoint { get; set; } = default!;
+
         [SensitiveData]
-        public string ApiKey { get; set; }
+        public string ApiKey { get; set; } = default!;
     }
 }

@@ -1,14 +1,16 @@
-﻿using Startup.Console.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Console.Model.ApplicationSettings;
 
-public class Startupapi
+public record Startupapi
 {
-    public string Uri { get; set; }
-    public string Cron { get; set; }
+    public string Uri { get; set; } = default!;
+    public string Cron { get; set; } = default!;
     public int TimeOutInSeconds { get; set; }
+
     [PiiData]
-    public string Username { get; set; }
+    public string Username { get; set; } = default!;
+ 
     [SensitiveData]
-    public string Password { get; set; }
+    public string Password { get; set; } = default!;
 }

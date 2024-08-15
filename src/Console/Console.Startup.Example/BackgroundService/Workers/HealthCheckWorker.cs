@@ -12,6 +12,7 @@ public class HealthCheckWorker : IHealthCheckWorker
     private readonly ILogger<HealthCheckWorker> _logger;
     private readonly StartupHttp _startupHttp;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public HealthCheckWorker(
         ILogger<HealthCheckWorker> logger,
         IOptions<AppSettings> appSettings,

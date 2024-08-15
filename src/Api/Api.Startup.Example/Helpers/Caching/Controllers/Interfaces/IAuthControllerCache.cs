@@ -2,6 +2,6 @@
 
 public interface IAuthControllerCache
 {
-    bool SetAuth(string key, string authToken);
-    string GetAuth(string key);
+    bool SetAuth(string key, string? authToken);
+    string? GetAuth(string key);
 }

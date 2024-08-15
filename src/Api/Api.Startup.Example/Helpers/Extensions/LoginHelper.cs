@@ -5,7 +5,7 @@ namespace Startup.Api.Helpers.Extensions;
 
 public static class LoginHelper
 {
-    public static UserLoginModel ToUserLogin(this DeviceLoginModel entity)
+    public static UserLoginModel? ToUserLogin(this DeviceLoginModel? entity)
     {
         if (entity == null)
         {

@@ -39,7 +39,7 @@ public class AuthService : IAuthService
     }
 
     //ToDo: Update the method to return AuthToken instead of a string
-    public string AuthenticateUser(UserLoginModel? user)
+    public string? AuthenticateUser(UserLoginModel? user)
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(AuthenticateUser));
 
@@ -60,7 +60,7 @@ public class AuthService : IAuthService
 
         List<Claim> claims = new List<Claim>();
 
-        IdentityUser iUser = _userManager.FindByNameAsync(user.Username).Result!;
+        IdentityUser iUser = _userManager.FindByNameAsync(user.Username!).Result!;
 
         //_userManager.ChangePasswordAsync(iUser, "P@ssword123", "P@ssword123").GetAwaiter().GetResult();
         // Create a log entry for the authentication attempt.
@@ -70,7 +70,7 @@ public class AuthService : IAuthService
             AuthStatusId = (short) AuthenticationStatusEnum.Failure,
         };
 
-        if (_userManager.CheckPasswordAsync(iUser, user.Password).Result)
+        if (_userManager.CheckPasswordAsync(iUser, user.Password!).Result)
         {
             // Update the log entry with the user Id.
             authLog.AspNetUsersId = iUser.Id;
@@ -97,7 +97,7 @@ public class AuthService : IAuthService
             DateTime expTokenDateTime = tokenDateTime.Add(TimeSpan.FromMinutes(_appSettings.Jwt.ExpireInMinutes));
 
             claims.Add(new Claim(ClaimTypes.Sid, iUser.Id));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Username));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Username!));
             claims.Add(new Claim(ClaimTypes.Name, user.DisplayName ?? string.Empty));
             claims.Add(new Claim(ClaimTypes.Expiration, expTokenDateTime.ToString("O")));
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, _appSettings.Jwt.Subject));
@@ -126,7 +126,7 @@ public class AuthService : IAuthService
         return claims;
     }
 
-    private string GenerateJsonWebToken(IList<Claim> claims)
+    private string? GenerateJsonWebToken(IList<Claim> claims)
     {
         ClaimsIdentity identity = new ClaimsIdentity(claims, "Token");
         SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.Jwt.Key));

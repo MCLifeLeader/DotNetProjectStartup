@@ -19,7 +19,7 @@ public class InfoService : IInfoService
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ReadApiCanaryPage));
 
-        string canary = _canaryPageRepository.GetCanaryPage();
+        string? canary = _canaryPageRepository.GetCanaryPage();
         string weather = _canaryPageRepository.GetWeatherPage();
 
         return canary + weather;
@@ -29,7 +29,7 @@ public class InfoService : IInfoService
     {
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(ReadApiCanaryPage));
 
-        string canary = await _canaryPageRepository.GetCanaryPageAsync();
+        string? canary = await _canaryPageRepository.GetCanaryPageAsync();
         string weather = await _canaryPageRepository.GetWeatherPageAsync();
 
         return canary + weather;

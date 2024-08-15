@@ -27,7 +27,7 @@ public static class JsonExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="json"></param>
     /// <returns></returns>
-    public static T FromJson<T>(this string json)
+    public static T? FromJson<T>(this string json)
     {
         return JsonConvert.DeserializeObject<T>(json);
     }
@@ -47,7 +47,7 @@ public static class JsonExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static string ToJson(this object value)
+    public static string? ToJson(this object value)
     {
         return JsonConvert.SerializeObject(value);
     }
@@ -57,7 +57,7 @@ public static class JsonExtensions
     /// </summary>
     /// <param name="json">The json.</param>
     /// <returns></returns>
-    public static async Task<JObject> FromJsonToJObjectAsync(this string json)
+    public static async Task<JObject?> FromJsonToJObjectAsync(this string json)
     {
         if (string.IsNullOrEmpty(json))
         {
@@ -82,7 +82,7 @@ public static class JsonExtensions
     /// </summary>
     /// <param name="json">The json.</param>
     /// <returns></returns>
-    public static async Task<JArray> FromJsonToJArrayAsync(this string json)
+    public static async Task<JArray?> FromJsonToJArrayAsync(this string json)
     {
         if (string.IsNullOrEmpty(json))
         {

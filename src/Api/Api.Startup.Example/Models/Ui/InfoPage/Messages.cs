@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 /// <summary>
 /// 
@@ -8,5 +8,5 @@ namespace Startup.Api.Models.Ui.CanaryPage;
 public class Messages
 {
     [JsonPropertyName("message")]
-    public string Message { get; set; }
+    public string? Message { get; set; }
 }

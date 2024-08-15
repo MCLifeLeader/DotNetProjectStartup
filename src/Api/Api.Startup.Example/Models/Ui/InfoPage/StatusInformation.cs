@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 /// <summary>
 /// 

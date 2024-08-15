@@ -1,6 +1,6 @@
 ﻿namespace Startup.Api.Models.ApplicationSettings;
 
-public class FeatureManagement
+public record FeatureManagement
 {
     public bool OpenTelemetryEnabled { get; set; }
     public bool InformationEndpoints { get; set; }

@@ -1,11 +1,12 @@
-﻿using Startup.Web.Helpers.Data;
+﻿using Startup.Common.Helpers.Data;
 
 namespace Startup.Web.Models.ApplicationSettings;
 
-public class Connectionstrings
+public record Connectionstrings
 {
     [SensitiveData]
-    public string DefaultConnection { get; set; }
+    public string DefaultConnection { get; set; } = default!;
+
     [SensitiveData]
-    public string ApplicationInsights { get; set; }
+    public string ApplicationInsights { get; set; } = default!;
 }

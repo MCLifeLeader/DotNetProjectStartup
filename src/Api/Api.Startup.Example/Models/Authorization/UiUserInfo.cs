@@ -2,11 +2,11 @@
 
 public class UiUserInfo
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
-    public string Role { get; set; }
+    public string? Role { get; set; }
 
-    public string UserAccountID { get; set; }
+    public string? UserAccountID { get; set; }
 
     public bool IsEmployeeImpersonating { get; set; }
 
@@ -26,7 +26,7 @@ public class UiUserInfo
             Name = "";
         }
 
-        if (Name.IndexOf("**") < 0)
+        if (Name.IndexOf("**", StringComparison.Ordinal) < 0)
         {
             Name = "**" + Name;
         }

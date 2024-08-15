@@ -20,9 +20,9 @@ public class OpenAiHealthCheck : IHealthCheck
         {
             OpenAiHealthStatus data = await _httpClient.GetObjectAsync<OpenAiHealthStatus>("api/v2/status.json", HttpClientNames.OPEN_AI_API_HEALTH);
 
-            if (data.Page.Name.Contains("OpenAI") &&
-                data.Status.Indicator.Contains("none") &&
-                data.Status.Description.Contains("All Systems Operational"))
+            if (data.Page!.Name!.Contains("OpenAI") &&
+                data.Status!.Indicator!.Contains("none") &&
+                data.Status.Description!.Contains("All Systems Operational"))
             {
                 return HealthCheckResult.Healthy();
             }
@@ -39,25 +39,25 @@ public class OpenAiHealthCheck : IHealthCheck
     public class OpenAiHealthStatus
     {
         [JsonProperty("page")]
-        public Page Page { get; set; }
+        public Page? Page { get; set; }
 
         [JsonProperty("status")]
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
     }
 
     public class Page
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         [JsonProperty("time_zone")]
-        public string TimeZone { get; set; }
+        public string? TimeZone { get; set; }
 
         [JsonProperty("updated_at")]
         public DateTime UpdatedAt { get; set; }
@@ -66,10 +66,10 @@ public class OpenAiHealthCheck : IHealthCheck
     public class Status
     {
         [JsonProperty("indicator")]
-        public string Indicator { get; set; }
+        public string? Indicator { get; set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
     #endregion
 }

@@ -56,7 +56,7 @@ public class AuthController : BaseController
 
         try
         {
-            string tokenString = _authControllerCache.GetAuth($"{user.Username}");
+            string? tokenString = _authControllerCache.GetAuth($"{user.Username}");
 
             if (string.IsNullOrEmpty(tokenString))
             {

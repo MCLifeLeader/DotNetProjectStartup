@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database.Example", "StartupExample\Database.Example.sqlproj", "{14A007F4-DA3C-495D-B5CB-5C246645AEEA}"
@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D64886AA-81B7-42D8-B504-65AE075AB9F2}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+		.vsconfig = .vsconfig
 		..\.devcontainer\devcontainer.json = ..\.devcontainer\devcontainer.json
 		..\Docker_Setup.ps1 = ..\Docker_Setup.ps1
 		..\containers\mssql.docker-compose.yml = ..\containers\mssql.docker-compose.yml
@@ -46,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Web", "Web\Web.Star
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{B412558B-07BE-41EB-A7D8-880B11D6B59D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startup.Tests", "Startup.Tests\Startup.Tests.csproj", "{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Tests", "Startup.Tests\Startup.Tests.csproj", "{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

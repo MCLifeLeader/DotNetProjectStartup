@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Xml.Serialization;
 
-namespace Startup.Api.Models.Ui.CanaryPage;
+namespace Startup.Api.Models.Ui.InfoPage;
 
 public class ServiceDetails
 {
@@ -34,7 +34,7 @@ public class ServiceDetails
     ///     The name.
     /// </value>
     [XmlElement("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     ///     Gets or sets the name of the encoded.
@@ -43,7 +43,7 @@ public class ServiceDetails
     ///     The name of the encoded.
     /// </value>
     [XmlElement("encoded-name")]
-    public string EncodedName { get; set; }
+    public string EncodedName { get; set; } = null!;
 
     /// <summary>
     ///     Gets or sets the messages.
@@ -53,7 +53,7 @@ public class ServiceDetails
     /// </value>
     [XmlArray("messages")]
     [XmlArrayItem("message")]
-    public List<string> Messages { get; set; }
+    public List<string> Messages { get; set; } = null!;
 
 
     /// <summary>

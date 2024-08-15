@@ -38,7 +38,7 @@ public class ChunkedObjectData<TEntityType>
     /// The next id to use when chunking
     /// </summary>
     // ReSharper disable once UnusedMember.Global
-    public TEntityType NextStartingId
+    public TEntityType? NextStartingId
     {
         get
         {
