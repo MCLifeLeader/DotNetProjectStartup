@@ -180,7 +180,6 @@ public static class RegisterDependentServices
         builder.Services.AddRedaction(x =>
         {
             x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-
             x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
             x.SetHmacRedactor(o =>
