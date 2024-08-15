@@ -30,21 +30,26 @@ The project is broken apart into the following examples:
 
 ## Using SQL Server Express
 1. To get started with this project, you will need to clone the repository and then open the solution in Visual Studio.
-2. Once the solution is open, you will need to build the solution. This will download all of the NuGet packages that are required or the project.
+2. Once the solution is open, you will want to build the solution. This will download all of the NuGet packages that are required or the project.
 3. Open the Database.Example project and build the project then publish using the "StartupExample.publish.xml" profile.
-4. There should be no need to update the secrets.json file with the connection string as it should be configured in the ppsettings json file for SQL Express.
+4. There should be no need to update the secrets.json file with the connection string as it should be configured in the appsettings.json file for SQL Express.
 
 ## Using Docker Containers
 1. Start Visual Studio and open the solution.
 2. Open the Database.Example project and build the project then publish using the "StartupExample.Docker.publish.xml" profile. Using the default password of "P@ssword123!".
 3. MailHog was added as an email trap.
 4. Open Telemetry was added to the project to help with debugging and development and can be found [here](http://localhost:4341/) after starting the docker containers.
-   1. Watch the following video: [The Logging Everyone Should Be Using in .NET](https://www.youtube.com/watch?v=MHJ0BHfWhRw)
+   1. Watch the following video for why and how its used: [The Logging Everyone Should Be Using in .NET](https://www.youtube.com/watch?v=MHJ0BHfWhRw)
 
 ## Running the Applications
 1. Once the project has been built and the database has been created, you can run any of the applications.
 
-# Codespaces
+# CodeSpaces
+
+If you are using CodeSpaces you'll want to update your container git configuration profile. Be sure to update with your appropriate name and email details.
+
 ## GitHub Configuration
+```
 git config --global user.name "Your Name"
 git config --global user.email "youremail@yourdomain.com"
+```

@@ -188,11 +188,6 @@ public static class RegisterDependentServices
                     x.SetFallbackRedactor<NullRedactor>();
                 });
 
-                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
-                {
-                    //services.AddApplicationInsightsTelemetry();
-                }
-
                 #endregion
             })
             .ConfigureLogging((hostContext, logging) =>

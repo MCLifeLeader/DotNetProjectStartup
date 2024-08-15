@@ -111,8 +111,6 @@ public static class RegisterDependentServices
                 configureTelemetryConfiguration: (config) =>
                     config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
                 configureApplicationInsightsLoggerOptions: (options) => { });
-
-            //builder.Services.AddApplicationInsightsTelemetry();
         }
 
         // EventLog is only available in a Windows environment
