@@ -134,6 +134,27 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
+
+        builder.Logging.EnableRedaction();
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+
+            x.SetFallbackRedactor<NullRedactor>();
+        });
+
         if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
             builder.Logging.ClearProviders();
@@ -159,27 +180,6 @@ public static class RegisterDependentServices
                 });
             });
         }
-
-        builder.Services.AddHttpLogging(o =>
-        {
-            o.CombineLogs = true;
-        });
-
-        builder.Logging.EnableRedaction();
-
-        builder.Services.AddRedaction(x =>
-        {
-            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
-
-            x.SetHmacRedactor(o =>
-            {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
-                o.KeyId = 1776;
-            }, new DataClassificationSet(DataTaxonomy.Pii));
-
-            x.SetFallbackRedactor<NullRedactor>();
-        });
 
         #endregion
 
@@ -214,6 +214,7 @@ public static class RegisterDependentServices
         builder.Services.AddFeatureManagement();
 
         builder.Services.AddRazorPages();
+
         builder.SetDependencyInjection(_appSettings);
 
         builder.Services.AddHealthChecks()
