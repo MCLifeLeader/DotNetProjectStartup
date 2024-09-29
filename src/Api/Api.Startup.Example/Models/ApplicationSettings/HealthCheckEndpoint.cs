@@ -1,8 +1,7 @@
-﻿namespace Startup.Api.Models.ApplicationSettings
+﻿namespace Startup.Api.Models.ApplicationSettings;
+
+public record HealthCheckEndpoint
 {
-    public record HealthCheckEndpoint
-    {
-        public string OpenAi { get; set; } = default!;
-        public int TimeoutInSeconds { get; set; }
-    }
+    public string OpenAi { get; set; } = default!;
+    public int TimeoutInSeconds { get; set; }
 }

@@ -78,6 +78,9 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         RuleFor(x => x.HttpClients.AzureOpenAi.CacheDurationInSeconds)
             .InclusiveBetween(5, 120);
 
+        RuleFor(x=>x.HttpClients.Resilience.BaseTimeOutInSeconds)
+            .InclusiveBetween(5, 120);
+
         RuleFor(x => x.HealthCheckEndpoints.OpenAi)
             .NotNull()
             .NotEmpty();

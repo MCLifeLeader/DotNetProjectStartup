@@ -1,8 +1,7 @@
-﻿namespace Startup.Blazor.Server.Models.ApplicationSettings
+﻿namespace Startup.Blazor.Server.Models.ApplicationSettings;
+
+public record HealthCheckEndpoint
 {
-    public record HealthCheckEndpoint
-    {
-        public string OpenAi { get; set; } = default!;
-        public int TimeoutInSeconds { get; set; }
-    }
+    public string OpenAi { get; set; } = default!;
+    public int TimeoutInSeconds { get; set; }
 }

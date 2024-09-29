@@ -14,6 +14,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Connection\Interfaces\**" />
+      <Content Remove="Connection\Interfaces\**" />
+      <EmbeddedResource Remove="Connection\Interfaces\**" />
+      <None Remove="Connection\Interfaces\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Content Remove="appsettings.Debug.json" />
       <Content Remove="appsettings.Development.json" />
       <Content Remove="appsettings.Production.json" />
@@ -107,7 +114,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Connection\Interfaces\" />
       <Folder Include="Constants\" />
     </ItemGroup>
 

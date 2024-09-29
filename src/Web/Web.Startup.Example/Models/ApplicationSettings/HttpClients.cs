@@ -1,9 +1,9 @@
-﻿namespace Startup.Web.Models.ApplicationSettings
-{
-    public record HttpClients
-    {
-        public OpenAiClient OpenAi { get; set; } = default!;
+﻿namespace Startup.Web.Models.ApplicationSettings;
 
-        public OpenAiClient AzureOpenAi { get; set; } = default!;
-    }
+public record HttpClients
+{
+    public OpenAiClient OpenAi { get; set; } = default!;
+
+    public OpenAiClient AzureOpenAi { get; set; } = default!;
+    public Resilience Resilience { get; set; } = default!;
 }

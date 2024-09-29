@@ -193,18 +193,18 @@ public static class RegisterDependentServices
                 o.TotalRequestTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds)
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds)
                 };
                 o.AttemptTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds),
                 };
                 o.CircuitBreaker = new HttpCircuitBreakerStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    BreakDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
-                    SamplingDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds * 2)
+                    BreakDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds),
+                    SamplingDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds * 2)
                 };
             });
         });
