@@ -111,6 +111,8 @@ public static class RegisterDependentServices
                 configureTelemetryConfiguration: (config) =>
                     config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
                 configureApplicationInsightsLoggerOptions: (options) => { });
+
+            builder.Services.AddApplicationInsightsTelemetry();
         }
 
         // EventLog is only available in a Windows environment
@@ -131,6 +133,27 @@ public static class RegisterDependentServices
                 })
                 .AddDebug();
         }
+
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
+
+        builder.Logging.EnableRedaction();
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+
+            x.SetFallbackRedactor<NullRedactor>();
+        });
 
         if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
@@ -158,27 +181,6 @@ public static class RegisterDependentServices
             });
         }
 
-        builder.Services.AddHttpLogging(o =>
-        {
-            o.CombineLogs = true;
-        });
-
-        builder.Logging.EnableRedaction();
-
-        builder.Services.AddRedaction(x =>
-        {
-            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
-
-            x.SetHmacRedactor(o =>
-            {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
-                o.KeyId = 1776;
-            }, new DataClassificationSet(DataTaxonomy.Pii));
-
-            x.SetFallbackRedactor<NullRedactor>();
-        });
-
         #endregion
 
         builder.Services.AddMemoryCache();
@@ -191,18 +193,18 @@ public static class RegisterDependentServices
                 o.TotalRequestTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds)
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds)
                 };
                 o.AttemptTimeout = new HttpTimeoutStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
+                    Timeout = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds),
                 };
                 o.CircuitBreaker = new HttpCircuitBreakerStrategyOptions()
                 {
                     Name = "TotalTimeout",
-                    BreakDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds),
-                    SamplingDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.AzureOpenAi.TimeoutInSeconds * 2)
+                    BreakDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds),
+                    SamplingDuration = TimeSpan.FromSeconds(_appSettings.HttpClients.Resilience.BaseTimeOutInSeconds * 2)
                 };
             });
         });
@@ -212,6 +214,7 @@ public static class RegisterDependentServices
         builder.Services.AddFeatureManagement();
 
         builder.Services.AddRazorPages();
+
         builder.SetDependencyInjection(_appSettings);
 
         builder.Services.AddHealthChecks()

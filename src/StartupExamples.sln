@@ -9,8 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.editorconfig = ..\.editorconfig
 		.vsconfig = .vsconfig
 		..\.devcontainer\devcontainer.json = ..\.devcontainer\devcontainer.json
+		..\containers\docker-compose.yml = ..\containers\docker-compose.yml
 		..\Docker_Setup.ps1 = ..\Docker_Setup.ps1
-		..\containers\mssql.docker-compose.yml = ..\containers\mssql.docker-compose.yml
 		PostCreate.ps1 = PostCreate.ps1
 		..\README.md = ..\README.md
 	EndProjectSection
@@ -19,8 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Data", "Startup.Dat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{D64A0A57-74BC-454A-8BEA-1AF2472FBD39}"
 	ProjectSection(SolutionItems) = preProject
-		..\Start_StartupExample_Api.ps1 = ..\Start_StartupExample_Api.ps1
-		..\Stop_StartupExample_Api.ps1 = ..\Stop_StartupExample_Api.ps1
+		..\run_app.ps1 = ..\run_app.ps1
+		..\stop_app.ps1 = ..\stop_app.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{AA486938-F915-4F6A-8A1E-495A01A57EDA}"

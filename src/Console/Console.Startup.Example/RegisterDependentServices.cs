@@ -188,6 +188,11 @@ public static class RegisterDependentServices
                     x.SetFallbackRedactor<NullRedactor>();
                 });
 
+                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                {
+                    services.AddApplicationInsightsTelemetry();
+                }
+
                 #endregion
             })
             .ConfigureLogging((hostContext, logging) =>
@@ -208,8 +213,7 @@ public static class RegisterDependentServices
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-                    logging
-                        .AddEventLog();
+                    logging.AddEventLog();
                 }
 
                 if (hostContext.HostingEnvironment.EnvironmentName == Environments.Development)
