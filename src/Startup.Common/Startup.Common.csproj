@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Startup.Common</AssemblyName>
@@ -12,33 +12,33 @@
 
     <ItemGroup>
         <PackageReference Include="Azure.Identity" Version="1.13.1" />
-        <PackageReference Include="Azure.Storage.Blobs" Version="12.22.2" />
-        <PackageReference Include="Azure.Storage.Queues" Version="12.20.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.23.0" />
+        <PackageReference Include="Azure.Storage.Queues" Version="12.21.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
-        <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.6" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Azure" Version="1.8.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="8.10.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.10.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
         <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.9.0" />
-        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+        <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.10.0" />
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
-        <PackageReference Include="System.Runtime.Caching" Version="8.0.1" />
+        <PackageReference Include="System.Runtime.Caching" Version="9.0.0" />
     </ItemGroup>
 
 </Project>
