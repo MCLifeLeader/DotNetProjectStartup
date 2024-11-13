@@ -1,0 +1,30 @@
+name: Delete Old Tags
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+
+jobs:
+  delete-old-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Delete old tags
+        run: |
+          # Define the time frame (e.g., 60 days ago)
+          timeFrame=$(date -d '60 days ago' +%s)
+
+          # Get all tags and their creation dates
+          tags=$(git for-each-ref --sort=taggerdate --format '%(refname:short) %(taggerdate:raw)' refs/tags)
+
+          # Filter and delete tags older than the specified time frame
+          echo "$tags" | while read -r tag date; do
+            if [ "$date" -lt "$timeFrame" ]; then
+              git tag -d "$tag"
+              git push origin --delete "$tag"
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
