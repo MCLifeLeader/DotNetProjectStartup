@@ -1,6 +1,5 @@
 {
    "recommendations": [
-      "sonarsource.sonarlint-vscode",
       "ms-azuretools.vscode-bicep",
       "donjayamanne.bower",
       "ms-dotnettools.csharp",
