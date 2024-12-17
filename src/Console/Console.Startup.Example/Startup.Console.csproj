@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <LangVersion>latest</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
         <AssemblyName>Startup.Console</AssemblyName>
