@@ -12,6 +12,8 @@
         <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
         <PlatformTarget>x64</PlatformTarget>
         <PublishSingleFile>true</PublishSingleFile>
+        <PublishAot>false</PublishAot>
+
         <Configurations>Debug;Release;Development;Production;Staging</Configurations>
         <UserSecretsId>98752f25-bd55-4a37-a840-ca720045b62b</UserSecretsId>
     </PropertyGroup>
