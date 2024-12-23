@@ -4,7 +4,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Docker</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="appsettings.Debug.json" />
+    <Content Remove="appsettings.Docker.json" />
+    <Content Remove="appsettings.Release.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Startup.Aspire.ServiceDefaults\Startup.Aspire.ServiceDefaults.csproj" />
@@ -13,11 +20,36 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Seq" Version="9.0.0" />
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.Debug.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+    <None Include="appsettings.Docker.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+    <None Include="appsettings.Release.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
   </ItemGroup>
 
 </Project>
