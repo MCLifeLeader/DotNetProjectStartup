@@ -11,7 +11,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5100"
     },
-    "https": {
+    "Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -22,7 +22,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7100;http://localhost:5100"
     },
-    "docker_https": {
+    "Docker_Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

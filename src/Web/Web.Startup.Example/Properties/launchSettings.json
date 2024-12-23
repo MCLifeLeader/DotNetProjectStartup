@@ -10,7 +10,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5120"
     },
-    "https": {
+    "Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
@@ -20,7 +20,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7120;http://localhost:5120"
     },
-    "docker_https": {
+    "Docker_Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
