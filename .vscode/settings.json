@@ -1,6 +1,11 @@
 {
-   "dotnet.defaultSolution": "src\\StartupExamples.sln",
-   "sarif-viewer.connectToGithubCodeScanning": "off",
-   "remote.autoForwardPortsFallback": 0,
-   "github.copilot.chat.codeGeneration.useInstructionFiles": true
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "dotnet.defaultSolution": "src\\StartupExamples.sln",
+  "sarif-viewer.connectToGithubCodeScanning": "off",
+  "remote.autoForwardPortsFallback": 0,
+  "remote.autoForwardPorts": false,
+  "remote.restoreForwardedPorts": false,
+  "remote.otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  }
 }

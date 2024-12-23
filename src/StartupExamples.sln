@@ -65,6 +65,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Development|Any CPU = Development|Any CPU
+		Docker|Any CPU = Docker|Any CPU
 		Production|Any CPU = Production|Any CPU
 		Release|Any CPU = Release|Any CPU
 		Staging|Any CPU = Staging|Any CPU
@@ -76,6 +77,9 @@ Global
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Development|Any CPU.Build.0 = Development|Any CPU
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Development|Any CPU.Deploy.0 = Development|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Docker|Any CPU.Build.0 = Docker|Any CPU
+		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Docker|Any CPU.Deploy.0 = Docker|Any CPU
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Production|Any CPU.Build.0 = Production|Any CPU
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA}.Production|Any CPU.Deploy.0 = Production|Any CPU
@@ -89,6 +93,8 @@ Global
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Development|Any CPU.Build.0 = Development|Any CPU
+		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Production|Any CPU.Build.0 = Production|Any CPU
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -99,6 +105,8 @@ Global
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Development|Any CPU.Build.0 = Development|Any CPU
+		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Production|Any CPU.Build.0 = Production|Any CPU
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,6 +117,8 @@ Global
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Development|Any CPU.Build.0 = Development|Any CPU
+		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Production|Any CPU.Build.0 = Production|Any CPU
 		{D99A8175-7EE2-4680-A527-CC31A977F68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -119,6 +129,8 @@ Global
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Development|Any CPU.Build.0 = Development|Any CPU
+		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Production|Any CPU.Build.0 = Production|Any CPU
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -129,6 +141,8 @@ Global
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Development|Any CPU.Build.0 = Development|Any CPU
+		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Production|Any CPU.Build.0 = Production|Any CPU
 		{B7B840F0-A596-49E2-AC1C-2E2D7A07A226}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -139,6 +153,8 @@ Global
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Development|Any CPU.Build.0 = Development|Any CPU
+		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Production|Any CPU.Build.0 = Production|Any CPU
 		{A62D9196-3373-44D9-8D85-2717FBEFF3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -149,6 +165,8 @@ Global
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Development|Any CPU.Build.0 = Development|Any CPU
+		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Production|Any CPU.Build.0 = Production|Any CPU
 		{DACDB214-2B7A-445B-855D-A54B38467E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -159,6 +177,8 @@ Global
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Development|Any CPU.Build.0 = Development|Any CPU
+		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Production|Any CPU.ActiveCfg = Production|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Production|Any CPU.Build.0 = Production|Any CPU
 		{A596B127-63E8-44B6-B538-9CC1FBA6D9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -169,6 +189,8 @@ Global
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{E31920EB-6EEE-4ABA-B94B-0A8E4319534B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -179,6 +201,8 @@ Global
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{C90F87C4-C9D6-4CD2-A717-983DD078D9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -189,6 +213,8 @@ Global
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{513BB623-E26B-4B05-B798-ECD6A2C9CD01}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -199,6 +225,8 @@ Global
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{B631056D-2F71-403C-AEE0-C9EC5C6BE232}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -209,6 +237,8 @@ Global
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{EF5B3FA3-D48C-48E6-9ED1-23CC9B8C7067}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -219,6 +249,8 @@ Global
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Docker|Any CPU.ActiveCfg = Docker|Any CPU
+		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Docker|Any CPU.Build.0 = Docker|Any CPU
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Production|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Production|Any CPU.Build.0 = Debug|Any CPU
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D}.Release|Any CPU.ActiveCfg = Release|Any CPU

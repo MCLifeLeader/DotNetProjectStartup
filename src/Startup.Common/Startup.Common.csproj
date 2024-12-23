@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <AssemblyName>Startup.Common</AssemblyName>
         <RootNamespace>Startup.Common</RootNamespace>
-        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging;Docker</Configurations>
     </PropertyGroup>
 
     <ItemGroup>

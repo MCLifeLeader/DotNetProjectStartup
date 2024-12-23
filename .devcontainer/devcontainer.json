@@ -1,30 +1,31 @@
 {
-  "name": "Startup Examples",
-  "image": "mcr.microsoft.com/dotnet/sdk:latest",
+  "name": "Dotnet Example Projects",
+
+  // Base Image for the dev container. More info: https://aka.ms/vscode-remote/containers/images.
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest"
-    },
-    "ghcr.io/azure/azure-dev/azd:0": {
-      "version": "latest"
-    },
+    "ghcr.io/azure/azure-dev/azd:0": {},
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
     "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "none",
-      "dotnetRuntimeVersions": "8.0",
-      "aspNetCoreRuntimeVersions": "8.0",
-      "workloads": "aspire, wasm-tools"
-    }
+      "workloads": "aspire, wasm-tools",
+      "nuget": "true"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/powershell:1": {}
   },
+
+  // Configure tool-specific properties.
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.windows": "PowerShell"
       },
+      // VsCode extensions to install in the dev container.
       "extensions": [
         "DotJoshJohnson.xml",
         "EditorConfig.EditorConfig",
@@ -32,6 +33,7 @@
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "GitHub.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
         "humao.rest-client",
         "mechatroner.rainbow-csv",
         "ms-dotnettools.vscode-dotnet-runtime",
@@ -44,36 +46,56 @@
         "rangav.vscode-thunder-client",
         "redhat.vscode-yaml",
         "ritwickdey.LiveServer",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "msjsdiag.vscode-react-native",
+        "donjayamanne.bower"
       ]
     }
   },
-  "forwardPorts": [
-    // MailHog
-    8024,
-    // SQL Server
-    4443
-  ],
-  "postCreateCommand": "cd ./src && pwsh -File ./PostCreate.ps1",
-  "hostRequirements": {
-    "cpus": 4,
-    "memory": "8gb",
-    "storage": "5gb"
-  },
-  "remoteEnv": {
-    "DOTNET_MULTILEVEL_LOOKUP": "0",
-    "TARGET": "net9.0"
-  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "sudo pwsh -File ./post_devcontainer.ps1",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [27080, 8541, 8206, 8100, 8110, 8120],
+
   "portsAttributes": {
-      "8024": {
-        "label": "MailHog",
-        "requireLocalPort": false,
-        "onAutoForward": "silent"
-      },
-      "4443": {
-        "label": "SQL Server",
-        "requireLocalPort": false,
-        "onAutoForward": "silent"
-      }
+    "27080": {
+      "label": "Docker-Aspire_Dash-https",
+      "protocol": "https"
+    },
+    "8541": {
+      "label": "Docker-Aspire.Api-https",
+      "protocol": "https"
+    },
+    "8206": {
+      "label": "Docker-Aspire.BlazorApp-https",
+      "protocol": "https"
+    },
+    "8100": {
+      "label": "Docker-Startup.Api-https",
+      "protocol": "https"
+    },
+    "8110": {
+      "label": "Docker-Startup.BlazorApp-https",
+      "protocol": "https"
+    },
+    "8120": {
+      "label": "Docker-Startup.BlazorApp-https",
+      "protocol": "https"
     }
+  },
+
+  "otherPortsAttributes": {
+    "onAutoForward": "silent"
+  },
+
+  "containerEnv": {
+    "ASPNETCORE_ENVIRONMENT": "Development",
+    "DOTNET_ENVIRONMENT": "Development",
+    "ASPNETCORE_LOCALDEV": "true"
+  },
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "root"
 }

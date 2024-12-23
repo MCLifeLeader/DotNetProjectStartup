@@ -8,7 +8,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging;Docker</Configurations>
         <UserSecretsId>9af20441-c662-4c6f-97f7-2d9afb0295d4</UserSecretsId>
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
@@ -23,6 +23,7 @@
     <ItemGroup>
       <Content Remove="appsettings.Debug.json" />
       <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Docker.json" />
       <Content Remove="appsettings.Production.json" />
       <Content Remove="appsettings.Release.json" />
       <Content Remove="appsettings.Staging.json" />
@@ -38,6 +39,10 @@
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings.json</DependentUpon>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Docker.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
       </None>
       <None Include="appsettings.Production.json">
         <IsTransformFile>true</IsTransformFile>
