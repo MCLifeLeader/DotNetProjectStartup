@@ -7,6 +7,7 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Configurations>Debug;Release;Docker</Configurations>
+    <UserSecretsId>894a8cbc-bafd-4219-a440-634fa081bf98</UserSecretsId>
   </PropertyGroup>
 
 

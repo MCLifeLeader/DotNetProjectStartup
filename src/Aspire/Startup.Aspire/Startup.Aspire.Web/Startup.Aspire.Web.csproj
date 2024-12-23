@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Docker</Configurations>
+    <UserSecretsId>2fbe66a6-322b-413a-a770-afc22f526391</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
