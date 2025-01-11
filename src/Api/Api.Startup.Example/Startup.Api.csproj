@@ -11,13 +11,14 @@
         <NoWarn>$(NoWarn);1591</NoWarn>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <UserSecretsId>62459bb0-90a3-4a96-b94d-b75bafc868ef</UserSecretsId>
-        <Configurations>Debug;Release;Development;Production;Staging</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging;Docker</Configurations>
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
 
     <ItemGroup>
       <Content Remove="appsettings.Debug.json" />
       <Content Remove="appsettings.Development.json" />
+      <Content Remove="appsettings.Docker.json" />
       <Content Remove="appsettings.Production.json" />
       <Content Remove="appsettings.Release.json" />
       <Content Remove="appsettings.Staging.json" />
@@ -33,6 +34,10 @@
         <IsTransformFile>true</IsTransformFile>
         <DependentUpon>appsettings.json</DependentUpon>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="appsettings.Docker.json">
+        <IsTransformFile>true</IsTransformFile>
+        <DependentUpon>appsettings.json</DependentUpon>
       </None>
       <None Include="appsettings.Production.json">
         <IsTransformFile>true</IsTransformFile>

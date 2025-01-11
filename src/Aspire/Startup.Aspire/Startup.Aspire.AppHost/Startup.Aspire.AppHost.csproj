@@ -9,6 +9,7 @@
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>0fb4399a-0d52-4065-a3ed-16c3c9004ac7</UserSecretsId>
+    <Configurations>Debug;Release;Docker</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,28 @@
     <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.Seq" Version="9.0.0" />
     <PackageReference Include="Aspire.Seq" Version="9.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.Debug.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+    <None Update="appsettings.Docker.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
+    <None Update="appsettings.json">
+      <TransformOnBuild>true</TransformOnBuild>
+    </None>
+    <None Update="appsettings.Release.json">
+      <IsTransformFile>true</IsTransformFile>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </None>
   </ItemGroup>
 
 </Project>

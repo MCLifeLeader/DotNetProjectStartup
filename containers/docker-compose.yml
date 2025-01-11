@@ -18,26 +18,6 @@ services:
             - "1379:6379"
         container_name: ExampleRedisCache
 
-    # cosmodb:
-    #     image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
-    #     ports:
-    #         - "1081:8081" # Cosmos DB emulator
-    #         - "11250:10250"
-    #         - "11251:10251" # Cosmos DB emulator gateway
-    #         - "11252:10252" # Cosmos DB emulator gateway management
-    #         - "11253:10253" # Cosmos DB emulator data explorer
-    #         - "11254:10254"
-    #         - "11255:10255"
-    #     container_name: ExampleCosmosDB
-
-    # azurite:
-    #     image: mcr.microsoft.com/azure-storage/azurite:latest
-    #     ports:
-    #         - "11000:10000" # Blob service
-    #         - "11001:10001" # Queue service
-    #         - "11002:10002" # Table service
-    #     container_name: ExampleAzurite
-
 # Development Resources
     mailhog:
         # build: ./mailhog
