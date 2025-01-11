@@ -6,8 +6,8 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 
 # Setup git Configurations
 git config --global credential.useHttpPath true
-git config --global core.autocrlf false
-git config --global core.eol native
+git config --global core.autocrlf true
+git config --global core.eol crlf
 
 # Install NuGet Support
 sudo apt update
