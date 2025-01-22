@@ -2,7 +2,7 @@
   "name": "Dotnet Example Projects",
 
   // Base Image for the dev container. More info: https://aka.ms/vscode-remote/containers/images.
-  "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0",
+  "image": "mcr.microsoft.com/devcontainers/dotnet",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -45,6 +45,7 @@
       "pnpmVersion": "latest",
       "nvmVersion": "latest"
     },
+    "ghcr.io/devcontainers-extra/features/npm-package:1": {},
     "ghcr.io/devcontainers/features/powershell:1": {},
     "ghcr.io/devcontainers/features/git:1": {
       "ppa": true,
