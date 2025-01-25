@@ -1,0 +1,7 @@
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Any and all files touched, add these groups to the default PR Approvers list
+* @MCLifeLeader
+
+# This line needs to be last. It locks down the CODEOWNERS file.
+/.github/CODEOWNERS @MCLifeLeader

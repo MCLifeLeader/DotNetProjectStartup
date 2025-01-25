@@ -7,5 +7,6 @@
   "remote.restoreForwardedPorts": false,
   "remote.otherPortsAttributes": {
     "onAutoForward": "ignore"
-  }
+  },
+  "files.eol": "\n"
 }
