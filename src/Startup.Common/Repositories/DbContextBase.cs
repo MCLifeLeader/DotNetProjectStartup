@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 using Startup.Common.Helpers;
-using Startup.Common.Helpers.Extensions;
+using Startup.Common.Helpers.Data;
 using Startup.Common.Repositories.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
