@@ -108,11 +108,15 @@ public static class RegisterDependentServices
         if (!_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
         {
             builder.Logging.AddApplicationInsights(
-                configureTelemetryConfiguration: (config) =>
-                    config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
-                configureApplicationInsightsLoggerOptions: (options) => { });
+                configureApplicationInsightsLoggerOptions: (options) =>
+                {
+                    options.FlushOnDispose = true;
+                });
 
-            builder.Services.AddApplicationInsightsTelemetry();
+            builder.Services.AddApplicationInsightsTelemetry(o =>
+            {
+                o.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights;
+            });
         }
 
         // EventLog is only available in a Windows environment

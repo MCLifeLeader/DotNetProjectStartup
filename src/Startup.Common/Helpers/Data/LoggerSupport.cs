@@ -7,7 +7,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
 using System.Reflection;
 
-namespace Startup.Common.Helpers.Extensions;
+namespace Startup.Common.Helpers.Data;
 
 public static class LoggerSupport
 {
@@ -26,8 +26,8 @@ public static class LoggerSupport
 
         if (openTelemetryEnabled)
         {
-            string endpoint = configuration?.GetValue<string>("OpenTelemetry:Endpoint") ?? string.Empty;
-            string apiKey = configuration?.GetValue<string>("OpenTelemetry:ApiKey") ?? string.Empty;
+            var endpoint = configuration?.GetValue<string>("OpenTelemetry:Endpoint") ?? string.Empty;
+            var apiKey = configuration?.GetValue<string>("OpenTelemetry:ApiKey") ?? string.Empty;
 
             serviceCollection.AddLogging(builder =>
             {
