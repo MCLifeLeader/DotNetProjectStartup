@@ -190,7 +190,10 @@ public static class RegisterDependentServices
 
                 if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
                 {
-                    services.AddApplicationInsightsTelemetry();
+                    services.AddApplicationInsightsTelemetry(o =>
+                    {
+                        o.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights;
+                    });
                 }
 
                 #endregion
@@ -204,9 +207,10 @@ public static class RegisterDependentServices
                 if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
                 {
                     logging.AddApplicationInsights(
-                        configureTelemetryConfiguration: (config) =>
-                            config.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights,
-                        configureApplicationInsightsLoggerOptions: (options) => { });
+                        configureApplicationInsightsLoggerOptions: (options) =>
+                        {
+                            options.FlushOnDispose = true;
+                        });
                 }
 
                 // EventLog is only available in a Windows environment

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FeatureManagement;
 using Startup.Common.Constants;
-using Startup.Common.Helpers.Extensions;
+using Startup.Common.Helpers.Data;
 using Startup.Data.Repositories.Db;
 using Startup.Data.Repositories.Db.Interfaces;
 using Startup.Data.Repositories.Db.Persistence;

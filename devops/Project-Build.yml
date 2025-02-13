@@ -1,0 +1,34 @@
+####################### SCHEDULE ##################################
+schedules:
+  - cron: "0 19 * * *"
+    displayName: Nightly build
+    branches:
+      include:
+        - main
+    always: true
+    batch: true
+
+####################### TRIGGER ##################################
+trigger:
+    - main
+
+####################### PIPELINE NAME ##################################
+name: $(ReleaseVersion).$(date:yyyy).$(date:MMdd)$(rev:.r)
+
+####################### VARIABLES ##################################
+variables:
+  - name: BuildVersion
+    value: '$(Build.BuildNumber)'
+
+####################### AGENT POOL ##################################
+pool: default
+
+####################### RESOURCES ##################################
+# resources:
+#     repositories:
+#       - repository: Catalog
+#         type: github
+#         endpoint: Endpoint
+#         name: devops.catalog
+
+####################### STAGES ##################################

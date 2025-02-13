@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.FeatureManagement;
 using Startup.Api.Models.ApplicationSettings;
 using Startup.Common.Constants;
-using Startup.Common.Helpers.Extensions;
+using Startup.Common.Helpers.Data;
 using Startup.Data.Repositories.DependencyInjection;
 
 namespace Startup.Api.Data.DependencyInjection;
