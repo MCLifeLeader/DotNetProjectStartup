@@ -27,7 +27,7 @@ public partial class Agency
 
     public string Country { get; set; }
 
-    public bool? IsEnabled { get; set; }
+    public bool IsEnabled { get; set; }
 
     public bool IsDeleted { get; set; }
 

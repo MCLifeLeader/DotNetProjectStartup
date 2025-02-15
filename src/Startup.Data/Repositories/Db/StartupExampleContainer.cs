@@ -57,16 +57,14 @@ public partial class StartupExampleContainer
                 .IsRequired()
                 .HasMaxLength(250)
                 .IsUnicode(false)
-                .HasDefaultValueSql("'http://www.StartupExample.com/content/images/DefaultLogo.png'")
+                .HasDefaultValue("http://www.StartupExample.com/content/images/DefaultLogo.png")
                 .HasColumnName("CompanyLogoURL");
             entity.Property(e => e.CompanyName)
                 .IsRequired()
                 .HasMaxLength(250);
             entity.Property(e => e.Country).HasMaxLength(100);
             entity.Property(e => e.DateCreated).HasDefaultValueSql("GetUtcDate()");
-            entity.Property(e => e.IsEnabled)
-                .IsRequired()
-                .HasDefaultValueSql("1");
+            entity.Property(e => e.IsEnabled).HasDefaultValue(true);
             entity.Property(e => e.LastUpdated).HasDefaultValueSql("GetUtcDate()");
             entity.Property(e => e.PostalCode).HasMaxLength(20);
             entity.Property(e => e.StateOrProvince).HasMaxLength(50);
