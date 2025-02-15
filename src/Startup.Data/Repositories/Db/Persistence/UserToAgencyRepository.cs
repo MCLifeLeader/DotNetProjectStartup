@@ -127,12 +127,12 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public ChunkedObjectData<UserToAgency> GetByPaging(int pageNumber, int pageSize)
+    public PagedObjectData<UserToAgency> GetByPaging(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ChunkedObjectData<UserToAgency>> GetByPagingAsync(int pageNumber, int pageSize)
+    public async Task<PagedObjectData<UserToAgency>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }

@@ -108,12 +108,12 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
         return pagedObjectData;
     }
 
-    public ChunkedObjectData<AuthenticationLog> GetByPaging(int pageNumber, int pageSize)
+    public PagedObjectData<AuthenticationLog> GetByPaging(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ChunkedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
+    public async Task<PagedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }

@@ -126,12 +126,12 @@ public class AgencyRepository : StartupExampleRepositoryBase, IAgencyRepository
         return pagedObjectData;
     }
 
-    public Common.Models.ChunkedObjectData<Agency> GetByPaging(int pageNumber, int pageSize)
+    public Common.Models.PagedObjectData<Agency> GetByPaging(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Common.Models.ChunkedObjectData<Agency>> GetByPagingAsync(int pageNumber, int pageSize)
+    public Task<Common.Models.PagedObjectData<Agency>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }

@@ -42,12 +42,12 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         throw new NotImplementedException();
     }
 
-    public ChunkedObjectData<AuthenticationStatus> GetByPaging(int pageNumber, int pageSize)
+    public PagedObjectData<AuthenticationStatus> GetByPaging(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ChunkedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
+    public async Task<PagedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
