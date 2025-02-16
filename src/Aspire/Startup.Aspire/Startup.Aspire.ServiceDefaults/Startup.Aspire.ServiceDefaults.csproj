@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsAspireSharedProject>true</IsAspireSharedProject>
-        <Configurations>Debug;Release;Docker</Configurations>
+        <Configurations>Debug;Release;Development;Production;Staging;Docker</Configurations>
     </PropertyGroup>
 
     <ItemGroup>

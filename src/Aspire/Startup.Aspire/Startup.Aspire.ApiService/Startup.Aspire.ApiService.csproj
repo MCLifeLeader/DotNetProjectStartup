@@ -1,50 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;Docker</Configurations>
-    <UserSecretsId>dcb5816f-c91b-47d0-8b1e-8cd549ecfe00</UserSecretsId>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Debug;Release;Development;Production;Staging;Docker</Configurations>
+        <UserSecretsId>dcb5816f-c91b-47d0-8b1e-8cd549ecfe00</UserSecretsId>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="appsettings.Debug.json" />
-    <Content Remove="appsettings.Docker.json" />
-    <Content Remove="appsettings.Release.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Remove="appsettings.Debug.json" />
+        <Content Remove="appsettings.Docker.json" />
+        <Content Remove="appsettings.Release.json" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="appsettings.Debug.json">
-      <IsTransformFile>true</IsTransformFile>
-      <DependentUpon>appsettings.json</DependentUpon>
-    </None>
-    <None Include="appsettings.Docker.json">
-      <IsTransformFile>true</IsTransformFile>
-      <DependentUpon>appsettings.json</DependentUpon>
-    </None>
-    <None Include="appsettings.Release.json">
-      <IsTransformFile>true</IsTransformFile>
-      <DependentUpon>appsettings.json</DependentUpon>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="appsettings.Debug.json">
+            <IsTransformFile>true</IsTransformFile>
+            <DependentUpon>appsettings.json</DependentUpon>
+        </None>
+        <None Include="appsettings.Docker.json">
+            <IsTransformFile>true</IsTransformFile>
+            <DependentUpon>appsettings.json</DependentUpon>
+        </None>
+        <None Include="appsettings.Release.json">
+            <IsTransformFile>true</IsTransformFile>
+            <DependentUpon>appsettings.json</DependentUpon>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Aspire.Seq" Version="9.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Aspire.Seq" Version="9.0.0" />
+        <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Startup.Aspire.ServiceDefaults\Startup.Aspire.ServiceDefaults.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Startup.Aspire.ServiceDefaults\Startup.Aspire.ServiceDefaults.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="appsettings.json">
-      <TransformOnBuild>true</TransformOnBuild>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Update="appsettings.json">
+            <TransformOnBuild>true</TransformOnBuild>
+        </Content>
+    </ItemGroup>
 
 </Project>
