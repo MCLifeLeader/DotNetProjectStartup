@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Http.Resilience;
@@ -20,6 +21,7 @@ using Startup.Api.Factories.DependencyInjection;
 using Startup.Api.Helpers.DependencyInjection;
 using Startup.Api.Helpers.Extensions;
 using Startup.Api.Helpers.Filter;
+using Startup.Api.Helpers.Handlers;
 using Startup.Api.Helpers.Health;
 using Startup.Api.Models.ApplicationSettings;
 using Startup.Api.Services.DependencyInjection;
@@ -178,6 +180,20 @@ public static class RegisterDependentServices
         {
             o.CombineLogs = true;
         });
+
+        builder.Services.AddProblemDetails(o =>
+        {
+            o.CustomizeProblemDetails = context =>
+            {
+                context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+                context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+
+                var activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+                context.ProblemDetails.Extensions.TryAdd("traceId", activity?.Id);
+            };
+        });
+
+        builder.Services.AddExceptionHandler<ProblemExceptionHandler>();
 
         builder.Logging.EnableRedaction();
 
