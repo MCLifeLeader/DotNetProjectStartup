@@ -72,6 +72,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
             <PrivateAssets>all</PrivateAssets>
@@ -124,10 +125,6 @@
         <Content Update="appsettings.json">
             <TransformOnBuild>true</TransformOnBuild>
         </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Connection\Interfaces\" />
     </ItemGroup>
 
 </Project>

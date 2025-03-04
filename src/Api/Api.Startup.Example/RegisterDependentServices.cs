@@ -259,8 +259,8 @@ public static class RegisterDependentServices
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new ApiInfo().GetApiVersion("v1"));
-                c.SwaggerDoc("v2", new ApiInfo().GetApiVersion("v2"));
+                c.SwaggerDoc("v1", new ApiInfo().GetApiVersion("1"));
+                c.SwaggerDoc("v2", new ApiInfo().GetApiVersion("2"));
                 c.OperationFilter<SwaggerResponseOperationFilter>();
                 c.DocumentFilter<AdditionalPropertiesDocumentFilter>();
 
@@ -295,6 +295,8 @@ public static class RegisterDependentServices
                 c.IncludeXmlComments(xmlPath);
             });
         }
+
+        builder.Services.AddOpenApi();
 
         builder.Services.AddFeatureManagement();
 
