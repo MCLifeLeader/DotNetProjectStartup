@@ -152,7 +152,6 @@ public static class RegisterDependentServices
 
         if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
-            builder.Logging.ClearProviders();
             builder.Logging.AddOpenTelemetry(x =>
             {
                 x.SetResourceBuilder(ResourceBuilder.CreateEmpty()
