@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 using Startup.Common.Helpers;
 using Startup.Common.Helpers.Data;
 using Startup.Common.Repositories.Interfaces;
@@ -11,18 +10,6 @@ namespace Startup.Common.Repositories;
 public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbContext : DbContext
 {
     private readonly string _connectionString;
-
-#pragma warning disable EF1001 // Internal EF Core API usage.
-    protected DbContextBase(DbContextOptions options) : base(new DbContextOptionsBuilder<TDbContext>()
-            .UseSqlServer(
-            options.FindExtension<SqlServerOptionsExtension>()?.ConnectionString ?? string.Empty).Options)
-    {
-        // The dependency injection resolver keeps sending requests through this constructor. This bit of code in the base ctor
-        // redirects the generic template constructor below with the signature of "DbContextOptions<TDbContext> options"
-
-        // ToDo: This has code smell to it, see if we can find a more elegant solution.
-    }
-#pragma warning restore EF1001 // Internal EF Core API usage.
 
     protected DbContextBase(DbContextOptions<TDbContext> options) : base(options)
     {
@@ -36,6 +23,10 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
     protected DbContextBase(string connectionString, DbContextOptions<TDbContext> options) : base(options)
     {
         _connectionString = connectionString;
+    }
+
+    public DbContextBase(DbContextOptions options) : base(options)
+    {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -138,12 +129,6 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
         ChangeTracker.AutoDetectChangesEnabled = setAutoDetect;
     }
 
-    protected static DbContextOptions<TDbContext> GetOptionsGeneric(string connectionString)
-    {
-        // ReSharper disable once InvokeAsExtensionMethod
-        return new DbContextOptionsBuilder<TDbContext>().UseSqlServer(connectionString).Options;
-    }
-
     #endregion
 
     #region Private Methods
@@ -151,9 +136,9 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
     private void Validate()
     {
         IEnumerable<object> entities = from e in ChangeTracker.Entries()
-            where e.State == EntityState.Added
-                  || e.State == EntityState.Modified
-            select e.Entity;
+                                       where e.State == EntityState.Added
+                                             || e.State == EntityState.Modified
+                                       select e.Entity;
 
         foreach (object entity in entities)
         {
