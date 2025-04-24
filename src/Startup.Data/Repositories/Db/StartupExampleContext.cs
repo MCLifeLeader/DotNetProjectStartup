@@ -13,9 +13,4 @@ public class StartupExampleContext : StartupExampleContainer
         : base(dbContextOptions)
     {
     }
-
-    public StartupExampleContext(string connectionString)
-        : base(GetOptionsGeneric(connectionString))
-    {
-    }
 }

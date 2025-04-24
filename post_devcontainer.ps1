@@ -10,16 +10,12 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 
 # Setup git Configurations
 git config --global credential.useHttpPath true
-git config --global core.autocrlf input
-#git config --global core.eol lf
+git config --global core.autocrlf true
+git config --global core.eol native
 
 # Install Package Manager Support
 sudo apt install -y nuget
 # sudo apt install -y npm
-
-# Install .NET Core runtime
-# sudo apt-get install -y dotnet-sdk-8.0
-# sudo apt-get install -y dotnet-sdk-9.0
 
 # Trust HTTPS developer certificate
 dotnet dev-certs https --trust

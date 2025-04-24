@@ -25,6 +25,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
 using Startup.Common.Helpers.Data;
 using Startup.Common.Helpers.Filter;
+using Microsoft.EntityFrameworkCore;
 
 namespace Startup.Web;
 
@@ -138,27 +139,6 @@ public static class RegisterDependentServices
                 .AddDebug();
         }
 
-        builder.Services.AddHttpLogging(o =>
-        {
-            o.CombineLogs = true;
-        });
-
-        builder.Logging.EnableRedaction();
-
-        builder.Services.AddRedaction(x =>
-        {
-            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
-
-            x.SetHmacRedactor(o =>
-            {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
-                o.KeyId = 1776;
-            }, new DataClassificationSet(DataTaxonomy.Pii));
-
-            x.SetFallbackRedactor<NullRedactor>();
-        });
-
         if (_appSettings.FeatureManagement.OpenTelemetryEnabled)
         {
             builder.Logging.ClearProviders();
@@ -185,6 +165,27 @@ public static class RegisterDependentServices
             });
         }
 
+        builder.Services.AddHttpLogging(o =>
+        {
+            o.CombineLogs = true;
+        });
+
+        builder.Logging.EnableRedaction();
+
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+
+            x.SetFallbackRedactor<NullRedactor>();
+        });
+        
         #endregion
 
         builder.Services.AddMemoryCache();

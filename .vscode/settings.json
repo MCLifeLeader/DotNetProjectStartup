@@ -8,5 +8,11 @@
   "remote.otherPortsAttributes": {
     "onAutoForward": "ignore"
   },
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "azureFunctions.projectSubpath": "src/Azure/Startup.Function.App",
+  "azureFunctions.deploySubpath": "src/Azure/Startup.Function.App/bin/Release/net9.0/publish",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "publish (functions)"
 }

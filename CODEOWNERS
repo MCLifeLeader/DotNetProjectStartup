@@ -1,0 +1,14 @@
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Any and all files touched, add these groups to the default PR Approvers list
+* @MCLifeLeader
+
+# DevOps resources
+/containers/      @MCLifeLeader
+/devops/          @MCLifeLeader
+
+# Source Code
+/src/             @MCLifeLeader
+
+# Access Control
+/CODEOWNERS    @MCLifeLeader

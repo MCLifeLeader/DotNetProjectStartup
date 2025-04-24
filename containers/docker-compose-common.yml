@@ -1,0 +1,35 @@
+services:
+
+# Development Resources
+
+    redis:
+        image: redis:latest
+        ports:
+            - "10120:6379" # Redis Cache, Update port if needed
+        container_name: RedisCache
+
+    mailhog:
+        image: mailhog/mailhog:latest
+        logging:
+            driver: 'none' # Disable logging
+        ports:
+            - "10130:8025" # web ui, Update port if needed
+            - "10140:1025" # smtp server, Update port if needed
+        container_name: MailHog
+
+    otel-collector:
+        image: datalust/seq:latest
+        environment:
+            ACCEPT_EULA: "Y"
+            SEQ_API_KEY: "1234567890"
+        ports:
+            - "10150:80" # OpenTelemetry, Update port if needed
+        container_name: OtelCollector
+
+    azurite:
+        image: mcr.microsoft.com/azure-storage/azurite
+        ports:
+            - "10000:10000" # Blob service, Update port if needed
+            - "10001:10001" # Queue service, Update port if needed
+            - "10002:10002" # Table service, Update port if needed
+        container_name: Azurite

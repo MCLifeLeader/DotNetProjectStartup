@@ -65,7 +65,7 @@ public interface ILookupRepositoryTemplate<TEntityType, in TKeyType>
     /// <param name="pageNumber"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
-    ChunkedObjectData<TEntityType> GetByPaging(int pageNumber, int pageSize);
+    PagedObjectData<TEntityType> GetByPaging(int pageNumber, int pageSize);
 
     /// <summary>
     /// Allows for paging by page and page size
@@ -73,7 +73,7 @@ public interface ILookupRepositoryTemplate<TEntityType, in TKeyType>
     /// <param name="pageNumber"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
-    Task<ChunkedObjectData<TEntityType>> GetByPagingAsync(int pageNumber, int pageSize);
+    Task<PagedObjectData<TEntityType>> GetByPagingAsync(int pageNumber, int pageSize);
 
     /// <summary>
     ///     Gets a queryable collection of records based on the

@@ -1,0 +1,13 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+### StartupGetExample
+GET http://localhost:7191/api/StartupGetExample
+Accept: application/json
+
+### StartupPostExample
+POST http://localhost:7191/api/StartupPostExample
+Content-Type: application/json
+
+{
+  "HelloWorld": "Hello World"
+}

@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Configuration;

@@ -1,6 +1,7 @@
 services:
 
-# Application Dependencies
+# Development Resources
+
     mssql:
         build: ./mssql
         environment:
@@ -8,32 +9,6 @@ services:
             ACCEPT_EULA: "Y"
             MSSQL_AGENT_ENABLED: "true"
         ports:
-            - "1443:1433"
+            - "4110:1433" # SQL Server, Update port if needed
         container_name: ExampleSql
         hostname: mssql
-
-    redis:
-        image: redis:latest
-        ports:
-            - "1379:6379"
-        container_name: ExampleRedisCache
-
-# Development Resources
-    mailhog:
-        # build: ./mailhog
-        image: mailhog/mailhog:latest
-        logging:
-            driver: 'none' # Disable logging
-        ports:
-            - "1021:1025" # smtp server
-            - "8021:8025" # web ui
-        container_name: ExampleMailhog
-
-    otel-collector:
-        image: datalust/seq:latest
-        environment:
-            ACCEPT_EULA: "Y"
-            SEQ_API_KEY: "1234567890"
-        ports:
-            - "4341:80" # OpenTelemetry
-        container_name: ExampleOtelCollector

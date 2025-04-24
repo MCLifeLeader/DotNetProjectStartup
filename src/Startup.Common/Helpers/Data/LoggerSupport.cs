@@ -5,10 +5,12 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Startup.Common.Helpers.Data;
 
+[ExcludeFromCodeCoverage]
 public static class LoggerSupport
 {
     /// <summary>
