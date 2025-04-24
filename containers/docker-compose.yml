@@ -10,5 +10,5 @@ services:
             MSSQL_AGENT_ENABLED: "true"
         ports:
             - "4110:1433" # SQL Server, Update port if needed
-        container_name: EduSiProjectSql
+        container_name: ExampleSql
         hostname: mssql
