@@ -1,5 +1,5 @@
 {
-  "name": "Edu.Si.Project",
+  "name": "Dotnet Example Project",
 
   // Base Image for the dev container. More info: https://aka.ms/vscode-remote/containers/images.
   "image": "mcr.microsoft.com/devcontainers/dotnet",
