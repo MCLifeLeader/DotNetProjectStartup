@@ -13,8 +13,8 @@ services:
         logging:
             driver: 'none' # Disable logging
         ports:
-            - "10130:1025" # smtp server, Update port if needed
-            - "10140:8025" # web ui, Update port if needed
+            - "10130:8025" # web ui, Update port if needed
+            - "10140:1025" # smtp server, Update port if needed
         container_name: MailHog
 
     otel-collector:

@@ -185,7 +185,7 @@ winget install Microsoft.VisualStudioCode
 👍 Recommended 👍
 
 Having the ability to query the database is required, however, SQL Server Management Studio is recommended as the primary tool for doing so.
-Nodepad++ is a lightweight text editor that is very handy.
+Notepad++ is a lightweight text editor that is very handy.
 
 ```
 winget install Microsoft.SQLServerManagementStudio
