@@ -26,6 +26,17 @@ services:
             - "10150:80" # OpenTelemetry, Update port if needed
         container_name: OtelCollectorDev
 
+    wiremock:
+        image: wiremock/wiremock:latest
+        ports:
+            - "10160:8080" # Wiremock, Update port if needed
+        container_name: Wiremock
+        volumes:
+            - ./extensions:/var/wiremock/extensions
+            - ./__files:/home/wiremock/__files
+            - ./mappings:/home/wiremock/mappings
+        entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
+
     azurite:
         image: mcr.microsoft.com/azure-storage/azurite
         ports:

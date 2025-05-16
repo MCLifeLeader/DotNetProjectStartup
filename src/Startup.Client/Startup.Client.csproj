@@ -17,25 +17,25 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Azure.Identity" Version="1.13.2" />
-        <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.4">
+        <PackageReference Include="Azure.Identity" Version="1.14.0" />
+        <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.4" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.5" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.5" />
         <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="NSwag.ApiDescription.Client" Version="14.3.0">
+        <PackageReference Include="NSwag.ApiDescription.Client" Version="14.4.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Runtime.Caching" Version="9.0.4" />
+        <PackageReference Include="System.Runtime.Caching" Version="9.0.5" />
     </ItemGroup>
 
     <ItemGroup>
