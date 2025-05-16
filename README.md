@@ -143,19 +143,14 @@ winget install Microsoft.Azure.StorageEmulator
 winget install Microsoft.Azure.StorageExplorer
 ```
 
-### Postman Gui Http Client
-
-⚠️ Not Approved for Use ⚠️
-
-```
-winget install Postman.Postman
-```
-
-### Bruno Gui Http Client
+### Http Gui Client
 
 👍 Recommended 👍
 
+You can install either Postman or Bruno
+
 ```
+winget install Postman.Postman
 winget install Bruno.Bruno
 ```
 
