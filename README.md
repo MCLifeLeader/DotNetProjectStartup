@@ -160,8 +160,6 @@ winget install Bruno.Bruno
 
 Having a local instance of SQL Server can be helpful for development purposes.
 
-⚠️ No church data from our servers maybe copied into your local database, Scrubbed data only ⚠️
-
 ```
 winget install Microsoft.SQLServer.2022.Express
 ```
@@ -264,7 +262,7 @@ A DevContainer is a development environment defined by a Docker container, which
 
 ⚠️ Helpful resources ⚠️ <br />
 
-The following Docker Images and Container resources are provisionally approved for local development environment use ONLY. These images and resources may *not* at any time be deployed outside of your local development environment. They are to be used as tools, utilities, and resources at the local development level only. Additionally, at no time should church data be replicated to a local laptop. If you have questions regarding this policy please reach out to your Engineering Manager or Portfolio Architect.
+The following Docker Images and Container resources are provisionally approved for local development environment use ONLY. These images and resources may *not* at any time be deployed outside of your local development environment. They are to be used as tools, utilities, and resources at the local development level only.
 
 Container Images
 
