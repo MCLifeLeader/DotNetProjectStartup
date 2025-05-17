@@ -1,11 +1,11 @@
 services:
 
-# Development Resources
+# SQL Server instance
     mssql:
         build: ./mssql
         environment:
-            SA_PASSWORD: "P@ssword123!"
-            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
+            ACCEPT_EULA: "${ACCEPT_EULA}"
             MSSQL_AGENT_ENABLED: "true"
         ports:
             - "4110:1433" # SQL Server, Update port if needed

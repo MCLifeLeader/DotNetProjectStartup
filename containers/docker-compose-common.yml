@@ -1,46 +1,93 @@
 services:
+  # Development Resources
 
-# Development Resources
+# Redis Cache
+  redis:
+    image: redis:latest
+    ports:
+      - "10120:6379" # Redis Cache, Update port if needed
+    container_name: RedisCacheDev
 
-    redis:
-        image: redis:latest
-        ports:
-            - "10120:6379" # Redis Cache, Update port if needed
-        container_name: RedisCacheDev
+# MailHog for email testing - SMTP mail trap server
+  mailhog:
+    image: mailhog/mailhog:latest
+    logging:
+      driver: "none" # Disable logging
+    ports:
+      - "10130:8025" # web ui, Update port if needed
+      - "10140:1025" # smtp server, Update port if needed
+    container_name: MailHogDev
 
-    mailhog:
-        image: mailhog/mailhog:latest
-        logging:
-            driver: 'none' # Disable logging
-        ports:
-            - "10130:8025" # web ui, Update port if needed
-            - "10140:1025" # smtp server, Update port if needed
-        container_name: MailHogDev
+# OpenTelemetry Collector
+  otel-collector:
+    image: datalust/seq:latest
+    environment:
+      ACCEPT_EULA: "${ACCEPT_EULA}"
+      SEQ_API_KEY: "${SEQ_API_KEY}"
+    ports:
+      - "10150:80" # OpenTelemetry, Update port if needed
+    container_name: OtelCollectorDev
 
-    otel-collector:
-        image: datalust/seq:latest
-        environment:
-            ACCEPT_EULA: "Y"
-            SEQ_API_KEY: "1234567890"
-        ports:
-            - "10150:80" # OpenTelemetry, Update port if needed
-        container_name: OtelCollectorDev
+# Wiremock endpoint for mocking APIs
+  wiremock:
+    image: wiremock/wiremock:latest
+    ports:
+      - "10160:8080" # Wiremock, Update port if needed
+    container_name: WiremockDev
+    volumes:
+      - ./extensions:/var/wiremock/extensions
+      - ./__files:/home/wiremock/__files
+      - ./mappings:/home/wiremock/mappings
+    entrypoint:
+      [
+        "/docker-entrypoint.sh",
+        "--global-response-templating",
+        "--disable-gzip",
+        "--verbose"
+      ]
 
-    wiremock:
-        image: wiremock/wiremock:latest
-        ports:
-            - "10160:8080" # Wiremock, Update port if needed
-        container_name: Wiremock
-        volumes:
-            - ./extensions:/var/wiremock/extensions
-            - ./__files:/home/wiremock/__files
-            - ./mappings:/home/wiremock/mappings
-        entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
+# SQL Edge and Service Bus Emulator
+  SqlEdge-sbDev:
+    container_name: SqlEdge-sbDev
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    networks:
+      sb-emulator:
+        aliases:
+          - SqlEdge-sbDev
+    environment:
+      ACCEPT_EULA: "${ACCEPT_EULA}"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
 
-    azurite:
-        image: mcr.microsoft.com/azure-storage/azurite
-        ports:
-            - "10000:10000" # Blob service, Update port if needed
-            - "10001:10001" # Queue service, Update port if needed
-            - "10002:10002" # Table service, Update port if needed
-        container_name: AzuriteDev
+# Service Bus Emulator using SQL Edge
+  service-bus:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    pull_policy: always
+    volumes:
+      - "./service-bus/Config.json:/ServiceBus_Emulator/ConfigFiles/Config.json"
+    ports:
+      - "10170:5672" # Service Bus, Update port if needed
+      - "10171:5300" # Service Bus, Update port if needed
+    container_name: ServiceBusDev
+    environment:
+      SQL_SERVER: "SqlEdge-sbDev"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}" # Password should be same as what is set for SQL Edge
+      ACCEPT_EULA: "${ACCEPT_EULA}"
+      SQL_WAIT_INTERVAL: "15"                   # Optional: Time in seconds to wait for SQL to be ready (default is 15 seconds)
+    depends_on:
+      - SqlEdge-sbDev
+    networks:
+      sb-emulator:
+        aliases:
+          - sb-emulator
+
+# Azurite (Azure Storage Emulator)
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000" # Blob service, Update port if needed
+      - "10001:10001" # Queue service, Update port if needed
+      - "10002:10002" # Table service, Update port if needed
+    container_name: AzuriteDev
+
+networks:
+  sb-emulator:
