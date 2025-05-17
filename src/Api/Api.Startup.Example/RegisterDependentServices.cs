@@ -185,6 +185,16 @@ public static class RegisterDependentServices
             }, new DataClassificationSet(DataTaxonomy.Pii));
 
             x.SetFallbackRedactor<NullRedactor>();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                //options.Filters.Add<CustomExceptionFilterAttribute>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
         });
 
         builder.Services.AddProblemDetails(o =>
@@ -309,18 +319,18 @@ public static class RegisterDependentServices
                     document.Info.Version = $"{new ApiInfo().GetAssemblyVersion()}";
                     document.Info.Title = _swaggerName;
                     document.Info.Description =
-                        "Documentation of all implemented endpoints, grouped by their route's base resource for The Church of Jesus Christ of Latter-day Saints.";
-                    document.Info.TermsOfService = new Uri("https://www.churchofjesuschrist.org/legal/terms-of-use");
+                        "Documentation of all implemented endpoints, grouped by their route's base resource for A-Game Empowerment, LLC.";
+                    document.Info.TermsOfService = new Uri("https://agameempowerment.com/Terms-Of-Use");
                     document.Info.Contact = new OpenApiContact
                     {
                         Name = "Michael Carey",
-                        Email = "Michael.Carey@ChurchOfJesusChrist.org",
-                        Url = new Uri("https://www.churchofjesuschrist.org/")
+                        Email = "Michael@AGameEmpowerment.com",
+                        Url = new Uri("https://agameempowerment.com")
                     };
                     document.Info.License = new OpenApiLicense
                     {
                         Name = "Internal Only",
-                        Url = new Uri("https://www.churchofjesuschrist.org/")
+                        Url = new Uri("https://agameempowerment.com")
                     };
                     return Task.CompletedTask;
                 });

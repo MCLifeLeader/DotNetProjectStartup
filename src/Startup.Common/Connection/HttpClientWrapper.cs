@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Startup.Common.Connection.Interfaces;
+using Startup.Common.Constants;
 using System.Net;
 using System.Net.Http.Headers;
 
@@ -29,8 +30,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The response body as a byte array.</returns>
     public byte[] GetBytes(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetBytes));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(GetBytes));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.GetAsync(resourcePath).Result;
@@ -51,8 +59,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>A byte array containing the response body.</returns>
     public async Task<byte[]> GetBytesAsync(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetBytesAsync));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(GetBytesAsync));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = await httpClient.GetAsync(resourcePath);
@@ -79,8 +94,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The object of type T retrieved from the specified resource path.</returns>
     public T GetObject<T>(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<T>' called", GetType().Name, nameof(GetObject));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(GetObject));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.GetAsync(resourcePath).Result;
@@ -107,8 +129,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The deserialized response content as an object of type T.</returns>
     public async Task<T> GetObjectAsync<T>(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<T>' called", GetType().Name, nameof(GetObjectAsync));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(GetObjectAsync));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = await httpClient.GetAsync(resourcePath);
@@ -146,8 +175,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     public T GetObjectUsingBearerToken<T>(string resourcePath, string clientName, string token)
     {
         // Log the method call and resource path
-        _logger.LogDebug("'{Class}.{Method}<T>' called", GetType().Name, nameof(GetObjectUsingBearerToken));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(GetObjectUsingBearerToken));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         // Create an HttpClient instance
         HttpClient httpClient = HttpClient(clientName);
@@ -192,8 +228,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <exception cref="Exception">Thrown when the request fails with a non-success status code.</exception>
     public string PostData(string resourcePath, object o, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(PostData));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(PostData));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.PostAsJsonAsync(resourcePath, o).Result;
@@ -217,8 +260,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <exception cref="Exception">Thrown when the request was unsuccessful.</exception>
     public string PutData(string resourcePath, object o, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(PutData));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(PutData));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.PutAsJsonAsync(resourcePath, o).Result;
@@ -251,8 +301,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The deserialized response body.</returns>
     public T Post<TK, T>(string resourcePath, TK data, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<TK, T>' called", GetType().Name, nameof(Post));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(Post));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         return PostAsync<TK, T>(resourcePath, data, clientName).Result;
     }
@@ -268,8 +325,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The deserialized response body.</returns>
     public async Task<T> PostAsync<TK, T>(string resourcePath, TK data, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<TK, T>' called", GetType().Name, nameof(PostAsync));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(PostAsync));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = await httpClient.PostAsJsonAsync(resourcePath, data);
@@ -294,8 +358,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The deserialized response body of type T.</returns>
     public T Put<TK, T>(string resourcePath, TK data, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<TK, T>' called", GetType().Name, nameof(Put));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(Put));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         return PutAsync<TK, T>(resourcePath, data, clientName).Result;
     }
@@ -311,8 +382,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>The deserialized response body of type T.</returns>
     public async Task<T> PutAsync<TK, T>(string resourcePath, TK data, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}<TK, T>' called", GetType().Name, nameof(Put));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(PutAsync));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = await httpClient.PutAsJsonAsync(resourcePath, data);
@@ -334,8 +412,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <exception cref="Exception">Thrown when the request fails.</exception>
     public string Delete(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(Delete));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(Delete));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = httpClient.DeleteAsync(resourcePath).Result;
@@ -358,8 +443,15 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>A Task that represents the asynchronous DELETE operation. The task result contains the HTTP response body as a string.</returns>
     public async Task<string> DeleteAsync(string resourcePath, string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(DeleteAsync));
-        _logger.LogInformation("Request Resource Path:'{resourcePath}'", resourcePath);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(DeleteAsync));
+        }
+
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation(LoggingTemplates.InfoHttpResourceStandardMessage, resourcePath);
+        }
 
         HttpClient httpClient = HttpClient(clientName);
         HttpResponseMessage response = await httpClient.DeleteAsync(resourcePath);
@@ -381,7 +473,10 @@ public class HttpClientWrapper : IHttpClientWrapper
     /// <returns>An instance of HttpClient.</returns>
     public HttpClient HttpClient(string clientName)
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(HttpClient));
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(LoggingTemplates.DebugMethodEntryMessage, GetType().Name, nameof(HttpClient));
+        }
 
         HttpClient httpClient = _httpClientFactory.CreateClient(clientName);
         return httpClient;

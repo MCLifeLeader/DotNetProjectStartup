@@ -25,6 +25,9 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Resources;
 using Startup.Common.Helpers.Data;
 using Startup.Common.Helpers.Filter;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Startup.Web;
 
@@ -119,13 +122,6 @@ public static class RegisterDependentServices
             });
         }
 
-        // EventLog is only available in a Windows environment
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
-        }
-
         if (builder.Environment.IsDevelopment())
         {
             builder.Logging
@@ -182,6 +178,16 @@ public static class RegisterDependentServices
             }, new DataClassificationSet(DataTaxonomy.Pii));
 
             x.SetFallbackRedactor<NullRedactor>();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                //options.Filters.Add<CustomExceptionFilterAttribute>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
         });
         
         #endregion

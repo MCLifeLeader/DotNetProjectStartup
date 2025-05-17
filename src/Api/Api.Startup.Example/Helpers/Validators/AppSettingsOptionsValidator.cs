@@ -24,11 +24,11 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
             .WithMessage("The connection string cannot be empty, must be formatted correctly, and be pointed at the correct database.");
         RuleFor(x => x.ConnectionStrings.ApplicationInsights)
             .NotNull()
-            .NotEmpty()
             .Must(e => !e.Contains("Replace-Key"));
 
         RuleFor(x => x.KeyVaultUri)
-            .NotEmpty();
+            .NotNull()
+            .Must(e => !e.Contains("Replace-Key"));
 
         RuleFor(x => x.FeatureManagement.OpenApiEnabled)
             .Must(_ => true);

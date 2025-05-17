@@ -44,7 +44,7 @@ public static class SetupMiddlewarePipeline
                 c.EnableFilter();
                 c.DisplayRequestDuration();
                 c.EnableDeepLinking();
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{_swaggerName} v1");
+                c.SwaggerEndpoint("/openapi/v1.json", $"{_swaggerName} v1");
                 c.InjectStylesheet("/css/SwaggerDark.css");
                 c.DocumentTitle = $"{_swaggerName} Swagger UI";
             });

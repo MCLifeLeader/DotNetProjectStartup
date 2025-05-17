@@ -188,14 +188,6 @@ public static class RegisterDependentServices
                     x.SetFallbackRedactor<NullRedactor>();
                 });
 
-                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    services.AddApplicationInsightsTelemetry(o =>
-                    {
-                        o.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights;
-                    });
-                }
-
                 #endregion
             })
             .ConfigureLogging((hostContext, logging) =>
@@ -203,7 +195,6 @@ public static class RegisterDependentServices
                 #region Logging Setup
 
                 logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
-
                 if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
                 {
                     logging.AddApplicationInsights(
