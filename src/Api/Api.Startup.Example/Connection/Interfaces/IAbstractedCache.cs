@@ -1,4 +1,4 @@
-﻿namespace Edu.Si.Project.Server.Connection.Interfaces
+﻿namespace Startup.Api.Connection.Interfaces
 {
     public interface IAbstractedCache : IDisposable
     {
