@@ -1,6 +1,5 @@
 ﻿using Azure.Identity;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Configuration;
@@ -109,9 +108,10 @@ public static class RegisterDependentServices
                 IConfiguration configuration = configApp.Build();
 
                 string keyVaultUri = configuration.GetValue<string>("KeyVaultUri")!;
-                if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
+                if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    configApp.AddAzureKeyVault(new Uri(configuration.GetValue<string>("KeyVaultUri")!),
+                    configApp.AddAzureKeyVault(
+                        new Uri(configuration.GetValue<string>("KeyVaultUri")!),
                         new DefaultAzureCredential());
                 }
 
@@ -177,7 +177,6 @@ public static class RegisterDependentServices
                 services.AddRedaction(x =>
                 {
                     x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-
                     x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
                     x.SetHmacRedactor(o =>
@@ -189,7 +188,7 @@ public static class RegisterDependentServices
                     x.SetFallbackRedactor<NullRedactor>();
                 });
 
-                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
                 {
                     services.AddApplicationInsightsTelemetry(o =>
                     {
@@ -205,7 +204,7 @@ public static class RegisterDependentServices
 
                 logging.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
 
-                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+                if (_appSettings != null && !_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
                 {
                     logging.AddApplicationInsights(
                         configureApplicationInsightsLoggerOptions: (options) =>

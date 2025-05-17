@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 #Project Specific Files
 *.orig
+nugetlibs/

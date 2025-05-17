@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Startup.Console.Model.ApplicationSettings;
+﻿namespace Startup.Console.Model.ApplicationSettings;
 
 public record Workerprocesses
 {

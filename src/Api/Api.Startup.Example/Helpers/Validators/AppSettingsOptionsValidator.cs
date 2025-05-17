@@ -30,7 +30,7 @@ public class AppSettingsOptionsValidator : AbstractValidator<AppSettings>
         RuleFor(x => x.KeyVaultUri)
             .NotEmpty();
 
-        RuleFor(x => x.FeatureManagement.SwaggerEnabled)
+        RuleFor(x => x.FeatureManagement.OpenApiEnabled)
             .Must(_ => true);
         RuleFor(x => x.FeatureManagement.DisplayConfiguration)
             .Must(_ => true);

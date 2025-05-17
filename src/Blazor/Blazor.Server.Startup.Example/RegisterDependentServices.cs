@@ -24,7 +24,6 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using Startup.Common.Helpers.Data;
 using Startup.Common.Helpers.Filter;
-using Microsoft.EntityFrameworkCore;
 
 namespace Startup.Blazor.Server;
 

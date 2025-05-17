@@ -34,7 +34,7 @@ public static class SetupMiddlewarePipeline
         }
 
         // Configure the HTTP request pipeline.
-        if (appSettings!.FeatureManagement.SwaggerEnabled)
+        if (appSettings!.FeatureManagement.OpenApiEnabled)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
