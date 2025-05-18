@@ -6,31 +6,23 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database.Example", "src\Sta
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D64886AA-81B7-42D8-B504-65AE075AB9F2}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\.editorconfig = ..\..\..\.editorconfig
-		..\..\..\.gitattributes = ..\..\..\.gitattributes
-		..\..\..\.gitignore = ..\..\..\.gitignore
-		..\..\..\.vsconfig = ..\..\..\.vsconfig
-		..\..\..\AUTHORS.md = ..\..\..\AUTHORS.md
-		..\..\..\CHANGELOG.md = ..\..\..\CHANGELOG.md
-		..\..\..\CONTRIBUTING.md = ..\..\..\CONTRIBUTING.md
-		..\..\..\docker_down.ps1 = ..\..\..\docker_down.ps1
-		..\..\..\docker_setup.ps1 = ..\..\..\docker_setup.ps1
-		..\..\..\LICENSE = ..\..\..\LICENSE
-		..\..\..\post_devcontainer.ps1 = ..\..\..\post_devcontainer.ps1
-		..\..\..\devops\Project-Build.yml = ..\..\..\devops\Project-Build.yml
-		..\..\..\README.md = ..\..\..\README.md
-		..\..\..\renovate.json = ..\..\..\renovate.json
-		..\..\..\setup_project.ps1 = ..\..\..\setup_project.ps1
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.vsconfig = .vsconfig
+		AUTHORS.md = AUTHORS.md
+		CHANGELOG.md = CHANGELOG.md
+		CODEOWNERS = CODEOWNERS
+		CONTRIBUTING.md = CONTRIBUTING.md
+		Delete_Old_Tags.ps1 = Delete_Old_Tags.ps1
+		docker_down.ps1 = docker_down.ps1
+		docker_setup.ps1 = docker_setup.ps1
+		LICENSE = LICENSE
+		post_devcontainer.ps1 = post_devcontainer.ps1
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup.Data", "src\Startup.Data\Startup.Data.csproj", "{C3F28CE3-C1F4-4C60-B568-B8C210008AF6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "runtime", "runtime", "{D64A0A57-74BC-454A-8BEA-1AF2472FBD39}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\run_app.ps1 = ..\..\..\run_app.ps1
-		..\..\..\run_tests.ps1 = ..\..\..\run_tests.ps1
-		..\..\..\stop_app.ps1 = ..\..\..\stop_app.ps1
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{AA486938-F915-4F6A-8A1E-495A01A57EDA}"
 EndProject
@@ -73,17 +65,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Startup.Function.Api", "src\Azure\Startup.Function.App\Startup.Function.Api.csproj", "{0AADDFD3-2F6E-4F54-A8C3-F5768EE4E95B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{9D8C66E9-6A63-4AC7-813C-E461E7AD16F2}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\devops\Project-Build.yml = ..\..\..\devops\Project-Build.yml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "containers", "containers", "{FFEA649F-5284-4D87-A753-3987851D72C2}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\containers\docker-compose-common.yml = ..\..\..\containers\docker-compose-common.yml
-		..\..\..\containers\docker-compose.yml = ..\..\..\containers\docker-compose.yml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -293,7 +274,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{14A007F4-DA3C-495D-B5CB-5C246645AEEA} = {791C9D71-5892-4DA1-9D7A-6A29F70D1D0C}
 		{C3F28CE3-C1F4-4C60-B568-B8C210008AF6} = {B26BDC9A-F29D-4B51-A0BE-873F10EF87C0}
-		{D64A0A57-74BC-454A-8BEA-1AF2472FBD39} = {D64886AA-81B7-42D8-B504-65AE075AB9F2}
 		{8B4B2477-4FD2-4AD6-ABA6-1B02061B5553} = {B26BDC9A-F29D-4B51-A0BE-873F10EF87C0}
 		{D99A8175-7EE2-4680-A527-CC31A977F68E} = {B26BDC9A-F29D-4B51-A0BE-873F10EF87C0}
 		{C18EE473-F2E6-4C1D-B07E-5C22E37C09DA} = {B26BDC9A-F29D-4B51-A0BE-873F10EF87C0}
@@ -311,8 +291,6 @@ Global
 		{EE98A3DB-A4ED-4AD6-B82B-7ED06AA3086D} = {3243A052-E5EC-4128-A511-BD6DEF43F757}
 		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {AA486938-F915-4F6A-8A1E-495A01A57EDA}
 		{0AADDFD3-2F6E-4F54-A8C3-F5768EE4E95B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{9D8C66E9-6A63-4AC7-813C-E461E7AD16F2} = {D64886AA-81B7-42D8-B504-65AE075AB9F2}
-		{FFEA649F-5284-4D87-A753-3987851D72C2} = {D64886AA-81B7-42D8-B504-65AE075AB9F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54A5C23D-0AD5-4407-AE9A-FE3B79B19215}
