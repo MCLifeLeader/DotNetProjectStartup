@@ -28,17 +28,6 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-//var builder = FunctionsApplication.CreateBuilder(args);
-
-//builder.ConfigureFunctionsWebApplication();
-
-//// Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4.
-//// builder.Services
-////     .AddApplicationInsightsTelemetryWorkerService()
-////     .ConfigureFunctionsApplicationInsights();
-
-//builder.Build().Run();
-
 namespace Startup.Function.Api;
 
 [ExcludeFromCodeCoverage]
