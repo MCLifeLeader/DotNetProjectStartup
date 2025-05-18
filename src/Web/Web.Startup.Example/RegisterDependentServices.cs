@@ -5,7 +5,6 @@ using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -227,7 +226,7 @@ public static class RegisterDependentServices
         builder.SetDependencyInjection(_appSettings);
 
         builder.Services.AddHealthChecks()
-            .AddCheck<StartupExampleAppHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower())
+            .AddCheck<StartupExampleApiHealthCheck>(HttpClientNames.STARTUPEXAMPLE_API.ToLower())
             .AddCheck<OpenAiHealthCheck>(HttpClientNames.OPEN_AI_API_HEALTH);
 
         appSettings = _appSettings;

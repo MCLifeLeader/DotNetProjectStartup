@@ -1,14 +1,13 @@
-﻿namespace Startup.Common.Helpers.Exceptions
-{
-    [Serializable]
-    public class ProblemException : Exception
-    {
-        public string Error { get; }
+﻿namespace Startup.Common.Helpers.Exceptions;
 
-        // ReSharper disable once ConvertToPrimaryConstructor
-        public ProblemException(string error, string message) : base(message)
-        {
-            Error = error;
-        }
+[Serializable]
+public class ProblemException : Exception
+{
+    public string Error { get; }
+
+    // ReSharper disable once ConvertToPrimaryConstructor
+    public ProblemException(string error, string message) : base(message)
+    {
+        Error = error;
     }
 }

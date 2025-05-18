@@ -1,8 +1,18 @@
 {
   "profiles": {
-    "Startup.Function.App": {
+    "Startup.Function.App - Development": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7191"
+      "commandLineArgs": "--port 7180",
+      "launchBrowser": true,
+      "launchUrl": "api/swagger/ui",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_LOCALDEV": "true",
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "AzureFunctionsJobHost__functionTimeout": "00:05:00"
+      }
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
