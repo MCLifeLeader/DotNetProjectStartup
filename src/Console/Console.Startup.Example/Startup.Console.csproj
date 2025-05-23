@@ -51,7 +51,7 @@
         <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.5" />
         <PackageReference Include="Microsoft.Extensions.Telemetry" Version="9.5.0" />
         <PackageReference Include="Microsoft.Extensions.Telemetry.Abstractions" Version="9.5.0" />
-        <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="4.1.0" />
         <PackageReference Include="Microsoft.VisualStudio.SlowCheetah" Version="4.0.50">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
