@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Scalar.AspNetCore;
 using Startup.Api.Models.ApplicationSettings;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -48,6 +49,9 @@ public static class SetupMiddlewarePipeline
                 c.InjectStylesheet("/css/SwaggerDark.css");
                 c.DocumentTitle = $"{_swaggerName} Swagger UI";
             });
+
+            app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         app.MapHealthChecks("/_health",
