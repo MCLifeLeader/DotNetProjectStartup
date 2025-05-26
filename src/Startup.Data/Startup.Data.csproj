@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
@@ -33,7 +33,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.5" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
-        <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0" />
+        <PackageReference Include="Microsoft.FeatureManagement" Version="4.1.0" />
     </ItemGroup>
 
     <ItemGroup>
