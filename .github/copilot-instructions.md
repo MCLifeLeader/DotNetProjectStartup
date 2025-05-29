@@ -43,9 +43,8 @@ src/
 ### ✅ Patterns to Follow
 - Use Clean Architecture with layered separation.
 - Use Dependency Injection for services and repositories.
-- Use MediatR for CQRS (Commands/Queries).
 - Use FluentValidation for input validation.
-- Map DTOs to domain models using AutoMapper.
+- Map DTOs to domain models using direct mapping through extension methods.
 - Use ILogger<T> or Serilog for structured logging.
 - For APIs:
   - Use [ApiController], ActionResult<T>, and ProducesResponseType.
@@ -80,8 +79,6 @@ src/
 - [Microsoft C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
 - [ASP.NET Core Documentation](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-8.0)
 - [Entity Framework Core Docs](https://learn.microsoft.com/en-us/ef/core/)
-- [MediatR GitHub](https://github.com/jbogard/MediatR)
-- [AutoMapper Documentation](https://automapper.org/)
 - [xUnit Documentation](https://xunit.net/)
 - [FluentValidation](https://docs.fluentvalidation.net/)
 - [Serilog Docs](https://serilog.net/)
