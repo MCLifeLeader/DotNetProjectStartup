@@ -1,6 +1,6 @@
 {
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  "dotnet.defaultSolution": "src\\StartupExamples.sln",
+  "dotnet.defaultSolution": "StartupExamples.sln",
   "sarif-viewer.connectToGithubCodeScanning": "off",
   "remote.autoForwardPortsFallback": 0,
   "remote.autoForwardPorts": false,
