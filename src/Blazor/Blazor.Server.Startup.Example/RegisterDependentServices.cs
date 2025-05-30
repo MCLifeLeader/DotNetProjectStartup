@@ -15,7 +15,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Startup.Common.Constants;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -24,7 +23,6 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using Startup.Common.Helpers.Data;
 using Startup.Common.Helpers.Filter;
-using Microsoft.EntityFrameworkCore;
 
 namespace Startup.Blazor.Server;
 
@@ -57,7 +55,7 @@ public static class RegisterDependentServices
 
         // Import Azure Key Vault Secrets and override any pre-loaded secrets
         string keyVaultUri = builder.Configuration.GetValue<string>("KeyVaultUri")!;
-        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
+        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
         {
             builder.Configuration.AddAzureKeyVault(
                 new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
@@ -100,8 +98,7 @@ public static class RegisterDependentServices
         #region Logging Setup
 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
-
-        if (!_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+        if (!_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
         {
             builder.Logging.AddApplicationInsights(
                 configureApplicationInsightsLoggerOptions: (options) =>
@@ -113,13 +110,6 @@ public static class RegisterDependentServices
             {
                 o.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights;
             });
-        }
-
-        // EventLog is only available in a Windows environment
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
         }
 
         if (builder.Environment.IsDevelopment())
@@ -166,11 +156,9 @@ public static class RegisterDependentServices
         });
 
         builder.Logging.EnableRedaction();
-
         builder.Services.AddRedaction(x =>
         {
             x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-
             x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
 
             x.SetHmacRedactor(o =>
@@ -180,6 +168,16 @@ public static class RegisterDependentServices
             }, new DataClassificationSet(DataTaxonomy.Pii));
 
             x.SetFallbackRedactor<NullRedactor>();
+            //builder.Services.AddControllersWithViews(options =>
+            //{
+            //    //options.Filters.Add<CustomExceptionFilterAttribute>();
+            //}).AddNewtonsoftJson(options =>
+            //{
+            //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //    options.SerializerSettings.Formatting = Formatting.Indented;
+            //    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            //    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //});
         });
 
         #endregion

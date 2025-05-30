@@ -1,0 +1,41 @@
+# name: Validate Build
+
+# on:
+#   pull_request_target:
+#     branches:
+#       - main
+#   push:
+#     branches:
+#       - main
+
+# permissions:
+#   contents: read
+#   pull-requests: write
+
+# jobs:
+#   build:
+#     name: Build and Test Solution
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4.2.2
+
+#       - name: Setup .NET
+#         uses: actions/setup-dotnet@v4.2.0
+#         with:
+#           dotnet-version: '9.0.x'
+
+#       - name: Clear LibraryManager cache
+#         run: |
+#           if [ -d /home/runner/.local/share/.librarymanager/cache ]; then
+#             rm -rf /home/runner/.local/share/.librarymanager/cache
+#           fi
+
+#       - name: Restore dependencies
+#         run: dotnet restore StartupExamples.sln
+
+#       - name: Build solution
+#         run: dotnet build StartupExamples.sln --configuration Release --no-restore --no-cache
+
+#     #   - name: Run tests
+#     #     run: dotnet test $(find . -type f -iname "*.test*.csproj") --configuration Release --no-build --logger trx

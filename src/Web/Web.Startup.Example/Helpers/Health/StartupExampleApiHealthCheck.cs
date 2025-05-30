@@ -4,12 +4,17 @@ using Startup.Common.Constants;
 
 namespace Startup.Web.Helpers.Health;
 
-public class StartupExampleAppHealthCheck : IHealthCheck
+public class StartupExampleApiHealthCheck : IHealthCheck
 {
     private readonly IHttpClientWrapper _httpClient;
+    private readonly ILogger<StartupExampleApiHealthCheck> _logger;
 
-    public StartupExampleAppHealthCheck(IHttpClientWrapper httpClientWrapper)
+    // ReSharper disable once ConvertToPrimaryConstructor
+    public StartupExampleApiHealthCheck(
+        ILogger<StartupExampleApiHealthCheck> logger,
+        IHttpClientWrapper httpClientWrapper)
     {
+        _logger = logger;
         _httpClient = httpClientWrapper;
     }
 
@@ -26,6 +31,8 @@ public class StartupExampleAppHealthCheck : IHealthCheck
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Failed to process health request: {Message}", ex.Message);
+
             return HealthCheckResult.Unhealthy(ex.Message);
         }
 

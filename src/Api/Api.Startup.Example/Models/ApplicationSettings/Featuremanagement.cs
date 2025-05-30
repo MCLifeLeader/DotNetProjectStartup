@@ -7,5 +7,5 @@ public record FeatureManagement
     public bool SqlDebugger { get; set; }
     public bool DisplayConfiguration { get; set; }
     public bool CorsEnabled { get; set; }
-    public bool SwaggerEnabled { get; set; }
+    public bool OpenApiEnabled { get; set; }
 }

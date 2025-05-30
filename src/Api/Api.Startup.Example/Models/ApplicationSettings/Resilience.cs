@@ -1,7 +1,6 @@
-﻿namespace Startup.Api.Models.ApplicationSettings
+﻿namespace Startup.Api.Models.ApplicationSettings;
+
+public class Resilience
 {
-    public class Resilience
-    {
-        public int BaseTimeOutInSeconds { get; set; }
-    }
+    public int BaseTimeOutInSeconds { get; set; }
 }

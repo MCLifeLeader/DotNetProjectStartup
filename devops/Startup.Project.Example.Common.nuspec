@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Startup.Project.Example.Common</id>
+        <title>Startup.Project.Example.Common</title>
+        <!--
+            This version number doesn't matter. It is overwritten during the build process in Azure DevOps.
+        -->
+        <version>0.1.0.0</version>
+        <!--
+            If you contribute to this project please feel free to add your name as a member of the authors.
+        -->
+        <authors>
+            Michael Carey - Michael@AGameEmpowerment.com
+        </authors>
+        <owners>Michael Carey</owners>
+        <projectUrl>https://github.com/MCLifeLeader/DotNetProjectStartup</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>
+            A common set of libraries as an example.
+        </description>
+        <copyright>Copyright ©2025 - Michael Carey.</copyright>
+        <dependencies>
+
+            <group targetFramework="net8.0">
+                <!-- Add the dependent libraries for net8.0 -->
+                <dependency id="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.3.0" />
+                <dependency id="Microsoft.Extensions.Http" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
+                <dependency id="Microsoft.FeatureManagement" Version="4.0.0" />
+                <dependency id="Newtonsoft.Json" Version="13.0.3" />
+                <dependency id="OpenTelemetry.Exporter.Console" Version="1.11.2" />
+                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+            </group>
+
+            <group targetFramework="net9.0">
+                <!-- Add the dependent libraries for net9.0 -->
+                <dependency id="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.3.0" />
+                <dependency id="Microsoft.Extensions.Http" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
+                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
+                <dependency id="Microsoft.FeatureManagement" Version="4.0.0" />
+                <dependency id="Newtonsoft.Json" Version="13.0.3" />
+                <dependency id="OpenTelemetry.Exporter.Console" Version="1.11.2" />
+                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- net 8.0 libraries -->
+        <file src="..\nugetlibs\net8.0\*.dll" target="lib/net8.0" exclude="**tests*" />
+        <file src="..\nugetlibs\net8.0\*.pdb" target="lib/net8.0" exclude="**tests*" />
+
+        <!-- net 9.0 libraries -->
+        <file src="..\nugetlibs\net9.0\*.dll" target="lib/net9.0" exclude="**tests*" />
+        <file src="..\nugetlibs\net9.0\*.pdb" target="lib/net9.0" exclude="**tests*" />
+    </files>
+</package>

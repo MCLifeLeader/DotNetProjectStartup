@@ -1,7 +1,6 @@
-﻿namespace Startup.Blazor.Server.Models.ApplicationSettings
+﻿namespace Startup.Blazor.Server.Models.ApplicationSettings;
+
+public class Resilience
 {
-    public class Resilience
-    {
-        public int BaseTimeOutInSeconds { get; set; }
-    }
+    public int BaseTimeOutInSeconds { get; set; }
 }

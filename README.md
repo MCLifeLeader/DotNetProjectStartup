@@ -285,3 +285,4 @@ Container Images
 - mcr.microsoft.com/dotnet/sdk
 - mcr.microsoft.com/dotnet/aspnet
 - mcr.microsoft.com/mssql/server
+- wiremock/wiremock

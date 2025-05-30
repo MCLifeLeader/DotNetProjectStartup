@@ -1,0 +1,18 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@baseUrl = http://localhost:7180
+# @baseUrl = https://exmaple.azurewebsites.net/
+@functionAppKey = Replace_With_Function_App_Key
+
+GET {{baseUrl}}/api/health  
+Accept: application/json  
+x-functions-key: @functionAppKey
+
+###
+
+GET {{baseUrl}}/api/information  
+Accept: application/json  
+x-functions-key: @functionAppKey
+
+###
+

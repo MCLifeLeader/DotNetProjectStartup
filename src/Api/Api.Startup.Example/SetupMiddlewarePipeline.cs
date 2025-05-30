@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Scalar.AspNetCore;
 using Startup.Api.Models.ApplicationSettings;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -34,7 +35,7 @@ public static class SetupMiddlewarePipeline
         }
 
         // Configure the HTTP request pipeline.
-        if (appSettings!.FeatureManagement.SwaggerEnabled)
+        if (appSettings!.FeatureManagement.OpenApiEnabled)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -44,10 +45,13 @@ public static class SetupMiddlewarePipeline
                 c.EnableFilter();
                 c.DisplayRequestDuration();
                 c.EnableDeepLinking();
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{_swaggerName} v1");
+                c.SwaggerEndpoint("/openapi/v1.json", $"{_swaggerName} v1");
                 c.InjectStylesheet("/css/SwaggerDark.css");
                 c.DocumentTitle = $"{_swaggerName} Swagger UI";
             });
+
+            app.MapOpenApi();
+            app.MapScalarApiReference();
         }
 
         app.MapHealthChecks("/_health",

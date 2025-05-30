@@ -3,7 +3,6 @@ using Azure.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Compliance.Classification;
 using Microsoft.Extensions.Compliance.Redaction;
 using Microsoft.Extensions.Http.Resilience;
@@ -32,7 +31,6 @@ using Startup.Common.Helpers.Data;
 using Startup.Common.Helpers.Filter;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -73,7 +71,7 @@ public static class RegisterDependentServices
 
         // Import Azure Key Vault Secrets and override any pre-loaded secrets
         string keyVaultUri = builder.Configuration.GetValue<string>("KeyVaultUri")!;
-        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.ToLower().Contains("na"))
+        if (!string.IsNullOrEmpty(keyVaultUri) && !keyVaultUri.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
         {
             builder.Configuration.AddAzureKeyVault(
                 new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")!),
@@ -118,7 +116,7 @@ public static class RegisterDependentServices
 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-        if (!_appSettings.ConnectionStrings.ApplicationInsights.ToLower().Contains("na"))
+        if (!_appSettings.ConnectionStrings.ApplicationInsights.Contains("Replace-Key", StringComparison.CurrentCultureIgnoreCase))
         {
             builder.Logging.AddApplicationInsights(
                 configureApplicationInsightsLoggerOptions: (options) =>
@@ -130,13 +128,6 @@ public static class RegisterDependentServices
             {
                 o.ConnectionString = _appSettings.ConnectionStrings.ApplicationInsights;
             });
-        }
-
-        // EventLog is only available in a Windows environment
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            //ToDo: Consider removing windows Event Logging in favor of just logging to App Insights
-            builder.Logging.AddEventLog();
         }
 
         if (builder.Environment.IsDevelopment())
@@ -181,6 +172,31 @@ public static class RegisterDependentServices
             o.CombineLogs = true;
         });
 
+        builder.Logging.EnableRedaction();
+        builder.Services.AddRedaction(x =>
+        {
+            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
+            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
+
+            x.SetHmacRedactor(o =>
+            {
+                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
+                o.KeyId = 1776;
+            }, new DataClassificationSet(DataTaxonomy.Pii));
+
+            x.SetFallbackRedactor<NullRedactor>();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                //options.Filters.Add<CustomExceptionFilterAttribute>();
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            });
+        });
+
         builder.Services.AddProblemDetails(o =>
         {
             o.CustomizeProblemDetails = context =>
@@ -194,22 +210,6 @@ public static class RegisterDependentServices
         });
 
         builder.Services.AddExceptionHandler<ProblemExceptionHandler>();
-
-        builder.Logging.EnableRedaction();
-
-        builder.Services.AddRedaction(x =>
-        {
-            x.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataTaxonomy.SensitiveData));
-            x.SetRedactor<StarRedactor>(new DataClassificationSet(DataTaxonomy.PartialSensitiveData));
-
-            x.SetHmacRedactor(o =>
-            {
-                o.Key = Convert.ToBase64String(Encoding.UTF8.GetBytes(_appSettings.RedactionKey));
-                o.KeyId = 1776;
-            }, new DataClassificationSet(DataTaxonomy.Pii));
-
-            x.SetFallbackRedactor<NullRedactor>();
-        });
 
         #endregion
 
@@ -225,13 +225,13 @@ public static class RegisterDependentServices
         }
 
         // Add services to the container.
-        builder.Services.AddControllersWithViews(options => { options.RespectBrowserAcceptHeader = true; })
-            .AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.Formatting = Formatting.Indented;
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
-            }).AddXmlSerializerFormatters();
+        builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+        {
+            options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            options.SerializerSettings.Formatting = Formatting.Indented;
+            options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+        });
 
         builder.Services.AddRequestDecompression();
         builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
@@ -262,7 +262,7 @@ public static class RegisterDependentServices
 
         builder.SetHttpClients(_appSettings);
 
-        if (_appSettings.FeatureManagement.SwaggerEnabled)
+        if (_appSettings.FeatureManagement.OpenApiEnabled)
         {
             builder.Services.AddApiVersioning(c =>
             {
@@ -310,6 +310,31 @@ public static class RegisterDependentServices
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services.AddOpenApi(options =>
+            {
+                options.AddDocumentTransformer((document, context, cancellationToken) =>
+                {
+                    document.Info.Version = $"{new ApiInfo().GetAssemblyVersion()}";
+                    document.Info.Title = _swaggerName;
+                    document.Info.Description =
+                        "Documentation of all implemented endpoints, grouped by their route's base resource for A-Game Empowerment, LLC.";
+                    document.Info.TermsOfService = new Uri("https://agameempowerment.com/Terms-Of-Use");
+                    document.Info.Contact = new OpenApiContact
+                    {
+                        Name = "Michael Carey",
+                        Email = "Michael@AGameEmpowerment.com",
+                        Url = new Uri("https://agameempowerment.com")
+                    };
+                    document.Info.License = new OpenApiLicense
+                    {
+                        Name = "Internal Only",
+                        Url = new Uri("https://agameempowerment.com")
+                    };
+                    return Task.CompletedTask;
+                });
+            });
         }
 
         builder.Services.AddFeatureManagement();
@@ -338,6 +363,7 @@ public static class RegisterDependentServices
                 ClockSkew = TimeSpan.FromSeconds(5)
             };
         });
+
         builder.Services.AddAuthorization();
 
         builder.Services.AddHealthChecks()
@@ -402,6 +428,11 @@ public static class RegisterDependentServices
                               $"- <a class=\"fw-bold\" href=\"https://github.com/MCLifeLeader/ePortfolio\" target=\"_blank\" rel=\"noopener\">ePortfolio</a> " +
                               $"- Build Version: {GetType().Assembly.GetName().Version}"
             };
+        }
+
+        public Version? GetAssemblyVersion()
+        {
+            return GetType().Assembly.GetName().Version;
         }
     }
 }

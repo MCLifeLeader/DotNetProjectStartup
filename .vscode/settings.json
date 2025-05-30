@@ -1,6 +1,6 @@
 {
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  "dotnet.defaultSolution": "src\\StartupExamples.sln",
+  "dotnet.defaultSolution": "StartupExamples.sln",
   "sarif-viewer.connectToGithubCodeScanning": "off",
   "remote.autoForwardPortsFallback": 0,
   "remote.autoForwardPorts": false,
@@ -8,7 +8,6 @@
   "remote.otherPortsAttributes": {
     "onAutoForward": "ignore"
   },
-  "files.eol": "\n",
   "azureFunctions.projectSubpath": "src/Azure/Startup.Function.App",
   "azureFunctions.deploySubpath": "src/Azure/Startup.Function.App/bin/Release/net9.0/publish",
   "azureFunctions.projectLanguage": "C#",
