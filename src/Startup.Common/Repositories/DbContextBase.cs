@@ -9,7 +9,7 @@ namespace Startup.Common.Repositories;
 
 public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbContext : DbContext
 {
-    private readonly string _connectionString;
+    private readonly string? _connectionString;
 
     protected DbContextBase(DbContextOptions<TDbContext> options) : base(options)
     {
@@ -38,8 +38,7 @@ public class DbContextBase<TDbContext> : DbContext, IDbContextBase where TDbCont
 
     protected sealed override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (_connectionString != null)
+        if (!string.IsNullOrEmpty(_connectionString))
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }

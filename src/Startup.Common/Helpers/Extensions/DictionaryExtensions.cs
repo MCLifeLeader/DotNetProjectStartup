@@ -18,19 +18,16 @@ public static class DictionaryExtensions
     /// <param name="key">The key whose value to get or add.</param>
     /// <param name="value">The value to add if the key does not exist.</param>
     /// <returns>The value associated with the specified key, or the newly added value.</returns>
-    public static TValue? GetOrAdd<TKey, TValue>(
-        this Dictionary<TKey, TValue> dict, TKey key, TValue? value)
+    public static TValue GetOrAdd<TKey, TValue>(
+        this Dictionary<TKey, TValue> dict, TKey key, TValue value)
         where TKey : notnull
     {
-        ref TValue? val = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out bool exists);
-
-
-        if (exists)
+        if (dict.TryGetValue(key, out TValue? existingValue))
         {
-            return val;
+            return existingValue;
         }
 
-        val = value;
+        dict[key] = value;
         return value;
     }
 
@@ -44,9 +41,10 @@ public static class DictionaryExtensions
     /// <param name="value">The new value to set for the specified key.</param>
     /// <returns><c>true</c> if the value was updated; otherwise, <c>false</c>.</returns>
     public static bool TryUpdate<TKey, TValue>(
-        this Dictionary<TKey, TValue> dictionary, TKey key, TValue? value) where TKey : notnull
+        this Dictionary<TKey, TValue> dictionary, TKey key, TValue value) where TKey : notnull
     {
-        ref TValue? val = ref CollectionsMarshal.GetValueRefOrNullRef(dictionary, key);
+        // Note: Use unsafely-casting to silence nullable warning for value types
+        ref TValue val = ref CollectionsMarshal.GetValueRefOrNullRef(dictionary, key);
         if (Unsafe.IsNullRef(ref val))
         {
             return false;

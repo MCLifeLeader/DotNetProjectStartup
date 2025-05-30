@@ -15,7 +15,7 @@ public class InfoPageDetails
     /// </value>
     [XmlArray("project-information")]
     [XmlArrayItem("info")]
-    public List<ProjectInfoDetails> ProjectInfoCollection { get; set; } = null!;
+    public List<ProjectInfoDetails> ProjectInfoCollection { get; set; } = new List<ProjectInfoDetails>();
 
     /// <summary>
     ///     Gets or sets the title.
@@ -24,7 +24,7 @@ public class InfoPageDetails
     ///     The title.
     /// </value>
     [XmlElement("title")]
-    public string Title { get; set; } = null!;
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     ///     Gets the services.
