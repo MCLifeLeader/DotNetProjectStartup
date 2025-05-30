@@ -61,8 +61,8 @@ public class JsonExtensionsTests
         Assert.That(result, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(result["Name"].ToString(), Is.EqualTo("John"));
-            Assert.That(result["Age"].ToObject<int>(), Is.EqualTo(30));
+            Assert.That(result!["Name"]?.ToString(), Is.EqualTo("John"));
+            Assert.That(result!["Age"]?.ToObject<int>(), Is.EqualTo(30));
         });
     }
 
@@ -74,8 +74,8 @@ public class JsonExtensionsTests
         Assert.That(result, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(result["Name"].ToString(), Is.EqualTo("John"));
-            Assert.That(result["Age"].ToObject<int>(), Is.EqualTo(30));
+            Assert.That(result!["Name"]?.ToString(), Is.EqualTo("John"));
+            Assert.That(result!["Age"]?.ToObject<int>(), Is.EqualTo(30));
         });
     }
 
@@ -85,13 +85,13 @@ public class JsonExtensionsTests
         string json = "[{\"Name\":\"John\", \"Age\":30}, {\"Name\":\"Jane\", \"Age\":25}]";
         var result = await json.FromJsonToJArrayAsync();
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Count, Is.EqualTo(2));
+        Assert.That(result!.Count, Is.EqualTo(2));
         Assert.Multiple(() =>
         {
-            Assert.That(result[0]["Name"].ToString(), Is.EqualTo("John"));
-            Assert.That(result[0]["Age"].ToObject<int>(), Is.EqualTo(30));
-            Assert.That(result[1]["Name"].ToString(), Is.EqualTo("Jane"));
-            Assert.That(result[1]["Age"].ToObject<int>(), Is.EqualTo(25));
+            Assert.That(result![0]!["Name"]?.ToString(), Is.EqualTo("John"));
+            Assert.That(result![0]!["Age"]?.ToObject<int>(), Is.EqualTo(30));
+            Assert.That(result![1]!["Name"]?.ToString(), Is.EqualTo("Jane"));
+            Assert.That(result![1]!["Age"]?.ToObject<int>(), Is.EqualTo(25));
         });
     }
 
@@ -101,19 +101,19 @@ public class JsonExtensionsTests
         string json = "[{\"Name\":\"John\", \"Age\":30}, {\"Name\":\"Jane\", \"Age\":25}]";
         var result = json.FromJsonToJArray();
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Count, Is.EqualTo(2));
+        Assert.That(result!.Count, Is.EqualTo(2));
         Assert.Multiple(() =>
         {
-            Assert.That(result[0]["Name"].ToString(), Is.EqualTo("John"));
-            Assert.That(result[0]["Age"].ToObject<int>(), Is.EqualTo(30));
-            Assert.That(result[1]["Name"].ToString(), Is.EqualTo("Jane"));
-            Assert.That(result[1]["Age"].ToObject<int>(), Is.EqualTo(25));
+            Assert.That(result![0]!["Name"]?.ToString(), Is.EqualTo("John"));
+            Assert.That(result![0]!["Age"]?.ToObject<int>(), Is.EqualTo(30));
+            Assert.That(result![1]!["Name"]?.ToString(), Is.EqualTo("Jane"));
+            Assert.That(result![1]!["Age"]?.ToObject<int>(), Is.EqualTo(25));
         });
     }
 
     public class Person
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int Age { get; set; }
     }
 }

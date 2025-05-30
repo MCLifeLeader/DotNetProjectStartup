@@ -9,8 +9,8 @@ namespace Startup.Client.Api;
 public partial class StartupHttp
 {
     private readonly UserLoginModel _userLogin;
-    private readonly ILogger<StartupHttp> _logger;
-    private readonly IApiHealthRepository _apiHealthRepository;
+    private readonly ILogger<StartupHttp>? _logger;
+    private readonly IApiHealthRepository? _apiHealthRepository;
 
     /// <summary>
     /// Preferred Injected constructor

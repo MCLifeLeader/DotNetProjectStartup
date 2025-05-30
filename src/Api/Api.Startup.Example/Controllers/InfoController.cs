@@ -70,7 +70,8 @@ public class InfoController : ControllerBase
         _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(GetStatusInformationJson));
         await Task.Yield();
 
-        return Content(_infoService.SerializeToResponseJson(), "application/json", Encoding.UTF8);
+        string content = _infoService.SerializeToResponseJson();
+        return Content(content, "application/json", Encoding.UTF8);
     }
 
     /// <summary>

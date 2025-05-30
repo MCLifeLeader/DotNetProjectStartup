@@ -29,7 +29,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="s">The string to be masked.</param>
     /// <returns>The masked string.</returns>
-    public static string Mask(this string s)
+    public static string? Mask(this string? s)
     {
         if (string.IsNullOrWhiteSpace(s))
         {

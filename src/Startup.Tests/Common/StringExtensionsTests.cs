@@ -87,7 +87,7 @@ public class StringExtensionsTests
     public void Mask_WithNullString_ReturnsNull()
     {
         // Arrange
-        string input = null;
+        string? input = null;
 
         // Act
         var result = input.Mask();
