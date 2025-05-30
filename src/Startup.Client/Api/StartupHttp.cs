@@ -54,8 +54,11 @@ public partial class StartupHttp
 
     public void RefreshToken()
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(RefreshToken));
-        _logger.LogInformation("Refreshing token for '{AccountName}'", _userLogin.Username);
+        if (_logger != null)
+        {
+            _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(RefreshToken));
+            _logger.LogInformation("Refreshing token for '{AccountName}'", _userLogin.Username);
+        }
 
         AuthToken token = new();
 
@@ -73,10 +76,17 @@ public partial class StartupHttp
 
     public async Task<string> CheckApiHealthAsync()
     {
-        _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(StartupHttp));
+        if (_logger != null)
+        {
+            _logger.LogDebug("'{Class}.{Method}' called", GetType().Name, nameof(StartupHttp));
+        }
 
-        var result = await _apiHealthRepository.GetHealthAsync();
-        _logger.LogDebug("{healthStatus}", result);
+        var result = await (_apiHealthRepository?.GetHealthAsync() ?? Task.FromResult("Health check not available"));
+        
+        if (_logger != null)
+        {
+            _logger.LogDebug("{healthStatus}", result);
+        }
 
         return result;
     }

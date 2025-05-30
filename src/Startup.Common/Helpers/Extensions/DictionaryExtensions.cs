@@ -22,15 +22,12 @@ public static class DictionaryExtensions
         this Dictionary<TKey, TValue> dict, TKey key, TValue value)
         where TKey : notnull
     {
-        ref TValue? val = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out bool exists);
-
-
-        if (exists)
+        if (dict.TryGetValue(key, out TValue? existingValue))
         {
-            return val!;
+            return existingValue;
         }
 
-        val = value;
+        dict[key] = value;
         return value;
     }
 
@@ -46,7 +43,8 @@ public static class DictionaryExtensions
     public static bool TryUpdate<TKey, TValue>(
         this Dictionary<TKey, TValue> dictionary, TKey key, TValue value) where TKey : notnull
     {
-        ref TValue? val = ref CollectionsMarshal.GetValueRefOrNullRef(dictionary, key);
+        // Note: Use unsafely-casting to silence nullable warning for value types
+        ref TValue val = ref CollectionsMarshal.GetValueRefOrNullRef(dictionary, key);
         if (Unsafe.IsNullRef(ref val))
         {
             return false;
