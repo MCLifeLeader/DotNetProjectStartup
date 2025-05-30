@@ -104,7 +104,10 @@ public class Program
                 #region HttpClient Services
                 services.AddHttpClient(HttpClientNames.STARTUPEXAMPLE_API, c =>
                 {
-                    c.BaseAddress = new Uri(appSettings.HttpClients!.StartupExample.BaseUrl!);
+                    if (appSettings.HttpClients?.StartupExample?.BaseUrl != null)
+                    {
+                        c.BaseAddress = new Uri(appSettings.HttpClients.StartupExample.BaseUrl);
+                    }
 
                     c.DefaultRequestHeaders.Accept.Clear();
                     c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
