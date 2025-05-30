@@ -34,10 +34,6 @@ try
     # Validate that the files were copied as output to the log when run in Azure DevOps
     Write-Host "Validate Target Folder Contents"
     Get-ChildItem -Path ".\..\nugetlibs\"
-    Get-ChildItem -Path ".\..\nugetlibs\netstandard2.0\"
-    Get-ChildItem -Path ".\..\nugetlibs\netstandard2.1\"
-    Get-ChildItem -Path ".\..\nugetlibs\net6.0\"
-    Get-ChildItem -Path ".\..\nugetlibs\net7.0\"
     Get-ChildItem -Path ".\..\nugetlibs\net8.0\"
     Get-ChildItem -Path ".\..\nugetlibs\net9.0\"
 }
