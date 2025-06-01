@@ -17,8 +17,6 @@ Write-Output "Configuring global git env settings..."
 git config --global user.name $userName
 git config --global user.email $email
 git config --global credential.useHttpPath true
-git config --global core.autocrlf true
-git config --global core.eol native
 
 Write-Output "Download nuget.exe and configure..."
 
