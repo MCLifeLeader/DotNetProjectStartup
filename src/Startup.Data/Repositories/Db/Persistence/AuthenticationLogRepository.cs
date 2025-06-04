@@ -63,7 +63,7 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
         throw new NotImplementedException();
     }
 
-    public async Task<IList<AuthenticationLog>> GetAllAsync()
+    public Task<IList<AuthenticationLog>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
@@ -113,7 +113,7 @@ public class AuthenticationLogRepository : StartupExampleRepositoryBase, IAuthen
         throw new NotImplementedException();
     }
 
-    public async Task<PagedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
+    public Task<PagedObjectData<AuthenticationLog>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }

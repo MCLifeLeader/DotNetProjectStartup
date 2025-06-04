@@ -39,25 +39,25 @@ public class OpenAiHealthCheck : IHealthCheck
     public class OpenAiHealthStatus
     {
         [JsonProperty("page")]
-        public Page Page { get; set; }
+        public required Page Page { get; set; }
 
         [JsonProperty("status")]
-        public Status Status { get; set; }
+        public required Status Status { get; set; }
     }
 
     public class Page
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public required string Url { get; set; }
 
         [JsonProperty("time_zone")]
-        public string TimeZone { get; set; }
+        public required string TimeZone { get; set; }
 
         [JsonProperty("updated_at")]
         public DateTime UpdatedAt { get; set; }
@@ -66,10 +66,10 @@ public class OpenAiHealthCheck : IHealthCheck
     public class Status
     {
         [JsonProperty("indicator")]
-        public string Indicator { get; set; }
+        public required string Indicator { get; set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public required string Description { get; set; }
     }
     #endregion
 }

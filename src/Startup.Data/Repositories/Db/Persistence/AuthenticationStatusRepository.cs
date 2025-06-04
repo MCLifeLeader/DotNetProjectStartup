@@ -37,7 +37,7 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         throw new NotImplementedException();
     }
 
-    public async Task<ChunkedObjectData<AuthenticationStatus>> GetByChunkingAsync(short key1, int pageSize)
+    public Task<ChunkedObjectData<AuthenticationStatus>> GetByChunkingAsync(short key1, int pageSize)
     {
         throw new NotImplementedException();
     }
@@ -47,7 +47,7 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         throw new NotImplementedException();
     }
 
-    public async Task<PagedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
+    public Task<PagedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
@@ -57,7 +57,7 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         throw new NotImplementedException();
     }
 
-    public async Task<Models.PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
+    public Task<Models.PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
     {
         throw new NotImplementedException();
     }

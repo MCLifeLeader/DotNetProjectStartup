@@ -21,7 +21,7 @@ public class InfoPageRepository : IInfoPageRepository
     public string GetCanaryPage()
     {
         string canary = "canary";
-        string cached = _cache.GetCanaryPage(canary);
+        string? cached = _cache.GetCanaryPage(canary);
 
         if (string.IsNullOrEmpty(cached))
         {
@@ -42,7 +42,7 @@ public class InfoPageRepository : IInfoPageRepository
     public async Task<string> GetCanaryPageAsync()
     {
         string canary = "canary";
-        string cached = _cache.GetCanaryPage(canary);
+        string? cached = _cache.GetCanaryPage(canary);
 
         if (string.IsNullOrEmpty(cached))
         {
