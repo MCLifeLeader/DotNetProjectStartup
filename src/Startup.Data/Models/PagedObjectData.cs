@@ -21,7 +21,7 @@ public class PagedObjectData<TEntityType>
     }
 
     // ReSharper disable once UnusedMember.Global
-    public TEntityType NextStartingId
+    public TEntityType? NextStartingId
     {
         get
         {

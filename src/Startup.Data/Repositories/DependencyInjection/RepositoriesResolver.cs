@@ -19,7 +19,7 @@ public static class RepositoriesResolver
         {
             options.UseSqlServer(connectionString);
 
-            if (service.BuildServiceProvider().GetService<IFeatureManager>().IsEnabledAsync(FeatureFlags.SQL_DEBUGGER).Result)
+            if (service.BuildServiceProvider().GetService<IFeatureManager>()?.IsEnabledAsync(FeatureFlags.SQL_DEBUGGER).Result == true)
             {
                 options.EnableSensitiveDataLogging();
                 options.EnableDetailedErrors();

@@ -72,7 +72,7 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public async Task<IList<UserToAgency>> GetEntitiesByFirstKeyIdAsync(string key1)
+    public Task<IList<UserToAgency>> GetEntitiesByFirstKeyIdAsync(string key1)
     {
         throw new NotImplementedException();
     }
@@ -82,7 +82,7 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public async Task<IList<UserToAgency>> GetEntitiesBySecondKeyIdAsync(Guid key2)
+    public Task<IList<UserToAgency>> GetEntitiesBySecondKeyIdAsync(Guid key2)
     {
         throw new NotImplementedException();
     }
@@ -102,7 +102,7 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public async Task<UserToAgency> GetEntityByIdAsync(string key1)
+    public Task<UserToAgency> GetEntityByIdAsync(string key1)
     {
         throw new NotImplementedException();
     }
@@ -122,7 +122,7 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public async Task<ChunkedObjectData<UserToAgency>> GetByChunkingAsync(string key1, int pageSize)
+    public Task<ChunkedObjectData<UserToAgency>> GetByChunkingAsync(string key1, int pageSize)
     {
         throw new NotImplementedException();
     }
@@ -132,7 +132,7 @@ public class UserToAgencyRepository : StartupExampleRepositoryBase, IUserToAgenc
         throw new NotImplementedException();
     }
 
-    public async Task<PagedObjectData<UserToAgency>> GetByPagingAsync(int pageNumber, int pageSize)
+    public Task<PagedObjectData<UserToAgency>> GetByPagingAsync(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
