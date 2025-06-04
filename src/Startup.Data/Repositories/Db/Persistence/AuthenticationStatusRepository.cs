@@ -42,22 +42,22 @@ public class AuthenticationStatusRepository : StartupExampleRepositoryBase, IAut
         throw new NotImplementedException();
     }
 
+    public static Models.PagedObjectData<AuthenticationStatus> GetByPaging(short key, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static async Task<Models.PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
     public PagedObjectData<AuthenticationStatus> GetByPaging(int pageNumber, int pageSize)
     {
         throw new NotImplementedException();
     }
 
     public async Task<PagedObjectData<AuthenticationStatus>> GetByPagingAsync(int pageNumber, int pageSize)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Models.PagedObjectData<AuthenticationStatus> GetByPaging(short key, int pageSize)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Models.PagedObjectData<AuthenticationStatus>> GetByPagingAsync(short key, int pageSize)
     {
         throw new NotImplementedException();
     }

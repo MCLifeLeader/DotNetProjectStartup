@@ -27,9 +27,8 @@ public class PagedObjectData<TEntityType>
         {
             if (EntityList != null && EntityList.Any())
             {
-                return EntityList.Last();
+                return EntityList[EntityList.Count - 1];
             }
-
             return default;
         }
     }
