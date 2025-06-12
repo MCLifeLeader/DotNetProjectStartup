@@ -75,7 +75,7 @@ src/
 
 ## Running tests
 
-(1) Build from the root with `dotnet build Ai.Coach.sln`.
+(1) Build from the root with `dotnet build StartupExamples.sln`.
 (2) If that produces errors, fix those errors and build again. Repeat until the build is successful.
 (3) Run tests with `dotnet test **/*.tests.csproj`.
 
