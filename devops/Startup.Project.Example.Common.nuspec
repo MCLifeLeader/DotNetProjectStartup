@@ -26,33 +26,33 @@
             <group targetFramework="net8.0">
                 <!-- Add the dependent libraries for net8.0 -->
                 <dependency id="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.3.0" />
-                <dependency id="Microsoft.Extensions.Http" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
-                <dependency id="Microsoft.FeatureManagement" Version="4.0.0" />
+                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.5.0" />
+                <dependency id="Microsoft.Extensions.Http" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
+                <dependency id="Microsoft.FeatureManagement" Version="4.1.0" />
                 <dependency id="Newtonsoft.Json" Version="13.0.3" />
-                <dependency id="OpenTelemetry.Exporter.Console" Version="1.11.2" />
-                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
-                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+                <dependency id="OpenTelemetry.Exporter.Console" Version="1.17.0" />
+                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.17.0" />
+                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.17.0" />
             </group>
 
             <group targetFramework="net9.0">
                 <!-- Add the dependent libraries for net9.0 -->
                 <dependency id="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
-                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.3.0" />
-                <dependency id="Microsoft.Extensions.Http" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
-                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
-                <dependency id="Microsoft.FeatureManagement" Version="4.0.0" />
+                <dependency id="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Compliance.Redaction" Version="9.5.0" />
+                <dependency id="Microsoft.Extensions.Http" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
+                <dependency id="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
+                <dependency id="Microsoft.FeatureManagement" Version="4.1.0" />
                 <dependency id="Newtonsoft.Json" Version="13.0.3" />
-                <dependency id="OpenTelemetry.Exporter.Console" Version="1.11.2" />
-                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
-                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+                <dependency id="OpenTelemetry.Exporter.Console" Version="1.17.0" />
+                <dependency id="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.17.0" />
+                <dependency id="OpenTelemetry.Instrumentation.Runtime" Version="1.17.0" />
             </group>
         </dependencies>
     </metadata>
