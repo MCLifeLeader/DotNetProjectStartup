@@ -71,7 +71,7 @@ public class AgencyRepository : StartupExampleRepositoryBase, IAgencyRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IList<Agency>> GetAllAsync()
+    public Task<IList<Agency>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
