@@ -1,14 +1,1 @@
-services:
-
-# SQL Server instance
-    mssql:
-        build: ./mssql
-        environment:
-            SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
-            ACCEPT_EULA: "${ACCEPT_EULA}"
-            MSSQL_AGENT_ENABLED: "true"
-        ports:
-            - "4110:1433" # SQL Server, Update port if needed
-        container_name: ExampleSql
-        hostname: mssql
-
+# if needed add project specific resources and enable the line in docker_setup.ps1 and docker_down.ps1
