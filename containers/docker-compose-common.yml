@@ -1,6 +1,32 @@
 services:
   # Development Resources
 
+  mssql:
+    build: ./mssql
+    environment:
+      SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
+      ACCEPT_EULA: "${ACCEPT_EULA}"
+      MSSQL_AGENT_ENABLED: "true"
+    ports:
+      - "10433:1433"
+    container_name: SqlServerDev
+    #restart: unless-stopped
+    hostname: mssql
+
+  cosmosdb:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
+    environment:
+      AZURE_COSMOS_EMULATOR_PARTITION_COUNT: "3"
+      AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: "true"
+    ports:
+      - "8081:8081"
+      - "10251:10251"
+      - "10252:10252"
+      - "10253:10253"
+    container_name: CosmoDbDev
+    #restart: unless-stopped
+    hostname: cosmosdb
+
 # Redis Cache
   redis:
     image: redis:latest
@@ -29,6 +55,8 @@ services:
       SEQ_STORAGE_SECRETKEY: "${SEQ_STORAGE_SECRETKEY}"
     ports:
       - "10150:80" # OpenTelemetry, Update port if needed
+    volumes:
+      - seq-data:/data
     #restart: unless-stopped
     container_name: OtelCollectorDev
 
@@ -99,3 +127,7 @@ services:
 
 networks:
   sb-emulator:
+
+volumes:
+  seq-data:
+    driver: local

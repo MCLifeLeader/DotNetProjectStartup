@@ -5,7 +5,7 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
 
     ## Teardown the vs multi-container
     docker-compose -f "./containers/docker-compose-common.yml" -p common_shared down
-    docker-compose -f "./containers/docker-compose.yml" -p dotnet_example down
+    #docker-compose -f "./containers/docker-compose.yml" -p project down
 }
 
 Write-Host "Docker Teardown Complete..."
